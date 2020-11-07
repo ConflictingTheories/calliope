@@ -1,6 +1,6 @@
 # Calliope Site Generator
 
-![Calliope](calliope.jpg)
+![Calliope](calliope.png)
 
 
 ## Dependencies (to deploy)
