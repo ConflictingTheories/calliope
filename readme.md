@@ -1,7 +1,7 @@
 # Calliope Site Generator
 
 ## Dependencies (to deploy)
-The Following Technologies are required to run and deploy NERD:
+The Following Technologies are required to run and deploy Calliope:
 - Docker / Docker-Compose
 
 ## Deployment
