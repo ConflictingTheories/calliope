@@ -58,3 +58,6 @@ __Note__: Also exposed via the default port: `8081`
 
 * Make sure you are committing with good frequency so as to make the gits useful but also trackable.
 
+
+## LICENSE
+Please see [[LICENSE]] for more details.
