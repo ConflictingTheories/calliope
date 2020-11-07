@@ -1,0 +1,11 @@
+
+/.vscode/
+**/.vscode/
+**/deployments
+
+**/.env
+database/data
+server/build
+server/dist
+
+env.ps1
