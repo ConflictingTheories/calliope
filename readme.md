@@ -1,5 +1,8 @@
 # Calliope Site Generator
 
+![Calliope](calliope.jpg)
+
+
 ## Dependencies (to deploy)
 The Following Technologies are required to run and deploy Calliope:
 - Docker / Docker-Compose
