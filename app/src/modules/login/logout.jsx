@@ -15,18 +15,6 @@ import React from "react";
 import { collect } from "react-recollect";
 
 // BLUEPRINT STYLES
-
-import {
-  InputGroup,
-  FormGroup,
-  Card,
-  Classes,
-  Intent,
-  ProgressBar,
-  Button,
-  Callout,
-} from "@blueprintjs/core";
-
 import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
 import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
 
@@ -34,20 +22,16 @@ import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
 import {
   Container,
   Header,
-  Navbar,
   Content,
   Sidebar,
   FlexboxGrid,
   Panel,
-  Form,
-  ButtonToolbar,
-  Footer,
 } from "rsuite";
-import "rsuite/dist/styles/rsuite-dark.css";
+import "rsuite/dist/styles/rsuite-default.css";
 
 // ASSETS & APP STYLES
 import Logo from "../../assets/logo.svg";
-import "../../styles/App.less";
+import "../../themes/default/less/App.less";
 
 import { logout } from "../../services/auth";
 

@@ -13,6 +13,10 @@
 
 const CracoLessPlugin = require('craco-less');
 
+const Env = require('./config/env');
+const themeSettings = require(`./src/themes/${Env.CALLIOPE_THEME || 'default'}`);
+const theme = Env.THEME_DARK ? themeSettings.dark : themeSettings.light;
+
 module.exports = {
   plugins: [
     // LESS Support
@@ -21,7 +25,7 @@ module.exports = {
       options: {
         lessLoaderOptions: {
           lessOptions: {
-            modifyVars: { '@background': '#282c34' },
+            modifyVars: theme,
             javascriptEnabled: true,
           },
         },

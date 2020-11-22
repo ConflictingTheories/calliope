@@ -37,11 +37,11 @@ import {
   Form,
   ButtonToolbar,
 } from "rsuite";
-import "rsuite/dist/styles/rsuite-dark.css";
+import "rsuite/dist/styles/rsuite-default.css";
 
 // ASSETS & APP STYLES
 import Logo from "../../assets/logo.svg";
-import "../../styles/App.less";
+import "../../themes/default/less/App.less";
 
 import { login, check } from "../../services/auth";
 

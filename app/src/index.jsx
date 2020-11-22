@@ -13,7 +13,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './themes/default/index.less';
+import './themes/default/less/index.less';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 

@@ -12,39 +12,38 @@
 \*                                            */
 
 import React from "react";
-import { collect } from "react-recollect";
+import { collect, store } from "react-recollect";
 
 // RSuite UI Library
-import { Container, Content, Row, Col, Notification, Placeholder} from "rsuite";
-import "rsuite/dist/styles/rsuite-dark.css";
+import {
+  Container,
+  Content,
+  Row,
+  Col,
+  Notification,
+  Placeholder,
+} from "rsuite";
+import "rsuite/dist/styles/rsuite-default.css";
 
 // BLUEPRINT STYLES
-import {
-  Button,
-  Tabs,
-  Tab,
-  NonIdealState,
-  Intent,
-  Callout,
-} from "@blueprintjs/core";
+import { Intent, Callout } from "@blueprintjs/core";
 import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
 import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
 
 import NavBar from "../../components/nav";
 import SideMenu from "../../components/menu";
-
+import Post from "../../components/post";
 // ASSETS & APP STYLES
-import "../../styles/App.less";
+import "../../themes/default/less/App.less";
 
-const { Paragraph } = Placeholder
+//SERVICES
+import { pages, posts } from "../../services/content";
+
+const { Paragraph } = Placeholder;
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-
-    this.store = props.store;
-
-    this.state = {};
   }
 
   renderDashboardTabs() {
@@ -56,20 +55,39 @@ class Dashboard extends React.Component {
         >
           <Paragraph width={320} rows={3} />
         </Callout>
+        <Container>
+          <Content>
+            {store.posts &&
+              store.posts?.map((post) => {
+                return (
+                  <Row>
+                    <Container className="calliope-list-item">
+                      <Post src={`posts/${post}`} />
+                    </Container>
+                  </Row>
+                );
+              })}
+          </Content>
+        </Container>
       </React.Fragment>
     );
   }
 
   async componentDidMount() {
-    // Provide "Notification"
-    setTimeout(
-      () =>
-        Notification.open({
-          title: "Welcome 🐙👾 - Calliope",
-          description: <Paragraph width={320} rows={3} />,
-        }),
-      ~~(Math.random() * 10000)
-    );
+    // Fetch & Render Posts
+    const result = await posts();
+    if (result) {
+      console.log(result);
+      store.posts = result;
+      setTimeout(
+        () =>
+          Notification.open({
+            title: "Welcome 🐙👾 - Calliope",
+            description: <Paragraph width={320} rows={3} />,
+          }),
+        ~~(Math.random() * 10000)
+      );
+    }
   }
 
   render() {

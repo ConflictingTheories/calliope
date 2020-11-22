@@ -41,5 +41,11 @@ module.exports = {
     STORAGE_ROOT: process.env.STORAGE_ROOT,
     // S3 Storage Options
     S3_REGION: process.env.S3_REGION,
-    S3_BUCKET: process.env.S3_BUCKET    
+    S3_BUCKET: process.env.S3_BUCKET,
+    // Feature Flags    
+    ENABLE_AUTH: false,
+    ENABLE_CONTENT: true,
+    // Theme Setting
+    CALLIOPE_THEME: "default",
+    THEME_DARK: false
 };

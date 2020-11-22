@@ -9,12 +9,10 @@ services:
       - "./load-balancer/certs:/etc/letsencrypt"
     depends_on:
       - "calliope_portal"
-      - "calliope_ep"
     links:
-      - "calliope_ep:calliope_ep"
       - "calliope_portal:calliope_portal"
     build:
-      context: ./load-balancer/
+      context: ./scripts/docker/load-balancer/
     ports:
       - "10007:80"
     environment:
@@ -25,7 +23,7 @@ services:
     container_name: "calliope-db"
     image: kderbyma/maple-tree-labs:archi-db_latest
     build:
-      context: ./database/
+      context: ./scripts/docker/database
     restart: always
     ports:
       - "${DB_PORT}:5432"
@@ -34,39 +32,14 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}
       POSTGRES_DB: ${DB_NAME}
-  # Etherpad API Endpoint (Behind Load Balancer)
-  calliope_ep:
-    container_name: "calliope-ep"
-    image: kderbyma/maple-tree-labs:archi-ep_latest
-    restart: always
-    depends_on:
-      - "calliope_db"
-    build:
-      context: ./etherpad/
-    ports:
-      - "${EP_PORT}:9001"
-    links:
-      - "calliope_db:calliope_db"
-    command: []
-    environment:
-      NODE_ENV: ${NODE_ENV}
-      DEBIAN_FRONTEND: noninteractive
-      TZ: America/Edmonton
-      DB_TYPE: ${DB_TYPE}
-      DB_HOST: ${DB_HOST_DOCKER}
-      DB_USER: ${DB_USER}
-      DB_PASS: ${DB_PASS}
-      DB_NAME: ${DB_NAME}
-      DB_PORT: ${DB_PORT}
-      EP_API_KEY: ${EP_API_KEY}
-      EP_ADMIN_PASS: ${EP_ADMIN_PASS}
   # Main API / Portal for calliope
   calliope_portal:
     container_name: "calliope-portal"
     image: kderbyma/maple-tree-labs:calliope_latest
     restart: always
     build:
-      context: ./server/
+      context: .
+      dockerfile: ./scripts/docker/server/Dockerfile
     depends_on:
       - "calliope_db"
     links:
@@ -75,6 +48,7 @@ services:
       - "${API_PORT}:${API_PORT}"
     volumes:
       - "./server/build:/opt/calliope/build"
+      - "./site:/opt/calliope/site"
       - "./server/node_modules:/opt/calliope/node_modules"
     environment:
       NODE_ENV: ${NODE_ENV}
@@ -87,6 +61,3 @@ services:
       PUBLIC_URL: ${PUBLIC_URL}
       API_PORT: ${API_PORT}
       API_HOST: ${API_HOST}
-      EP_API_KEY: ${EP_API_KEY}
-      EP_HOST: ${EP_HOST_DOCKER}
-      EP_PORT: ${EP_PORT}

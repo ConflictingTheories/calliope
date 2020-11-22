@@ -22,6 +22,7 @@ const FF = require("../../config/featureFlags");
 module.exports = (() => {
   // API Routes (V1)
   if (FF.ENABLE_AUTH) router.use("/auth", require("./auth"));
+  if (FF.ENABLE_CONTENT) router.use("/content", require("./content"));
 
   return router;
 })();

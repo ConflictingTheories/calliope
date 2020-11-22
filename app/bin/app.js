@@ -24,6 +24,7 @@ module.exports = (() => {
   const cookieparser = require("cookie-parser");
   const session = require("express-session");
   const FileUpload = require("express-fileupload");
+  const path = require("path");
   const cors = require("cors");
   const app = express();
   const server = require("http").Server(app);
@@ -36,7 +37,7 @@ module.exports = (() => {
 
   // INDEX MODULES
   const index = require("../routes/index");
-
+  const content = require("../routes/content");
   // SERVER
   server.listen(Env.API_PORT, () => {
     console.log(
@@ -44,7 +45,6 @@ module.exports = (() => {
       Env.API_PORT
     );
     console.log("Using Storage Driver :: ", Storage.version);
-
     // Request Handling
     app.use(session(Env.SESSION_CONF));
     app.use(cookieparser());
@@ -57,7 +57,6 @@ module.exports = (() => {
         extended: false,
       })
     );
-
     // API
     app.use("/api/:ver", (req, res) => {
       try {
@@ -76,15 +75,23 @@ module.exports = (() => {
         Error.sendError(res);
       }
     });
-
     // File Storage (if being Used - ie. File Driver)
     if (Env.STORAGE_TYPE === "file")
       app.use("/storage", express.static(__dirname + "/../storage"));
-
+    express.static.mime.define({
+      "text/markdown": ["md"],
+    });
     // Web App
-    app.use("/static", express.static(__dirname + "/../build"));
+    app.use(
+      "/content",
+      express.static(path.join(__dirname, "../../site/"), {
+        index: false,
+        extensions: ["md"],
+      })
+    );
+    app.use("/content", content);
+    app.use("/static", express.static(__dirname + "/../build/static"));
     app.use("/", index);
-
     // Database Sync
     DB.sync();
   });

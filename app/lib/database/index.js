@@ -11,7 +11,7 @@
 ** ------------------------------------------ **
 \*                                            */
 
-const Sequelize = require("../../config/db/migrations/node_modules/sequelize");
+const Sequelize = require("sequelize");
 console.log(process.env.DB_TYPE, process.env.DB_PORT);
 // Connection to Database (SQL ORM)
 class Database {

@@ -16,12 +16,12 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // External Style Frameworks (RSuite / BlueprintJS)
-import "rsuite/dist/styles/rsuite-dark.css";
+import "rsuite/dist/styles/rsuite-default.css";
 import "../node_modules/@blueprintjs/core/lib/css/blueprint.css";
 import "../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
 
 // ASSETS & APP STYLES
-import "./themes/default/App.less";
+import "./themes/default/less/App.less";
 
 // HELPERS
 import withSplashScreen from "./modules/utils/splashScreen";
@@ -36,7 +36,6 @@ import HomeScreen from "./modules/dashboard";
 
 // APP
 const App = () => {
-  document.body.className = "bp3-dark";
   return (
     <Router>
       <div className="container">

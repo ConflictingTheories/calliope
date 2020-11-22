@@ -11,11 +11,9 @@
 ** ------------------------------------------ **
 \*                                            */
 
-const Sequelize = require("../../config/db/migrations/node_modules/sequelize");
-console.log(process.env.DB_TYPE, process.env.DB_PORT);
 // Static Site Generator
 class Generator {
-  static instance = null;
+  static instance;
   constructor() {
     if (this.instance) return this.instance;
     else {
@@ -26,4 +24,4 @@ class Generator {
   }
 }
 
-module.exports = new Database();
+module.exports = new Generator();
