@@ -3,7 +3,7 @@ services:
   # Load Balancer
   calliope_lb:
     container_name: "calliope-lb"
-    image: kderbyma/maple-tree-labs:archi-lb_latest
+    image: calliope-load-balancer:latest
     restart: always
     volumes:
       - "./load-balancer/certs:/etc/letsencrypt"
@@ -21,7 +21,7 @@ services:
   # Database
   calliope_db:
     container_name: "calliope-db"
-    image: kderbyma/maple-tree-labs:archi-db_latest
+    image: calliope-database:latest
     build:
       context: ./scripts/docker/database
     restart: always
@@ -35,7 +35,7 @@ services:
   # Main API / Portal for calliope
   calliope_portal:
     container_name: "calliope-portal"
-    image: kderbyma/maple-tree-labs:calliope_latest
+    image: calliope:latest
     restart: always
     build:
       context: .

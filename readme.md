@@ -2,6 +2,20 @@
 
 ![Calliope](calliope.png)
 
+## Static vs Served
+You can serve your content via NodeJS and this will read posts and content directly from the filesystem, or you can compile and bundle a static version of your site and host it using a service such as S3, Netlify, etc.
+
+*To Serve:*
+        
+        yarn 
+        yarn build                      # Build API / Admin
+        yarn run                        # Run Server
+
+*To Compile:*
+
+        yarn
+        yarn build-static              # Compile Static Assets & Manifests
+        cd build && http-server        # Serve Static files
 
 ## Dependencies (to deploy)
 The Following Technologies are required to run and deploy Calliope:
