@@ -1,6 +1,6 @@
 # Calliope Site Generator
 
-![Calliope](calliope.png)
+![Calliope](site/media/calliope.png)
 
 ## Static vs Served
 

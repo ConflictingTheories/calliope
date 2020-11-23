@@ -6,7 +6,7 @@ services:
     image: calliope-load-balancer:latest
     restart: always
     volumes:
-      - "./load-balancer/certs:/etc/letsencrypt"
+      - "./scripts/docker/load-balancer/certs:/etc/letsencrypt"
     depends_on:
       - "calliope_portal"
     links:

@@ -57,11 +57,17 @@ class ArchNavBar extends React.Component {
 
   render() {
     return this.state.isLogin ? (
-      <Navbar style={{ color: Colors.WHITE, background: Colors.DARK_GRAY4 }}>
+      <Navbar
+        className="App-nav"
+        style={{ color: Colors.WHITE, background: Colors.DARK_GRAY4 }}
+      >
         {this.renderBrand()}
       </Navbar>
     ) : (
-      <Navbar style={{ color: Colors.WHITE, background: Colors.DARK_GRAY4 }}>
+      <Navbar
+        className="App-nav"
+        style={{ color: Colors.WHITE, background: Colors.DARK_GRAY4 }}
+      >
         <Navbar.Group align={Alignment.LEFT}>
           {this.state.renderBrand()}
           {this.state.renderBar()}
