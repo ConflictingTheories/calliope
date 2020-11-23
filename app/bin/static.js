@@ -18,6 +18,7 @@
 \*                                            */
 const fs = require("fs");
 const path = require("path");
+const Env = require("../config/env");
 const { getPages, getPosts } = require("../config/content");
 
 module.exports = (async () => {
@@ -58,6 +59,7 @@ module.exports = (async () => {
 
   // COPY Pages
   let pages = await getPages();
+  console.log(pages);
   let pageJson = [];
   pages.forEach(function (file) {
     let filename = file
@@ -89,11 +91,11 @@ module.exports = (async () => {
 
   // Write JSON Manifests
   fs.writeFileSync(
-    path.join(__dirname, "../build/content/posts.json"),
+    path.join(__dirname, "/../build/content/posts.json"),
     JSON.stringify(postJson)
   );
   fs.writeFileSync(
-    path.join(__dirname, "../build/content/pages.json"),
+    path.join(__dirname, "/../build/content/pages.json"),
     JSON.stringify(pageJson)
   );
 })();

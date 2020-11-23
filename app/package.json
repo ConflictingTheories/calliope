@@ -36,11 +36,12 @@
     "typescript": "^4.0.2"
   },
   "scripts": {
-    "seed": "node config/db/seed.js",
-    "migrate": "node config/db/migrate.js",
+    "configure": "node bin/configure",
+    "build": "yarn configure && craco build",
+    "build-static": "yarn build && node bin/static",
     "start": "node bin/app.js",
-    "build": "craco build",
-    "build-static": "craco build && node bin/generate-site",
+    "db-migrate": "node config/db/migrate.js",
+    "db-seed": "node config/db/seed.js",
     "test": "craco test",
     "eject": "react-scripts eject"
   },

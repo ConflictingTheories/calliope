@@ -34,7 +34,7 @@ import NavBar from "../../components/nav";
 import SideMenu from "../../components/menu";
 import Post from "../../components/post";
 // ASSETS & APP STYLES
-import "../../themes/default/less/App.less";
+import "../../theme/less/App.less";
 
 //SERVICES
 import { pages, posts } from "../../services/content";

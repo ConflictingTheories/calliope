@@ -41,7 +41,7 @@ import "rsuite/dist/styles/rsuite-default.css";
 
 // ASSETS & APP STYLES
 import Logo from "../../assets/logo.svg";
-import "../../themes/default/less/App.less";
+import "../../theme/less/App.less";
 
 import { login, check } from "../../services/auth";
 
