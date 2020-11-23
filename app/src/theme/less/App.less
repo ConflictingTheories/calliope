@@ -1,5 +1,4 @@
 @import "./colors.less";
-@import "./cyberpunk.less";
 
 body,
 html {
@@ -9,8 +8,8 @@ html {
   font-family: monospace;
   background: linear-gradient(45deg, #141823 0%, #292e49 100%);
   font-weight: lighter;
-  color: #fff8f0;
-  background: black;
+  color: #000810;
+  background: snow;
   font-family: "Orbitron", sans-serif;
   font-style: italic;
   white-space: nowrap;
@@ -20,7 +19,7 @@ canvas {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: black;
+  background-color: snow;
 }
 
 .App {
@@ -30,7 +29,6 @@ canvas {
 .App-nav {
   position:fixed;
 }
-
 
 .App-header {
   background-color: @background;
@@ -62,7 +60,6 @@ canvas {
 
 .calliope-list-item {
   padding: 0.5em;
-  
 }
 
 .calliope-post {
@@ -85,10 +82,17 @@ canvas {
   right: 15px;
   font-family: "Arial";
   font-size: 1rem;
-  color: #d7b8f3;
+  color: #1f1329;
   text-align: center;
 }
 .f a {
   font-size: 1rem;
-  color: #fff;
+  color: #000;
+}
+
+.container {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 40%;
+  left: 50%;
 }
