@@ -112,10 +112,9 @@ const initializeTheme = (c) => {
     let c = ~~(Math.random() * 0.01) + 0.05;
     // Styling Lines
     ctx.shadowBlur = 0;
-    // ctx.fillStyle = `rgba(${a},${b},${d},${c})`;
     ctx.fillStyle = "#ffffff11";
-
     ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = `rgba(${a},${b},${d},${c})`;
     ctx.shadowBlur = 30;
     // Draw
     for (var i = 0; i < lines.length; ++i)
@@ -183,14 +182,19 @@ const initializeTheme = (c) => {
   init();
   anim();
   // Refresh on Resize Events
-  window.addEventListener("resize");
+  window.addEventListener("resize", function () {
+    w = c.width = window.innerWidth;
+    h = c.height = window.innerHeight;
+    starter.x = ~~(Math.random() * w) / 2;
+    starter.y = ~~(Math.random() * h) / 2;
+    init();
+  });
 };
 
 const onResize = (c) => {
-  const w = (c.width = window.innerWidth);
-  h = c.height = window.innerHeight;
-  starter.x = ~~(Math.random() * w) / 2;
-  starter.y = ~~(Math.random() * h) / 2;
+  c.width = window.innerWidth;
+  c.height = window.innerHeight;
+  console.log(window);
   initializeTheme(c);
 };
 

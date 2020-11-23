@@ -43,9 +43,9 @@ module.exports = {
     S3_REGION: process.env.S3_REGION,
     S3_BUCKET: process.env.S3_BUCKET,
     // Feature Flags    
-    ENABLE_AUTH: false,
-    ENABLE_CONTENT: true,
+    ENABLE_AUTH: process.env.ENABLE_AUTH,
+    ENABLE_CONTENT: process.env.ENABLE_CONTENT,
     // Theme Setting
-    CALLIOPE_THEME: "cyberpunk",
-    THEME_DARK: true
+    CALLIOPE_THEME: process.env.CALLIOPE_THEME,
+    THEME_DARK: process.env.THEME_DARK
 };
