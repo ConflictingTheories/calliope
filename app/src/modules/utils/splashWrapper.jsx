@@ -15,7 +15,6 @@ import React from "react";
 import SplashScreen from "./splash";
 // ASSETS & APP STYLES
 import "../../theme/less/App.less";
-
 // Splash Screen
 export default function withSplashScreen(WrappedComponent) {
   return class extends React.Component {
@@ -31,7 +30,7 @@ export default function withSplashScreen(WrappedComponent) {
           this.setState({
             loading: false,
           });
-        }, 2500);
+        }, 5500);
       } catch (err) {
         console.log(err);
         this.setState({
