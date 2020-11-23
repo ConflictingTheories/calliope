@@ -26,7 +26,6 @@ import {
 import "rsuite/dist/styles/rsuite-default.css";
 
 // BLUEPRINT STYLES
-import { Intent, Callout } from "@blueprintjs/core";
 import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
 import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
 
@@ -49,20 +48,26 @@ class Dashboard extends React.Component {
   renderPosts() {
     return (
       <React.Fragment>
-        <Container>
-          <Content>
-            {store.posts &&
-              store.posts?.map((post) => {
-                return (
-                  <Row>
-                    <Container className="calliope-list-item">
-                      <Post src={`posts/${post}`} />
-                    </Container>
-                  </Row>
-                );
-              })}
-          </Content>
-        </Container>
+        <Row>
+          <Col sm={3} />
+          <Col sm={18}>
+            <Container>
+              <Content>
+                {store.posts &&
+                  store.posts?.map((post) => {
+                    return (
+                      <Row>
+                        <Container className="calliope-list-item">
+                          <Post src={`posts/${post}`} />
+                        </Container>
+                      </Row>
+                    );
+                  })}
+              </Content>
+            </Container>
+          </Col>
+          <Col sm={3} />
+        </Row>
       </React.Fragment>
     );
   }
