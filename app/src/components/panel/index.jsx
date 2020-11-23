@@ -15,7 +15,7 @@ import React, { Component } from "react";
 import { collect, store } from "react-recollect";
 
 // RSuite UI Library
-import { Container, Icon, Panel, Content, Row, Col, InputGroup } from "rsuite";
+import { Container, Icon, Panel, Content, Row, Col, InputGroup } from "../../modules/home/node_modules/rsuite";
 
 import "rsuite/dist/styles/rsuite-default.css";
 

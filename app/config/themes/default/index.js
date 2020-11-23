@@ -183,19 +183,21 @@ const initializeTheme = (c) => {
   init();
   anim();
   // Refresh on Resize Events
-  window.addEventListener("resize", function () {
-    const c = document.getElementById("c");
-    w = c.width = window.innerWidth;
-    h = c.height = window.innerHeight;
-    starter.x = ~~(Math.random() * w) / 2;
-    starter.y = ~~(Math.random() * h) / 2;
-    init();
-  });
+  window.addEventListener("resize");
+};
+
+const onResize = (c) => {
+  const w = (c.width = window.innerWidth);
+  h = c.height = window.innerHeight;
+  starter.x = ~~(Math.random() * w) / 2;
+  starter.y = ~~(Math.random() * h) / 2;
+  initializeTheme(c);
 };
 
 module.exports = {
   light,
   dark,
   fonts,
+  onResize,
   initializeTheme,
 };

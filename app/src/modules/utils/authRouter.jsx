@@ -25,6 +25,6 @@ export const AuthenticatedRoute = ({component,...rest}) =>{
     <Route {...rest} render={(props)=>
         Authenticator.isAuthenticated()
             ? <MyComp {...props} />
-            : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />} />
+            : <Redirect to={{ pathname: '/home', state: { from: props.location } }} />} />
     )
 };

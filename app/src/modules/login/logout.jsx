@@ -41,7 +41,7 @@ class Logout extends React.Component {
       await logout();
     } finally {
       const { from } = this.props.location.state || {
-        from: { pathname: "/login" },
+        from: { pathname: "/home" },
       };
       this.props.history.push(from);
     }

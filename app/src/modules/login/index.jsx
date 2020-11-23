@@ -1,24 +1,13 @@
-/*                                            *\
-** ------------------------------------------ **
-**         Calliope - Site Generator   	      **
-** ------------------------------------------ **
-**  Copyright (c) 2020 - Kyle Derby MacInnis  **
-**                                            **
-** Any unauthorized distribution or transfer  **
-**    of this work is strictly prohibited.    **
-**                                            **
-**           All Rights Reserved.             **
-** ------------------------------------------ **
-\*                                            */
-
 import React from "react";
-import { collect } from "react-recollect";
+import { collect, store } from "react-recollect";
 // BLUEPRINT STYLES
 import {
   InputGroup,
   FormGroup,
+  Card,
   Classes,
   Intent,
+  ProgressBar,
   Button,
   Callout,
 } from "@blueprintjs/core";
@@ -30,29 +19,26 @@ import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
 import {
   Container,
   Header,
+  Navbar,
   Content,
   Sidebar,
   FlexboxGrid,
   Panel,
   Form,
   ButtonToolbar,
+  Footer,
 } from "rsuite";
-import "rsuite/dist/styles/rsuite-default.css";
+import "rsuite/dist/styles/rsuite-dark.css";
 
 // ASSETS & APP STYLES
-import Logo from "../../assets/logo.svg";
+import logo from "../../assets/logo.svg";
 import "../../theme/less/App.less";
 
-import { login, check } from "../../services/auth";
+import { login, logout, getAll, check } from "../../services/auth";
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-
-    this.store = props.store;
 
     this.state = {
       username: "",
@@ -61,12 +47,14 @@ class Login extends React.Component {
       loading: false,
       error: "",
     };
-  
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   async componentDidMount() {
     let auth = await check();
-    this.store.auth = auth;
+    store.auth = auth;
+    console.log(auth);
     if (auth.isAuth) {
       const { from } = { from: { pathname: "/" } };
       this.props.history.push(from);
@@ -92,12 +80,19 @@ class Login extends React.Component {
     this.setState({ loading: true });
     login(username, password).then(
       (user) => {
+        console.log(user);
         const { from } = this.props.location.state || {
-          from: { pathname: "/" },
+          from: { pathname: "/admin" },
         };
         this.props.history.push(from);
       },
-      (error) => this.setState({ error, loading: false })
+      (error) => {
+        console.log(error);
+        const { from } = this.props.location.state || {
+          from: { pathname: "/login" },
+        };
+        this.props.history.push(from);
+      }
     );
   }
 
@@ -105,6 +100,7 @@ class Login extends React.Component {
     const { username, password, submitted, loading, error } = this.state;
     return (
       <Container
+        className={"container"}
         style={{
           background: "linear-gradient(45deg, rgba(37, 1, 63, 0.52), black)",
         }}
@@ -121,16 +117,16 @@ class Login extends React.Component {
                   <Container style={{ backgroundColor: "#30404d" }}>
                     <Sidebar style={{ width: "320px" }}>
                       <img
-                        src={Logo}
+                        src={logo}
                         height="320"
                         style={{
-                          background: "linear-gradient(45deg,indigo,black)",
+                          background: "linear-gradient(45deg, rgba(10,10,10,0.5), black)",
                         }}
                       />
                     </Sidebar>
                     <Container style={{ width: "320px" }}>
                       <Content style={{ padding: "1em" }}>
-                        <Form fluid>
+                        <Form fluid onSubmit={this.handleSubmit}>
                           <FormGroup
                             label="Username or email address"
                             helperText={
@@ -172,7 +168,7 @@ class Login extends React.Component {
                           <FormGroup>
                             <ButtonToolbar>
                               <Button
-                                onClick={this.handleSubmit}
+                                // onClick={this.handleSubmit}
                                 disabled={loading}
                               >
                                 Login

@@ -24,48 +24,56 @@ import "../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
 import "./theme/less/App.less";
 
 // HELPERS
-import withSplashScreen from "./modules/utils/splashScreen";
+import withSplashScreen from "./modules/utils/splashWrapper";
 
 // ROUTER
 import { AuthenticatedRoute } from "./modules/utils/authRouter";
 
-// SCREENS
+// PUBLIC SCREENS
+import PublicScreen from "./modules/home";
+
+// ADMIN SCREENS
 import LoginScreen from "./modules/login";
 import LogoutScreen from "./modules/login/logout";
-import HomeScreen from "./modules/dashboard";
+import AdminScreen from "./modules/admin";
 
-import { initializeTheme } from "./theme";
+import { initializeTheme, onResize } from "./theme";
 // APP
 const App = () => {
   // Initialize Canvas for Theme
   const ref = useRef();
   const date = new Date().toDateString();
-  useEffect(() => {
-    let canvas = ref.current;
-    initializeTheme(canvas);
-  });
+
+  // useEffect(() => {
+  //   let canvas = ref.current;
+  //   initializeTheme(canvas);
+  // });
+
+
   // Return Themed Site
   return (
     <React.Fragment>
-      <canvas ref={ref} />
+      {/* background Canvas - For Special Animations - TODO - Issues with Sizing*/}
+      {/* <canvas style={{ width: "100%", height: "100%" }} ref={ref} /> */}
+      {/* Pre-Special Effects - TODO -- Issues w sizing*/}
+      {/* <div class="specialEffect1"></div> */}
+      <div class="specialEffect2"></div>
+      <div class="specialEffect3"></div>
+      {/* Main Site Container */}
       <div className="calliope-container">
         <Router>
           <Switch>
-            {/* LOGIN / LOGOUT */}
-            <Route path="/login" component={LoginScreen} />
-            <AuthenticatedRoute exact path="/logout" component={LogoutScreen} />
-            {/* DASHBOARD  */}
-            <AuthenticatedRoute path="/dashboard" component={HomeScreen} />
-            <AuthenticatedRoute path="*" component={HomeScreen} />
+            <AuthenticatedRoute exact path="/admin" component={AdminScreen} />
+            <AuthenticatedRoute path="/logout" component={LogoutScreen} />
+            <Route exact path="/login" component={LoginScreen} />
+            <Route path="*" component={PublicScreen} />
           </Switch>
         </Router>
       </div>
-      {/* Special Effects */}
-      <div class="specialEffect1"></div>
-      <div class="specialEffect2"></div>
-      <div class="specialEffect3"></div>
+      {/* Post-Special Effects */}
       <div class="specialEffect4"></div>
       <div class="specialEffect5"></div>
+      <div class="specialEffect6"></div>
       {/* Powered by Calliope and Date */}
       <p class="f">
         <span id="date">{date}</span>

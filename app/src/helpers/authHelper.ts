@@ -1,47 +1,71 @@
-/*                                            *\
-** ------------------------------------------ **
-**         Calliope - Site Generator   	      **
-** ------------------------------------------ **
-**  Copyright (c) 2020 - Kyle Derby MacInnis  **
-**                                            **
-** Any unauthorized distribution or transfer  **
-**    of this work is strictly prohibited.    **
-**                                            **
-**           All Rights Reserved.             **
-** ------------------------------------------ **
-\*                                            */
+/*
+ * ---------------------------- *
+ *                              *
+ * 2020 (c) Kyle Derby MacInnis *
+ *                              *
+ * ---------------------------- *
+ */
+
+// import { session } from "electron";
 
 // Auth Helper Class
 class Authenticator {
-
-    // Return Auth Header with Token
-    static authHeader() {
-        let user = JSON.parse(localStorage.getItem('user')||'{}');
-        if (user && user.authdata) {
-            return { 'Authorization': 'Basic ' + user.authdata };
-        } else {
-            return {'Authorization':''};
-        }
+  // Return Auth Header with Token
+  static authHeader() {
+    try {
+      let user = JSON.parse(localStorage.getItem("user") || "{}");
+      if (user && user.authdata)
+        return { Authorization: "Basic " + user.authdata };
+      else return { Authorization: "" };
+    } catch (e) {
+      Authenticator.clearAuthData();
+      return { Authorization: "" };
     }
+  }
 
-    // Checkf for Auth Status (TODO :: No Authentication Required)
-    static isAuthenticated() {
-        return true;
-    };
-
-    // Set Auth Data (local / session)
-    static setAuthData(authdata:any){
-        let user = JSON.parse(localStorage.getItem('user')||'{}');
-        user.authdata = authdata;
-        localStorage.setItem('user',user);
-        sessionStorage.setItem('user', user);
+  // Checkf for Auth Status
+  static isAuthenticated() {
+    if (!sessionStorage.user && !localStorage.user) {
+      return false;
+    } else {
+      try {
+        var CalliopeUser = JSON.parse(sessionStorage.user || localStorage.user);
+        if (CalliopeUser && CalliopeUser.is_authorized) return true;
+        else return false;
+      } catch (e) {
+        Authenticator.clearAuthData();
+        return false;
+      }
     }
+  }
 
-    // Clear Auth Data (local / session)
-    static clearAuthData(){
-        localStorage.removeItem('user');
-        sessionStorage.removeItem('user');
+  // Check for Admin Status
+  static isAdmin() {
+    if (!sessionStorage.user && !localStorage.user) {
+      return false;
+    } else {
+      try {
+        var CalliopeUser = JSON.parse(sessionStorage.user || localStorage.user);
+        if (CalliopeUser && CalliopeUser.is_admin) return true;
+        else return false;
+      } catch (e) {
+        Authenticator.clearAuthData();
+        return false;
+      }
     }
+  }
+
+  // Set Auth Data
+  static setAuthData(authdata: any) {
+    localStorage.setItem("user", JSON.stringify(authdata));
+    sessionStorage.setItem("user", JSON.stringify(authdata));
+  }
+
+  // Clear Auth Data
+  static clearAuthData() {
+    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
+  }
 }
 
-export default Authenticator
+export default Authenticator;
