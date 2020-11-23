@@ -3,6 +3,7 @@
 The following are the features I am working on getting ready:
 
 - Better Configuration & Instructions
+- Mobile Support
 - Resizable Images
 - Support for Inline HTML
 - Plugins Like galleries and Custom Embeds
