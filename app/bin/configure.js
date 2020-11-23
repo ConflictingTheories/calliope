@@ -35,32 +35,28 @@ module.exports = (() => {
       );
     }
     // Copy Files
-    files.forEach((file) => {
-      console.log(file);
+    files.forEach(async (file) => {
       let filename = file.split(`/config/themes/${theme}/`)[1];
-      fs.readFile(file, "utf8", async function (err, data) {
-        // Read each file
-        if (err) {
-          console.log(
-            "cannot read the file, something goes wrong with the file",
-            err
-          );
-        }
-        // Make sure Folders are present
-        await fs.promises.mkdir(themePath, {
+      let filenamePath = filename.split(/[\/]/);
+      let filepath = filenamePath.pop();
+      console.log("transfering -- ", filepath);
+      await fs.promises.mkdir(
+        path.join(
+          __dirname + `/../src/theme/${filenamePath.join("/")}`
+        ),
+        {
           recursive: true,
-        });
-        // Copy into Build Dir
-        fs.writeFileSync(
-          path.join(__dirname + `/../src/theme/${filename}`),
-          data
-        );
-      });
+        }
+      );
+      const readFile = fs.createReadStream(file);
+      const outFile = fs.createWriteStream(
+        path.join(__dirname + `/../src/theme/${filename}`)
+      );
+      readFile.pipe(outFile);
     });
   });
 
 
-  // Setup Font Files
-
+  // Setup Font Files (TODO)
 
 })();

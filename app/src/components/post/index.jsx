@@ -14,6 +14,7 @@
 import React, { Component } from "react";
 import { collect } from "react-recollect";
 import ReactMarkdown from "react-markdown";
+import { renderers } from "../../theme/jsx";
 
 class Post extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class Post extends Component {
     return (
       <React.Fragment className="calliope-post">
         <hr />
-        <ReactMarkdown children={content} />
+        <ReactMarkdown children={content} renders={renderers} />
         <hr />
       </React.Fragment>
     );

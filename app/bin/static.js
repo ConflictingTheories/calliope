@@ -18,7 +18,7 @@
 \*                                            */
 const fs = require("fs");
 const path = require("path");
-const Env = require("../config/env");
+const glob = require("glob");
 const { getPages, getPosts } = require("../config/content");
 
 module.exports = (async () => {
@@ -86,6 +86,40 @@ module.exports = (async () => {
         path.join(__dirname + `/../build/content/pages/${filename}`),
         data
       );
+    });
+  });
+
+  // COPY Media
+  const mediaFiles = path.join(__dirname + `/../../site/media`);
+  console.log("Transfering:\n\n", mediaFiles);
+  // Transfer Media Files
+  glob(mediaFiles + "/**/*.*", function (err, files) {
+    if (err) {
+      console.log(
+        "cannot read the Pages folder, something goes wrong with glob",
+        err
+      );
+    }
+    // Copy Files
+    files.forEach(async (file) => {
+      console.log(file);
+      let filename = file.split(`/site/media/`)[1];
+      let filenamePath = filename.split(/[\/]/);
+      let filepath = filenamePath.pop();
+      console.log("transfering -- ", filepath);
+      await fs.promises.mkdir(
+        path.join(
+          __dirname + `/../build/content/media/${filenamePath.join("/")}`
+        ),
+        {
+          recursive: true,
+        }
+      );
+      const readFile = fs.createReadStream(file);
+      const outFile = fs.createWriteStream(
+        path.join(__dirname + `/../build/content/media/${filename}`)
+      );
+      readFile.pipe(outFile);
     });
   });
 
