@@ -47,9 +47,9 @@ services:
     ports:
       - "${API_PORT}:${API_PORT}"
     volumes:
-      - "./server/build:/opt/calliope/build"
+      - "./app/build:/opt/calliope/build"
       - "./site:/opt/calliope/site"
-      - "./server/node_modules:/opt/calliope/node_modules"
+      - "./app/node_modules:/opt/calliope/node_modules"
     environment:
       NODE_ENV: ${NODE_ENV}
       DB_TYPE: ${DB_TYPE}

@@ -12,7 +12,7 @@ const dark = {
   secondaryColor: "#ab00aa77",
   dark: "#222",
   textColor: "hotpink",
-  linkColor: "#hsl( 300deg, 20%, 50% )",
+  linkColor: "hsl( 300deg, 20%, 50% )",
 
   // Grays
   darkGray: "#444",

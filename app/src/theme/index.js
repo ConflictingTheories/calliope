@@ -1,14 +1,18 @@
-// Dark Mode (Can be set in config)
+// Techno Cyberpunk Mode (Can be set in config)
 //
-const fonts = [];
+const fonts = [
+  "https://fonts.googleapis.com/css?family=Rock+Salt",
+  "https://fonts.googleapis.com/css?family=Orbitron",
+];
 
+// Dark Mode Colours
 const dark = {
   // Colours
   primaryColor: "rgba(37, 1, 63, 0.52)",
   secondaryColor: "#ab00aa77",
   dark: "#222",
-  textColor: "white",
-  linkColor: "#61dafb",
+  textColor: "hotpink",
+  linkColor: "hsl( 300deg, 20%, 50% )",
 
   // Grays
   darkGray: "#444",
@@ -195,5 +199,5 @@ module.exports = {
   light,
   dark,
   fonts,
-  initializeTheme,
+  initializeTheme
 };

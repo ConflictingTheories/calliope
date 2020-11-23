@@ -30,7 +30,6 @@ class Post extends Component {
       const fileResponse = await fetch("/content/" + this.state.src);
       if (fileResponse.ok) {
         let content = await fileResponse.text();
-        console.log(content);
         this.setState({ content });
       }
     }

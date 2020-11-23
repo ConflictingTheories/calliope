@@ -90,7 +90,7 @@ const initializeTheme = (c) => {
 
     for (var i = 0; i < initialLines; ++i) lines.push(new Line(starter));
 
-    ctx.fillStyle = "#222";
+    ctx.fillStyle = "#fff";
     ctx.fillRect(0, 0, w, h);
 
     // if you want a cookie ;)
@@ -112,7 +112,9 @@ const initializeTheme = (c) => {
     let c = ~~(Math.random() * 0.01) + 0.05;
     // Styling Lines
     ctx.shadowBlur = 0;
-    ctx.fillStyle = `rgba(${a},${b},${d},${c})`;
+    // ctx.fillStyle = `rgba(${a},${b},${d},${c})`;
+    ctx.fillStyle = "#ffffff11";
+
     ctx.fillRect(0, 0, w, h);
     ctx.shadowBlur = 30;
     // Draw

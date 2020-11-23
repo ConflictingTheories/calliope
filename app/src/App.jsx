@@ -68,11 +68,11 @@ const App = () => {
       <div class="specialEffect5"></div>
       {/* Powered by Calliope and Date */}
       <p class="f">
+        <span id="date">{date}</span>
+        <br />
         <a target="_blank" href="https://www.calliope.site">
           powered by Calliope ⚡⚡⚡
         </a>
-        <br />
-        <span id="date">{date}</span>
       </p>
     </React.Fragment>
   );

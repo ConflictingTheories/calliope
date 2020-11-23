@@ -37,7 +37,7 @@ import Post from "../../components/post";
 import "../../theme/less/App.less";
 
 //SERVICES
-import { pages, posts } from "../../services/content";
+import { posts } from "../../services/content";
 
 const { Paragraph } = Placeholder;
 
@@ -46,15 +46,9 @@ class Dashboard extends React.Component {
     super(props);
   }
 
-  renderDashboardTabs() {
+  renderPosts() {
     return (
       <React.Fragment>
-        <Callout
-          intent={Intent.SUCCESS}
-          title={"Calliope :: Your New Website - Loaded ✓"}
-        >
-          <Paragraph width={320} rows={3} />
-        </Callout>
         <Container>
           <Content>
             {store.posts &&
@@ -77,12 +71,11 @@ class Dashboard extends React.Component {
     // Fetch & Render Posts
     const result = await posts();
     if (result) {
-      console.log(result);
       store.posts = result;
       setTimeout(
         () =>
           Notification.open({
-            title: "Welcome 🐙👾 - Calliope",
+            title: "Welcome to Calliope",
             description: <Paragraph width={320} rows={3} />,
           }),
         ~~(Math.random() * 10000)
@@ -105,14 +98,14 @@ class Dashboard extends React.Component {
           style={{ flex: 1, flexShrink: 1, flexGrow: 0 }}
         />
         <div style={{ display: "flex", flex: 1, flexDirection: "row" }}>
-          <Container>
+          <Container className="calliope-container">
             <NavBar
               isLogin={false}
               renderBrand={this.renderClientSelect}
               renderBar={() => null}
               renderRight={() => null}
             />
-            <Content>{this.renderDashboardTabs()}</Content>
+            <Content>{this.renderPosts()}</Content>
           </Container>
         </div>
         {/* MEETING sidebar */}

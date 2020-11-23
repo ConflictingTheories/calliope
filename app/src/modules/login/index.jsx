@@ -67,7 +67,6 @@ class Login extends React.Component {
   async componentDidMount() {
     let auth = await check();
     this.store.auth = auth;
-    console.log(auth);
     if (auth.isAuth) {
       const { from } = { from: { pathname: "/" } };
       this.props.history.push(from);
@@ -93,7 +92,6 @@ class Login extends React.Component {
     this.setState({ loading: true });
     login(username, password).then(
       (user) => {
-        console.log(user);
         const { from } = this.props.location.state || {
           from: { pathname: "/" },
         };

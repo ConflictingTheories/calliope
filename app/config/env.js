@@ -46,6 +46,6 @@ module.exports = {
     ENABLE_AUTH: false,
     ENABLE_CONTENT: true,
     // Theme Setting
-    CALLIOPE_THEME: "default",
-    THEME_DARK: false
+    CALLIOPE_THEME: "cyberpunk",
+    THEME_DARK: true
 };

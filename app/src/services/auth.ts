@@ -19,7 +19,6 @@ export async function check() {
     .then((user:any) => {
         // login successful if there's a response object in the response
         if (user) {
-            console.log(user);
             sessionStorage.setItem('user', JSON.stringify(user));
             localStorage.setItem('user', JSON.stringify(user));
         }
