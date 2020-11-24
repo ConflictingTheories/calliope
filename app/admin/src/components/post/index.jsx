@@ -43,7 +43,7 @@ class Post extends Component {
     return (
       <React.Fragment className="calliope-post">
         <hr />
-        <ReactMarkdown children={content} renders={renderers} />
+        <ReactMarkdown children={content} renderers={renderers} />
         <hr />
       </React.Fragment>
     );

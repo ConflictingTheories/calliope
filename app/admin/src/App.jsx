@@ -17,8 +17,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // External Style Frameworks (RSuite / BlueprintJS)
 import "rsuite/dist/styles/rsuite-default.css";
-import "../node_modules/@blueprintjs/core/lib/css/blueprint.css";
-import "../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
+// BLUEPRINT STYLES
+import "@blueprintjs/core/lib/css/blueprint.css";
+import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 
 // ASSETS & APP STYLES
 import "./theme/less/App.less";

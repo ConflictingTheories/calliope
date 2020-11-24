@@ -15,8 +15,8 @@ import React from "react";
 import { collect } from "react-recollect";
 
 // BLUEPRINT STYLES
-import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
-import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
+import "@blueprintjs/core/lib/css/blueprint.css";
+import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 
 // RSuite UI Library
 import {

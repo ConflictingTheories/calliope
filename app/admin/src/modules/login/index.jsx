@@ -12,8 +12,9 @@ import {
   Callout,
 } from "@blueprintjs/core";
 
-import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
-import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
+// BLUEPRINT STYLES
+import "@blueprintjs/core/lib/css/blueprint.css";
+import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 
 // RSuite UI Library
 import {

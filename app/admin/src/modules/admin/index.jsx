@@ -27,8 +27,9 @@ import "rsuite/dist/styles/rsuite-default.css";
 
 // BLUEPRINT STYLES
 import { Intent, Callout } from "@blueprintjs/core";
-import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
-import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
+// BLUEPRINT STYLES
+import "@blueprintjs/core/lib/css/blueprint.css";
+import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 
 import NavBar from "../../components/nav";
 import SideMenu from "../../components/menu";

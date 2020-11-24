@@ -15,7 +15,7 @@ import React from "react";
 // Customization for Markdown Rendering (react-markdown)
 export const renderers = {
   image: ({ alt, src, title }) => (
-    <img alt={alt} src={src} title={title} style={{ maxWidth: 475 }} />
+    <img alt={alt} src={src} title={title} style={{ maxWidth: "100%" }} />
   ),
 };
 
