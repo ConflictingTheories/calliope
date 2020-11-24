@@ -36,13 +36,13 @@ module.exports = (() => {
   const Storage = require("../lib/storage");
 
   // INDEX MODULES
-  const index = require("../routes/index");
-  const content = require("../routes/content");
+  const index = require("../website/routes/index");
+  const content = require("../website/routes/content");
   // SERVER
-  server.listen(Env.API_PORT, () => {
+  server.listen(Env.WEBSITE_PORT, () => {
     console.log(
       "Calliope :: Your New Website is Now Live @ PORT: ",
-      Env.API_PORT
+      Env.WEBSITE_PORT
     );
     console.log("Using Storage Driver :: ", Storage.version);
     // Request Handling
@@ -63,7 +63,7 @@ module.exports = (() => {
         let apiVer = req.params.ver;
         switch (apiVer) {
           case "v1":
-            apiRouter = require("../routes/" + apiVer + "/index.js");
+            apiRouter = require("../website/routes/" + apiVer + "/index.js");
             apiRouter(req, res);
             break;
           default:
@@ -84,13 +84,13 @@ module.exports = (() => {
     // Web App
     app.use(
       "/content",
-      express.static(path.join(__dirname, "../../site/"), {
+      express.static(path.join(__dirname, "../../content/"), {
         index: false,
         extensions: ["md"],
       })
     );
     app.use("/content", content);
-    app.use("/static", express.static(__dirname + "/../build/static"));
+    app.use("/static", express.static(__dirname + "/../website/build/static"));
     app.use("/", index);
     // Database Sync
     DB.sync();

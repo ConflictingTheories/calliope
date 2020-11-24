@@ -14,7 +14,11 @@ events {
 http {
 
 	upstream cms {
-		server calliope_portal:${API_PORT};
+		server calliope_portal:${WEBSITE_PORT};
+	}
+
+    upstream admin {
+		server calliope_portal:${ADMIN_PORT};
 	}
 
 	server {
@@ -27,6 +31,11 @@ http {
             proxy_pass http://cms/;
         }
 
+        location /admin {
+            proxy_pass http://admin/;
+        }
+
     }
+
 }
 EOF

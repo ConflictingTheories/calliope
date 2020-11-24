@@ -1,1 +1,0 @@
-![/content/media/calliope.png](/content/media/calliope.png)

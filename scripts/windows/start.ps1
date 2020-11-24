@@ -15,7 +15,7 @@
 $env:BUILD_PATH="$(Get-Location)"
 Set-Location $env:BUILD_PATH;
 
-foreach( $line in $(Get-Content "env.ps1")){$line}
+foreach( $line in $(Get-Content ".env.ps1")){$line}
 
 # Deploy
 docker-compose up -d

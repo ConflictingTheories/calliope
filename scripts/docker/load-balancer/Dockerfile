@@ -18,7 +18,7 @@ WORKDIR /opt/archi-lb
 ADD ./scripts/nginx-setup.sh .
 RUN sh /opt/archi-lb/nginx-setup.sh
 # Expose Ports
-EXPOSE 80
+EXPOSE 80 443
 # RUN
 # CMD nginx
 CMD tail -f /var/log/nginx/access.log

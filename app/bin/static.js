@@ -23,7 +23,7 @@ const { getPages, getPosts } = require("../config/content");
 
 module.exports = (async () => {
   // Make Directory for Site Content
-  await fs.promises.mkdir(path.join(__dirname + `/../build/content`), {
+  await fs.promises.mkdir(path.join(__dirname + `/../website/build/content`), {
     recursive: true,
   });
   // COPY Posts
@@ -31,7 +31,7 @@ module.exports = (async () => {
   let postJson = [];
   posts.forEach(function (file) {
     let filename = file
-      .split("../site/posts/")[1]
+      .split("../content/posts/")[1]
       .split(/[\/\s]+/)
       .join("-");
     postJson.push(filename);
@@ -44,14 +44,14 @@ module.exports = (async () => {
         );
       }
       await fs.promises.mkdir(
-        path.join(__dirname + `/../build/content/posts/`),
+        path.join(__dirname + `/../website/build/content/posts/`),
         {
           recursive: true,
         }
       );
       // Copy into Build Dir
       fs.writeFileSync(
-        path.join(__dirname + `/../build/content/posts/${filename}`),
+        path.join(__dirname + `/../website/build/content/posts/${filename}`),
         data
       );
     });
@@ -63,7 +63,7 @@ module.exports = (async () => {
   let pageJson = [];
   pages.forEach(function (file) {
     let filename = file
-      .split("../site/pages/")[1]
+      .split("../content/pages/")[1]
       .split(/[\/\s]+/)
       .join("-");
     pageJson.push(filename);
@@ -77,20 +77,20 @@ module.exports = (async () => {
       }
       // Copy into Build Dir
       await fs.promises.mkdir(
-        path.join(__dirname + `/../build/content/pages/`),
+        path.join(__dirname + `/../website/build/content/pages/`),
         {
           recursive: true,
         }
       );
       fs.writeFileSync(
-        path.join(__dirname + `/../build/content/pages/${filename}`),
+        path.join(__dirname + `/../website/build/content/pages/${filename}`),
         data
       );
     });
   });
 
   // COPY Media
-  const mediaFiles = path.join(__dirname + `/../../site/media`);
+  const mediaFiles = path.join(__dirname + `/../../content/media`);
   console.log("Transfering:\n\n", mediaFiles);
   // Transfer Media Files
   glob(mediaFiles + "/**/*.*", function (err, files) {
@@ -103,13 +103,13 @@ module.exports = (async () => {
     // Copy Files
     files.forEach(async (file) => {
       console.log(file);
-      let filename = file.split(`/site/media/`)[1];
+      let filename = file.split(`/content/media/`)[1];
       let filenamePath = filename.split(/[\/]/);
       let filepath = filenamePath.pop();
       console.log("transfering -- ", filepath);
       await fs.promises.mkdir(
         path.join(
-          __dirname + `/../build/content/media/${filenamePath.join("/")}`
+          __dirname + `/../website/build/content/media/${filenamePath.join("/")}`
         ),
         {
           recursive: true,
@@ -117,7 +117,7 @@ module.exports = (async () => {
       );
       const readFile = fs.createReadStream(file);
       const outFile = fs.createWriteStream(
-        path.join(__dirname + `/../build/content/media/${filename}`)
+        path.join(__dirname + `/../website/build/content/media/${filename}`)
       );
       readFile.pipe(outFile);
     });
@@ -125,11 +125,11 @@ module.exports = (async () => {
 
   // Write JSON Manifests
   fs.writeFileSync(
-    path.join(__dirname, "/../build/content/posts.json"),
+    path.join(__dirname, "/../website/build/content/posts.json"),
     JSON.stringify(postJson)
   );
   fs.writeFileSync(
-    path.join(__dirname, "/../build/content/pages.json"),
+    path.join(__dirname, "/../website/build/content/pages.json"),
     JSON.stringify(pageJson)
   );
 })();

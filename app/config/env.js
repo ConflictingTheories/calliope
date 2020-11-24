@@ -15,7 +15,10 @@ module.exports = {
     // API Config
     API_VERSION: process.env.API_VERSION,
     API_ROUTE_PATH: process.env.API_ROUTE_PATH,
-    API_PORT: process.env.API_PORT,
+    // Website Config
+    WEBSITE_PORT: process.env.WEBSITE_PORT,
+    // Admin Config
+    ADMIN_PORT: process.env.ADMIN_PORT,
     // Datbase Config
     DB_HOST: process.env.DB_HOST,
     DB_USER: process.env.DB_USER,

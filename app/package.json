@@ -37,13 +37,17 @@
   },
   "scripts": {
     "configure": "node bin/configure",
-    "build": "yarn configure && craco build",
-    "build-static": "yarn build && node bin/static",
-    "start": "node bin/app.js",
     "db-migrate": "node config/db/migrate.js",
     "db-seed": "node config/db/seed.js",
-    "test": "craco test",
-    "eject": "react-scripts eject"
+    "build-live": "cd website && craco build",
+    "build-site": "yarn build-live && node ./bin/static",
+    "build-admin": "cd admin && craco build",
+    "build": "yarn configure && yarn build-site && yarn build-admin",
+    "start-site": "node bin/app.js",
+    "start-admin": "node bin/admin.js",
+    "start": "yarn start-site && yarn start-admin",
+    "build-demo": "yarn configure && yarn build-site",
+    "serve-demo": "cd website/build && http-server"
   },
   "eslintConfig": {
     "extends": "react-app"

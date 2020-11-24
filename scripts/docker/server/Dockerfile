@@ -14,10 +14,12 @@
 FROM ubuntu
 LABEL Author "Kyle Derby MacInnis"
 # Env Variables
-ENV API_HOST=${API_HOST}
 ENV API_VERSION=${API_VERSION}
 ENV API_ROUTE_PATH=${API_ROUTE_PATH}
-ENV APP_PORT=${PORT}
+ENV WEBSITE_HOST=${WEBSITE_HOST}
+ENV WEBSITE_PORT=${WEBSITE_PORT}
+ENV ADMIN_HOST=${ADMIN_HOST}
+ENV ADMIN_PORT=${ADMIN_PORT}
 ENV DB_USER=${DB_USER}
 ENV DB_PASS=${DB_PASS}
 ENV DB_HOST=${DB_HOST}
@@ -44,7 +46,7 @@ RUN apt-get update -y && apt-get install -y yarn
 # Build Source
 RUN yarn && yarn build
 # Expose Ports
-EXPOSE 8081
+EXPOSE 8081 8088 ${WEBSITE_PORT} ${ADMIN_PORT}
 # Copy Site Contents
 WORKDIR /opt/calliope/site
 COPY ./site .

@@ -4,8 +4,7 @@
 **/deployments
 
 **/.env
-database/data
-server/build
-server/dist
-
-env.ps1
+**/.env.ps1
+app/node_modules
+**/node_modules
+**/build

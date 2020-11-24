@@ -14,10 +14,10 @@ services:
     build:
       context: ./scripts/docker/load-balancer/
     ports:
-      - "10007:80"
+      - "80:80"
     environment:
-      API_PORT: ${API_PORT}
-      EP_PORT: ${EP_PORT}
+      WEBSITE_PORT: ${WEBSITE_PORT}
+      ADMIN_PORT: ${ADMIN_PORT}
   # Database
   calliope_db:
     container_name: "calliope-db"
@@ -45,10 +45,11 @@ services:
     links:
       - "calliope_db:calliope_db"
     ports:
-      - "${API_PORT}:${API_PORT}"
+      - "${WEBSITE_PORT}:${WEBSITE_PORT}"
+      - "${ADMIN_PORT}:${ADMIN_PORT}"
     volumes:
       - "./app/build:/opt/calliope/build"
-      - "./site:/opt/calliope/site"
+      - "./content:/opt/calliope/site"
       - "./app/node_modules:/opt/calliope/node_modules"
     environment:
       NODE_ENV: ${NODE_ENV}
@@ -59,5 +60,7 @@ services:
       DB_PORT: ${DB_PORT}
       DB_NAME: ${DB_NAME}
       PUBLIC_URL: ${PUBLIC_URL}
-      API_PORT: ${API_PORT}
-      API_HOST: ${API_HOST}
+      WEBSITE_PORT: ${WEBSITE_PORT}
+      WEBSITE_HOST: ${WEBSITE_HOST}
+      ADMIN_PORT: ${ADMIN_PORT}
+      ADMIN_HOST: ${ADMIN_HOST}
