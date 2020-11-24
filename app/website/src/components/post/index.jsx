@@ -13,7 +13,16 @@
 
 import React, { Component } from "react";
 import { collect } from "react-recollect";
-import ReactMarkdown from "react-markdown";
+
+import ReactMarkdownWithHtml from "react-markdown/with-html";
+import gfm from "remark-gfm";
+import math from "remark-math";
+import a11yEmoji from "@fec/remark-a11y-emoji";
+import html from "remark-html";
+import slug from "remark-slug";
+import emoji from "remark-emoji";
+import headings from "remark-autolink-headings";
+
 import { renderers } from "../../theme/jsx";
 
 class Post extends Component {
@@ -43,7 +52,12 @@ class Post extends Component {
     return (
       <React.Fragment className="calliope-post">
         <hr />
-        <ReactMarkdown children={content} renderers={renderers} />
+        <ReactMarkdownWithHtml
+          plugins={[emoji, a11yEmoji, math, gfm, html, slug, headings]}
+          children={content}
+          renderers={renderers}
+          allowDangerousHtml
+        />
         <hr />
       </React.Fragment>
     );

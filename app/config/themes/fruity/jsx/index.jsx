@@ -12,11 +12,27 @@
 \*                                            */
 import React from "react";
 
+// Code Highlighting
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import {funky} from "react-syntax-highlighter/dist/esm/styles/prism";
+
+// Math Latex Support
+import { InlineMath, BlockMath } from "react-katex";
+import "katex/dist/katex.min.css";
+import style from "react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark";
+
 // Customization for Markdown Rendering (react-markdown)
 export const renderers = {
   image: ({ alt, src, title }) => (
     <img alt={alt} src={src} title={title} style={{ maxWidth: "100%" }} />
   ),
+  code: ({ language, value }) => {
+    return (
+      <SyntaxHighlighter style={funky} language={language} children={value} />
+    );
+  },
+  inlineMath: ({ value }) => <InlineMath math={value} />,
+  math: ({ value }) => <BlockMath math={value} />,
 };
 
 export default { renderers };
