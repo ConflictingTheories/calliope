@@ -47,7 +47,7 @@
     "start-admin": "node bin/admin.js",
     "start": "yarn start-site && yarn start-admin",
     "build-demo": "yarn configure && yarn build-site",
-    "serve-demo": "cd website/build && http-server"
+    "serve-demo": "cd ../demo && http-server"
   },
   "eslintConfig": {
     "extends": "react-app"
