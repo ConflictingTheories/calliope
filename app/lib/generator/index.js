@@ -1,27 +1,36 @@
-/*                                            *\
-** ------------------------------------------ **
-**         Calliope - Site Generator   	      **
-** ------------------------------------------ **
-**  Copyright (c) 2020 - Kyle Derby MacInnis  **
-**                                            **
-** Any unauthorized distribution or transfer  **
-**    of this work is strictly prohibited.    **
-**                                            **
-**           All Rights Reserved.             **
-** ------------------------------------------ **
-\*                                            */
+var glob = require("glob");
 
-// Static Site Generator
-class Generator {
-  static instance;
-  constructor() {
-    if (this.instance) return this.instance;
-    else {
-      // TODO -- Add Actual Logic
-      this.instance = (this)
-      return this.instance;
-    }
-  }
-}
+// Posts (Markdown Files)
+const getPosts = () =>
+  new Promise((resolve, reject) => {
+    glob(__dirname+"/../../../content/posts/**/*.md", function (err, files) {
+      if (err) {
+        console.log(
+          "cannot read the Posts folder, something goes wrong with glob",
+          err
+        );
+        reject(err);
+      }
+      resolve(files);
+    });
+  });
 
-module.exports = new Generator();
+// Pages (Markdown Files)
+const getPages = () =>
+  new Promise((resolve, reject) => {
+    glob(__dirname+"/../../../content/pages/**/*.md", function (err, files) {
+      if (err) {
+        console.log(
+          "cannot read the Pages folder, something goes wrong with glob",
+          err
+        );
+        reject(err);
+      }
+      resolve(files);
+    });
+  });
+
+module.exports = {
+  getPages,
+  getPosts,
+};

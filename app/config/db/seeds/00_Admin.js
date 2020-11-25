@@ -19,7 +19,7 @@ module.exports = (() => {
   const Permission = require("../../../models/Permission");
   const EP = require("../../../lib/etherpad");
   const DB = require("../../../lib/database");
-  // Seed Users Table
+  // Seed Users Table with Admin Account
   return {
     seed: async () => {
       try {

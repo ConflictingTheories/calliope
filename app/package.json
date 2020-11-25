@@ -1,8 +1,11 @@
 {
-  "name": "calliope-site-generator",
-  "version": "0.1.0",
-  "private": true,
+  "name": "calliope-ssg",
+  "version": "0.1.1",
   "author": "Kyle Derby MacInnis",
+  "license": "Apache-2.0",
+  "repository": {
+    "url": "https://github.com/ConflictingTheories/calliope"
+  },
   "homepage": "/",
   "dependencies": {
     "@blueprintjs/core": "^3.31.0",
@@ -42,6 +45,7 @@
     "remark-slug": "^6.0.0",
     "rsuite": "^4.8.2",
     "sequelize": "^6.3.5",
+    "shelljs": "^0.8.4",
     "typescript": "^4.0.2"
   },
   "scripts": {
@@ -53,11 +57,12 @@
     "build-site": "yarn build-live && yarn copy-content",
     "build-admin": "cd admin && craco build",
     "build": "yarn configure && yarn build-site && yarn build-admin",
+    "export": "node bin/export.js",
+    "deploy": "yarn build && yarn export",
     "start-site": "node bin/app.js",
     "start-admin": "node bin/admin.js",
     "start": "yarn start-site && yarn start-admin",
-    "build-demo": "yarn configure && yarn build-site",
-    "serve-demo": "cd ../demo && http-server"
+    "serve": "cd ../output/site && http-server"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -73,5 +78,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "http-server": "^0.12.3"
   }
 }

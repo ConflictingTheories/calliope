@@ -22,7 +22,7 @@ module.exports = (() => {
   const seeds = require("../json/seeds.json");
   const EP = require("../../../lib/etherpad");
   const DB = require("../../../lib/database");
-  // Seed Users Table
+  // Seed Users Table with Random Users
   return {
     seed: async () => {
       try {

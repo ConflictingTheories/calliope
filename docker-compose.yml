@@ -48,8 +48,9 @@ services:
       - "${WEBSITE_PORT}:${WEBSITE_PORT}"
       - "${ADMIN_PORT}:${ADMIN_PORT}"
     volumes:
-      - "./app/build:/opt/calliope/build"
-      - "./content:/opt/calliope/site"
+      - "./output/site:/opt/calliope/website/build"
+      - "./output/admin:/opt/calliope/admin/build"
+      - "./content:/opt/calliope/content"
       - "./app/node_modules:/opt/calliope/node_modules"
     environment:
       NODE_ENV: ${NODE_ENV}
