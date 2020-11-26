@@ -23,14 +23,19 @@ import "katex/dist/katex.min.css";
 // Customization for Markdown Rendering (react-markdown)
 export const renderers = {
   image: ({ alt, src, title }) => (
-    <img alt={alt} src={src} title={title} style={{ maxWidth: "100%" }} />
+    <img
+      alt={alt}
+      src={src}
+      title={title}
+      style={{ maxWidth: "100%", padding: 0 }}
+    />
   ),
   code: ({ language, value }) => {
     return (
       <SyntaxHighlighter
         style={materialLight}
         language={language}
-        children={value || ''}
+        children={value || ""}
       />
     );
   },
