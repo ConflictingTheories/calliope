@@ -29,7 +29,7 @@ class Post extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      src: props.src,
+      src: props?.src || "",
       content: null,
     };
   }
@@ -49,18 +49,24 @@ class Post extends Component {
 
   render() {
     const { content } = this.state;
-    return (
-      <React.Fragment className="calliope-post">
-        <hr />
-        <ReactMarkdownWithHtml
-          plugins={[emoji, a11yEmoji, math, gfm, html]}
-          children={content}
-          renderers={renderers}
-          allowDangerousHtml
-        />
-        <hr />
-      </React.Fragment>
-    );
+    let res = null;
+    try {
+      res = (
+        <React.Fragment className="calliope-post">
+          <hr />
+          <ReactMarkdownWithHtml
+            plugins={[emoji, a11yEmoji, math, gfm, html, slug, headings]}
+            children={content || ""}
+            renderers={renderers}
+            allowDangerousHtml
+          />
+          <hr />
+        </React.Fragment>
+      );
+    } catch (e) {
+      console.error(e);
+    }
+    return res;
   }
 }
 

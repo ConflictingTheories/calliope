@@ -19,7 +19,7 @@
 const fs = require("fs");
 const path = require("path");
 const glob = require("glob");
-const { getPages, getPosts } = require("../config/content");
+const { getPages, getPosts } = require("../lib/generator");
 
 module.exports = (async () => {
   // Make Directory for Site Content

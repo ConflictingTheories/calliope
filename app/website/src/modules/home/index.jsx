@@ -49,8 +49,8 @@ class Dashboard extends React.Component {
     return (
       <React.Fragment>
         <Row>
-          <Col sm={3} />
-          <Col sm={18}>
+          <Col sm={0} md={3} lg={6} />
+          <Col sm={24} md={18} lg={12}>
             <Container>
               <Content>
                 {store.posts &&
@@ -66,7 +66,7 @@ class Dashboard extends React.Component {
               </Content>
             </Container>
           </Col>
-          <Col sm={3} />
+          <Col sm={0} md={3} lg={6} />
         </Row>
       </React.Fragment>
     );
@@ -80,7 +80,7 @@ class Dashboard extends React.Component {
       setTimeout(
         () =>
           Notification.open({
-            title: "Welcome to Calliope",
+            title: `Welcome!`,
             description: <Paragraph width={320} rows={3} />,
           }),
         ~~(Math.random() * 10000)
@@ -90,19 +90,11 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <div
-        style={{
-          display: "flex",
-          flex: 1,
-          flexDirection: "row",
-          minHeight: "100vh",
-        }}
-      >
+      <React.Fragment>
         <SideMenu
           activeKey={"1"}
           style={{ flex: 1, flexShrink: 1, flexGrow: 0 }}
         />
-        <div style={{ display: "flex", flex: 1, flexDirection: "row" }}>
           <Container className="calliope-container">
             <NavBar
               isLogin={false}
@@ -112,9 +104,7 @@ class Dashboard extends React.Component {
             />
             <Content>{this.renderPosts()}</Content>
           </Container>
-        </div>
-        {/* MEETING sidebar */}
-      </div>
+      </React.Fragment>
     );
   }
 }

@@ -30,7 +30,7 @@ export const renderers = {
       <SyntaxHighlighter
         style={materialLight}
         language={language}
-        children={value}
+        children={value || ''}
       />
     );
   },

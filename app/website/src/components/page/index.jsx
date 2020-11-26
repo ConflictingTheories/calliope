@@ -42,7 +42,7 @@ class Page extends Component {
     return (
       <React.Fragment className="calliope-page">
         <hr />
-        <ReactMarkdown children={content} />
+        <ReactMarkdown children={content || ''} />
         <hr />
       </React.Fragment>
     );
