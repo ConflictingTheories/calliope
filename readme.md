@@ -21,15 +21,22 @@ You can serve your content via NodeJS and this will read posts and content direc
 
 _To Serve:_
 
-        yarn
-        yarn build                      # Build API / Admin
-        yarn run                        # Run Server
+        cd app
+        yarn 
+        yarn deploy                       # Build API / Admin & Export
+        yarn serve                        # Serve Static Website (port 8080)
 
 _To Compile:_
 
         yarn
-        yarn build-static              # Compile Static Assets & Manifests
-        cd build && http-server        # Serve Static files
+        yarn build                       
+
+_To Run Live / Admin_
+
+        yarn
+        yarn build
+        yarn start
+
 
 _To Deploy:_ (Coming Soon - tools to help deploy -- For Now I recommend https://netlify.com and using https://github.com)
 

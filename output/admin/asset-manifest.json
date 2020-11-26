@@ -1,28 +1,28 @@
 {
   "files": {
-    "main.css": "/admin/static/css/main.309660e2.chunk.css",
-    "main.js": "/admin/static/js/main.9a97f403.chunk.js",
-    "main.js.map": "/admin/static/js/main.9a97f403.chunk.js.map",
-    "runtime-main.js": "/admin/static/js/runtime-main.8ffee97a.js",
-    "runtime-main.js.map": "/admin/static/js/runtime-main.8ffee97a.js.map",
-    "static/css/2.9bbac755.chunk.css": "/admin/static/css/2.9bbac755.chunk.css",
-    "static/js/2.4cc27f59.chunk.js": "/admin/static/js/2.4cc27f59.chunk.js",
-    "static/js/2.4cc27f59.chunk.js.map": "/admin/static/js/2.4cc27f59.chunk.js.map",
-    "index.html": "/admin/index.html",
-    "precache-manifest.9327948698fbcc759f9f190e1a04aa47.js": "/admin/precache-manifest.9327948698fbcc759f9f190e1a04aa47.js",
-    "service-worker.js": "/admin/service-worker.js",
-    "static/css/2.9bbac755.chunk.css.map": "/admin/static/css/2.9bbac755.chunk.css.map",
-    "static/css/main.309660e2.chunk.css.map": "/admin/static/css/main.309660e2.chunk.css.map",
-    "static/js/2.4cc27f59.chunk.js.LICENSE.txt": "/admin/static/js/2.4cc27f59.chunk.js.LICENSE.txt",
-    "static/media/katex.min.css": "/admin/static/media/KaTeX_Typewriter-Regular.f43e8696.woff2",
-    "static/media/blueprint-icons.css": "/admin/static/media/icons-20.cef8cdbb.woff",
-    "static/media/logo.svg": "/admin/static/media/logo.1b010ed1.svg"
+    "main.css": "/static/css/main.003e3839.chunk.css",
+    "main.js": "/static/js/main.e9f4e646.chunk.js",
+    "main.js.map": "/static/js/main.e9f4e646.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.e8f40a24.js",
+    "runtime-main.js.map": "/static/js/runtime-main.e8f40a24.js.map",
+    "static/css/2.40579a6c.chunk.css": "/static/css/2.40579a6c.chunk.css",
+    "static/js/2.a729d3f1.chunk.js": "/static/js/2.a729d3f1.chunk.js",
+    "static/js/2.a729d3f1.chunk.js.map": "/static/js/2.a729d3f1.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.3adc8d485796949179dd2542ccdeba8c.js": "/precache-manifest.3adc8d485796949179dd2542ccdeba8c.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.40579a6c.chunk.css.map": "/static/css/2.40579a6c.chunk.css.map",
+    "static/css/main.003e3839.chunk.css.map": "/static/css/main.003e3839.chunk.css.map",
+    "static/js/2.a729d3f1.chunk.js.LICENSE.txt": "/static/js/2.a729d3f1.chunk.js.LICENSE.txt",
+    "static/media/katex.min.css": "/static/media/KaTeX_Typewriter-Regular.f43e8696.woff2",
+    "static/media/blueprint-icons.css": "/static/media/icons-20.cef8cdbb.woff",
+    "static/media/logo.svg": "/static/media/logo.1b010ed1.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.8ffee97a.js",
-    "static/css/2.9bbac755.chunk.css",
-    "static/js/2.4cc27f59.chunk.js",
-    "static/css/main.309660e2.chunk.css",
-    "static/js/main.9a97f403.chunk.js"
+    "static/js/runtime-main.e8f40a24.js",
+    "static/css/2.40579a6c.chunk.css",
+    "static/js/2.a729d3f1.chunk.js",
+    "static/css/main.003e3839.chunk.css",
+    "static/js/main.e9f4e646.chunk.js"
   ]
 }
