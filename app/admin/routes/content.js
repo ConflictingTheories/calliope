@@ -25,7 +25,7 @@ module.exports = (() => {
       msg: "Error - No Posts Found!",
     };
     // Return List of Site Posts
-    const { getPosts } = require("../config/content");
+    const { getPosts } = require("../../config/content");
     const posts = await getPosts();
     const files = posts.map((post) => post.split("../content/posts/")[1]);
     console.log(files);
@@ -41,7 +41,7 @@ module.exports = (() => {
       msg: "Error - No Posts Found!",
     };
     // Return List of Site Posts
-    const { getPages } = require("../config/content");
+    const { getPages } = require("../../config/content");
     const pages = await getPages();
     const files = pages.map((page) => page.split("../content/pages/")[1]);
     if (files) res.status(200).json(files);
@@ -49,8 +49,8 @@ module.exports = (() => {
     else res.status(404).json(status);
   });
 
-  console.log("SERVING", path.join(__dirname, "../../content/"))
-  router.use("*", express.static(path.join(__dirname, "../../content/"),{index:false,extensions:['md']}));
+  console.log("SERVING", path.join(__dirname, "../../../content/"))
+  router.use("*", express.static(path.join(__dirname, "../../../content/"),{index:false,extensions:['md']}));
   
 
   return router;

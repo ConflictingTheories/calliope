@@ -39,6 +39,7 @@ import "../../theme/less/App.less";
 import { posts } from "../../services/content";
 
 const { Paragraph } = Placeholder;
+const PAGE_LIMIT = 10;
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -54,15 +55,28 @@ class Dashboard extends React.Component {
             <Container>
               <Content>
                 {store.posts &&
-                  store.posts?.map((post) => {
-                    return (
-                      <Row>
-                        <Container className="calliope-list-item">
-                          <Post src={`posts/${post}`} />
-                        </Container>
-                      </Row>
-                    );
-                  })}
+                  store.posts
+                    ?.filter((post, i) => i < store.end && i >= store.start)
+                    .map((post) => {
+                      return (
+                        <Row>
+                          <Container className="calliope-list-item">
+                            <Post src={`posts/${post}`} />
+                          </Container>
+                        </Row>
+                      );
+                    })}
+                <>
+                  {store.end && store.end < store.posts?.length && (
+                    <a
+                      onClick={() => {
+                        store.end += PAGE_LIMIT;
+                      }}
+                    >
+                      Load More Posts
+                    </a>
+                  )}
+                </>
               </Content>
             </Container>
           </Col>
@@ -77,6 +91,10 @@ class Dashboard extends React.Component {
     const result = await posts();
     if (result) {
       store.posts = result;
+
+      store.start = 0;
+      store.end = store.start + PAGE_LIMIT;
+
       setTimeout(
         () =>
           Notification.open({
@@ -95,15 +113,15 @@ class Dashboard extends React.Component {
           activeKey={"1"}
           style={{ flex: 1, flexShrink: 1, flexGrow: 0 }}
         />
-          <Container className="calliope-container">
-            <NavBar
-              isLogin={false}
-              renderBrand={this.renderClientSelect}
-              renderBar={() => null}
-              renderRight={() => null}
-            />
-            <Content>{this.renderPosts()}</Content>
-          </Container>
+        <Container className="calliope-container">
+          <NavBar
+            isLogin={false}
+            renderBrand={this.renderClientSelect}
+            renderBar={() => null}
+            renderRight={() => null}
+          />
+          <Content>{this.renderPosts()}</Content>
+        </Container>
       </React.Fragment>
     );
   }

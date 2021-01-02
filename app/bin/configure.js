@@ -61,7 +61,7 @@ module.exports = (() => {
   }
 
   function configureAdmin() {
-    const theme = Env.CALLIOPE_THEME || "default";
+    const theme = Env.ADMIN_THEME || "default";
     const themeFiles = path.join(__dirname + `/../config/themes/${theme}`);
     const themePath = path.join(__dirname + `/../admin/src/theme`);
     console.log("Admin Site :: Transfering:\n\n", themeFiles);

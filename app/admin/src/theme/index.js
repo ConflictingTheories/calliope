@@ -1,14 +1,18 @@
-// Dark Mode (Can be set in config)
+// Techno Cyberpunk Mode (Can be set in config)
 //
-const fonts = [];
+const fonts = [
+  "https://fonts.googleapis.com/css?family=Rock+Salt",
+  "https://fonts.googleapis.com/css?family=Orbitron",
+];
 
+// Dark Mode Colours
 const dark = {
   // Colours
   primaryColor: "rgba(37, 1, 63, 0.52)",
   secondaryColor: "#ab00aa77",
   dark: "#222",
-  textColor: "white",
-  linkColor: "#61dafb",
+  textColor: "hotpink",
+  linkColor: "hsl( 300deg, 20%, 50% )",
 
   // Grays
   darkGray: "#444",
@@ -90,7 +94,7 @@ const initializeTheme = (c) => {
 
     for (var i = 0; i < initialLines; ++i) lines.push(new Line(starter));
 
-    ctx.fillStyle = "#fff";
+    ctx.fillStyle = "#222";
     ctx.fillRect(0, 0, w, h);
 
     // if you want a cookie ;)
@@ -112,9 +116,8 @@ const initializeTheme = (c) => {
     let c = ~~(Math.random() * 0.01) + 0.05;
     // Styling Lines
     ctx.shadowBlur = 0;
-    ctx.fillStyle = "#ffffff11";
-    ctx.fillRect(0, 0, w, h);
     ctx.fillStyle = `rgba(${a},${b},${d},${c})`;
+    ctx.fillRect(0, 0, w, h);
     ctx.shadowBlur = 30;
     // Draw
     for (var i = 0; i < lines.length; ++i)
@@ -191,6 +194,7 @@ const initializeTheme = (c) => {
   });
 };
 
+// Resize Canvas
 const onResize = (c) => {
   c.width = window.innerWidth;
   c.height = window.innerHeight;
@@ -202,6 +206,6 @@ module.exports = {
   light,
   dark,
   fonts,
-  onResize,
   initializeTheme,
+  onResize,
 };

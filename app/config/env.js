@@ -49,6 +49,8 @@ module.exports = {
     ENABLE_AUTH: process.env.ENABLE_AUTH,
     ENABLE_CONTENT: process.env.ENABLE_CONTENT,
     // Theme Setting
+    ADMIN_THEME: process.env.ADMIN_THEME,
     CALLIOPE_THEME: process.env.CALLIOPE_THEME,
+    ADMIN_THEME_DARK: process.env.ADMIN_THEME_DARK,
     THEME_DARK: process.env.THEME_DARK
 };

@@ -6,6 +6,7 @@
   "repository": {
     "url": "https://github.com/ConflictingTheories/calliope"
   },
+  "main": "./electron/main.js",
   "homepage": "/",
   "dependencies": {
     "@blueprintjs/core": "^3.31.0",
@@ -19,10 +20,14 @@
     "@types/node": "^14.10.1",
     "aws-sdk": "^2.761.0",
     "body-parser": "^1.19.0",
+    "concurrently": "^5.3.0",
     "config": "^3.3.2",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "craco-less": "^1.17.0",
+    "electron": "^11.1.1",
+    "electron-builder": "^22.9.1",
+    "electron-is-dev": "^1.2.0",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.0",
     "express-session": "^1.17.1",
@@ -46,9 +51,12 @@
     "rsuite": "^4.8.2",
     "sequelize": "^6.3.5",
     "shelljs": "^0.8.4",
-    "typescript": "^4.0.2"
+    "typescript": "^4.0.2",
+    "wait-on": "^5.2.1"
   },
   "scripts": {
+    "ebuild": "yarn build && node_modules/.bin/build",
+    "dev": "concurrently \"npm start\" \"wait-on http://localhost:8899 && electron .\"",
     "configure": "node bin/configure",
     "copy-content": "node ./bin/static",
     "db-migrate": "node config/db/migrate.js",
@@ -61,7 +69,7 @@
     "deploy": "yarn build && yarn export",
     "start-site": "node bin/app.js",
     "start-admin": "node bin/admin.js",
-    "start": "yarn start-site && yarn start-admin",
+    "start": "concurrently \"yarn start-site\" \"yarn start-admin\"",
     "serve": "cd ../output/site && http-server"
   },
   "eslintConfig": {
