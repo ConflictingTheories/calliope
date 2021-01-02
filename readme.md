@@ -13,7 +13,7 @@ When you serve the static files, keep in mind that you will need to provide a we
 
 ## Demonstration
 
-You can see the `/demo-site` folder which has been generated using Calliope for your reference, or alternatively you can check out https://www.calliope.site for a live demonstration using both Netlify and Github to hot it.
+You can see the `/output` folder which has been generated using Calliope for your reference, or alternatively you can check out https://www.calliope.site for a live demonstration using both Netlify and Github to hot it.
 
 ## Static vs Served
 
