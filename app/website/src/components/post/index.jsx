@@ -22,6 +22,8 @@ import html from "remark-html";
 import slug from "remark-slug";
 import emoji from "remark-emoji";
 import headings from "remark-autolink-headings";
+import parse from "remark-parse";
+import shortcodes from "remark-shortcodes";
 
 import { renderers } from "../../theme/jsx";
 
@@ -55,7 +57,7 @@ class Post extends Component {
         <React.Fragment className="calliope-post">
           <hr />
           <ReactMarkdownWithHtml
-            plugins={[emoji, a11yEmoji, math, gfm, html, slug, headings]}
+            plugins={[emoji, a11yEmoji, math, gfm, html, slug, headings, parse, [shortcodes,{startBlock: "{{>", endBlock: "<}}"}]]}
             children={content || ""}
             renderers={renderers}
             allowDangerousHtml

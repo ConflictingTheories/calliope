@@ -39,6 +39,10 @@ export const renderers = {
       />
     );
   },
+  shortcode: ({identifier, attributes})=>{
+    console.log(identifier, attributes);
+    return <></>;
+  },
   inlineMath: ({ value }) => <InlineMath math={value} />,
   math: ({ value }) => <BlockMath math={value} />,
 };

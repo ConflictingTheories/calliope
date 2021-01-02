@@ -25,7 +25,7 @@ module.exports = (() => {
       msg: "Error - No Posts Found!",
     };
     // Return List of Site Posts
-    const { getPosts } = require("../../config/content");
+    const { getPosts } = require("../../lib/generator");
     const posts = await getPosts();
     const files = posts.map((post) => post.split("../content/posts/")[1]);
     console.log(files);
@@ -41,7 +41,7 @@ module.exports = (() => {
       msg: "Error - No Posts Found!",
     };
     // Return List of Site Posts
-    const { getPages } = require("../../config/content");
+    const { getPages } = require("../../lib/generator");
     const pages = await getPages();
     const files = pages.map((page) => page.split("../content/pages/")[1]);
     if (files) res.status(200).json(files);
