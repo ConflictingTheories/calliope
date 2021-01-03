@@ -43,16 +43,11 @@ export const renderers = {
     );
   },
   shortcode: (props) => {
+    console.log(props);
     switch (props.identifier) {
       case "ipfsStream":
         let { ipfsHash } = props.attributes;
-        return (
-          <IPFSVideo
-            ipfsHash={
-              ipfsHash || "QmYGs1ksGX3eMiGvxNuvRT6PD7zPKZpHyiUDXKGQoL4R7S"
-            }
-          />
-        );
+        return <IPFSVideo ipfsHash={ipfsHash} />;
       default:
         return <>{JSON.stringify(props)}</>;
     }

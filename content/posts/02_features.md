@@ -36,7 +36,7 @@ Ex. Pass Through Params and Make Custom Plugin Shortcodes
 
 Ex. IPFS-Hosted Video Streaming
 
-[[ ipfsStream ipfsHash="QmYGs1ksGX3eMiGvxNuvRT6PD7zPKZpHyiUDXKGQoL4R7S" ]]
+[[ ipfsStream ipfsHash="QmQjDRKG8pZaeBnQi9zLqupCgY9D2Mth6noF4GMdZR6CVQ" ]]
 
 
 <br/>
