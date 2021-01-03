@@ -31,22 +31,15 @@ Some areas which are coming soon for plugins:
 - Crypto
 
 Ex. Pass Through Params and Make Custom Plugin Shortcodes
-[[ CustomShortCodes customParam1="Custom Params" <}}
+
+[[ CustomShortCodes customParam1="Custom Params" ]]
 
 Ex. IPFS-Hosted Video Streaming
-[[ipfsStream ipfsHash="QmYGs1ksGX3eMiGvxNuvRT6PD7zPKZpHyiUDXKGQoL4R7S"]]
 
-<link
-  href="https://fonts.googleapis.com/css?family=Rock+Salt"
-  rel="stylesheet"
-  type="text/css"
-/>
+[[ ipfsStream ipfsHash="QmYGs1ksGX3eMiGvxNuvRT6PD7zPKZpHyiUDXKGQoL4R7S"]]
 
-<link
-  href="https://fonts.googleapis.com/css?family=Syncopate"
-  rel="stylesheet"
-  type="text/css"
-/>
+
+<br/>
 
 <div>
   <span class="glitch conflict">inline</span>&nbsp; &nbsp; &nbsp; &nbsp;<span class="glitch" data-text="HTML"  >HTML</span>
