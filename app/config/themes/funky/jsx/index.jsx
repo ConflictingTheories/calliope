@@ -20,6 +20,9 @@ import { funky } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { InlineMath, BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
 
+// Plugins -- MAY NEED TO CUSTOMIZE FOR NOW - NOT INTJECTABLE JUST YET
+import IPFSVideo from "../../plugins/ipfs-stream/jsx"
+
 // Customization for Markdown Rendering (react-markdown)
 export const renderers = {
   image: ({ alt, src, title }) => (
@@ -39,9 +42,20 @@ export const renderers = {
       />
     );
   },
-  shortcode: ({identifier, attributes})=>{
-    console.log(identifier, attributes);
-    return <></>;
+  shortcode: (props) => {
+    switch (props.identifier) {
+      case "ipfsStream":
+        let { ipfsHash } = props.attributes;
+        return (
+          <IPFSVideo
+            ipfsHash={
+              ipfsHash || "QmYGs1ksGX3eMiGvxNuvRT6PD7zPKZpHyiUDXKGQoL4R7S"
+            }
+          />
+        );
+      default:
+        return <>{JSON.stringify(props)}</>;
+    }
   },
   inlineMath: ({ value }) => <InlineMath math={value} />,
   math: ({ value }) => <BlockMath math={value} />,

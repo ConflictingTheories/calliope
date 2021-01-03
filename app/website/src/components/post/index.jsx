@@ -1,28 +1,27 @@
-/*                                            *\
-** ------------------------------------------ **
-**         Calliope - Site Generator   	      **
-** ------------------------------------------ **
-**  Copyright (c) 2020 - Kyle Derby MacInnis  **
-**                                            **
-** Any unauthorized distribution or transfer  **
-**    of this work is strictly prohibited.    **
-**                                            **
-**           All Rights Reserved.             **
-** ------------------------------------------ **
-\*                                            */
+/*                                                 *\
+** ----------------------------------------------- **
+**             Calliope - Site Generator   	       **
+** ----------------------------------------------- **
+**  Copyright (c) 2020-2021 - Kyle Derby MacInnis  **
+**                                                 **
+**    Any unauthorized distribution or transfer    **
+**       of this work is strictly prohibited.      **
+**                                                 **
+**               All Rights Reserved.              **
+** ----------------------------------------------- **
+\*                                                 */
+
 
 import React, { Component } from "react";
 import { collect } from "react-recollect";
 
 import ReactMarkdownWithHtml from "react-markdown/with-html";
+import ReactMarkdown from "react-markdown";
 import gfm from "remark-gfm";
 import math from "remark-math";
 import a11yEmoji from "@fec/remark-a11y-emoji";
 import html from "remark-html";
-import slug from "remark-slug";
 import emoji from "remark-emoji";
-import headings from "remark-autolink-headings";
-import parse from "remark-parse";
 import shortcodes from "remark-shortcodes";
 
 import { renderers } from "../../theme/jsx";
@@ -57,7 +56,17 @@ class Post extends Component {
         <React.Fragment className="calliope-post">
           <hr />
           <ReactMarkdownWithHtml
-            plugins={[emoji, a11yEmoji, math, gfm, html, slug, headings, parse, [shortcodes,{startBlock: "{{>", endBlock: "<}}"}]]}
+          plugins={[
+              emoji,
+              a11yEmoji,
+              math,
+              [
+                shortcodes,
+                { startBlock: "[[", endBlock: "]]" },
+              ],
+              gfm,
+              html,
+            ]}
             children={content || ""}
             renderers={renderers}
             allowDangerousHtml

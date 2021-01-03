@@ -1,15 +1,16 @@
-/*                                            *\
-** ------------------------------------------ **
-**         Calliope - Site Generator   	      **
-** ------------------------------------------ **
-**  Copyright (c) 2020 - Kyle Derby MacInnis  **
-**                                            **
-** Any unauthorized distribution or transfer  **
-**    of this work is strictly prohibited.    **
-**                                            **
-**           All Rights Reserved.             **
-** ------------------------------------------ **
-\*                                            */
+/*                                                 *\
+** ----------------------------------------------- **
+**             Calliope - Site Generator   	       **
+** ----------------------------------------------- **
+**  Copyright (c) 2020-2021 - Kyle Derby MacInnis  **
+**                                                 **
+**    Any unauthorized distribution or transfer    **
+**       of this work is strictly prohibited.      **
+**                                                 **
+**               All Rights Reserved.              **
+** ----------------------------------------------- **
+\*                                                 */
+
 
 import React from "react";
 import { collect, store } from "react-recollect";
@@ -50,8 +51,8 @@ class Dashboard extends React.Component {
     return (
       <React.Fragment>
         <Row>
-          <Col sm={3} />
-          <Col sm={18}>
+          <Col sm={1} />
+          <Col sm={6}>
             <Container>
               <Content>
                 {store.posts &&
@@ -59,7 +60,10 @@ class Dashboard extends React.Component {
                     return (
                       <Row>
                         <Container className="calliope-list-item">
-                          <Post src={`posts/${post}`} />
+                          <details>
+                            <summary>{post}</summary>
+                            <Post src={`posts/${post}`} />
+                          </details>
                         </Container>
                       </Row>
                     );
@@ -67,7 +71,9 @@ class Dashboard extends React.Component {
               </Content>
             </Container>
           </Col>
-          <Col sm={3} />
+          <Col sm={8}></Col>
+          <Col sm={8}></Col>
+          <Col sm={1} />
         </Row>
       </React.Fragment>
     );

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 // BLUEPRINT STYLES UI LIBRARY
 import { Button, Colors, Navbar, Alignment } from "@blueprintjs/core";
-// BLUEPRINT STYLES
 import "@blueprintjs/core/lib/css/blueprint.css";
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 
