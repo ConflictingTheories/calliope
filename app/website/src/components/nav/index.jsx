@@ -45,12 +45,7 @@ class ArchNavBar extends React.Component {
   renderRight() {
     return (
       <React.Fragment>
-        <Link to="/settings">
-          <Button className="bp3-minimal" icon="badge" text="Account" />
-        </Link>
-        <Link to="/logout">
-          <Button className="bp3-minimal" icon="log-out" text="Logout" />
-        </Link>
+        <Button className="bp3-minimal" icon="plus" text="+ IPFS" onClick={()=>{console.log("LoadFile for IPFS??")}} />
       </React.Fragment>
     );
   }
@@ -61,7 +56,12 @@ class ArchNavBar extends React.Component {
         className="App-nav"
         style={{ color: Colors.WHITE, background: Colors.DARK_GRAY4 }}
       >
-        {this.renderBrand()}
+        <Navbar.Group align={Alignment.LEFT}>
+          {this.state.renderBrand()}
+        </Navbar.Group>
+        <Navbar.Group align={Alignment.RIGHT}>
+          {this.state.renderRight()}
+        </Navbar.Group>
       </Navbar>
     ) : (
       <Navbar

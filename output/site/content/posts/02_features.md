@@ -41,11 +41,7 @@ Ex. IPFS-Hosted Video Streaming
 
 <br/>
 
-<div>
-  <span class="glitch conflict">inline</span>&nbsp; &nbsp; &nbsp; &nbsp;<span class="glitch" data-text="HTML"  >HTML</span>
-  <p><strong>This Text</strong> is rendered using inline html and there is injected CSS for easy customization. (Note - this may be limited in the future for security)</p>
-  <h3>💪 Give it TRY!  </h3>
-</div>
+<h3>💪 Give it TRY!  </h3>
 
 <hr/>
 
