@@ -17,10 +17,13 @@ import HLSPlayer from "react-hls";
 import { store } from "react-recollect";
 class IPFSVideo extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+  }
+
+  componentDidMount(){
     store.ipfsServer = store.ipfsServer
-      ? store.ipfsServer
-      : ipfsCore.create({ repo: "ipfs-" + Math.random() });
+    ? store.ipfsServer
+    : ipfsCore.create({ repo: "ipfs-" + Math.random() });
   }
 
   render() {
@@ -28,7 +31,8 @@ class IPFSVideo extends Component {
     return (
       <div>
         <HLSPlayer
-          hlsOptions={{ ipfsHash, ipfs: store.ipfsServer }}
+          autoplay={false}
+          hlsOptions={{ ipfsHash: ipfsHash, ipfs: store.ipfsServer }}
           source={"master.m3u8"}
         />
       </div>
