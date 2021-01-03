@@ -12,12 +12,12 @@
 \*                                                 */
 
 import React, { Component } from "react";
-import { collect } from "react-recollect";
+import { collect, store } from "react-recollect";
 
 import ReactMarkdownWithHtml from "react-markdown/with-html";
 
 import ReactMarkdown from "react-markdown";
-import htmlParser from 'react-markdown/plugins/html-parser';
+import htmlParser from "react-markdown/plugins/html-parser";
 
 import gfm from "remark-gfm";
 import math from "remark-math";
@@ -31,10 +31,12 @@ import shortcodes from "remark-shortcodes";
 import { renderers } from "../../theme/jsx";
 
 const parseHtml = htmlParser({
-  isValidNode: node => node.type !== 'script',
-  processingInstructions: [/* ... */]
-})
-class Post extends Component {
+  isValidNode: (node) => node.type !== "script",
+  processingInstructions: [
+    /* ... */
+  ],
+});
+class MarkdownEdit extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -61,28 +63,15 @@ class Post extends Component {
     let res = null;
     try {
       res = (
-        <React.Fragment className="calliope-post">
+        <React.Fragment className="calliope-edit">
           <hr />
-          <ReactMarkdownWithHtml
-          astPlugins={[parseHtml]}
-          escapeHtml={false}
-          parserOptions={{gfm:true}}
-          plugins={[
-              [
-                shortcodes,
-                { startBlock: "[[", endBlock: "]]", inlineMode: true },
-              ],
-              emoji,
-              a11yEmoji,
-              math,
-              slug,
-              headings,
-              html,
-            ]}
-            children={content || ""}
-            renderers={renderers}
-            allowDangerousHtml
-          />
+          <textarea
+            value={store.content}
+            onChange={(v) => {
+              console.log(v);
+              store.contentData = v;
+            }}
+          ></textarea>
           <hr />
         </React.Fragment>
       );
@@ -93,4 +82,4 @@ class Post extends Component {
   }
 }
 
-export default collect(Post);
+export default collect(MarkdownEdit);

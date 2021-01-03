@@ -11,7 +11,6 @@
 ** ----------------------------------------------- **
 \*                                                 */
 
-
 import React from "react";
 import { collect, store } from "react-recollect";
 
@@ -34,6 +33,8 @@ import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 import NavBar from "../../components/nav";
 import SideMenu from "../../components/menu";
 import Post from "../../components/post";
+import MarkdownEdit from "../../components/edit";
+import MarkdownPreview from "../../components/preview";
 // ASSETS & APP STYLES
 import "../../theme/less/App.less";
 
@@ -47,12 +48,18 @@ class Dashboard extends React.Component {
     super(props);
   }
 
+  async edit(post) {
+    // Fetch Post & Store Content
+    if (post && post !== "") {
+      store.selectedPost = post;
+    }
+  }
+
   renderPosts() {
     return (
       <React.Fragment>
-        <Row>
-          <Col sm={1} />
-          <Col sm={6}>
+        <Row style={{ paddingTop: "2em" }}>
+          <Col sm={8}>
             <Container>
               <Content>
                 {store.posts &&
@@ -61,7 +68,9 @@ class Dashboard extends React.Component {
                       <Row>
                         <Container className="calliope-list-item">
                           <details>
-                            <summary>{post}</summary>
+                            <summary>
+                              {post} <a onClick={this.edit(post)}>Edit</a>
+                            </summary>
                             <Post src={`posts/${post}`} />
                           </details>
                         </Container>
@@ -71,9 +80,14 @@ class Dashboard extends React.Component {
               </Content>
             </Container>
           </Col>
-          <Col sm={8}></Col>
-          <Col sm={8}></Col>
-          <Col sm={1} />
+          <Col sm={8}>
+            {/* {store.selectedPost && <MarkdownEdit post={store.selectedPost} />} */}
+          </Col>
+          <Col sm={8}>
+            {/* {store.selectedPost && (
+              <MarkdownPreview post={store.selectedPost} />
+            )} */}
+          </Col>
         </Row>
       </React.Fragment>
     );

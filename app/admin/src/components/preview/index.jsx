@@ -12,14 +12,13 @@
 \*                                                 */
 
 import React, { Component } from "react";
-import { collect } from "react-recollect";
+import { collect, store } from "react-recollect";
 
 import ReactMarkdownWithHtml from "react-markdown/with-html";
 
 import ReactMarkdown from "react-markdown";
 import htmlParser from 'react-markdown/plugins/html-parser';
 
-import gfm from "remark-gfm";
 import math from "remark-math";
 import a11yEmoji from "@fec/remark-a11y-emoji";
 import html from "remark-html";
@@ -34,7 +33,7 @@ const parseHtml = htmlParser({
   isValidNode: node => node.type !== 'script',
   processingInstructions: [/* ... */]
 })
-class Post extends Component {
+class MarkdownPreview extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -61,7 +60,7 @@ class Post extends Component {
     let res = null;
     try {
       res = (
-        <React.Fragment className="calliope-post">
+        <React.Fragment className="calliope-preview">
           <hr />
           <ReactMarkdownWithHtml
           astPlugins={[parseHtml]}
@@ -93,4 +92,4 @@ class Post extends Component {
   }
 }
 
-export default collect(Post);
+export default collect(MarkdownPreview);
