@@ -21,7 +21,7 @@ import { synthwave84 } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { InlineMath, BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
 
-import IPFSVideo from "../../plugins/ipfs-stream/jsx"
+import ipfsStream from "../../plugins/ipfs-stream/jsx";
 
 // Customization for Markdown Rendering (react-markdown)
 export const renderers = {
@@ -43,16 +43,15 @@ export const renderers = {
     );
   },
   shortcode: (props) => {
+    console.log(props);
     switch (props.identifier) {
       case "ipfsStream":
-        let { ipfsHash } = props.attributes;
-        return (
-          <IPFSVideo
-            ipfsHash={
-              ipfsHash || "QmYGs1ksGX3eMiGvxNuvRT6PD7zPKZpHyiUDXKGQoL4R7S"
-            }
-          />
-        );
+        let { ipfsHash, audioOnly } = props.attributes;
+        if (audioOnly) {
+          return <ipfsStream.Audio ipfsHash={ipfsHash} />;
+        } else {
+          return <ipfsStream.Video ipfsHash={ipfsHash} />;
+        }
       default:
         return <>{JSON.stringify(props)}</>;
     }
