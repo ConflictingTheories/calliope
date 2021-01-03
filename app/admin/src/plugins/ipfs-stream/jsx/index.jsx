@@ -14,7 +14,6 @@
 import React, { Component, useRef } from "react";
 import ipfsCore from "ipfs-core";
 import Hls from "hls.js";
-import HLSPlayer from "react-hls";
 import HlsjsIpfsLoader from "hlsjs-ipfs-loader";
 import { store, collect } from "react-recollect";
 class IPFSVideo extends Component {
@@ -33,11 +32,6 @@ class IPFSVideo extends Component {
     return (
       <div>
         <video ref={Player("master.m3u8", "QmQjDRKG8pZaeBnQi9zLqupCgY9D2Mth6noF4GMdZR6CVQ")} id="video" controls></video>
-        <HLSPlayer
-          autoplay={false}
-          hlsOptions={{ ipfsHash: ipfsHash, ipfs: store.ipfsServer }}
-          source={"master.m3u8"}
-        />
       </div>
     );
   }
