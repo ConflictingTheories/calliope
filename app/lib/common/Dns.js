@@ -13,6 +13,7 @@
 
 const Env = require("../../config/env");
 const records = require("../../config/dns");
+const axios = require("axios");
 
 module.exports = (() => {
   // Defaults
@@ -23,25 +24,19 @@ module.exports = (() => {
   };
 
   function merge(a, b) {
-    let output = Object.clone(a);
-    Object.keys(b).foreach((x) => (output[x] = b[x]));
+    let output = Object.assign(Object.assign({}, a), b);
     return output;
   }
 
   // Set Host Command with Options Passed in
   async function setHost(options) {
-    var requestOptions = {
-      method: "GET",
-      redirect: "follow",
-    };
-
     // Params
     var queryParams = {
       apiuser: options.user,
-      apikey: options.key,
+      apikey: options.apikey,
       username: options.user,
       Command: "namecheap.domains.dns.setHosts",
-      ClientIp: options.ipAddress,
+      ClientIp: options.clientIp,
       SLD: options.sld,
       TLD: options.tld,
       HostName1: options.host,
@@ -57,11 +52,8 @@ module.exports = (() => {
 
     // Fetch
     try {
-      let response = await fetch(
-        "https://api.namecheap.com/xml.response?" + query.join("&"),
-        requestOptions
-      );
-      return response.text();
+      let response = await axios.get("https://api.namecheap.com/xml.response?" + query.join("&"));
+      return response;
     } catch (e) {
       console.error(e);
     }
