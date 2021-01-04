@@ -1,15 +1,15 @@
-/*                                            *\
-** ------------------------------------------ **
-**      	 Calliope Site Generator          **
-** ------------------------------------------ **
-**     Copyright (c) 2020 - KDM Solutions     **
-**                                            **
-** Any unauthorized distribution or transfer  **
-**    of this work is strictly prohibited.    **
-**                                            **
-**           All Rights Reserved.             **
-** ------------------------------------------ **
-\*                                            */
+/*                                                 *\
+** ----------------------------------------------- **
+**             Calliope - Site Generator   	       **
+** ----------------------------------------------- **
+**  Copyright (c) 2020-2021 - Kyle Derby MacInnis  **
+**                                                 **
+**    Any unauthorized distribution or transfer    **
+**       of this work is strictly prohibited.      **
+**                                                 **
+**               All Rights Reserved.              **
+** ----------------------------------------------- **
+\*                                                 */
 
 module.exports = {
     // API Config
@@ -52,5 +52,11 @@ module.exports = {
     ADMIN_THEME: process.env.ADMIN_THEME,
     CALLIOPE_THEME: process.env.CALLIOPE_THEME,
     ADMIN_THEME_DARK: process.env.ADMIN_THEME_DARK,
-    THEME_DARK: process.env.THEME_DARK
+    THEME_DARK: process.env.THEME_DARK,
+    // DNS
+    ENABLE_DNS: process.env.ENABLE_DNS,
+    DNS_APIKEY: process.env.DNS_APIKEY,
+    DNS_USERNAME: process.env.DNS_USERNAME,
+    DNS_IP: process.env.DNS_IP,
+    SITE_IP: process.env.SITE_IP
 };
