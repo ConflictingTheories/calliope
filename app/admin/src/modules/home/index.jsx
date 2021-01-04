@@ -51,7 +51,12 @@ class Dashboard extends React.Component {
   async edit(post) {
     // Fetch Post & Store Content
     if (post && post !== "") {
-      store.selectedPost = post;
+      const fileResponse = await fetch("/content/" + post);
+      if (fileResponse.ok) {
+        let content = await fileResponse.text();
+        store.selectedPost = post;
+        store.selectedContent = content;
+      }
     }
   }
 
@@ -59,7 +64,7 @@ class Dashboard extends React.Component {
     return (
       <React.Fragment>
         <Row style={{ paddingTop: "2em" }}>
-          <Col sm={8}>
+          <Col sm={24} md={6} lg={4}>
             <Container>
               <Content>
                 {store.posts &&
@@ -69,9 +74,8 @@ class Dashboard extends React.Component {
                         <Container className="calliope-list-item">
                           <details>
                             <summary>
-                              {post} <a onClick={this.edit(post)}>Edit</a>
+                              {post} <a onClick={() => this.edit(post)}>Edit</a>
                             </summary>
-                            <Post src={`posts/${post}`} />
                           </details>
                         </Container>
                       </Row>
@@ -80,13 +84,8 @@ class Dashboard extends React.Component {
               </Content>
             </Container>
           </Col>
-          <Col sm={8}>
-            {/* {store.selectedPost && <MarkdownEdit post={store.selectedPost} />} */}
-          </Col>
-          <Col sm={8}>
-            {/* {store.selectedPost && (
-              <MarkdownPreview post={store.selectedPost} />
-            )} */}
+          <Col sm={24} md={18} lg={20}>
+            {store.selectedContent && <MarkdownEdit content={store.selectedContent} />}
           </Col>
         </Row>
       </React.Fragment>
