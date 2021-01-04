@@ -63,7 +63,7 @@ class Dashboard extends React.Component {
   renderPosts() {
     return (
       <React.Fragment>
-        <Row style={{ paddingTop: "2em" }}>
+        <Row style={{ paddingTop: "5em" }}>
           <Col sm={24} md={6} lg={4}>
             <Container>
               <Content>
