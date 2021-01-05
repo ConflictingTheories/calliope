@@ -46,11 +46,13 @@ const { Paragraph } = Placeholder;
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props.store);
   }
 
   async edit(post) {
     // Fetch Post & Store Content
     if (post && post !== "") {
+      console.log(post);
       const fileResponse = await fetch("/content/" + post);
       if (fileResponse.ok) {
         let content = await fileResponse.text();
@@ -63,31 +65,20 @@ class Dashboard extends React.Component {
   renderPosts() {
     return (
       <React.Fragment>
-        <Row style={{ paddingTop: "5em" }}>
-          <Col sm={24} md={6} lg={4}>
-            <Container>
-              <Content>
-                {store.posts &&
-                  store.posts?.map((post) => {
-                    return (
-                      <Row>
-                        <Container className="calliope-list-item">
-                          <details>
-                            <summary>
-                              {post} <a onClick={() => this.edit(post)}>Edit</a>
-                            </summary>
-                          </details>
-                        </Container>
-                      </Row>
-                    );
-                  })}
-              </Content>
-            </Container>
-          </Col>
-          <Col sm={24} md={18} lg={20}>
-            {store.selectedContent && <MarkdownEdit content={store.selectedContent} />}
-          </Col>
-        </Row>
+        {store.posts &&
+          store.posts?.map((post) => {
+            return (
+              <Row>
+                <Container className="calliope-list-item">
+                  <details>
+                    <summary>
+                      {post} <a onClick={() => this.edit(post)}>Edit</a>
+                    </summary>
+                  </details>
+                </Container>
+              </Row>
+            );
+          })}
       </React.Fragment>
     );
   }
@@ -109,6 +100,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
+    let content = store.selectedContent;
     return (
       <div
         style={{
@@ -130,7 +122,22 @@ class Dashboard extends React.Component {
               renderBar={() => null}
               renderRight={() => null}
             />
-            <Content>{this.renderPosts()}</Content>
+            <Content>
+              <Row style={{ paddingTop: "5em" }}>
+                <Col sm={24} md={6} lg={4}>
+                  <Container>
+                    <Content>{this.renderPosts()}</Content>
+                  </Container>
+                </Col>
+                <Col sm={24} md={18} lg={20}>
+                  <Container>
+                    <Content>
+                      {content && <MarkdownEdit content={content} />}
+                    </Content>
+                  </Container>
+                </Col>
+              </Row>
+            </Content>
           </Container>
         </div>
         {/* MEETING sidebar */}

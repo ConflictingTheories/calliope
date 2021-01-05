@@ -42,97 +42,108 @@ const parseHtml = htmlParser({
   ],
 });
 
-export default function Editor(props) {
-  const [value, setValue] = React.useState(props.content);
+class EditMarkdown extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      content: props.content || "",
+    };
+    this.saveChanges = this.saveChanges.bind(this);
+  }
 
-  function saveChanges() {
-    store.selectedContent = value;
 
+  componentWillReceiveProps(nextProps) {
+    if(this.props != nextProps) {
+      this.setState({
+        content: nextProps.content
+      });
+    }
+  }
+
+  saveChanges() {
+    store.selectedContent = this.state.content;
     // Write Content Back out to File (TODO)
     //
   }
 
-  useEffect(
-    () => {
-      console.log(store.selectedContent);
-      if (store.selectedContent != value) setValue(store.selectedContent);
-    },
-    value,
-    props.content
-  );
-
-  return (
-    <div>
-      <Row style={{ paddingTop: "3em" }}>
-        <Col sm={12} md={12} lg={12}>
-          <MDEditor
-            minSize={600}
-            height={900}
-            preview={"edit"}
-            value={value}
-            onChange={(value) => {
-              store.selectedContent = value;
-              setValue(value);
-            }}
-            // Toolbar Settings
-            commands={[
-              commands.bold,
-              commands.hr,
-              commands.italic,
-              commands.divider,
-              commands.fullscreen,
-            ]}
-            // Markdown Options
-            previewOptions={{
-              astPlugins: [parseHtml],
-              escapeHtml: false,
-              parserOptions: { gfm: true },
-              plugins: [
-                [
-                  shortcodes,
-                  { startBlock: "[[", endBlock: "]]", inlineMode: true },
+  render() {
+    const { content } = this.state;
+    let res = null;
+    return (
+      <div>
+        <Row style={{ paddingTop: "5em" }}>
+          <Col sm={12} md={12} lg={12}>
+            <MDEditor
+              minSize={600}
+              height={900}
+              preview={"edit"}
+              value={content}
+              onChange={(value) => {
+                store.selectedContent = value;
+                this.setState({ content: value });
+              }}
+              // Toolbar Settings
+              commands={[
+                commands.bold,
+                commands.hr,
+                commands.italic,
+                commands.divider,
+                commands.fullscreen,
+              ]}
+              // Markdown Options
+              previewOptions={{
+                astPlugins: [parseHtml],
+                escapeHtml: false,
+                parserOptions: { gfm: true },
+                plugins: [
+                  [
+                    shortcodes,
+                    { startBlock: "[[", endBlock: "]]", inlineMode: true },
+                  ],
+                  emoji,
+                  a11yEmoji,
+                  math,
+                  slug,
+                  headings,
+                  html,
                 ],
-                emoji,
-                a11yEmoji,
-                math,
-                slug,
-                headings,
-                html,
-              ],
-              renderers: renderers,
-              allowDangerousHtml: true,
-            }}
-          />
-        </Col>
-        <Col sm={12} md={12} lg={12}>
-          <MDEditor.Markdown
-            // Markdown Options (needs work)
-            previewOptions={{
-              astPlugins: [parseHtml],
-              escapeHtml: false,
-              parserOptions: { gfm: true },
-              plugins: [
-                [
-                  shortcodes,
-                  { startBlock: "[[", endBlock: "]]", inlineMode: true },
+                renderers: renderers,
+                allowDangerousHtml: true,
+              }}
+            />
+          </Col>
+          <Col sm={12} md={12} lg={12}>
+            <MDEditor.Markdown
+              // Markdown Options (needs work)
+              previewOptions={{
+                astPlugins: [parseHtml],
+                escapeHtml: false,
+                parserOptions: { gfm: true },
+                plugins: [
+                  [
+                    shortcodes,
+                    { startBlock: "[[", endBlock: "]]", inlineMode: true },
+                  ],
+                  emoji,
+                  a11yEmoji,
+                  math,
+                  slug,
+                  headings,
+                  html,
                 ],
-                emoji,
-                a11yEmoji,
-                math,
-                slug,
-                headings,
-                html,
-              ],
-              renderers: renderers,
-              allowDangerousHtml: true,
-            }}
-            source={value}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <button onClick={saveChanges}>Save Changes</button>
-      </Row>
-    </div>
-  );
+                renderers: renderers,
+                allowDangerousHtml: true,
+              }}
+              source={content}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <button onClick={this.saveChanges}>Save Changes</button>
+        </Row>
+      </div>
+    );
+  }
 }
+
+export default collect(EditMarkdown);
