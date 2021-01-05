@@ -24,6 +24,12 @@ const Plugins = require("../config/featureFlags")["PLUGINS"];
 
 const pluginFiles = path.join(__dirname + `/../config/plugins`);
 const componentFiles = path.join(__dirname + `/../config/components`);
+const helperFiles = path.join(__dirname + `/../config/helpers`);
+const serviceFiles = path.join(__dirname + `/../config/services`);
+const moduleFiles = path.join(__dirname + `/../config/modules/admin/modules`);
+const websitemoduleFiles = path.join(
+  __dirname + `/../config/modules/website/modules`
+);
 
 module.exports = (() => {
   function configureWebsite() {
@@ -117,6 +123,96 @@ module.exports = (() => {
         const readFile = fs.createReadStream(file);
         const outFile = fs.createWriteStream(
           path.join(__dirname + `/../website/src/components/${filename}`)
+        );
+        readFile.pipe(outFile);
+      });
+    });
+
+    // // Transfer Helper Files
+    // glob(helperFiles + "/**/*.*", function (err, files) {
+    //   if (err) {
+    //     console.log(
+    //       "cannot read the Components folder, something goes wrong with glob",
+    //       err
+    //     );
+    //   }
+    //   // Copy Files
+    //   files.forEach(async (file) => {
+    //     let filename = file.split(`/config/helpers/`)[1];
+    //     let filenamePath = filename.split(/[\/]/);
+    //     let filepath = filenamePath.pop();
+    //     console.log("Website :: Transfering -- ", filepath);
+    //     await fs.promises.mkdir(
+    //       path.join(
+    //         __dirname + `/../website/src/helpers/${filenamePath.join("/")}`
+    //       ),
+    //       {
+    //         recursive: true,
+    //       }
+    //     );
+    //     const readFile = fs.createReadStream(file);
+    //     const outFile = fs.createWriteStream(
+    //       path.join(__dirname + `/../website/src/helpers/${filename}`)
+    //     );
+    //     readFile.pipe(outFile);
+    //   });
+    // });
+
+    // // Transfer Service Files
+    // glob(serviceFiles + "/**/*.*", function (err, files) {
+    //   if (err) {
+    //     console.log(
+    //       "cannot read the Components folder, something goes wrong with glob",
+    //       err
+    //     );
+    //   }
+    //   // Copy Files
+    //   files.forEach(async (file) => {
+    //     let filename = file.split(`/config/services/`)[1];
+    //     let filenamePath = filename.split(/[\/]/);
+    //     let filepath = filenamePath.pop();
+    //     console.log("Website :: Transfering -- ", filepath);
+    //     await fs.promises.mkdir(
+    //       path.join(
+    //         __dirname + `/../website/src/services/${filenamePath.join("/")}`
+    //       ),
+    //       {
+    //         recursive: true,
+    //       }
+    //     );
+    //     const readFile = fs.createReadStream(file);
+    //     const outFile = fs.createWriteStream(
+    //       path.join(__dirname + `/../website/src/services/${filename}`)
+    //     );
+    //     readFile.pipe(outFile);
+    //   });
+    // });
+
+    // Transfer Modules Files
+    glob(websitemoduleFiles + "/**/*.*", function (err, files) {
+      if (err) {
+        console.log(
+          "cannot read the Components folder, something goes wrong with glob",
+          err
+        );
+      }
+      // Copy Files
+      files.forEach(async (file) => {
+        let filename = file.split(`/config/modules/website/modules/`)[1];
+        let filenamePath = filename.split(/[\/]/);
+        let filepath = filenamePath.pop();
+        console.log("Admin :: Transfering -- ", filepath);
+        await fs.promises.mkdir(
+          path.join(
+            __dirname + `/../website/src/modules/${filenamePath.join("/")}`
+          ),
+          {
+            recursive: true,
+          }
+        );
+        const readFile = fs.createReadStream(file);
+        const outFile = fs.createWriteStream(
+          path.join(__dirname + `/../website/src/modules/${filename}`)
         );
         readFile.pipe(outFile);
       });
@@ -216,6 +312,96 @@ module.exports = (() => {
         const readFile = fs.createReadStream(file);
         const outFile = fs.createWriteStream(
           path.join(__dirname + `/../admin/src/components/${filename}`)
+        );
+        readFile.pipe(outFile);
+      });
+    });
+
+    // // Transfer Components Files
+    // glob(helperFiles + "/**/*.*", function (err, files) {
+    //   if (err) {
+    //     console.log(
+    //       "cannot read the Components folder, something goes wrong with glob",
+    //       err
+    //     );
+    //   }
+    //   // Copy Files
+    //   files.forEach(async (file) => {
+    //     let filename = file.split(`/config/helpers/`)[1];
+    //     let filenamePath = filename.split(/[\/]/);
+    //     let filepath = filenamePath.pop();
+    //     console.log("Admin :: Transfering -- ", filepath);
+    //     await fs.promises.mkdir(
+    //       path.join(
+    //         __dirname + `/../admin/src/helpers/${filenamePath.join("/")}`
+    //       ),
+    //       {
+    //         recursive: true,
+    //       }
+    //     );
+    //     const readFile = fs.createReadStream(file);
+    //     const outFile = fs.createWriteStream(
+    //       path.join(__dirname + `/../admin/src/helpers/${filename}`)
+    //     );
+    //     readFile.pipe(outFile);
+    //   });
+    // });
+
+    // // Transfer Components Files
+    // glob(serviceFiles + "/**/*.*", function (err, files) {
+    //   if (err) {
+    //     console.log(
+    //       "cannot read the Components folder, something goes wrong with glob",
+    //       err
+    //     );
+    //   }
+    //   // Copy Files
+    //   files.forEach(async (file) => {
+    //     let filename = file.split(`/config/services/`)[1];
+    //     let filenamePath = filename.split(/[\/]/);
+    //     let filepath = filenamePath.pop();
+    //     console.log("Admin :: Transfering -- ", filepath);
+    //     await fs.promises.mkdir(
+    //       path.join(
+    //         __dirname + `/../admin/src/services/${filenamePath.join("/")}`
+    //       ),
+    //       {
+    //         recursive: true,
+    //       }
+    //     );
+    //     const readFile = fs.createReadStream(file);
+    //     const outFile = fs.createWriteStream(
+    //       path.join(__dirname + `/../admin/src/services/${filename}`)
+    //     );
+    //     readFile.pipe(outFile);
+    //   });
+    // });
+    
+    // Transfer Modules Files
+    glob(moduleFiles + "/**/*.*", function (err, files) {
+      if (err) {
+        console.log(
+          "cannot read the Components folder, something goes wrong with glob",
+          err
+        );
+      }
+      // Copy Files
+      files.forEach(async (file) => {
+        let filename = file.split(`/config/modules/admin/modules/`)[1];
+        let filenamePath = filename.split(/[\/]/);
+        let filepath = filenamePath.pop();
+        console.log("Admin :: Transfering -- ", filepath);
+        await fs.promises.mkdir(
+          path.join(
+            __dirname + `/../admin/src/modules/${filenamePath.join("/")}`
+          ),
+          {
+            recursive: true,
+          }
+        );
+        const readFile = fs.createReadStream(file);
+        const outFile = fs.createWriteStream(
+          path.join(__dirname + `/../admin/src/modules/${filename}`)
         );
         readFile.pipe(outFile);
       });

@@ -49,6 +49,22 @@ module.exports = (() => {
     else res.status(404).json(status);
   });
 
+  router.post("/save", async (_, res) => {
+    // Setup Response
+    let status = {
+      status: 404,
+      msg: "Error - No Posts Found!",
+    };
+    // Return List of Site Posts
+    const { getPosts } = require("../../lib/generator");
+    const posts = await getPosts();
+    const files = posts.map((post) => post.split("../content/posts/")[1]);
+    console.log(files);
+    if (files) res.status(200).json(files);
+    // Return
+    else res.status(404).json(status);
+  });
+
   console.log("SERVING", path.join(__dirname, "../../content/"))
   router.use("*", express.static(path.join(__dirname, "../../content/"),{index:false,extensions:['md']}));
   

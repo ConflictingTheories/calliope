@@ -11,20 +11,16 @@
 ** ----------------------------------------------- **
 \*                                                 */
 
-import React, { Component, useEffect } from "react";
+import React, { Component } from "react";
 import { collect, store } from "react-recollect";
 
-import ReactMarkdownWithHtml from "react-markdown/with-html";
 import MDEditor, { commands } from "@uiw/react-md-editor";
-
-import ReactMarkdown from "react-markdown";
 import htmlParser from "react-markdown/plugins/html-parser";
 
 // RSuite UI Library
 import { Row, Col } from "rsuite";
 import "rsuite/dist/styles/rsuite-default.css";
 
-import gfm from "remark-gfm";
 import math from "remark-math";
 import a11yEmoji from "@fec/remark-a11y-emoji";
 import html from "remark-html";
@@ -34,6 +30,7 @@ import headings from "remark-autolink-headings";
 import shortcodes from "remark-shortcodes";
 
 import { renderers } from "../../theme/jsx";
+import { save } from "../../services/content";
 
 const parseHtml = htmlParser({
   isValidNode: (node) => node.type !== "script",
@@ -51,19 +48,18 @@ class EditMarkdown extends Component {
     this.saveChanges = this.saveChanges.bind(this);
   }
 
-
   componentWillReceiveProps(nextProps) {
-    if(this.props != nextProps) {
+    if (this.props != nextProps) {
       this.setState({
-        content: nextProps.content
+        content: nextProps.content,
       });
     }
   }
 
   saveChanges() {
     store.selectedContent = this.state.content;
-    // Write Content Back out to File (TODO)
-    //
+    // Write Content Back out to File
+    save(store.selectedPost, store.selectedContent);
   }
 
   render() {
@@ -139,7 +135,7 @@ class EditMarkdown extends Component {
           </Col>
         </Row>
         <Row>
-          <button onClick={this.saveChanges}>Save Changes</button>
+          <button onClick={() => this.saveChanges()}>Save Changes</button>
         </Row>
       </div>
     );

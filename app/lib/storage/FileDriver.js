@@ -37,7 +37,7 @@ class FileDriver extends StorageDriverInterface {
   getFileUrl(folder, key) {
     return new Promise((resolve, _) => {
       resolve(
-        `${process.env.ADMIN_PORY}${process.env.STORAGE_ROOT}/${folder}/${key}`
+        `${process.env.ADMIN_PORT}${process.env.STORAGE_ROOT}/${folder}/${key}`
       );
     });
   }
