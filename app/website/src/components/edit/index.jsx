@@ -71,7 +71,7 @@ class EditMarkdown extends Component {
     let res = null;
     return (
       <div>
-        <Row style={{ paddingTop: "5em" }}>
+        <Row>
           <Col sm={12} md={12} lg={12}>
             <MDEditor
               minSize={600}
