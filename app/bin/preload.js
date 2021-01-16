@@ -123,13 +123,13 @@ module.exports = (async () => {
     });
   });
 
-  // Write JSON Manifests
+  // For Service Worker
   fs.writeFileSync(
-    path.join(__dirname, "/../website/build/content/posts.json"),
+    path.join(__dirname, "/../website/src/content/posts.json"),
     JSON.stringify(postJson)
   );
   fs.writeFileSync(
-    path.join(__dirname, "/../website/build/content/pages.json"),
+    path.join(__dirname, "/../website/src/content/pages.json"),
     JSON.stringify(pageJson)
   );
 })();
