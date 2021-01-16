@@ -37,7 +37,52 @@ module.exports = (() => {
     const themeFiles = path.join(__dirname + `/../config/themes/${theme}`);
     const themePath = path.join(__dirname + `/../website/src/theme`);
     const pluginPath = path.join(__dirname + `/../website/src/plugins`);
+
     console.log("Website :: Transfering:\n\n", themeFiles);
+
+    // Frontend Website Config
+    const webConfig = {
+      posts: "/content/posts.json",
+      pages: "/content/pages.json",
+      save: "/content/save",
+      offline: true,
+    };
+    fs.writeFileSync(
+      path.join(__dirname + `/../website/src/config/runtime.json`),
+      JSON.stringify(webConfig)
+    );
+
+    // PWA Manifest Configuration
+    const manifest = {
+      short_name: Env.SHORT_NAME,
+      name: Env.SITE_NAME,
+      icons: [
+        {
+          src: "favicon.ico",
+          sizes: "64x64 32x32 24x24 16x16",
+          type: "image/x-icon",
+        },
+        {
+          src: "logo192.png",
+          type: "image/png",
+          sizes: "192x192",
+        },
+        {
+          src: "logo512.png",
+          type: "image/png",
+          sizes: "512x512",
+        },
+      ],
+      start_url: ".",
+      display: "standalone",
+      theme_color: Env.THEME_DARK ? "#777" : "#333",
+      background_color: Env.THEME_DARK ? "#000" : "#fff",
+    };
+    fs.writeFileSync(
+      path.join(__dirname + `/../website/public/manifest.json`),
+      JSON.stringify(manifest)
+    );
+
     // Transfer Theme Files
     glob(themeFiles + "/**/*.*", function (err, files) {
       if (err) {
@@ -127,67 +172,6 @@ module.exports = (() => {
         readFile.pipe(outFile);
       });
     });
-
-    // // Transfer Helper Files
-    // glob(helperFiles + "/**/*.*", function (err, files) {
-    //   if (err) {
-    //     console.log(
-    //       "cannot read the Components folder, something goes wrong with glob",
-    //       err
-    //     );
-    //   }
-    //   // Copy Files
-    //   files.forEach(async (file) => {
-    //     let filename = file.split(`/config/helpers/`)[1];
-    //     let filenamePath = filename.split(/[\/]/);
-    //     let filepath = filenamePath.pop();
-    //     console.log("Website :: Transfering -- ", filepath);
-    //     await fs.promises.mkdir(
-    //       path.join(
-    //         __dirname + `/../website/src/helpers/${filenamePath.join("/")}`
-    //       ),
-    //       {
-    //         recursive: true,
-    //       }
-    //     );
-    //     const readFile = fs.createReadStream(file);
-    //     const outFile = fs.createWriteStream(
-    //       path.join(__dirname + `/../website/src/helpers/${filename}`)
-    //     );
-    //     readFile.pipe(outFile);
-    //   });
-    // });
-
-    // // Transfer Service Files
-    // glob(serviceFiles + "/**/*.*", function (err, files) {
-    //   if (err) {
-    //     console.log(
-    //       "cannot read the Components folder, something goes wrong with glob",
-    //       err
-    //     );
-    //   }
-    //   // Copy Files
-    //   files.forEach(async (file) => {
-    //     let filename = file.split(`/config/services/`)[1];
-    //     let filenamePath = filename.split(/[\/]/);
-    //     let filepath = filenamePath.pop();
-    //     console.log("Website :: Transfering -- ", filepath);
-    //     await fs.promises.mkdir(
-    //       path.join(
-    //         __dirname + `/../website/src/services/${filenamePath.join("/")}`
-    //       ),
-    //       {
-    //         recursive: true,
-    //       }
-    //     );
-    //     const readFile = fs.createReadStream(file);
-    //     const outFile = fs.createWriteStream(
-    //       path.join(__dirname + `/../website/src/services/${filename}`)
-    //     );
-    //     readFile.pipe(outFile);
-    //   });
-    // });
-
     // Transfer Modules Files
     glob(websitemoduleFiles + "/**/*.*", function (err, files) {
       if (err) {
@@ -316,67 +300,6 @@ module.exports = (() => {
         readFile.pipe(outFile);
       });
     });
-
-    // // Transfer Components Files
-    // glob(helperFiles + "/**/*.*", function (err, files) {
-    //   if (err) {
-    //     console.log(
-    //       "cannot read the Components folder, something goes wrong with glob",
-    //       err
-    //     );
-    //   }
-    //   // Copy Files
-    //   files.forEach(async (file) => {
-    //     let filename = file.split(`/config/helpers/`)[1];
-    //     let filenamePath = filename.split(/[\/]/);
-    //     let filepath = filenamePath.pop();
-    //     console.log("Admin :: Transfering -- ", filepath);
-    //     await fs.promises.mkdir(
-    //       path.join(
-    //         __dirname + `/../admin/src/helpers/${filenamePath.join("/")}`
-    //       ),
-    //       {
-    //         recursive: true,
-    //       }
-    //     );
-    //     const readFile = fs.createReadStream(file);
-    //     const outFile = fs.createWriteStream(
-    //       path.join(__dirname + `/../admin/src/helpers/${filename}`)
-    //     );
-    //     readFile.pipe(outFile);
-    //   });
-    // });
-
-    // // Transfer Components Files
-    // glob(serviceFiles + "/**/*.*", function (err, files) {
-    //   if (err) {
-    //     console.log(
-    //       "cannot read the Components folder, something goes wrong with glob",
-    //       err
-    //     );
-    //   }
-    //   // Copy Files
-    //   files.forEach(async (file) => {
-    //     let filename = file.split(`/config/services/`)[1];
-    //     let filenamePath = filename.split(/[\/]/);
-    //     let filepath = filenamePath.pop();
-    //     console.log("Admin :: Transfering -- ", filepath);
-    //     await fs.promises.mkdir(
-    //       path.join(
-    //         __dirname + `/../admin/src/services/${filenamePath.join("/")}`
-    //       ),
-    //       {
-    //         recursive: true,
-    //       }
-    //     );
-    //     const readFile = fs.createReadStream(file);
-    //     const outFile = fs.createWriteStream(
-    //       path.join(__dirname + `/../admin/src/services/${filename}`)
-    //     );
-    //     readFile.pipe(outFile);
-    //   });
-    // });
-    
     // Transfer Modules Files
     glob(moduleFiles + "/**/*.*", function (err, files) {
       if (err) {

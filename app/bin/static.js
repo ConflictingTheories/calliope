@@ -132,4 +132,13 @@ module.exports = (async () => {
     path.join(__dirname, "/../website/build/content/pages.json"),
     JSON.stringify(pageJson)
   );
+  // For Service Worker
+  fs.writeFileSync(
+    path.join(__dirname, "/../website/src/content/posts.json"),
+    JSON.stringify(postJson)
+  );
+  fs.writeFileSync(
+    path.join(__dirname, "/../website/src/content/pages.json"),
+    JSON.stringify(pageJson)
+  );
 })();
