@@ -1,0 +1,2 @@
+(this["webpackJsonpcalliope-site-generator-admin"]=this["webpackJsonpcalliope-site-generator-admin"]||[]).push([[50],{837:function(e,a){Prism.languages.brainfuck={pointer:{pattern:/<|>/,alias:"keyword"},increment:{pattern:/\+/,alias:"inserted"},decrement:{pattern:/-/,alias:"deleted"},branching:{pattern:/\[|\]/,alias:"important"},operator:/[.,]/,comment:/\S+/}}}]);
+//# sourceMappingURL=50.da82816c.chunk.js.map

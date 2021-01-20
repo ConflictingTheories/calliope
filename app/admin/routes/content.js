@@ -13,7 +13,7 @@
 const fs = require("fs");
 var express = require("express");
 const path = require("path");
-const Env = require('../../config/env');
+const Env = require("../../config/env");
 var router = express.Router({
   mergeParams: true,
 });
@@ -30,7 +30,6 @@ module.exports = (() => {
     const { getPosts } = require("../../lib/generator");
     const posts = await getPosts();
     const files = posts.map((post) => post.split("../content/")[1]);
-    console.log(files);
     if (files) res.status(200).json(files);
     // Return
     else res.status(404).json(status);
@@ -55,8 +54,9 @@ module.exports = (() => {
   // Save
   router.post("/save", async (req, res) => {
     let { content, post } = req.body;
-    console.log(req.body);
-    // console.log(path.join(__dirname, Env.CONTENT_ROOT, "/", post))
+
+    console.log(req);
+    console.log("HEHE");
     if (post && content) {
       fs.writeFileSync(
         path.join(__dirname, Env.CONTENT_ROOT, "/", post),

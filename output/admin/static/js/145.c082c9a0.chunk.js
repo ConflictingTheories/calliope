@@ -1,2 +1,0 @@
-(this["webpackJsonpcalliope-site-generator-admin"]=this["webpackJsonpcalliope-site-generator-admin"]||[]).push([[145],{933:function(e,m){Prism.languages.git={comment:/^#.*/m,deleted:/^[-\u2013].*/m,inserted:/^\+.*/m,string:/("|')(?:\\.|(?!\1)[^\\\r\n])*\1/m,command:{pattern:/^.*\$ git .*$/m,inside:{parameter:/\s--?\w+/m}},coord:/^@@.*@@$/m,commit_sha1:/^commit \w{40}$/m}}}]);
-//# sourceMappingURL=145.c082c9a0.chunk.js.map

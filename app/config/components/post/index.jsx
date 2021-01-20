@@ -16,10 +16,8 @@ import { collect } from "react-recollect";
 
 import ReactMarkdownWithHtml from "react-markdown/with-html";
 
-import ReactMarkdown from "react-markdown";
-import htmlParser from 'react-markdown/plugins/html-parser';
+import htmlParser from "react-markdown/plugins/html-parser";
 
-import gfm from "remark-gfm";
 import math from "remark-math";
 import a11yEmoji from "@fec/remark-a11y-emoji";
 import html from "remark-html";
@@ -31,9 +29,11 @@ import shortcodes from "remark-shortcodes";
 import { renderers } from "../../theme/jsx";
 
 const parseHtml = htmlParser({
-  isValidNode: node => node.type !== 'script',
-  processingInstructions: [/* ... */]
-})
+  isValidNode: (node) => node.type !== "script",
+  processingInstructions: [
+    /* ... */
+  ],
+});
 class Post extends Component {
   constructor(props) {
     super(props);
@@ -53,7 +53,7 @@ class Post extends Component {
       }
     }
   }
-  
+
   componentWillReceiveProps(nextProps) {
     if (this.props != nextProps) {
       this.setState({
@@ -61,7 +61,6 @@ class Post extends Component {
       });
     }
   }
-
 
   render() {
     const { content } = this.state;
@@ -71,10 +70,10 @@ class Post extends Component {
         <React.Fragment className="calliope-post">
           <hr />
           <ReactMarkdownWithHtml
-          astPlugins={[parseHtml]}
-          escapeHtml={false}
-          parserOptions={{gfm:true}}
-          plugins={[
+            astPlugins={[parseHtml]}
+            escapeHtml={false}
+            parserOptions={{ gfm: true }}
+            plugins={[
               [
                 shortcodes,
                 { startBlock: "[[", endBlock: "]]", inlineMode: true },

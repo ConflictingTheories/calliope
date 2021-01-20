@@ -1,2 +1,0 @@
-(this["webpackJsonpcalliope-site-generator-admin"]=this["webpackJsonpcalliope-site-generator-admin"]||[]).push([[307],{1095:function(e,a){Prism.languages.insertBefore("php","variable",{this:/\$this\b/,global:/\$(?:_(?:SERVER|GET|POST|FILES|REQUEST|SESSION|ENV|COOKIE)|GLOBALS|HTTP_RAW_POST_DATA|argc|argv|php_errormsg|http_response_header)\b/,scope:{pattern:/\b[\w\\]+::/,inside:{keyword:/static|self|parent/,punctuation:/::|\\/}}})}}]);
-//# sourceMappingURL=307.968c36d7.chunk.js.map

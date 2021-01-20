@@ -1,2 +1,0 @@
-(this["webpackJsonpcalliope-site-generator-admin"]=this["webpackJsonpcalliope-site-generator-admin"]||[]).push([[181],{969:function(e,n){var a;(a=Prism).languages.ignore={comment:/^#.*/m,entry:{pattern:/\S(?:.*(?:(?:\\ )|\S))?/,alias:"string",inside:{operator:/^!|\*\*?|\?/,regex:{pattern:/(^|[^\\])\[[^\[\]]*\]/,lookbehind:!0},punctuation:/\//}}},a.languages.gitignore=a.languages.ignore,a.languages.hgignore=a.languages.ignore,a.languages.npmignore=a.languages.ignore}}]);
-//# sourceMappingURL=181.5241a673.chunk.js.map

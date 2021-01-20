@@ -131,29 +131,6 @@ class EditMarkdown extends Component {
               }}
             >
               <Post content={content} />
-              {/* <MDEditor.Markdown
-                // Markdown Options (needs work)
-                previewOptions={{
-                  astPlugins: [parseHtml],
-                  escapeHtml: false,
-                  parserOptions: { gfm: true },
-                  plugins: [
-                    [
-                      shortcodes,
-                      { startBlock: "[[", endBlock: "]]", inlineMode: true },
-                    ],
-                    emoji,
-                    a11yEmoji,
-                    math,
-                    slug,
-                    headings,
-                    html,
-                  ],
-                  renderers: renderers,
-                  allowDangerousHtml: true,
-                }}
-                source={content}
-              /> */}
             </Panel>
           </Col>
         </Row>

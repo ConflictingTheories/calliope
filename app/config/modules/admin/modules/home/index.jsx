@@ -33,9 +33,7 @@ import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 
 import NavBar from "../../components/nav";
 import SideMenu from "../../components/menu";
-import Post from "../../components/post";
 import MarkdownEdit from "../../components/edit";
-import MarkdownPreview from "../../components/preview";
 // ASSETS & APP STYLES
 import "../../theme/less/App.less";
 
