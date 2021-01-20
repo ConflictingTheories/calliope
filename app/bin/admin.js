@@ -50,7 +50,8 @@ module.exports = (() => {
     app.use(cookieparser());
     app.use(cors());
     app.use(FileUpload());
-    app.use(express.json())
+    app.use(express.json());
+    app.use(bodyparser.text());
     app.use(
       bodyparser.urlencoded({
         limit: "10mb",

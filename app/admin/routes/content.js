@@ -53,18 +53,20 @@ module.exports = (() => {
 
   // Save
   router.post("/save", async (req, res) => {
-    let { content, post } = req.body;
-
-    console.log(req);
-    console.log("HEHE");
-    if (post && content) {
-      fs.writeFileSync(
-        path.join(__dirname, Env.CONTENT_ROOT, "/", post),
-        content
-      );
+    try {
+      let body = JSON.parse(req.body);
+      let { post, content } = body;
+      if (post && content) {
+        fs.writeFileSync(
+          path.join(__dirname, Env.CONTENT_ROOT, "/", post),
+          content
+        );
+      }
+      res.status(200).json({ msg: "saved", err: null });
+    } catch (e) {
+      console.error(e);
+      res.status(200).json({ msg: "error", err: true });
     }
-
-    res.status(200).json({ msg: "saved", err: null });
   });
 
   console.log("SERVING", path.join(__dirname, Env.CONTENT_ROOT));

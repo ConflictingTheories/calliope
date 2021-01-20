@@ -24,15 +24,17 @@ export async function posts() {
 }
 
 export async function save(post, content) {
-  return (
-    await fetch(config.save, {
-      body: JSON.stringify({ content, post }),
-      method: "POST",
-      credentials: true,
-      mode: "cors",
-      header: {
-        "Content-Type": "application/json",
-      },
-    })
-  ).data;
+  let postData = new FormData();
+  postData.append("content", content);
+  postData.append("post", post);
+
+  return await fetch(config.save, {
+    method: "POST",
+    mode: "cors",
+    redirect: "follow",
+    body: postData,
+    headers: new Headers({
+      "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+    }),
+  });
 }

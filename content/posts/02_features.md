@@ -6,15 +6,14 @@ The following are the features I am working on getting ready:
 - ✔️ Resizable Images 🖼️
 - ✔️ Support for Inline HTML 🌐
 - ✔️ Better Configuration & Instructions :gear:
-- :construction: Admin Section & Application
+- ✔️ Admin Section & Application
+- ✔️ Plugins Like galleries and Custom Embeds 🔌
+- ✔️ Reloadable Live-Preview
+- ✔️ Live Editing
 
 More Complex Features (Will come later)
-
-- :construction: Plugins Like galleries and Custom Embeds 🔌
 - :construction: Deployment to Git / S3 / Others
 - :construction: Injectable Posts / Nested Content via Reference
-- :construction: Reloadable Live-Preview
-- :construction: Live Editting
 - :construction: Publish / Edit Buttons
 - :construction: Permissions & Roles
 
