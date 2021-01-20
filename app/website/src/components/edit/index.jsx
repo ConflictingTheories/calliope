@@ -18,7 +18,7 @@ import MDEditor, { commands } from "@uiw/react-md-editor";
 import htmlParser from "react-markdown/plugins/html-parser";
 
 // RSuite UI Library
-import { Row, Col } from "rsuite";
+import { Panel, Row, Col, Container } from "rsuite";
 import "rsuite/dist/styles/rsuite-default.css";
 
 import math from "remark-math";
@@ -66,78 +66,98 @@ class EditMarkdown extends Component {
     const { content } = this.state;
     let res = null;
     return (
-      <div>
+      <Container>
         <Row>
           <Col sm={12} md={12} lg={12}>
-            <MDEditor
-              minSize={600}
-              height={900}
-              preview={"edit"}
-              value={content}
-              onChange={(value) => {
-                store.selectedContent = value;
-                this.setState({ content: value });
+            <Panel
+              bordered
+              style={{
+                height: "87vh",
+                overflow: "overlay",
+                background: "#121216",
+                width: "100%",
               }}
-              // Toolbar Settings
-              commands={[
-                commands.bold,
-                commands.hr,
-                commands.italic,
-                commands.divider,
-                commands.fullscreen,
-              ]}
-              // Markdown Options
-              previewOptions={{
-                astPlugins: [parseHtml],
-                escapeHtml: false,
-                parserOptions: { gfm: true },
-                plugins: [
-                  [
-                    shortcodes,
-                    { startBlock: "[[", endBlock: "]]", inlineMode: true },
+            >
+              <MDEditor
+                minSize={'100%'}
+                height={'100%'}
+                preview={"edit"}
+                value={content}
+                onChange={(value) => {
+                  store.selectedContent = value;
+                  this.setState({ content: value });
+                }}
+                // Toolbar Settings
+                commands={[
+                  commands.bold,
+                  commands.hr,
+                  commands.italic,
+                  commands.divider,
+                  commands.fullscreen,
+                ]}
+                // Markdown Options
+                previewOptions={{
+                  astPlugins: [parseHtml],
+                  escapeHtml: false,
+                  parserOptions: { gfm: true },
+                  plugins: [
+                    [
+                      shortcodes,
+                      { startBlock: "[[", endBlock: "]]", inlineMode: true },
+                    ],
+                    emoji,
+                    a11yEmoji,
+                    math,
+                    slug,
+                    headings,
+                    html,
                   ],
-                  emoji,
-                  a11yEmoji,
-                  math,
-                  slug,
-                  headings,
-                  html,
-                ],
-                renderers: renderers,
-                allowDangerousHtml: true,
-              }}
-            />
+                  renderers: renderers,
+                  allowDangerousHtml: true,
+                }}
+              />
+            </Panel>
           </Col>
           <Col sm={12} md={12} lg={12}>
-            <MDEditor.Markdown
-              // Markdown Options (needs work)
-              previewOptions={{
-                astPlugins: [parseHtml],
-                escapeHtml: false,
-                parserOptions: { gfm: true },
-                plugins: [
-                  [
-                    shortcodes,
-                    { startBlock: "[[", endBlock: "]]", inlineMode: true },
-                  ],
-                  emoji,
-                  a11yEmoji,
-                  math,
-                  slug,
-                  headings,
-                  html,
-                ],
-                renderers: renderers,
-                allowDangerousHtml: true,
+            <Panel
+              bordered
+              style={{
+                height: "87vh",
+                overflow: "overlay",
+                background: "#121216",
+                width: "100%",
               }}
-              source={content}
-            />
+            >
+              <MDEditor.Markdown
+                // Markdown Options (needs work)
+                previewOptions={{
+                  astPlugins: [parseHtml],
+                  escapeHtml: false,
+                  parserOptions: { gfm: true },
+                  plugins: [
+                    [
+                      shortcodes,
+                      { startBlock: "[[", endBlock: "]]", inlineMode: true },
+                    ],
+                    emoji,
+                    a11yEmoji,
+                    math,
+                    slug,
+                    headings,
+                    html,
+                  ],
+                  renderers: renderers,
+                  allowDangerousHtml: true,
+                }}
+                source={content}
+              />
+            </Panel>
           </Col>
         </Row>
         <Row>
           <button onClick={() => this.saveChanges()}>Save Changes</button>
         </Row>
-      </div>
+      </Container>
     );
   }
 }

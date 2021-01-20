@@ -18,6 +18,7 @@ import { collect, store } from "react-recollect";
 import {
   Container,
   Content,
+  Panel,
   Row,
   Col,
   Notification,
@@ -25,7 +26,7 @@ import {
 } from "rsuite";
 import "rsuite/dist/styles/rsuite-default.css";
 
-// BLUEPRINT STYLES
+import { NonIdealState, Tabs, Tab } from "@blueprintjs/core";
 // BLUEPRINT STYLES
 import "@blueprintjs/core/lib/css/blueprint.css";
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
@@ -46,7 +47,25 @@ const { Paragraph } = Placeholder;
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props.store);
+    this.edit = this.edit.bind(this);
+    this.renderPosts = this.renderPosts.bind(this);
+    this.profilePanel = this.profilePanel.bind(this);
+  }
+
+  async componentDidMount() {
+    // Fetch & Render Posts
+    const result = await posts();
+    if (result) {
+      store.posts = result;
+      setTimeout(
+        () =>
+          Notification.open({
+            title: "Welcome to Calliope",
+            description: <Paragraph width={320} rows={3} />,
+          }),
+        ~~(Math.random() * 10000)
+      );
+    }
   }
 
   async edit(post) {
@@ -70,11 +89,9 @@ class Dashboard extends React.Component {
             return (
               <Row>
                 <Container className="calliope-list-item">
-                  <details>
-                    <summary>
-                      {post} <a onClick={() => this.edit(post)}>Edit</a>
-                    </summary>
-                  </details>
+                  <label>
+                    {post} <a onClick={() => this.edit(post)}>Edit</a>
+                  </label>
                 </Container>
               </Row>
             );
@@ -83,24 +100,32 @@ class Dashboard extends React.Component {
     );
   }
 
-  async componentDidMount() {
-    // Fetch & Render Posts
-    const result = await posts();
-    if (result) {
-      store.posts = result;
-      setTimeout(
-        () =>
-          Notification.open({
-            title: "Welcome to Calliope",
-            description: <Paragraph width={320} rows={3} />,
-          }),
-        ~~(Math.random() * 10000)
-      );
-    }
+  // PANELS & COMPONENTS
+  profilePanel() {
+    let content = store.selectedContent;
+    return (
+      <Panel style={{ width: "100%" }}>
+        <Content>
+          <Row>
+            <Col md={4}>{this.renderPosts()}</Col>
+            <Col md={20}>
+              {content ? (
+                <MarkdownEdit content={content} />
+              ) : (
+                <NonIdealState
+                  icon={"build"}
+                  title="Getting Started"
+                  description={"Please select a post to edit"}
+                />
+              )}
+            </Col>
+          </Row>
+        </Content>
+      </Panel>
+    );
   }
 
   render() {
-    let content = store.selectedContent;
     return (
       <div
         style={{
@@ -122,25 +147,9 @@ class Dashboard extends React.Component {
               renderBar={() => null}
               renderRight={() => null}
             />
-            <Content>
-              <Row style={{ paddingTop: "5em" }}>
-                <Col sm={24} md={6} lg={4}>
-                  <Container>
-                    <Content>{this.renderPosts()}</Content>
-                  </Container>
-                </Col>
-                <Col sm={24} md={18} lg={20}>
-                  <Container>
-                    <Content>
-                      {content && <MarkdownEdit content={content} />}
-                    </Content>
-                  </Container>
-                </Col>
-              </Row>
-            </Content>
+            <Content>{this.profilePanel()}</Content>
           </Container>
         </div>
-        {/* MEETING sidebar */}
       </div>
     );
   }
