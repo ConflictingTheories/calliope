@@ -31,6 +31,7 @@ import shortcodes from "remark-shortcodes";
 
 import { renderers } from "../../theme/jsx";
 import { save } from "../../services/content";
+import Post from "../post";
 
 const parseHtml = htmlParser({
   isValidNode: (node) => node.type !== "script",
@@ -71,6 +72,7 @@ class EditMarkdown extends Component {
           <Col sm={12} md={12} lg={12}>
             <Panel
               bordered
+              bodyFill
               style={{
                 height: "87vh",
                 overflow: "overlay",
@@ -79,8 +81,8 @@ class EditMarkdown extends Component {
               }}
             >
               <MDEditor
-                minSize={'100%'}
-                height={'100%'}
+                minSize={"100%"}
+                height={"100%"}
                 preview={"edit"}
                 value={content}
                 onChange={(value) => {
@@ -128,7 +130,8 @@ class EditMarkdown extends Component {
                 width: "100%",
               }}
             >
-              <MDEditor.Markdown
+              <Post content={content} />
+              {/* <MDEditor.Markdown
                 // Markdown Options (needs work)
                 previewOptions={{
                   astPlugins: [parseHtml],
@@ -150,7 +153,7 @@ class EditMarkdown extends Component {
                   allowDangerousHtml: true,
                 }}
                 source={content}
-              />
+              /> */}
             </Panel>
           </Col>
         </Row>

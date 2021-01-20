@@ -53,8 +53,15 @@ class Post extends Component {
       }
     }
   }
+  
+  componentWillReceiveProps(nextProps) {
+    if (this.props != nextProps) {
+      this.setState({
+        content: nextProps.content,
+      });
+    }
+  }
 
-  componentWillUnmount() {}
 
   render() {
     const { content } = this.state;

@@ -25,7 +25,8 @@ export async function save(post, content) {
   return await (
     await fetch(config.save, {
       method: "POST",
-      body: JSON.stringify({ content, post }),
+      json: true,
+      body: { content, post },
     })
   ).json();
 }

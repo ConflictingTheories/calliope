@@ -10,14 +10,16 @@
 **           All Rights Reserved.             **
 ** ------------------------------------------ **
 \*                                            */
-
+const fs = require("fs");
 var express = require("express");
 const path = require("path");
+const Env = require('../../config/env');
 var router = express.Router({
   mergeParams: true,
 });
 
 module.exports = (() => {
+  // Return Posts
   router.get("/posts.json", async (_, res) => {
     // Setup Response
     let status = {
@@ -34,6 +36,7 @@ module.exports = (() => {
     else res.status(404).json(status);
   });
 
+  // Return Pages
   router.get("/pages.json", async (_, res) => {
     // Setup Response
     let status = {
@@ -49,9 +52,29 @@ module.exports = (() => {
     else res.status(404).json(status);
   });
 
-  console.log("SERVING", path.join(__dirname, "../../content/"))
-  router.use("*", express.static(path.join(__dirname, "../../content/"),{index:false,extensions:['md']}));
-  
+  // Save
+  router.post("/save", async (req, res) => {
+    let { content, post } = req.body;
+    console.log(req.body);
+    // console.log(path.join(__dirname, Env.CONTENT_ROOT, "/", post))
+    if (post && content) {
+      fs.writeFileSync(
+        path.join(__dirname, Env.CONTENT_ROOT, "/", post),
+        content
+      );
+    }
+
+    res.status(200).json({ msg: "saved", err: null });
+  });
+
+  console.log("SERVING", path.join(__dirname, Env.CONTENT_ROOT));
+  router.use(
+    "*",
+    express.static(path.join(__dirname, Env.CONTENT_ROOT), {
+      index: false,
+      extensions: ["md"],
+    })
+  );
 
   return router;
 })();

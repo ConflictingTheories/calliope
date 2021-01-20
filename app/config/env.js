@@ -62,4 +62,6 @@ module.exports = {
   DNS_USERNAME: process.env.DNS_USERNAME,
   DNS_IP: process.env.DNS_IP,
   SITE_IP: process.env.SITE_IP,
+  // CONTENT
+  CONTENT_ROOT: process.env.CONTENT_ROOT
 };
