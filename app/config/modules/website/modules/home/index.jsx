@@ -12,6 +12,7 @@
 \*                                                 */
 
 import React from "react";
+import { useParams } from "react-router-dom";
 import { collect, store } from "react-recollect";
 
 // RSuite UI Library
@@ -44,6 +45,41 @@ const PAGE_LIMIT = 10;
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = { isPage: false };
+
+    let { page } = props.match.params;
+
+    if (page) {
+      store.page = page;
+    }
+  }
+
+  renderPage() {
+    return (
+      <React.Fragment>
+        <Row>
+          <Col sm={0} md={3} lg={6} />
+          <Col sm={24} md={18} lg={12}>
+            <Container>
+              <Content>
+                {store.page && (
+                  <Row>
+                    <Container className="calliope-page">
+                      <Post src={`pages/${store.page}.md`} />
+                    </Container>
+                  </Row>
+                )}
+                <>
+                  <a href="/">Back Home</a>
+                </>
+              </Content>
+            </Container>
+          </Col>
+          <Col sm={0} md={3} lg={6} />
+        </Row>
+      </React.Fragment>
+    );
   }
 
   renderPosts() {
@@ -87,23 +123,27 @@ class Dashboard extends React.Component {
   }
 
   async componentDidMount() {
-    // Fetch & Render Posts
-    const result = await posts();
-    if (result) {
-      store.posts = result;
-
-      store.start = 0;
-      store.end = store.start + PAGE_LIMIT;
-
-      setTimeout(
-        () =>
-          Notification.open({
-            title: `Welcome!`,
-            description: <Paragraph width={320} rows={3} />,
-          }),
-        ~~(Math.random() * 10000)
-      );
+    // If Page - Load Page Specifically
+    let { page } = store;
+    if (page && page !== "") {
+      this.setState({ isPage: true });
+    } else {
+      // Else - Fetch & Render Posts
+      const result = await posts();
+      if (result) {
+        store.posts = result;
+        store.start = 0;
+        store.end = store.start + PAGE_LIMIT;
+      }
     }
+    setTimeout(
+      () =>
+        Notification.open({
+          title: `Welcome! ⚡⚡⚡`,
+          description: <Paragraph width={320} rows={3} />,
+        }),
+      ~~(Math.random() * 10000)
+    );
   }
 
   render() {
@@ -120,7 +160,11 @@ class Dashboard extends React.Component {
             renderBar={() => null}
             renderRight={() => null}
           />
-          <Content>{this.renderPosts()}</Content>
+          {this.state.isPage ? (
+            <Content>{this.renderPage()}</Content>
+          ) : (
+            <Content>{this.renderPosts()}</Content>
+          )}
         </Container>
       </React.Fragment>
     );

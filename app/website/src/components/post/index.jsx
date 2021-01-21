@@ -50,6 +50,8 @@ class Post extends Component {
       if (fileResponse.ok) {
         let content = await fileResponse.text();
         this.setState({ content });
+      }else{
+        this.setState({content: "# 404\n## Page Not Found\n\nSorry, but that page does not exist. 😬😬😬"})
       }
     }
   }

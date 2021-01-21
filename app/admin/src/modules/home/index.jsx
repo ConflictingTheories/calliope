@@ -23,6 +23,7 @@ import {
   Col,
   Notification,
   Placeholder,
+  List,
 } from "rsuite";
 import "rsuite/dist/styles/rsuite-default.css";
 
@@ -38,7 +39,7 @@ import MarkdownEdit from "../../components/edit";
 import "../../theme/less/App.less";
 
 //SERVICES
-import { posts } from "../../services/content";
+import { posts, pages } from "../../services/content";
 
 const { Paragraph } = Placeholder;
 
@@ -47,23 +48,24 @@ class Dashboard extends React.Component {
     super(props);
     this.edit = this.edit.bind(this);
     this.renderPosts = this.renderPosts.bind(this);
+    this.renderPages = this.renderPages.bind(this);
     this.profilePanel = this.profilePanel.bind(this);
   }
 
   async componentDidMount() {
     // Fetch & Render Posts
-    const result = await posts();
-    if (result) {
-      store.posts = result;
-      setTimeout(
-        () =>
-          Notification.open({
-            title: "Welcome to Calliope",
-            description: <Paragraph width={320} rows={3} />,
-          }),
-        ~~(Math.random() * 10000)
-      );
-    }
+    const resultPosts = await posts();
+    const resultPages = await pages();
+    store.posts = resultPosts;
+    store.pages = resultPages;
+    setTimeout(
+      () =>
+        Notification.open({
+          title: "Welcome to Calliope",
+          description: <Paragraph width={320} rows={3} />,
+        }),
+      ~~(Math.random() * 10000)
+    );
   }
 
   async edit(post) {
@@ -82,22 +84,48 @@ class Dashboard extends React.Component {
   renderPosts() {
     return (
       <React.Fragment>
-        {store.posts &&
-          store.posts?.map((post) => {
-            return (
-              <Row>
-                <Container className="calliope-list-item">
-                  <label>
-                    {post} <a onClick={() => this.edit(post)}>Edit</a>
-                  </label>
-                </Container>
-              </Row>
-            );
-          })}
+        <Row>
+          <Container className="calliope-list-item">
+            <List>
+              {store.posts &&
+                store.posts?.map((post) => {
+                  return (
+                    <List.Item>
+                      <label>
+                        {post} <a onClick={() => this.edit(post)}>Edit</a>
+                      </label>
+                    </List.Item>
+                  );
+                })}
+            </List>
+          </Container>
+        </Row>
       </React.Fragment>
     );
   }
 
+  renderPages() {
+    return (
+      <React.Fragment>
+        <Row>
+          <Container className="calliope-list-item">
+            <List>
+              {store.pages &&
+                store.pages?.map((page) => {
+                  return (
+                    <List.Item>
+                      <label>
+                        {page} <a onClick={() => this.edit(page)}>Edit</a>
+                      </label>
+                    </List.Item>
+                  );
+                })}
+            </List>
+          </Container>
+        </Row>
+      </React.Fragment>
+    );
+  }
   // PANELS & COMPONENTS
   profilePanel() {
     let content = store.selectedContent;
@@ -105,7 +133,20 @@ class Dashboard extends React.Component {
       <Panel style={{ width: "100%" }}>
         <Content>
           <Row>
-            <Col md={4}>{this.renderPosts()}</Col>
+            <Col md={4}>
+              <details open>
+                <summary >
+                  Posts <button onClick={()=>console.log('todo')}>+ Add New Post</button>
+                </summary>
+                {this.renderPosts()}
+              </details>
+              <details open>
+                <summary>
+                  Pages <button onClick={()=>console.log('todo')}>+ Add New Page</button>
+                </summary>
+                {this.renderPages()}
+              </details>
+            </Col>
             <Col md={20}>
               {content ? (
                 <MarkdownEdit content={content} />

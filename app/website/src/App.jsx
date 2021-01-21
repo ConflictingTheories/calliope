@@ -49,14 +49,13 @@ const App = () => {
   //   initializeTheme(canvas);
   // });
 
-
   // Return Themed Site
   return (
     <React.Fragment>
       {/* background Canvas - For Special Animations - TODO - Issues with Sizing*/}
       {/* <canvas style={{ width: "100%", height: "100%" }} ref={ref} /> */}
       {/* Pre-Special Effects - TODO -- Issues w sizing*/}
-      {/* <div class="specialEffect1"></div> */}
+      <div class="specialEffect1"></div>
       <div class="specialEffect2"></div>
       <div class="specialEffect3"></div>
       {/* Main Site Container */}
@@ -64,8 +63,9 @@ const App = () => {
         <Router>
           <Switch>
             <AuthenticatedRoute exact path="/admin" component={AdminScreen} />
-            <AuthenticatedRoute path="/logout" component={LogoutScreen} />
+            <AuthenticatedRoute exact path="/logout" component={LogoutScreen} />
             <Route exact path="/login" component={LoginScreen} />
+            <Route path="/:page" component={PublicScreen} />
             <Route path="*" component={PublicScreen} />
           </Switch>
         </Router>
