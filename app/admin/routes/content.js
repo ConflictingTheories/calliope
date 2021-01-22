@@ -18,6 +18,7 @@ const Env = require("../../config/env");
 var router = express.Router({
   mergeParams: true,
 });
+var archive = require("../../lib/storage/archiver")
 
 module.exports = (() => {
   // Return Posts
@@ -70,6 +71,16 @@ module.exports = (() => {
     }
   });
 
+    // Save
+    router.get("/export", async (req, res) => {
+      try {
+        let archiver = archive(res);
+      } catch (e) {
+        console.error(e);
+        res.status(200).json({ msg: "error", err: true });
+      }
+    });
+  
   console.log("SERVING", path.join(__dirname, Env.CONTENT_ROOT));
   router.use(
     "*",

@@ -12,6 +12,9 @@
 \*                                                 */
 
 import * as config from "../config/runtime.json";
+import FileSaver from "file-saver";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.css";
 
 export async function pages() {
   return await (await fetch(config.pages)).json();
@@ -23,6 +26,14 @@ export async function posts() {
 
 export async function save(post, content) {
   return await (
-    await fetch({ url: config.save, method: "POST", body: JSON.stringify({content, post}) })
+    await fetch({
+      url: config.save,
+      method: "POST",
+      body: JSON.stringify({ content, post }),
+    })
   ).json();
+}
+
+export async function exportZip() {
+  // do nothing (Admin only)
 }

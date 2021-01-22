@@ -40,6 +40,7 @@ module.exports = (() => {
       posts: "/content/posts.json",
       pages: "/content/pages.json",
       save: "/content/save",
+      export: "/content/export",
       offline: true,
     };
     fs.writeFileSync(
@@ -206,6 +207,19 @@ module.exports = (() => {
     const themePath = path.join(__dirname + `/../admin/src/theme`);
     const pluginPath = path.join(__dirname + `/../admin/src/plugins`);
     console.log("Admin Site :: Transfering:\n\n", themeFiles);
+    // Frontend Website Config
+    const webConfig = {
+      posts: "/content/posts.json",
+      pages: "/content/pages.json",
+      save: "/content/save",
+      export: "/content/export",
+      offline: true,
+    };
+    fs.writeFileSync(
+      path.join(__dirname + `/../admin/src/config/runtime.json`),
+      JSON.stringify(webConfig)
+    );
+
     // Transfer Theme Files
     glob(themeFiles + "/**/*.*", function (err, files) {
       if (err) {

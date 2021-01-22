@@ -253,8 +253,9 @@ class Dashboard extends React.Component {
           style={{ flex: 1, flexShrink: 1, flexGrow: 0 }}
         />
         <div style={{ display: "flex", flex: 1, flexDirection: "row" }}>
-          <Container className="calliope-container">
+          <Container className="calliope-admin">
             <NavBar
+              isAdmin={true}
               isLogin={false}
               renderBrand={this.renderClientSelect}
               renderBar={() => null}
