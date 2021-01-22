@@ -57,10 +57,11 @@ class EditMarkdown extends Component {
     }
   }
 
-  saveChanges() {
+  // Write Content Back out to File
+  async saveChanges() {
     store.selectedContent = this.state.content;
-    // Write Content Back out to File
-    save(store.selectedPost, store.selectedContent);
+    await save(store.selectedPost, store.selectedContent);
+    store.isSaved = true;
   }
 
   render() {
@@ -80,44 +81,53 @@ class EditMarkdown extends Component {
                 width: "100%",
               }}
             >
-              <MDEditor
-                minSize={"100%"}
-                height={"100%"}
-                preview={"edit"}
-                value={content}
-                onChange={(value) => {
-                  store.selectedContent = value;
-                  this.setState({ content: value });
-                }}
-                // Toolbar Settings
-                commands={[
-                  commands.bold,
-                  commands.hr,
-                  commands.italic,
-                  commands.divider,
-                  commands.fullscreen,
-                ]}
-                // Markdown Options
-                previewOptions={{
-                  astPlugins: [parseHtml],
-                  escapeHtml: false,
-                  parserOptions: { gfm: true },
-                  plugins: [
-                    [
-                      shortcodes,
-                      { startBlock: "[[", endBlock: "]]", inlineMode: true },
+              <Container style={{ minHeight: "100%" }}>
+                <MDEditor
+                  style={{ height: "100%", minHeight: "87vh" }}
+                  height={"100%"}
+                  preview={"edit"}
+                  value={content}
+                  autoFocus={true}
+                  visiableDragbar={false}
+                  onChange={(value) => {
+                    store.selectedContent = value;
+                    store.isSaved = false;
+                    this.setState({ content: value });
+                  }}
+                  // Toolbar Settings
+                  commands={[
+                    commands.bold,
+                    commands.hr,
+                    commands.italic,
+                    commands.divider,
+                    commands.fullscreen,
+                  ]}
+                  // Markdown Options
+                  previewOptions={{
+                    astPlugins: [parseHtml],
+                    escapeHtml: false,
+                    parserOptions: { gfm: true },
+                    plugins: [
+                      [
+                        shortcodes,
+                        {
+                          startBlock: "[[",
+                          endBlock: "]]",
+                          inlineMode: true,
+                        },
+                      ],
+                      emoji,
+                      a11yEmoji,
+                      math,
+                      slug,
+                      headings,
+                      html,
                     ],
-                    emoji,
-                    a11yEmoji,
-                    math,
-                    slug,
-                    headings,
-                    html,
-                  ],
-                  renderers: renderers,
-                  allowDangerousHtml: true,
-                }}
-              />
+                    renderers: renderers,
+                    allowDangerousHtml: true,
+                  }}
+                />
+              </Container>
             </Panel>
           </Col>
           <Col sm={12} md={12} lg={12}>

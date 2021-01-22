@@ -11,12 +11,6 @@
 ** ----------------------------------------------- **
 \*                                                 */
 
-/*                                            *\
-** ------------------------------------------ **
-** !!! NOTE: -- NO NEED TO EDIT THIS FILE !!! **
-** ------------------------------------------ **
-\*                                            */
-
 module.exports = (() => {
   // THIRD-PARTY LIBRARIES
   const express = require("express");
@@ -103,7 +97,7 @@ module.exports = (() => {
     );
     app.use("/content", content);
     app.use("/static", express.static(__dirname + "/../website/build/static"));
-    app.use("/", index);
+    app.use("*", index);
     // Database Sync
     DB.sync();
   });

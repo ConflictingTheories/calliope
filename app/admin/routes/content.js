@@ -1,15 +1,16 @@
-/*                                            *\
-** ------------------------------------------ **
-**         Calliope - Site Generator   	      **
-** ------------------------------------------ **
-**  Copyright (c) 2020 - Kyle Derby MacInnis  **
-**                                            **
-** Any unauthorized distribution or transfer  **
-**    of this work is strictly prohibited.    **
-**                                            **
-**           All Rights Reserved.             **
-** ------------------------------------------ **
-\*                                            */
+/*                                                 *\
+** ----------------------------------------------- **
+**             Calliope - Site Generator   	       **
+** ----------------------------------------------- **
+**  Copyright (c) 2020-2021 - Kyle Derby MacInnis  **
+**                                                 **
+**    Any unauthorized distribution or transfer    **
+**       of this work is strictly prohibited.      **
+**                                                 **
+**               All Rights Reserved.              **
+** ----------------------------------------------- **
+\*                                                 */
+
 const fs = require("fs");
 var express = require("express");
 const path = require("path");
@@ -56,10 +57,10 @@ module.exports = (() => {
     try {
       let body = JSON.parse(req.body);
       let { post, content } = body;
-      if (post && content) {
+      if (post) {
         fs.writeFileSync(
           path.join(__dirname, Env.CONTENT_ROOT, "/", post),
-          content
+          content || ""
         );
       }
       res.status(200).json({ msg: "saved", err: null });

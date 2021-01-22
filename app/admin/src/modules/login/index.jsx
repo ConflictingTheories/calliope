@@ -1,3 +1,16 @@
+/*                                                 *\
+** ----------------------------------------------- **
+**             Calliope - Site Generator   	       **
+** ----------------------------------------------- **
+**  Copyright (c) 2020-2021 - Kyle Derby MacInnis  **
+**                                                 **
+**    Any unauthorized distribution or transfer    **
+**       of this work is strictly prohibited.      **
+**                                                 **
+**               All Rights Reserved.              **
+** ----------------------------------------------- **
+\*                                                 */
+
 import React from "react";
 import { collect, store } from "react-recollect";
 // BLUEPRINT STYLES

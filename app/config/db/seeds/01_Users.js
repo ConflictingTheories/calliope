@@ -1,16 +1,15 @@
-/*                                            *\
-** ------------------------------------------ **
-**         Calliope - Site Generator   	      **
-** ------------------------------------------ **
-**           Copyright (c) 2017-2020          **
-**             Kyle Derby MacInnis            **
-**                                            **
-** Any unauthorized distribution or transfer  **
-**    of this work is strictly prohibited.    **
-**                                            **
-**           All Rights Reserved.             **
-** ------------------------------------------ **
-\*                                            */
+/*                                                 *\
+** ----------------------------------------------- **
+**             Calliope - Site Generator   	       **
+** ----------------------------------------------- **
+**  Copyright (c) 2020-2021 - Kyle Derby MacInnis  **
+**                                                 **
+**    Any unauthorized distribution or transfer    **
+**       of this work is strictly prohibited.      **
+**                                                 **
+**               All Rights Reserved.              **
+** ----------------------------------------------- **
+\*                                                 */
 
 module.exports = (() => {
   const {

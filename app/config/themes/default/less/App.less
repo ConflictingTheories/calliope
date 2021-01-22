@@ -15,24 +15,29 @@ html {
   font-style: italic;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 2.5%;
 }
 
-p, ul{
+p,
+ul {
   font-family: monospace;
   margin: 2.5%;
 }
 
-
-video{
+video {
   max-width: 95%;
   width: 95%;
   text-align: center;
   margin: 2.5% 2.5% auto;
 }
 
-audio{
+audio {
   max-width: 95%;
   width: 95%;
   text-align: center;
@@ -82,12 +87,19 @@ button {
   }
 }
 
+.calliope-admin {
+  z-index: 5;
+}
+
 .calliope-container {
   z-index: 5;
 }
 
 .calliope-list-item {
   padding: 0.5em;
+  .rs-list-item {
+    padding-left: 1.25em;
+  }
 }
 
 .calliope-post {
@@ -112,6 +124,7 @@ button {
   font-size: 1rem;
   color: #1f1329;
   text-align: center;
+  margin: revert;
 }
 .f a {
   font-size: 1rem;
@@ -123,4 +136,8 @@ button {
   transform: translate(-50%, -50%);
   top: 40%;
   left: 50%;
+}
+
+.rs-panel-body-fill {
+  height: 100%;
 }

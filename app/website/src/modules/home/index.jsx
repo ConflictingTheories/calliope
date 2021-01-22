@@ -12,7 +12,6 @@
 \*                                                 */
 
 import React from "react";
-import { useParams } from "react-router-dom";
 import { collect, store } from "react-recollect";
 
 // RSuite UI Library

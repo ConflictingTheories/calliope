@@ -1,16 +1,3 @@
-/*                                                 *\
-** ----------------------------------------------- **
-**             Calliope - Site Generator   	       **
-** ----------------------------------------------- **
-**  Copyright (c) 2020-2021 - Kyle Derby MacInnis  **
-**                                                 **
-**    Any unauthorized distribution or transfer    **
-**       of this work is strictly prohibited.      **
-**                                                 **
-**               All Rights Reserved.              **
-** ----------------------------------------------- **
-\*                                                 */
-
 import React from "react";
 import { collect, store } from "react-recollect";
 
@@ -26,20 +13,24 @@ import {
   List,
 } from "rsuite";
 import "rsuite/dist/styles/rsuite-default.css";
-
+// Blueprint
 import { NonIdealState, Tabs, Tab } from "@blueprintjs/core";
-// BLUEPRINT STYLES
 import "@blueprintjs/core/lib/css/blueprint.css";
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
+// Misc
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.css";
 
+// Components
 import NavBar from "../../components/nav";
 import SideMenu from "../../components/menu";
 import MarkdownEdit from "../../components/edit";
+
 // ASSETS & APP STYLES
 import "../../theme/less/App.less";
 
 //SERVICES
-import { posts, pages } from "../../services/content";
+import { posts, pages, save } from "../../services/content";
 
 const { Paragraph } = Placeholder;
 
@@ -47,17 +38,20 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.edit = this.edit.bind(this);
+    this.create = this.create.bind(this);
+    this.fetchLists = this.fetchLists.bind(this);
+    this.fetchPost = this.fetchPost.bind(this);
     this.renderPosts = this.renderPosts.bind(this);
     this.renderPages = this.renderPages.bind(this);
-    this.profilePanel = this.profilePanel.bind(this);
+    this.profilePanel = this.renderPanel.bind(this);
   }
 
   async componentDidMount() {
     // Fetch & Render Posts
-    const resultPosts = await posts();
-    const resultPages = await pages();
-    store.posts = resultPosts;
-    store.pages = resultPages;
+    store.show = false;
+    store.isEditting = false;
+    store.isSaved = true;
+    await this.fetchLists();
     setTimeout(
       () =>
         Notification.open({
@@ -68,16 +62,79 @@ class Dashboard extends React.Component {
     );
   }
 
+  async fetchLists() {
+    const resultPosts = await posts();
+    const resultPages = await pages();
+    store.posts = resultPosts;
+    store.pages = resultPages;
+  }
+
+  async create(type, name = "untitled") {
+    // New Post
+    if (name === "") {
+      name = "untitled";
+    }
+    const date = new Date().toISOString().split(".")[0].replaceAll(/[:-]/g, ""); // Date format (ISO - No TZ - Minimized)
+    const formattedName = `${type}/${date}_${name}.md`;
+    await save(formattedName, ""); // Create Blank File
+    await this.fetchLists();
+    return formattedName;
+  }
+
   async edit(post) {
-    // Fetch Post & Store Content
-    if (post && post !== "") {
-      console.log(post);
-      const fileResponse = await fetch("/content/" + post);
-      if (fileResponse.ok) {
-        let content = await fileResponse.text();
-        store.selectedPost = post;
-        store.selectedContent = content;
+    store.editPost = post;
+    // Prompt to Save if Changing
+    if (store.selectedPost != post && store.isEditting && !store.isSaved) {
+      this.saveChanges();
+    } else {
+      // Fetch Post & Store Content
+      if (post && post !== "" && store.selectedPost != post) {
+        this.fetchPost(post);
       }
+    }
+  }
+
+  async fetchPost(post) {
+    const fileResponse = await fetch("/content/" + post);
+    if (fileResponse.ok) {
+      let content = await fileResponse.text();
+      store.selectedPost = post;
+      store.selectedContent = content;
+      store.isEditting = true;
+      store.isSaved = true;
+    }
+  }
+
+  async saveChanges() {
+    let result = await Swal.fire({
+      title: "Do you want to save the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: `Save`,
+      denyButtonText: `Don't save`,
+    });
+    if (result.isConfirmed) {
+      await save(store.selectedPost, store.selectedContent);
+      Swal.fire("Saved!", "", "success");
+      await this.fetchPost(store.editPost);
+    } else if (result.isDenied) {
+      Swal.fire("Changes are not saved", "", "info");
+      await this.fetchPost(store.editPost);
+    }
+  }
+
+  async newFile() {
+    let result = await Swal.fire({
+      title: "Please enter the name of the new file",
+      input: "text",
+      inputPlaceholder: "untitled",
+      showCancelButton: true,
+      confirmButtonText: `Create`,
+    });
+    if (result.isConfirmed) {
+      let newFile = await this.create(store.type, result.value);
+      Swal.fire("Created!", "", "success");
+      await this.fetchPost(newFile);
     }
   }
 
@@ -127,7 +184,7 @@ class Dashboard extends React.Component {
     );
   }
   // PANELS & COMPONENTS
-  profilePanel() {
+  renderPanel() {
     let content = store.selectedContent;
     return (
       <Panel style={{ width: "100%" }}>
@@ -135,23 +192,40 @@ class Dashboard extends React.Component {
           <Row>
             <Col md={4}>
               <details open>
-                <summary >
-                  Posts <button onClick={()=>console.log('todo')}>+ Add New Post</button>
+                <summary>
+                  Posts{" "}
+                  <button
+                    onClick={async () => {
+                      store.type = "posts";
+                      await this.newFile();
+                    }}
+                  >
+                    + Add New Post
+                  </button>
                 </summary>
                 {this.renderPosts()}
               </details>
               <details open>
                 <summary>
-                  Pages <button onClick={()=>console.log('todo')}>+ Add New Page</button>
+                  Pages{" "}
+                  <button
+                    onClick={async () => {
+                      store.type = "pages";
+                      await this.newFile();
+                    }}
+                  >
+                    + Add New Page
+                  </button>
                 </summary>
                 {this.renderPages()}
               </details>
             </Col>
             <Col md={20}>
-              {content ? (
+              {store.selectedPost && content !== null ? (
                 <MarkdownEdit content={content} />
               ) : (
                 <NonIdealState
+                  style={{ height: "87vh" }}
                   icon={"build"}
                   title="Getting Started"
                   description={"Please select a post to edit"}
@@ -186,7 +260,7 @@ class Dashboard extends React.Component {
               renderBar={() => null}
               renderRight={() => null}
             />
-            <Content>{this.profilePanel()}</Content>
+            <Content>{this.renderPanel()}</Content>
           </Container>
         </div>
       </div>

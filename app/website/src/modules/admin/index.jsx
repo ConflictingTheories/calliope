@@ -9,7 +9,7 @@
 **                                                 **
 **               All Rights Reserved.              **
 ** ----------------------------------------------- **
-\*                                                 */
+\*                                                 */                                              
 
 import React from "react";
 import { collect, store } from "react-recollect";

@@ -45,23 +45,22 @@ const App = () => {
   const ref = useRef();
   const date = new Date().toDateString();
 
-  // useEffect(() => {
-  //   let canvas = ref.current;
-  //   initializeTheme(canvas);
-  // });
-
+  useEffect(() => {
+    let canvas = ref.current;
+    initializeTheme(canvas);
+  });
 
   // Return Themed Site
   return (
     <React.Fragment>
       {/* background Canvas - For Special Animations - TODO - Issues with Sizing*/}
-      {/* <canvas style={{ width: "100%", height: "100%" }} ref={ref} /> */}
+      <canvas style={{ width: "100%", height: "100%" }} ref={ref} />
       {/* Pre-Special Effects - TODO -- Issues w sizing*/}
       {/* <div class="specialEffect1"></div> */}
       <div class="specialEffect2"></div>
       <div class="specialEffect3"></div>
       {/* Main Site Container */}
-      <div className="calliope-container">
+      <div className="calliope-admin">
         <Router>
           <Switch>
             <AuthenticatedRoute exact path="/admin" component={AdminScreen} />
@@ -77,11 +76,12 @@ const App = () => {
       <div class="specialEffect6"></div>
       {/* Powered by Calliope and Date */}
       <p class="f">
-        <span id="date">{date}</span>
-        <br />
-        <a target="_blank" href="https://www.calliope.site">
-          powered by Calliope ⚡⚡⚡
-        </a>
+        <span id="date">
+          <a target="_blank" href="https://www.calliope.site">
+            powered by Calliope ⚡⚡⚡
+          </a>{" "}
+          {date}
+        </span>
       </p>
     </React.Fragment>
   );

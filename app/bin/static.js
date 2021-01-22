@@ -1,21 +1,16 @@
-/*                                            *\
-** ------------------------------------------ **
-**         Calliope - Site Generator   	      **
-** ------------------------------------------ **
-**  Copyright (c) 2020 - Kyle Derby MacInnis  **
-**                                            **
-** Any unauthorized distribution or transfer  **
-**    of this work is strictly prohibited.    **
-**                                            **
-**           All Rights Reserved.             **
-** ------------------------------------------ **
-\*                                            */
+/*                                                 *\
+** ----------------------------------------------- **
+**             Calliope - Site Generator   	       **
+** ----------------------------------------------- **
+**  Copyright (c) 2020-2021 - Kyle Derby MacInnis  **
+**                                                 **
+**    Any unauthorized distribution or transfer    **
+**       of this work is strictly prohibited.      **
+**                                                 **
+**               All Rights Reserved.              **
+** ----------------------------------------------- **
+\*                                                 */
 
-/*                                            *\
-** ------------------------------------------ **
-** !!! NOTE: -- NO NEED TO EDIT THIS FILE !!! **
-** ------------------------------------------ **
-\*                                            */
 const fs = require("fs");
 const path = require("path");
 const glob = require("glob");
