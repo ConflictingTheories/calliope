@@ -10,3 +10,5 @@ app/node_modules
 **/build
 
 /output/admin
+
+/app/calliope-ssg*/*

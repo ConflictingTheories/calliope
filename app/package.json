@@ -32,8 +32,8 @@
     "config": "^3.3.2",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
-    "electron": "^11.1.1",
     "express": "^4.17.1",
+    "electron-is-dev": "^1.2.0",
     "express-fileupload": "^1.2.0",
     "express-session": "^1.17.1",
     "file-saver": "^2.0.5",
@@ -83,8 +83,8 @@
     "serve": "cd ../output/site && http-server",
     "pack": "npx electron-builder install-app-deps && npx electron-builder --dir",
     "dist": "PUBLIC_URL= && ELECTRON_START_URL= && yarn build && electron-builder",
-    "dist-win": "PUBLIC_URL='' && yarn build && electron-packager . --arch=x64 --platform=win32",
-    "dist-mac": "PUBLIC_URL='' && yarn build && electron-packager . --arch=x64 --platform=darwin"
+    "dist-win": "npx electron-packager . --arch=x64 --platform=win32",
+    "dist-mac": "PUBLIC_URL='' && yarn build && npx electron-packager . --arch=x64 --platform=darwin"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -111,8 +111,8 @@
     "@types/node": "^14.10.1",
     "concurrently": "^5.3.0",
     "craco-less": "^1.17.0",
+    "electron": "^11.1.1",
     "electron-builder": "^22.9.1",
-    "electron-is-dev": "^1.2.0",
     "electron-package": "^0.1.0",
     "http-server": "^0.12.3",
     "typescript": "^4.0.2",
