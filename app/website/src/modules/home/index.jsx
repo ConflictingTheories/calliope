@@ -65,7 +65,7 @@ class Dashboard extends React.Component {
                 {store.page && (
                   <Row>
                     <Container className="calliope-page">
-                      <Post src={`pages/${store.page}.md`} />
+                      <Post src={`${store.page}`} />
                     </Container>
                   </Row>
                 )}
@@ -96,7 +96,7 @@ class Dashboard extends React.Component {
                       return (
                         <Row>
                           <Container className="calliope-list-item">
-                            <Post src={`posts/${post}`} />
+                            <Post src={`${post}`} />
                           </Container>
                         </Row>
                       );

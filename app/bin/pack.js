@@ -10,18 +10,15 @@
 **               All Rights Reserved.              **
 ** ----------------------------------------------- **
 \*                                                 */
+require('dotenv').config()
 
-// Third-party Libraries
-const express = require("express");
+const shell = require("shelljs");
 const path = require("path");
-const router = express.Router({ mergeParams: true });
 
 module.exports = (() => {
-  router.get("/index", function (_, res) {
-    res.sendFile(path.join(__dirname, "../build/", "index.html"));
-  });
+  const outPath = path.join(__dirname + "/../calliope-ssg-win32-x64");
+  const winPath = path.join(__dirname + "/../..");
 
-  router.use("/", express.static(path.join(__dirname, "../build")));
-
-  return router;
+  // Copy env to app dir
+  shell.cp(winPath + "/.env", outPath + "/.env");
 })();

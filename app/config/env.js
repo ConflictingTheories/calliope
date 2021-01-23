@@ -12,9 +12,9 @@
 \*                                                 */
 
 // Load Environment Variables
-require('dotenv').config()
+// require('dotenv').config()
 const path = require("path");
-console.log(path.join(__dirname, process.env.CONTENT_ROOT));
+
 module.exports = {
   // Name
   SITE_NAME: process.env.REACT_APP_SITE_TITLE,

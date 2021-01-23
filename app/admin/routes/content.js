@@ -83,9 +83,9 @@ module.exports = (() => {
 
   console.log("SERVING", Env.CONTENT_ROOT);
 
-  router.use(
+  router.get(
     "*",
-    express.static(Env.CONTENT_ROOT, {
+    express.static(path.join(Env.CONTENT_ROOT), {
       index: false,
       extensions: ["md"],
     })

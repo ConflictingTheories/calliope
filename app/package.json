@@ -1,6 +1,6 @@
 {
   "name": "calliope-ssg",
-  "version": "0.1.2",
+  "version": "0.2.1",
   "author": "Kyle Derby MacInnis",
   "license": "Apache-2.0",
   "repository": {
@@ -66,26 +66,27 @@
     "sweetalert2": "^10.13.0"
   },
   "scripts": {
-    "ebuild": "yarn build && node_modules/.bin/build",
     "dev": "concurrently \"npm start\" \"wait-on http://localhost:8899 && electron .\"",
-    "configure": "yarn preload && node bin/configure",
-    "copy-content": "node ./bin/static",
-    "preload": "node ./bin/preload",
-    "db-migrate": "node config/db/migrate.js",
-    "db-seed": "node config/db/seed.js",
+    "ebuild": "yarn build && node_modules/.bin/build",
     "build-site": "cd website && craco build",
     "build-admin": "cd admin && craco build",
     "build": "yarn configure && concurrently \"yarn build-site\" \"yarn build-admin\"",
-    "export": "node bin/export.js && yarn copy-content",
+    "configure": "yarn preload && node bin/configure",
+    "copy-content": "node ./bin/static",
+    "preload": "node ./bin/preload",
     "deploy": "yarn build && yarn export",
+    "db-seed": "node config/db/seed.js",
+    "db-migrate": "node config/db/migrate.js",
+    "export": "node bin/export.js && yarn copy-content",
     "start-site": "yarn configure && node bin/app.js",
     "start-admin": "node bin/admin.js",
     "start": "concurrently \"yarn start-site\" \"yarn start-admin\"",
     "serve": "cd ../output/site && http-server",
     "pack": "npx electron-builder install-app-deps && npx electron-builder --dir",
-    "dist": "PUBLIC_URL= && ELECTRON_START_URL= && yarn build && electron-builder",
-    "dist-win": "npx electron-packager . --arch=x64 --platform=win32",
-    "dist-mac": "PUBLIC_URL='' && yarn build && npx electron-packager . --arch=x64 --platform=darwin"
+    "dist": "yarn build && PUBLIC_URL= && ELECTRON_START_URL= && yarn build && electron-builder",
+    "dist-win": "yarn build && npx electron-packager . --arch=x64 --platform=win32 --overwrite && yarn env",
+    "dist-mac": "yarn build && npx electron-packager . --arch=x64 --platform=darwin",
+    "env": "node bin/pack.js"
   },
   "eslintConfig": {
     "extends": "react-app"

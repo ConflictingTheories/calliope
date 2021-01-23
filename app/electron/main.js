@@ -11,7 +11,7 @@
 ** ----------------------------------------------- **
 \*                                                 */
 // Load Environment Variables
-require('dotenv').config()
+require("dotenv").config();
 // Load App
 const { app, BrowserWindow } = require("electron");
 const isDev = require("electron-is-dev");
@@ -36,6 +36,9 @@ function createWindow() {
   adminWindow.once("ready-to-show", () => adminWindow.show());
   adminWindow.on("closed", () => {
     adminWindow = null;
+    if (mainWindow == null) {
+      app.quit();
+    }
   });
 
   // Website Window
@@ -53,6 +56,9 @@ function createWindow() {
   mainWindow.once("ready-to-show", () => mainWindow.show());
   mainWindow.on("closed", () => {
     mainWindow = null;
+    if (adminWindow == null) {
+      app.quit();
+    }
   });
 }
 
