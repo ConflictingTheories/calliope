@@ -10,15 +10,19 @@
 **               All Rights Reserved.              **
 ** ----------------------------------------------- **
 \*                                                 */
-require("dotenv").config();
 
-const shell = require("shelljs");
-const path = require("path");
+// Third-party Libraries
+const express = require("express");
+const router = express.Router({ mergeParams: true });
 
+// Feature Flags
+const FF = require("../../../config/featureFlags");
+
+// Export Route
 module.exports = (() => {
-  const outPath = path.join(__dirname + "/../calliope-ssg-win32-x64");
-  const winPath = path.join(__dirname + "/../..");
+  // API Routes (V1)
+  if (FF.ENABLE_AUTH) router.use("/auth", require("./auth"));
+  if (FF.ENABLE_CONTENT) router.use("/content", require("./content"));
 
-  // Copy env to app dir
-  shell.cp(winPath + "/.env", outPath + "/.env");
+  return router;
 })();

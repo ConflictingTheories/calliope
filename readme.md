@@ -1,6 +1,6 @@
 # Calliope Site Generator
 
-![Calliope](content/media/calliope.png)
+![Calliope](/app/storage/media/calliope.png)
 
 ## What is Calliope?
 Calliope is a Static site generator and webserving platform. It provides two functions - static generation and live serving. The server is done to help make it quick for you to check changes locally without pushing anything out, and these sites are primarily focused at the moment on small blog and post-driven content. In the future Calliope will provide more plugins and themes (it already has two) and will hopefully begin to expand on the markdown support and provide its own form of shortcode plugins.

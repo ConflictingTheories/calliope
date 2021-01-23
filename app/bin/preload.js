@@ -20,9 +20,12 @@ const { getPages, getPosts } = require("../lib/generator");
 
 module.exports = (async () => {
   // Make Directory for Site Content
-  await fs.promises.mkdir(path.join(__dirname + `/../website/build/content`), {
-    recursive: true,
-  });
+  await fs.promises.mkdir(
+    path.join(__dirname + `/../client/website/build/content`),
+    {
+      recursive: true,
+    }
+  );
   // COPY Posts
   let posts = await getPosts();
   let postJson = [];
@@ -41,14 +44,16 @@ module.exports = (async () => {
         );
       }
       await fs.promises.mkdir(
-        path.join(__dirname + `/../website/build/content/posts/`),
+        path.join(__dirname + `/../client/website/build/content/posts/`),
         {
           recursive: true,
         }
       );
       // Copy into Build Dir
       fs.writeFileSync(
-        path.join(__dirname + `/../website/build/content/posts/${filename}`),
+        path.join(
+          __dirname + `/../client/website/build/content/posts/${filename}`
+        ),
         data
       );
     });
@@ -74,13 +79,15 @@ module.exports = (async () => {
       }
       // Copy into Build Dir
       await fs.promises.mkdir(
-        path.join(__dirname + `/../website/build/content/pages/`),
+        path.join(__dirname + `/../client/website/build/content/pages/`),
         {
           recursive: true,
         }
       );
       fs.writeFileSync(
-        path.join(__dirname + `/../website/build/content/pages/${filename}`),
+        path.join(
+          __dirname + `/../client/website/build/content/pages/${filename}`
+        ),
         data
       );
     });
@@ -107,7 +114,7 @@ module.exports = (async () => {
       await fs.promises.mkdir(
         path.join(
           __dirname +
-            `/../website/build/content/media/${filenamePath.join("/")}`
+            `/../client/website/build/content/media/${filenamePath.join("/")}`
         ),
         {
           recursive: true,
@@ -115,7 +122,9 @@ module.exports = (async () => {
       );
       const readFile = fs.createReadStream(file);
       const outFile = fs.createWriteStream(
-        path.join(__dirname + `/../website/build/content/media/${filename}`)
+        path.join(
+          __dirname + `/../client/website/build/content/media/${filename}`
+        )
       );
       readFile.pipe(outFile);
     });
@@ -123,11 +132,11 @@ module.exports = (async () => {
 
   // For Service Worker
   fs.writeFileSync(
-    path.join(__dirname, "/../website/src/content/posts.json"),
-    JSON.stringify(postJson)
+    path.join(__dirname, "/../client/website/src/content/posts.json"),
+    JSON.stringify(postJson.reverse())
   );
   fs.writeFileSync(
-    path.join(__dirname, "/../website/src/content/pages.json"),
-    JSON.stringify(pageJson)
+    path.join(__dirname, "/../client/website/src/content/pages.json"),
+    JSON.stringify(pageJson.reverse())
   );
 })();

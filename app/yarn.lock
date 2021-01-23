@@ -5829,7 +5829,7 @@ cp-file@^6.2.0:
     pify "^4.0.1"
     safe-buffer "^5.0.1"
 
-craco-less@^1.17.0:
+craco-less@^1.17.1:
   version "1.17.1"
   resolved "https://registry.yarnpkg.com/craco-less/-/craco-less-1.17.1.tgz#aa23cf10d09f0f99657bed977788cc9b501add70"
   integrity sha512-T6V1aF3+eQZ22gUigHInX/i+ExPbWrnmdAhtuEXc4mOyhneDifmEzZFseq/BdRy1aUEs9s4z26jTxP+1I6P//g==
@@ -7110,11 +7110,6 @@ electron-fetch@^1.7.2:
   integrity sha512-1AVMaxrHXTTMqd7EK0MGWusdqNr07Rpj8Th6bG4at0oNgIi/1LBwa9CjT/0Zy+M0k/tSJPS04nFxHj0SXDVgVw==
   dependencies:
     encoding "^0.1.13"
-
-electron-is-dev@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-1.2.0.tgz#2e5cea0a1b3ccf1c86f577cee77363ef55deb05e"
-  integrity sha512-R1oD5gMBPS7PVU8gJwH6CtT0e6VSoD0+SzSnYpNm+dBkcijgA+K7VAMHDfnRq/lkKPZArpzplTW6jfiMYosdzw==
 
 electron-mocha@^8.1.2:
   version "8.2.2"
