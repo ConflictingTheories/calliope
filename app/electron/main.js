@@ -14,7 +14,6 @@
 require("dotenv").config();
 // Load App
 const { app, BrowserWindow } = require("electron");
-const isDev = require("electron-is-dev");
 const path = require("path");
 const Env = require("../config/env");
 
@@ -30,12 +29,12 @@ function createWindow() {
   });
 
   // Load Admin Panel
-  // const adminUrl = isDev ? `http://localhost:8899` : `file://${path.join(__dirname, '../admin/build/index.html')}`;
-  const adminUrl = `http://localhost:8899`; // : `file://${path.join(__dirname, '../admin/build/index.html')}`;
+  const adminUrl = `http://localhost:8899`;
   adminWindow.loadURL(adminUrl);
   adminWindow.once("ready-to-show", () => adminWindow.show());
   adminWindow.on("closed", () => {
     adminWindow = null;
+    adminServer = null;
     if (mainWindow == null) {
       app.quit();
     }
@@ -50,12 +49,12 @@ function createWindow() {
   });
 
   // Load Website Preview Panel
-  // const startURL = isDev ? `http://localhost:8888` : `file://${path.join(__dirname, '../website/build/index.html')}`;
-  const startURL = `http://localhost:8888`; //: `file://${path.join(__dirname, '../website/build/index.html')}`;
+  const startURL = `http://localhost:8888`;
   mainWindow.loadURL(startURL);
   mainWindow.once("ready-to-show", () => mainWindow.show());
   mainWindow.on("closed", () => {
     mainWindow = null;
+    webServer = null;
     if (adminWindow == null) {
       app.quit();
     }

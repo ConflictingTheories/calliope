@@ -1,7 +1,10 @@
 {
   "name": "calliope-ssg",
-  "version": "0.2.1",
-  "author": "Kyle Derby MacInnis",
+  "version": "1.0.0",
+  "author": {
+    "name": "Kyle Derby MacInnis",
+    "url": "https://conflictingtheories.com"
+  },
   "license": "Apache-2.0",
   "repository": {
     "url": "https://github.com/ConflictingTheories/calliope"
@@ -33,7 +36,6 @@
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
-    "electron-is-dev": "^1.2.0",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.0",
     "express-session": "^1.17.1",
@@ -68,8 +70,8 @@
   "scripts": {
     "dev": "concurrently \"npm start\" \"wait-on http://localhost:8899 && electron .\"",
     "ebuild": "yarn build && node_modules/.bin/build",
-    "build-site": "cd website && craco build",
-    "build-admin": "cd admin && craco build",
+    "build-site": "cd client/website && craco build",
+    "build-admin": "cd client/admin && craco build",
     "build": "yarn configure && concurrently \"yarn build-site\" \"yarn build-admin\"",
     "configure": "yarn preload && node bin/configure",
     "copy-content": "node ./bin/static",
@@ -112,7 +114,7 @@
     "@types/config": "^0.0.36",
     "@types/node": "^14.10.1",
     "concurrently": "^5.3.0",
-    "craco-less": "^1.17.0",
+    "craco-less": "^1.17.1",
     "electron": "^11.1.1",
     "electron-builder": "^22.9.1",
     "electron-package": "^0.1.0",

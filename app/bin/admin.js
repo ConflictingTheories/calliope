@@ -10,7 +10,7 @@
 **               All Rights Reserved.              **
 ** ----------------------------------------------- **
 \*                                                 */
-require('dotenv').config()
+require("dotenv").config();
 
 module.exports = (() => {
   // THIRD-PARTY LIBRARIES
@@ -31,13 +31,12 @@ module.exports = (() => {
   const Storage = require("../lib/storage");
 
   // INDEX MODULES
-  const index = require("../admin/routes/index");
-  const content = require("../admin/routes/content");
+  const index = require("../routes/admin/index");
+  const content = require("../routes/admin/content");
   // SERVER
   server.listen(Env.ADMIN_PORT, () => {
     console.log(
-      "Calliope :: Your New Website is Now Live @ PORT: ",
-      Env.ADMIN_PORT
+      `${Env.SHORT_NAME} :: Your New Website is Now Live @ http://localhost:${Env.ADMIN_PORT}`
     );
     console.log("Using Storage Driver :: ", Storage.version);
     // Request Handling
@@ -59,7 +58,7 @@ module.exports = (() => {
         let apiVer = req.params.ver;
         switch (apiVer) {
           case "v1":
-            apiRouter = require("../admin/routes/" + apiVer + "/index.js");
+            apiRouter = require("../routes/admin/" + apiVer + "/index.js");
             apiRouter(req, res);
             break;
           default:
@@ -71,22 +70,11 @@ module.exports = (() => {
         Error.sendError(res);
       }
     });
-    // File Storage (if being Used - ie. File Driver)
-    if (Env.STORAGE_TYPE === "file")
-      app.use("/storage", express.static(__dirname + "/../storage"));
-    express.static.mime.define({
-      "text/markdown": ["md"],
-    });
-    // Web App
-    app.use(
-      "/content",
-      express.static(path.join(__dirname, "../../content/"), {
-        index: false,
-        extensions: ["md"],
-      })
-    );
     app.use("/content", content);
-    app.use("/static", express.static(__dirname + "/../admin/build/static"));
+    app.use(
+      "/static",
+      express.static(__dirname + "/../client/admin/build/static")
+    );
     app.use("/", index);
     // Database Sync
     DB.sync();

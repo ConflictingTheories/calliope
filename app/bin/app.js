@@ -10,7 +10,7 @@
 **               All Rights Reserved.              **
 ** ----------------------------------------------- **
 \*                                                 */
-require('dotenv').config()
+require("dotenv").config();
 
 module.exports = (() => {
   // THIRD-PARTY LIBRARIES
@@ -32,8 +32,8 @@ module.exports = (() => {
   const Dns = require("../lib/common/Dns");
 
   // INDEX MODULES
-  const index = require("../website/routes/index");
-  const content = require("../website/routes/content");
+  const index = require("../routes/public/index");
+  const content = require("../routes/public/content");
 
   // SERVER
   server.listen(Env.WEBSITE_PORT, () => {
@@ -46,10 +46,8 @@ module.exports = (() => {
       Dns.setRecords();
     }
 
-    // Port
     console.log(
-      "Calliope :: Your New Website is Now Live @ PORT: ",
-      Env.WEBSITE_PORT
+      `${Env.SHORT_NAME} :: Your New Website is Now Live @ http://localhost:${Env.WEBSITE_PORT}`
     );
 
     // Request Handling
@@ -57,7 +55,7 @@ module.exports = (() => {
     app.use(cookieparser());
     app.use(cors());
     app.use(FileUpload());
-    app.use(express.json())
+    app.use(express.json());
     app.use(
       bodyparser.urlencoded({
         limit: "10mb",
@@ -70,7 +68,7 @@ module.exports = (() => {
         let apiVer = req.params.ver;
         switch (apiVer) {
           case "v1":
-            apiRouter = require("../website/routes/" + apiVer + "/index.js");
+            apiRouter = require("../routes/public/" + apiVer + "/index.js");
             apiRouter(req, res);
             break;
           default:
@@ -82,22 +80,11 @@ module.exports = (() => {
         Error.sendError(res);
       }
     });
-    // File Storage (if being Used - ie. File Driver)
-    if (Env.STORAGE_TYPE === "file")
-      app.use("/storage", express.static(__dirname + "/../storage"));
-    express.static.mime.define({
-      "text/markdown": ["md"],
-    });
-    // Web App
-    app.use(
-      "/content",
-      express.static(path.join(__dirname, "../../content/"), {
-        index: false,
-        extensions: ["md"],
-      })
-    );
     app.use("/content", content);
-    app.use("/static", express.static(__dirname + "/../website/build/static"));
+    app.use(
+      "/static",
+      express.static(__dirname + "/../client/website/build/static")
+    );
     app.use("*", index);
     // Database Sync
     DB.sync();
