@@ -85,7 +85,7 @@ module.exports = (() => {
       "/static",
       express.static(__dirname + "/../client/website/build/static")
     );
-    app.use("*", index);
+    app.use("/", index);
     // Database Sync
     DB.sync();
   });

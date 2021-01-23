@@ -20,19 +20,23 @@ export default function withSplashScreen(WrappedComponent) {
   return class extends React.Component {
     constructor(props) {
       super(props);
+      const SplashLoaded = sessionStorage.getItem('splashLoaded');
       this.state = {
-        loading: true,
+        loading: !!!SplashLoaded,
       };
+
     }
     async componentDidMount() {
       try {
         setTimeout(() => {
+          sessionStorage.setItem('splashLoaded', true);
           this.setState({
             loading: false,
           });
         }, 5500);
       } catch (err) {
         console.log(err);
+        sessionStorage.setItem('splashLoaded', true);
         this.setState({
           loading: false,
         });
