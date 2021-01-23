@@ -31,7 +31,7 @@ module.exports = (async () => {
       .split("/posts/")[1]
       .split(/[\/\s]+/)
       .join("-");
-    postJson.push(filename);
+    postJson.push(`posts/${filename}`);
     fs.readFile(file, "utf8", async function (err, data) {
       // Read each file
       if (err) {
@@ -63,7 +63,7 @@ module.exports = (async () => {
       .split("/pages/")[1]
       .split(/[\/\s]+/)
       .join("-");
-    pageJson.push(filename);
+    pageJson.push(`pages/${filename}`);
     fs.readFile(file, "utf8", async function (err, data) {
       // Read each file
       if (err) {
