@@ -18,7 +18,7 @@ const Env = require("../../config/env");
 var router = express.Router({
   mergeParams: true,
 });
-var archive = require("../../lib/storage/archiver")
+var archive = require("../../lib/storage/archiver");
 
 module.exports = (() => {
   // Return Posts
@@ -31,7 +31,7 @@ module.exports = (() => {
     // Return List of Site Posts
     const { getPosts } = require("../../lib/generator");
     const posts = await getPosts();
-    const files = posts.map((post) => post.split("../content/")[1]);
+    const files = posts.map((post) => post.split("/storage/")[1]);
     if (files) res.status(200).json(files);
     // Return
     else res.status(404).json(status);
@@ -47,7 +47,7 @@ module.exports = (() => {
     // Return List of Site Posts
     const { getPages } = require("../../lib/generator");
     const pages = await getPages();
-    const files = pages.map((page) => page.split("../content/")[1]);
+    const files = pages.map((page) => page.split("/storage/")[1]);
     if (files) res.status(200).json(files);
     // Return
     else res.status(404).json(status);
@@ -60,7 +60,7 @@ module.exports = (() => {
       let { post, content } = body;
       if (post) {
         fs.writeFileSync(
-          path.join(__dirname, Env.CONTENT_ROOT, "/", post),
+          path.join(Env.CONTENT_ROOT, "/", post),
           content || ""
         );
       }
@@ -71,20 +71,21 @@ module.exports = (() => {
     }
   });
 
-    // Save
-    router.get("/export", async (req, res) => {
-      try {
-        let archiver = archive(res);
-      } catch (e) {
-        console.error(e);
-        res.status(200).json({ msg: "error", err: true });
-      }
-    });
-  
-  console.log("SERVING", path.join(__dirname, Env.CONTENT_ROOT));
+  // Save
+  router.get("/export", async (req, res) => {
+    try {
+      let archiver = archive(res);
+    } catch (e) {
+      console.error(e);
+      res.status(200).json({ msg: "error", err: true });
+    }
+  });
+
+  console.log("SERVING", Env.CONTENT_ROOT);
+
   router.use(
     "*",
-    express.static(path.join(__dirname, Env.CONTENT_ROOT), {
+    express.static(Env.CONTENT_ROOT, {
       index: false,
       extensions: ["md"],
     })

@@ -10,6 +10,7 @@
 **               All Rights Reserved.              **
 ** ----------------------------------------------- **
 \*                                                 */
+require('dotenv').config()
 
 module.exports = (() => {
   // THIRD-PARTY LIBRARIES

@@ -10,6 +10,8 @@
 **               All Rights Reserved.              **
 ** ----------------------------------------------- **
 \*                                                 */
+require('dotenv').config()
+
 const shell = require("shelljs");
 const path = require("path");
 

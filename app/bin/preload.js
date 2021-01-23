@@ -10,6 +10,7 @@
 **               All Rights Reserved.              **
 ** ----------------------------------------------- **
 \*                                                 */
+require('dotenv').config()
 
 const fs = require("fs");
 const path = require("path");
@@ -26,7 +27,7 @@ module.exports = (async () => {
   let postJson = [];
   posts.forEach(function (file) {
     let filename = file
-      .split("../content/posts/")[1]
+      .split("/posts/")[1]
       .split(/[\/\s]+/)
       .join("-");
     postJson.push(filename);
@@ -58,7 +59,7 @@ module.exports = (async () => {
   let pageJson = [];
   pages.forEach(function (file) {
     let filename = file
-      .split("../content/pages/")[1]
+      .split("/pages/")[1]
       .split(/[\/\s]+/)
       .join("-");
     pageJson.push(filename);

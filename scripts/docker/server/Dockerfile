@@ -43,6 +43,8 @@ RUN apt-get update -y && apt-get install -y curl nodejs git gnupg dos2unix
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN apt-get update -y && apt-get install -y yarn
+# Dev Dependencies
+RUN npm install -g @testing-library/dom @testing-library/jest-dom @testing-library/react @testing-library/user-event @types/config @types/node concurrently craco-less electron electron-builder electron-package http-server typescript wait-on
 # Build Source
 RUN yarn && yarn build
 # Expose Ports

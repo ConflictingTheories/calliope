@@ -11,6 +11,10 @@
 ** ----------------------------------------------- **
 \*                                                 */
 
+// Load Environment Variables
+require('dotenv').config()
+const path = require("path");
+console.log(path.join(__dirname, process.env.CONTENT_ROOT));
 module.exports = {
   // Name
   SITE_NAME: process.env.REACT_APP_SITE_TITLE,
@@ -63,5 +67,5 @@ module.exports = {
   DNS_IP: process.env.DNS_IP,
   SITE_IP: process.env.SITE_IP,
   // CONTENT
-  CONTENT_ROOT: process.env.CONTENT_ROOT
+  CONTENT_ROOT: path.join(__dirname, process.env.CONTENT_ROOT)
 };
