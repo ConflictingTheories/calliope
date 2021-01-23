@@ -1,5 +1,6 @@
 const fs = require("fs");
 const archiver = require("archiver");
+const Env = require("../../config/env");
 
 module.exports = function archiveWebsite(output) {
   const archive = archiver("zip", {
@@ -41,6 +42,7 @@ module.exports = function archiveWebsite(output) {
   archive.pipe(output);
   // append files from a sub-directory, putting its contents at the root of archive
   archive.directory(__dirname + "/../../website/build", false);
+  archive.directory(Env.CONTENT_ROOT, "/content");
   // finalize the archive (ie we are done appending files but streams have to finish yet)
   // 'close', 'end' or 'finish' may be fired right after calling this method so register to them beforehand
   archive.finalize();

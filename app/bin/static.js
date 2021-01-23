@@ -10,10 +10,11 @@
 **               All Rights Reserved.              **
 ** ----------------------------------------------- **
 \*                                                 */
-require('dotenv').config()
+require("dotenv").config();
 
 const fs = require("fs");
 const path = require("path");
+const Env = require("../config/env");
 const glob = require("glob");
 const { getPages, getPosts } = require("../lib/generator");
 
@@ -27,7 +28,7 @@ module.exports = (async () => {
   let postJson = [];
   posts.forEach(function (file) {
     let filename = file
-      .split("../content/posts/")[1]
+      .split("/posts/")[1]
       .split(/[\/\s]+/)
       .join("-");
     postJson.push(filename);
@@ -59,7 +60,7 @@ module.exports = (async () => {
   let pageJson = [];
   pages.forEach(function (file) {
     let filename = file
-      .split("../content/pages/")[1]
+      .split("/pages/")[1]
       .split(/[\/\s]+/)
       .join("-");
     pageJson.push(filename);
@@ -86,7 +87,7 @@ module.exports = (async () => {
   });
 
   // COPY Media
-  const mediaFiles = path.join(__dirname + `/../../content/media`);
+  const mediaFiles = path.join(Env.CONTENT_ROOT, "/media");
   console.log("Transfering:\n\n", mediaFiles);
   // Transfer Media Files
   glob(mediaFiles + "/**/*.*", function (err, files) {
@@ -99,13 +100,14 @@ module.exports = (async () => {
     // Copy Files
     files.forEach(async (file) => {
       console.log(file);
-      let filename = file.split(`/content/media/`)[1];
+      let filename = file.split(`/media/`)[1];
       let filenamePath = filename.split(/[\/]/);
       let filepath = filenamePath.pop();
       console.log("transfering -- ", filepath);
       await fs.promises.mkdir(
         path.join(
-          __dirname + `/../website/build/content/media/${filenamePath.join("/")}`
+          __dirname +
+            `/../website/build/content/media/${filenamePath.join("/")}`
         ),
         {
           recursive: true,

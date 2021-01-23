@@ -5,7 +5,7 @@
 ## What is Calliope?
 Calliope is a Static site generator and webserving platform. It provides two functions - static generation and live serving. The server is done to help make it quick for you to check changes locally without pushing anything out, and these sites are primarily focused at the moment on small blog and post-driven content. In the future Calliope will provide more plugins and themes (it already has two) and will hopefully begin to expand on the markdown support and provide its own form of shortcode plugins.
 
-For now, everything is read out of the `/content` directory and posts are read from markdown files found with `/content/posts`. These are rendered according to the selected theme which can configured through the `.env` file. Note that a sample has been provided, but for windows you will need to slightly adjust the script to work on Powershell -- replace `export <variable_name>=<value>` with `$env:<variable_name>="<value>"`.
+For now, everything is read out of the `/app/storage` directory and posts are read from markdown files found with `/app/storage/posts`. These are rendered according to the selected theme which can configured through the `.env` file. Note that a sample has been provided, but for windows you will need to slightly adjust the script to work on Powershell -- replace `export <variable_name>=<value>` with `$env:<variable_name>="<value>"`.
 
 When you serve the static files, keep in mind that you will need to provide a web server (I suggest `npm install -g http-server` myself) or via a service like Netlify. If you use the server it will host it for you and make it available on your local machine.
 
