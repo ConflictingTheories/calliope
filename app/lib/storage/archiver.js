@@ -33,7 +33,7 @@ module.exports = function archiveWebsite(output) {
 
   // pipe archive data to the file
   archive.pipe(output);
-  archive.directory(__dirname + "/../../website/build", false);
+  archive.directory(__dirname + "/../../client/website/build", false);
   archive.directory(Env.CONTENT_ROOT, "/content");
   archive.finalize();
 };

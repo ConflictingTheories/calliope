@@ -37,8 +37,6 @@ Some areas which are coming soon for plugins:
 
 #### Current Plugins
 
-Ex. Support for [Mermaid Diagrams](https://mermaid-js.github.io)
-[[ mermaid type="graph TD;" diagram="graph TD;\nWordpress-->Calliope; Next.js-->Calliope;Gatsby-->Calliope; JAMStack-->Calliope;" ]]
 
 
 Ex. [IPFS-Hosted](https://ipfs.io) Video Streaming
