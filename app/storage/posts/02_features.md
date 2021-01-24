@@ -37,24 +37,28 @@ Some areas which are coming soon for plugins:
 
 #### Current Plugins
 
+The following Plugins are Working
 
-Ex. Support for [Mermaid Diagrams](https://mermaid-js.github.io)
+
+##### Ex. Support for [Mermaid Diagrams](https://mermaid-js.github.io)
 [[ mermaid diagram="graph TD;\nWordpress-->Calliope; Next.js-->Calliope;Gatsby-->Calliope; JAMStack-->Calliope;" ]]
 
 <br/>
 
 
-Ex. [IPFS-Hosted](https://ipfs.io) Video Streaming
+##### Ex. [IPFS-Hosted](https://ipfs.io) Video Streaming
 
 [[ ipfsStream ipfsHash="QmQjDRKG8pZaeBnQi9zLqupCgY9D2Mth6noF4GMdZR6CVQ" ]]
 
 
 
-Ex. [$\KaTeX$](https://katex.org) Support
+##### Ex. [$\KaTeX$](https://katex.org) Support
 
 You can also add inline math using $\href{https://katex.org/}{\KaTeX}$.
 
 $\sum_i^{n}x^{\ln{2^y}}$
+
+<br/>
 
 ---
 
