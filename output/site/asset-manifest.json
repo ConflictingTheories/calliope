@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.448f2dea.chunk.css",
+    "main.js": "/static/js/main.fd3e8402.chunk.js",
+    "main.js.map": "/static/js/main.fd3e8402.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.a4891f41.js",
+    "runtime-main.js.map": "/static/js/runtime-main.a4891f41.js.map",
+    "static/css/2.d7a4a21e.chunk.css": "/static/css/2.d7a4a21e.chunk.css",
+    "static/js/2.c67d8d41.chunk.js": "/static/js/2.c67d8d41.chunk.js",
+    "static/js/2.c67d8d41.chunk.js.map": "/static/js/2.c67d8d41.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.c3152defee32267f79963ab4de0a6a54.js": "/precache-manifest.c3152defee32267f79963ab4de0a6a54.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.d7a4a21e.chunk.css.map": "/static/css/2.d7a4a21e.chunk.css.map",
+    "static/css/main.448f2dea.chunk.css.map": "/static/css/main.448f2dea.chunk.css.map",
+    "static/js/2.c67d8d41.chunk.js.LICENSE.txt": "/static/js/2.c67d8d41.chunk.js.LICENSE.txt",
+    "static/media/katex.min.css": "/static/media/KaTeX_Typewriter-Regular.f43e8696.woff2",
+    "static/media/blueprint-icons.css": "/static/media/icons-20.cef8cdbb.woff",
+    "static/media/logo.svg": "/static/media/logo.1b010ed1.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a4891f41.js",
+    "static/css/2.d7a4a21e.chunk.css",
+    "static/js/2.c67d8d41.chunk.js",
+    "static/css/main.448f2dea.chunk.css",
+    "static/js/main.fd3e8402.chunk.js"
+  ]
+}
