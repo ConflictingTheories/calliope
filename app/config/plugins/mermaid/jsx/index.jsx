@@ -25,18 +25,19 @@ class MermaidDiagram extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
-    if (JSON.stringify(this.props) != JSON.stringify(nextProps)) {
+    if (
+      JSON.stringify(this.props.diagram) != JSON.stringify(nextProps.diagram)
+    ) {
       this.setState({
         diagram: nextProps.diagram,
         updated: Date.now(),
       });
-      this.forceUpdate();
     }
   }
 
   // TODO - Add Theme Injection Somehow (Or Wrapper)
   render() {
-    const { diagram, type, options, separator, updated } = this.state;
+    const { diagram, updated } = this.state;
     return (
       <>
         <Mermaid
