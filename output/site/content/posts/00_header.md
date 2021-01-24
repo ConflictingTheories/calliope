@@ -20,10 +20,7 @@ Just head on over to [GitHub](https://github.com/ConflictingTheories/calliope) t
 If you like, please give me a star ⭐⭐⭐!
 
 
-Ex. Support for [Mermaid Diagrams](https://mermaid-js.github.io)
-[[ mermaid diagram="graph TD;\nWordpress-->Calliope; Next.js-->Calliope;Gatsby-->Calliope; JAMStack-->Calliope;" ]]
-
-
+<br/>
 
 **Updated: 2021-01-22**
 
