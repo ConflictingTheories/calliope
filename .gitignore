@@ -3,7 +3,7 @@
 **/.vscode/
 **/deployments
 
-**/.env
+.env
 **/.env.ps1
 app/node_modules
 **/node_modules
