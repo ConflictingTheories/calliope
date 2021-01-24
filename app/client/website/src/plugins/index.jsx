@@ -30,9 +30,9 @@ export default function plugins(props) {
       }
     // Mermaid Diagrams
     case "mermaid":
-      let { diagram, type, separator, options } = props.attributes;
+      let { diagram } = props.attributes;
       if (diagram) {
-        return <MermaidDiagram diagram={diagram} type={type} separator={separator} options={options} />;
+        return <MermaidDiagram diagram={diagram} />;
       } else {
         return <></>;
       }
