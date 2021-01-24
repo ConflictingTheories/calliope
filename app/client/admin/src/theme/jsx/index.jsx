@@ -16,12 +16,11 @@ import React from "react";
 // Code Highlighting
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { synthwave84 } from "react-syntax-highlighter/dist/esm/styles/prism";
-
 // Math Latex Support
 import { InlineMath, BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
-
-import ipfsStream from "../../plugins/ipfs-stream/jsx";
+// Plugins
+import plugins from "../../plugins";
 
 // Customization for Markdown Rendering (react-markdown)
 export const renderers = {
@@ -42,20 +41,7 @@ export const renderers = {
       />
     );
   },
-  shortcode: (props) => {
-    console.log(props);
-    switch (props.identifier) {
-      case "ipfsStream":
-        let { ipfsHash, audioOnly } = props.attributes;
-        if (audioOnly) {
-          return <ipfsStream.Audio ipfsHash={ipfsHash} />;
-        } else {
-          return <ipfsStream.Video ipfsHash={ipfsHash} />;
-        }
-      default:
-        return <>{JSON.stringify(props)}</>;
-    }
-  },
+  shortcode: plugins,
   inlineMath: ({ value }) => <InlineMath math={value} />,
   math: ({ value }) => <BlockMath math={value} />,
 };

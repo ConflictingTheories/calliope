@@ -26,6 +26,8 @@
 import posts from "./content/posts.json";
 import pages from "./content/pages.json";
 
+console.log(posts, pages);
+
 const isLocalhost = Boolean(
   window.location.hostname === "localhost" ||
     // [::1] is the IPv6 localhost address.
@@ -52,10 +54,16 @@ export function register(config?: Config) {
       return;
     }
 
-    window.addEventListener("load", () => {
+    window.addEventListener("load", async () => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
 
       if (isLocalhost) {
+        await caches.open("calliope-cache").then(function (cache) {
+          return cache.addAll([
+            ...pages.map((x: string) => "/content/" + x),
+            ...posts.map((x: string) => "/content/" + x),
+          ]);
+        });
         // This is running on localhost. Let's check if a service worker still exists or not.
         checkValidServiceWorker(swUrl, config);
 
@@ -72,6 +80,22 @@ export function register(config?: Config) {
         registerValidSW(swUrl, config);
       }
     });
+
+    // Precache Current Posts / Pages / etc.
+    window.addEventListener("install", async (event) => {
+      const staticCacheName = "pages-cache-v1";
+
+      await caches.open("calliope-cache").then(function (cache) {
+        return cache.addAll([
+          ...pages.map((x: string) => "/content/" + x),
+          ...posts.map((x: string) => "/content/" + x),
+        ]);
+      });
+
+      console.log(
+        "Attempting to install service worker and cache static assets"
+      );
+    });
   }
 }
 
@@ -85,15 +109,6 @@ function registerValidSW(swUrl: string, config?: Config) {
           return;
         }
         installingWorker.onstatechange = async () => {
-          // Precache Current Posts / Pages / etc.
-          if (installingWorker.state === "installing") {
-            await caches.open("calliope-cache").then(function (cache) {
-              return cache.addAll([
-                ...pages.map((x: string) => "/content/pages/" + x),
-                ...posts.map((x: string) => "/content/posts/" + x),
-              ]);
-            });
-          }
           // App Installed
           if (installingWorker.state === "installed") {
             if (navigator.serviceWorker.controller) {

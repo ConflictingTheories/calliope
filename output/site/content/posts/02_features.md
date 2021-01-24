@@ -1,30 +1,12 @@
 # Current features
 
-#### Plugins & Extensible Short Codes
-
-You can also use custom Shortcode and perform your own expansion based on the short codes. Expand it with plugins and tap into all the fun.
-
-Some areas which are coming soon for plugins:
-
-- IPFS Support for Streaming & Hosting
-- Embedded Widgets & Galleries
-- Crypto
-
-Ex. Pass Through Params and Make Custom Plugin Shortcodes
-
-[[ CustomShortCodes customParam1="Custom Params" ]]
-
-Ex. IPFS-Hosted Video Streaming
-
-[[ ipfsStream ipfsHash="QmQjDRKG8pZaeBnQi9zLqupCgY9D2Mth6noF4GMdZR6CVQ" ]]
-
-
 ### Embedded Media
 
 Media can be added through normal Markdown entry - and can reference local or remote files.
 
 ![Remote](https://pa1.narvii.com/6494/8026f94d8d5e388c6a971b70ac606123e53dea22_hq.gif)
 
+<br/>
 
 ### Source Code Highlighting
 
@@ -38,8 +20,35 @@ console.log("It works!");
 const element = (props) => (<Section ...props />)
  ~~~
 
+<br/>
 
-#### $\KaTeX$ Support
+### Plugins & Extensible Short Codes
+
+You can also use custom Shortcode and perform your own expansion based on the short codes. Expand it with plugins and tap into all the fun.
+
+Ex. Pass Through Params and Make Custom Plugin Shortcodes
+
+[[ CustomShortCodes customParam1="Custom Params" ]]
+
+Some areas which are coming soon for plugins:
+
+- Embedded Widgets & Galleries
+- Crypto
+
+#### Current Plugins
+
+Ex. Support for [Mermaid Diagrams](https://mermaid-js.github.io)
+[[ mermaid type="graph TD;" diagram="graph TD;\nWordpress-->Calliope; Next.js-->Calliope;Gatsby-->Calliope; JAMStack-->Calliope;" ]]
+
+
+Ex. [IPFS-Hosted](https://ipfs.io) Video Streaming
+
+[[ ipfsStream ipfsHash="QmQjDRKG8pZaeBnQi9zLqupCgY9D2Mth6noF4GMdZR6CVQ" ]]
+
+
+
+Ex. [$\KaTeX$](https://katex.org) Support
+
 You can also add inline math using $\href{https://katex.org/}{\KaTeX}$.
 
 $\sum_i^{n}x^{\ln{2^y}}$

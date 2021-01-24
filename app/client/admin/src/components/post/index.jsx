@@ -21,12 +21,13 @@ import htmlParser from "react-markdown/plugins/html-parser";
 import math from "remark-math";
 import a11yEmoji from "@fec/remark-a11y-emoji";
 import html from "remark-html";
-import slug from "remark-slug";
+import mermaid from "remark-mermaid";
 import emoji from "remark-emoji";
 import headings from "remark-autolink-headings";
 import shortcodes from "remark-shortcodes";
 
 import { renderers } from "../../theme/jsx";
+import "mermaid";
 
 const parseHtml = htmlParser({
   isValidNode: (node) => node.type !== "script",
@@ -50,8 +51,11 @@ class Post extends Component {
       if (fileResponse.ok) {
         let content = await fileResponse.text();
         this.setState({ content });
-      }else{
-        this.setState({content: "# 404\n## Page Not Found\n\nSorry, but that page does not exist. 😬😬😬"})
+      } else {
+        this.setState({
+          content:
+            "# 404\n## Page Not Found\n\nSorry, but that page does not exist. 😬😬😬",
+        });
       }
     }
   }
@@ -83,7 +87,6 @@ class Post extends Component {
               emoji,
               a11yEmoji,
               math,
-              slug,
               headings,
               html,
             ]}
