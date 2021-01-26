@@ -90,7 +90,6 @@ class Post extends Component {
     box-shadow: 4px 4px 14px #000;
     filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=.2);" 
     src="${url}" height="448" width="448"></iframe>`;
-
     // Popup
     await Swal.fire({
       title: "Embed and Share!",

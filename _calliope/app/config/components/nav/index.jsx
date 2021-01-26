@@ -61,14 +61,7 @@ class ArchNavBar extends React.Component {
   renderRight() {
     return (
       <React.Fragment>
-        <Button
-          className="bp3-minimal"
-          icon="plus"
-          text="+ IPFS"
-          onClick={() => {
-            console.log("LoadFile for IPFS??");
-          }}
-        />
+        
       </React.Fragment>
     );
   }
@@ -76,6 +69,15 @@ class ArchNavBar extends React.Component {
   renderAdmin() {
     return (
       <React.Fragment>
+        <button
+          className="bp3-minimal"
+          icon="plus"
+          text="+ IPFS"
+          onClick={() => {
+            console.log("LoadFile for IPFS??");
+          }}
+        />
+        &nbsp;&nbsp;
         <button onClick={async () => {await exportZip()}}>
           Download Zip
         </button>
@@ -87,7 +89,6 @@ class ArchNavBar extends React.Component {
     return this.state.isLogin ? (
       <Navbar
         className="App-nav"
-        style={{ color: Colors.WHITE, background: Colors.DARK_GRAY4 }}
       >
         <Navbar.Group align={Alignment.LEFT}>
           {this.state.renderBrand()}
@@ -99,7 +100,6 @@ class ArchNavBar extends React.Component {
     ) : this.state.isAdmin ? (
       <Navbar
         className="App-nav"
-        style={{ color: Colors.WHITE, background: Colors.DARK_GRAY4 }}
       >
         <Navbar.Group align={Alignment.LEFT}>
           {this.state.renderBrand()}
@@ -111,7 +111,6 @@ class ArchNavBar extends React.Component {
     ) : (
       <Navbar
         className="App-nav"
-        style={{ color: Colors.WHITE, background: Colors.DARK_GRAY4 }}
       >
         <Navbar.Group align={Alignment.LEFT}>
           {this.state.renderBrand()}
