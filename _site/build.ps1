@@ -18,8 +18,9 @@ yarn deploy-site            # Build Site
 yarn export                 # Export
 
 # Move Site Export
+Remove-Item $env:BUILD_PATH/output/* -Force -Recurse
 Set-Location $env:BUILD_PATH/../../_calliope
-Move-Item output $env:BUILD_PATH/output
+Copy-Item output/site/* $env:BUILD_PATH/output 
 
 # Return to Start
 Set-Location $env:BUILD_PATH;
