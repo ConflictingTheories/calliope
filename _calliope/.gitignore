@@ -9,6 +9,6 @@ app/node_modules
 **/node_modules
 **/build
 
-/output/admin
+/output
 
 /app/calliope-ssg*/*
