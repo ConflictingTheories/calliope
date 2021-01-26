@@ -60,8 +60,8 @@ export function register(config?: Config) {
       if (isLocalhost) {
         await caches.open("calliope-cache").then(function (cache) {
           return cache.addAll([
-            ...pages.map((x: string) => "/content/" + x),
-            ...posts.map((x: string) => "/content/" + x),
+            ...pages.map((x: string) => "/content/pages/" + x),
+            ...posts.map((x: string) => "/content/posts/" + x),
           ]);
         });
         // This is running on localhost. Let's check if a service worker still exists or not.

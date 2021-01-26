@@ -14,14 +14,14 @@
   "build": {
     "appId": "com.kderbyma.calliope",
     "win": {
-      "icon": "./build/logo512.png"
+      "icon": "./client/website/build/logo512.png"
     },
     "linux": {
-      "icon": "./build/logo512.png",
+      "icon": "./client/website/build/logo512.png",
       "category": "Internet"
     },
     "mac": {
-      "icon": "./build/logo512.png",
+      "icon": "./client/website/build/logo512.png",
       "category": "Internet"
     }
   },

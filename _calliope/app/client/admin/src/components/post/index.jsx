@@ -21,13 +21,13 @@ import htmlParser from "react-markdown/plugins/html-parser";
 import math from "remark-math";
 import a11yEmoji from "@fec/remark-a11y-emoji";
 import html from "remark-html";
-import mermaid from "remark-mermaid";
 import emoji from "remark-emoji";
 import headings from "remark-autolink-headings";
 import shortcodes from "remark-shortcodes";
 
 import { renderers } from "../../theme/jsx";
-import "mermaid";
+import { Icon } from "@blueprintjs/core";
+import Swal from "sweetalert2";
 
 const parseHtml = htmlParser({
   isValidNode: (node) => node.type !== "script",
@@ -39,7 +39,9 @@ class Post extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      src: props?.src || "",
+      src: props.src || "",
+      type: props.t || "posts",
+      hideEmbed: props.hideEmbed,
       content: null,
     };
   }
@@ -47,7 +49,9 @@ class Post extends Component {
   async componentDidMount() {
     //Fetch Source and Render Content
     if (this.state.src && this.state.src !== "") {
-      const fileResponse = await fetch("/content/" + this.state.src);
+      const fileResponse = await fetch(
+        "/content/" + this.state.type + "/" + this.state.src
+      );
       if (fileResponse.ok) {
         let content = await fileResponse.text();
         this.setState({ content });
@@ -68,12 +72,50 @@ class Post extends Component {
     }
   }
 
+  async showEmbed(type, src) {
+    // Url to Post
+    let url = `${window.location.protocol}//${
+      window.location.host
+    }/embed/${type}/${src.replaceAll(".md", "")}`;
+    console.log(type, src, url);
+    // Iframe Link
+    let embedLink = `<iframe src="${url}" height="448" width="332"></iframe>`;
+    // Popup
+    await Swal.fire({
+      title: "Embed and Share!",
+      html: `<div>
+        <p>Link to this Post using the URL below</p>
+        <br/>
+        <input style="font-size: small;width: 100%;border: none;color: blue;font-style: oblique;font-weight: 600;padding: 0.5em;" type="text" value="${url}"/>
+        <br/><br/>
+        <p>Or paste this inside of any HTML website</p>
+        <br/>
+        <textarea style="height: 100px;width: 100%;font-size: small;" >${embedLink}</textarea>
+        </div>`,
+    });
+  }
+
   render() {
-    const { content } = this.state;
+    const { content, src, type, hideEmbed } = this.state;
     let res = null;
     try {
       res = (
         <React.Fragment className="calliope-post">
+          {hideEmbed ?? (
+            <header>
+              <a
+                style={{
+                  margin: "5px 0 -2.5em 0",
+                  padding: "0.5em",
+                  float: "right",
+                }}
+                onClick={() => this.showEmbed(type, src)}
+              >
+                Share Post&nbsp;&nbsp;
+                <Icon icon="share" title="Embed Post"></Icon>
+              </a>
+            </header>
+          )}
           <hr />
           <ReactMarkdownWithHtml
             astPlugins={[parseHtml]}

@@ -31,6 +31,7 @@ import { AuthenticatedRoute } from "./modules/utils/authRouter";
 
 // PUBLIC SCREENS
 import PublicScreen from "./modules/home";
+import EmbedScreen from "./modules/embed";
 
 // ADMIN SCREENS
 import LoginScreen from "./modules/login";
@@ -68,6 +69,7 @@ const App = () => {
             <AuthenticatedRoute exact path="/admin" component={AdminScreen} />
             <AuthenticatedRoute exact path="/logout" component={LogoutScreen} />
             <Route exact path="/login" component={LoginScreen} />
+            <Route path="/embed/:type/:src" component={EmbedScreen} />
             <Route path="/:page" component={PublicScreen} />
             <Route path="*" component={PublicScreen} />
           </Switch>

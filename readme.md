@@ -1,6 +1,9 @@
-## Calliope Starter Template
 
-This is the Starter Template and is the main Branch to get started using Calliope. It is focused on being the easiest tool to get started with when using calliope.
+![Calliope](/_calliope/app/storage/media/calliope.png)
+
+# Calliope Starter Template
+
+This is the Starter Template and is the main Branch to get started using Calliope. It is focused on being the easiest tool to get started with when using calliope. If you want to read more about the project development and other features - check out the [Readme](/_calliope/readme.md) in the `_calliope` folder.
 
 ### Layout
 All you site content can be managed from `_site` while the core application and server resides inside of `_calliope`. There is a starter script inside of the `_site` folder to help boostrap your static facing website. For docker or live hosting - you can access more functionality inside the main `_calliope/*` folder.

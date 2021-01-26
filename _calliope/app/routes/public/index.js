@@ -17,11 +17,9 @@ const path = require("path");
 const router = express.Router({ mergeParams: true });
 
 module.exports = (() => {
-  router.get("/index", function (_, res) {
-    res.sendFile(path.join(__dirname, "../../client/website/build", "index.html"));
-  });
-
+  // Serve File if Exists
   router.use("/", express.static(path.join(__dirname, "../../client/website/build")));
-
+  // Capture & Perform Custom Routing
+  router.use("*", function (_, res) { res.sendFile(path.join(__dirname, "../../client/website/build", "index.html"))});
   return router;
 })();

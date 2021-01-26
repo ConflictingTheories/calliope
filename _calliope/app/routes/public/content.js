@@ -31,7 +31,7 @@ module.exports = (() => {
     // Return List of Site Posts
     const { getPosts } = require("../../lib/generator");
     const posts = await getPosts();
-    const files = posts.map((post) => post.split("/storage/")[1]);
+    const files = posts.map((post) => post.split("/storage/posts/")[1]);
     if (files) res.status(200).json(files);
     // Return
     else res.status(404).json(status);
@@ -47,7 +47,7 @@ module.exports = (() => {
     // Return List of Site Posts
     const { getPages } = require("../../lib/generator");
     const pages = await getPages();
-    const files = pages.map((page) => page.split("/storage/")[1]);
+    const files = pages.map((page) => page.split("/storage/pages/")[1]);
     if (files) res.status(200).json(files);
     // Return
     else res.status(404).json(status);

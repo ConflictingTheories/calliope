@@ -75,13 +75,13 @@ class Dashboard extends React.Component {
       name = "untitled";
     }
     const date = new Date().toISOString().split(".")[0].replaceAll(/[:-]/g, ""); // Date format (ISO - No TZ - Minimized)
-    const formattedName = `${type}/${date}_${name}.md`;
-    await save(formattedName, ""); // Create Blank File
+    const formattedName = `${date}_${name}.md`;
+    await save(formattedName, "", type); // Create Blank File
     await this.fetchLists();
     return formattedName;
   }
 
-  async edit(post) {
+  async edit(post, type) {
     store.editPost = post;
     // Prompt to Save if Changing
     if (store.selectedPost != post && store.isEditting && !store.isSaved) {
@@ -89,13 +89,13 @@ class Dashboard extends React.Component {
     } else {
       // Fetch Post & Store Content
       if (post && post !== "" && store.selectedPost != post) {
-        this.fetchPost(post);
+        this.fetchPost(post, type);
       }
     }
   }
 
-  async fetchPost(post) {
-    const fileResponse = await fetch("/content/" + post);
+  async fetchPost(post, type) {
+    const fileResponse = await fetch("/content/" + type + "/" + post);
     if (fileResponse.ok) {
       let content = await fileResponse.text();
       store.selectedPost = post;
@@ -149,7 +149,8 @@ class Dashboard extends React.Component {
                   return (
                     <List.Item>
                       <label>
-                        {post} <a onClick={() => this.edit(post)}>Edit</a>
+                        {post}{" "}
+                        <a onClick={() => this.edit(post, "posts")}>Edit</a>
                       </label>
                     </List.Item>
                   );
@@ -172,7 +173,8 @@ class Dashboard extends React.Component {
                   return (
                     <List.Item>
                       <label>
-                        {page} <a onClick={() => this.edit(page)}>Edit</a>
+                        {page}{" "}
+                        <a onClick={() => this.edit(page, "pages")}>Edit</a>
                       </label>
                     </List.Item>
                   );

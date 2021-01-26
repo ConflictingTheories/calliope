@@ -24,11 +24,11 @@ export async function posts() {
   return await (await fetch(config.posts)).json();
 }
 
-export async function save(post, content) {
+export async function save(post, content, type) {
   return await (
     await fetch(config.save, {
       method: "POST",
-      body: JSON.stringify({ content, post }),
+      body: JSON.stringify({ content, post: `${type}/${post}` }),
     })
   ).json();
 }
@@ -46,4 +46,3 @@ export async function exportZip() {
     }
   });
 }
-
