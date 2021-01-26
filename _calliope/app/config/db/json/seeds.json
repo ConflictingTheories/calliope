@@ -1,0 +1,88 @@
+{
+  "cities": ["Calgary", "Edmonton", "Vancouver"],
+  "contactMethods": ["phone", "email", "sms"],
+  "tours": [
+    {
+      "name": "A Tour of China",
+      "destination": "China",
+      "description": "Explore the Great Wall and Forbidden City!"
+    },
+    {
+      "name": "A Tour of Nevada",
+      "destination": "Nevada Desert",
+      "description": "Drink! Gamble! Shoot! *Wink*"
+    }
+  ],
+  "addresses": [
+    {
+      "addressline1": "123 Fake Street",
+      "addressline2": "",
+      "city": "Calgary",
+      "state": "Alberta",
+      "postal": "T2T0X0",
+      "country": "Canada",
+      "formatted": "123 Fake Street, Calgary Alberta, Canada T2T0X0"
+    },
+    {
+      "addressline1": "123 Fake Court",
+      "addressline2": "",
+      "city": "Calgary",
+      "state": "Alberta",
+      "postal": "T2T1X1",
+      "country": "Canada",
+      "formatted": "123 Fake Court, Calgary Alberta, Canada T2T1X1"
+    },
+    {
+      "addressline1": "321 Rock Street",
+      "addressline2": "",
+      "city": "Calgary",
+      "state": "Alberta",
+      "postal": "T2T0X0",
+      "country": "Canada",
+      "formatted": "321 Rock Street, Calgary Alberta, Canada T2T2X2"
+    }
+  ],
+  "companies": ["ACME Corp", "BlahBalh Inc.", "Skynet Ltd.", "Chaos Corp."],
+  "projects": [
+    "Infrastructure Rebuild",
+    "Project Greenwood",
+    "Big Brother",
+    "Seed of Discontent"
+  ],
+  "firstNames": [
+    "Harry",
+    "Jim",
+    "Moe",
+    "Molly",
+    "Ferris",
+    "John",
+    "Jane",
+    "Philippe",
+    "Marco",
+    "Jared",
+    "Shannon"
+  ],
+  "lastNames": [
+    "Potsworth",
+    "Johnson",
+    "Flanders",
+    "Brown",
+    "Dawson",
+    "Thompson",
+    "Lee",
+    "Ruiz",
+    "Green",
+    "Amlin",
+    "Barrager"
+  ],
+  "airports": [
+    {
+      "tag": "YYC",
+      "name": "Calgary International Airport"
+    },
+    {
+      "tag": "YYG",
+      "name": "Edmonton International Airport"
+    }
+  ]
+}
