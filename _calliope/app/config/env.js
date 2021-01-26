@@ -67,5 +67,6 @@ module.exports = {
   DNS_IP: process.env.DNS_IP,
   SITE_IP: process.env.SITE_IP,
   // CONTENT
-  CONTENT_ROOT: path.join(__dirname, process.env.CONTENT_ROOT)
+  CONTENT_ROOT: path.join(__dirname, process.env.CONTENT_ROOT),
+  REVERSE_CONTENT: process.env.REVERSE_CONTENT
 };
