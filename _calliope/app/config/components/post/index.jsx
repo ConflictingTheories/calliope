@@ -79,7 +79,18 @@ class Post extends Component {
     }/embed/${type}/${src.replaceAll(".md", "")}`;
     console.log(type, src, url);
     // Iframe Link
-    let embedLink = `<iframe src="${url}" height="448" width="332"></iframe>`;
+    let embedLink = `
+    <iframe style="margin-top: 20px;
+    margin-bottom: 30px;
+    -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 4px 4px 14px #000;
+    -webkit-box-shadow: 4px 4px 14px #000;
+    box-shadow: 4px 4px 14px #000;
+    filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=.2);" 
+    src="${url}" height="448" width="448"></iframe>`;
+
     // Popup
     await Swal.fire({
       title: "Embed and Share!",
