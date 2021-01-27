@@ -115,9 +115,9 @@ class Post extends Component {
             <header>
               <a
                 style={{
-                  margin: "5px 0 -2.5em 0",
+                  margin: "5px 1em -2.5em 0",
                   padding: "0.5em",
-                  float: "right",
+                  float: "left",
                 }}
                 onClick={() => this.showEmbed(type, src)}
               >
