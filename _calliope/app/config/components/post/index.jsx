@@ -93,7 +93,7 @@ class Post extends Component {
       html: `<div><p>Link to this Post using the URL below</p>
         <br/><input class="calliope-input" type="text" value="${url}"/>
         <br/><br/><p>Or paste this inside of any HTML website</p>
-        <br/><textarea class="calliope-input" >${embedLink}</textarea>
+        <br/><textarea style="height:144px" class="calliope-input" >${embedLink}</textarea>
         </div>`,
     });
   }
