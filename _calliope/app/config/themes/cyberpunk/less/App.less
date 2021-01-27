@@ -15,6 +15,26 @@ html {
   font-family: "Orbitron", sans-serif;
   font-style: italic;
 }
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+  height: 0;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: darkcyan;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: darkcyan;
+}
 
 h1,
 h2,
@@ -104,7 +124,8 @@ button {
   }
 }
 
-.calliope-post, .calliope-page {
+.calliope-post,
+.calliope-page {
   margin: 1.5em 0.5em 0.25em 1em;
   padding-left: 0.5em;
   box-shadow: 1px 1px rgb(14, 52, 64);
