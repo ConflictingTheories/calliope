@@ -88,7 +88,7 @@ class Post extends Component {
     // Popup
     await Swal.fire({
       customClass: "calliope-modal calliope-post",
-      background: "linear-gradient(180deg, black, #102d2d)",
+      background: "rgba(4, 21, 27, 0.99)",
       title: "Embed and Share!",
       html: `<div><p>Link to this Post using the URL below</p>
         <br/><input class="calliope-input" type="text" value="${url}"/>
