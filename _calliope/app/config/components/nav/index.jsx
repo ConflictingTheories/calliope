@@ -22,7 +22,7 @@ import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 
 // ASSETS & APP STYLES
 import "../../theme/less/App.less";
-import {exportZip} from "../../services/content";
+import { exportZip } from "../../services/content";
 
 // APP
 class ArchNavBar extends React.Component {
@@ -59,26 +59,17 @@ class ArchNavBar extends React.Component {
   }
 
   renderRight() {
-    return (
-      <React.Fragment>
-        
-      </React.Fragment>
-    );
+    return <React.Fragment></React.Fragment>;
   }
 
   renderAdmin() {
     return (
       <React.Fragment>
         <button
-          className="bp3-minimal"
-          icon="plus"
-          text="+ IPFS"
-          onClick={() => {
-            console.log("LoadFile for IPFS??");
+          onClick={async () => {
+            await exportZip();
           }}
-        />
-        &nbsp;&nbsp;
-        <button onClick={async () => {await exportZip()}}>
+        >
           Download Zip
         </button>
       </React.Fragment>
@@ -87,9 +78,7 @@ class ArchNavBar extends React.Component {
 
   render() {
     return this.state.isLogin ? (
-      <Navbar
-        className="App-nav"
-      >
+      <Navbar className="App-nav">
         <Navbar.Group align={Alignment.LEFT}>
           {this.state.renderBrand()}
         </Navbar.Group>
@@ -98,9 +87,7 @@ class ArchNavBar extends React.Component {
         </Navbar.Group>
       </Navbar>
     ) : this.state.isAdmin ? (
-      <Navbar
-        className="App-nav"
-      >
+      <Navbar className="App-nav">
         <Navbar.Group align={Alignment.LEFT}>
           {this.state.renderBrand()}
         </Navbar.Group>
@@ -109,9 +96,7 @@ class ArchNavBar extends React.Component {
         </Navbar.Group>
       </Navbar>
     ) : (
-      <Navbar
-        className="App-nav"
-      >
+      <Navbar className="App-nav">
         <Navbar.Group align={Alignment.LEFT}>
           {this.state.renderBrand()}
           {this.state.renderBar()}

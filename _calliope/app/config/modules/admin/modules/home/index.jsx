@@ -263,7 +263,7 @@ class Dashboard extends React.Component {
               renderBar={() => null}
               renderRight={() => null}
             />
-            <Content>{this.renderPanel()}</Content>
+            <Content style={{marginTop:"3em"}}>{this.renderPanel()}</Content>
           </Container>
         </div>
       </div>
