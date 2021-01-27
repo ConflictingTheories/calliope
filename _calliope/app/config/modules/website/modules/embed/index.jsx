@@ -60,7 +60,7 @@ class Embed extends React.Component {
                     </Container>
                   </Row>
                 )}
-                <>
+                <footer className={"calliope-site-link"}>
                   <a
                     style={{
                       margin: "5px 0 -2.5em 0",
@@ -73,7 +73,7 @@ class Embed extends React.Component {
                     Check out Site&nbsp;&nbsp;
                     <Icon icon="globe-network" title="Embed Post"></Icon>
                   </a>
-                </>
+                </footer>
               </Content>
             </Container>
           </Col>

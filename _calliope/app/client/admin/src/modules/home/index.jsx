@@ -19,7 +19,7 @@ import "@blueprintjs/core/lib/css/blueprint.css";
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 // Misc
 import Swal from "sweetalert2";
-import "sweetalert2/dist/sweetalert2.css";
+import "@sweetalert2/themes/borderless/borderless.min.css";
 
 // Components
 import NavBar from "../../components/nav";
