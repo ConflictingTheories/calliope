@@ -117,7 +117,7 @@ class Post extends Component {
                 style={{
                   margin: "5px 1em -2.5em 0",
                   padding: "0.5em",
-                  float: "left",
+                  float: "right",
                 }}
                 onClick={() => this.showEmbed(type, src)}
               >

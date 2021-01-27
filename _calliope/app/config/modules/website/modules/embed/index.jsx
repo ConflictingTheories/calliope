@@ -65,7 +65,7 @@ class Embed extends React.Component {
                     style={{
                       margin: "5px 0 -2.5em 0",
                       padding: "0.5em",
-                      float: "right",
+                      float: "left",
                     }}
                     target="_blank"
                     href="/"
