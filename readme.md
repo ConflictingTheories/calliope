@@ -1,111 +1,37 @@
-# Calliope Site Generator
 
-![Calliope](/app/storage/media/calliope.png)
+![Calliope](/_calliope/app/storage/media/calliope.png)
 
-## What is Calliope?
-Calliope is a Static site generator and webserving platform. It provides two functions - static generation and live serving. The server is done to help make it quick for you to check changes locally without pushing anything out, and these sites are primarily focused at the moment on small blog and post-driven content. In the future Calliope will provide more plugins and themes (it already has two) and will hopefully begin to expand on the markdown support and provide its own form of shortcode plugins.
+# Calliope Starter Template
 
-For now, everything is read out of the `/app/storage` directory and posts are read from markdown files found with `/app/storage/posts`. These are rendered according to the selected theme which can configured through the `.env` file. Note that a sample has been provided, but for windows you will need to slightly adjust the script to work on Powershell -- replace `export <variable_name>=<value>` with `$env:<variable_name>="<value>"`.
+This is the Starter Template and is the main Branch to get started using Calliope. It is focused on being the easiest tool to get started with when using calliope. If you want to read more about the project development and other features - check out the [Readme](/_calliope/readme.md) in the `_calliope` folder.
 
-When you serve the static files, keep in mind that you will need to provide a web server (I suggest `npm install -g http-server` myself) or via a service like Netlify. If you use the server it will host it for you and make it available on your local machine.
+### Layout
+All you site content can be managed from `_site` while the core application and server resides inside of `_calliope`. There is a starter script inside of the `_site` folder to help boostrap your static facing website. For docker or live hosting - you can access more functionality inside the main `_calliope/*` folder.
 
-**Note** - You will need to set the variables for your system and then make sure you have them active in your shell otherwise you may find some errors.
+### Getting Started
+To generate your static website the following should be sufficient (note you may need some development dependencies on your system such as `node` and `yarn`)
 
-## Demonstration
-
-You can see the `/output` folder which has been generated using Calliope for your reference, or alternatively you can check out https://www.calliope.site for a live demonstration using both Netlify and Github to hot it.
-
-## Static vs Served
-
-You can serve your content via NodeJS and this will read posts and content directly from the filesystem, or you can compile and bundle a static version of your site and host it using a service such as S3, Netlify, etc.
-
-_To Serve:_
-
-        cd app
-        yarn 
-        yarn deploy                       # Build API / Admin & Export
-        yarn serve                        # Serve Static Website (port 8080)
-
-_To Compile:_
-
-        yarn
-        yarn build                       
-
-_To Run Live / Admin_
-
-        yarn
-        yarn build
-        yarn start
+1. `mkdir website`
+2. `git clone https://github.com/ConflictingTheories/calliope website`
+3. `cd website\_site`
 
 
-_To Deploy:_ (Coming Soon - tools to help deploy -- For Now I recommend https://netlify.com and using https://github.com)
+__Add Content:__
+You content lives inside of the `_site/content` folders. Here you can put your pages and posts and media files you wish to compile into your static site. (For more control - look at using the admin panel for customization and more advanced editing - including Live Preview, Zip Generation, and more.)
 
-## Dependencies (to deploy)
+__Configure Environment:__
+Once you have some content and are ready to build you site, it is time to make sure you have configured the final settings correctly. Here is where you would configure your `.env` file and make your configurations for calliope to build your site. Once you have configured your `.env` (see the sample for help)
 
-The Following Technologies are required to run and deploy Calliope:
+0. Source your Env file, and the finally build you site with the following,
+1. `. build.ps1`
 
-- Docker / Docker-Compose
+This should generate your new website inside of the `_site/output` folder and here you can host and deploy your site statically.
 
-## Deployment
+To Test you can statically serve it or deploy it to your favourite host. If you are using `http-server` you can do the following.
 
-Please see the following instructions for deploying locally.
-
-First, set your configurations for your environment variables in the `.env` file (see `.env-sample`) and then proceed with the following depending on your OS:
-
-### Windows
-
-Please run the following:
-
-        > . scripts/windows/install.ps1
-        > . scripts/windows/migrate.ps1 # Please note Database must be ready
-        > . scripts/windows/seed.ps1 # Ditto
-
-### Linux / Mac
-
-Please run the following:
-
-        $ bash scripts/nix/install.sh
-        $ bash scripts/nix/migrate.sh # Please note Database must be ready
-        $ bash scripts/nix/seed.sh # Ditto
-
-The above will initialize the Database - then you can perform manual updates and migrations from there. Additionally:
-
-### Windows
-
-Please run the following:
-
-        > . scripts/windows/refresh.ps1 # Build New Frontend
-        > . scripts/windows/build.ps1 # Build New Image
-        > . scripts/windows/start.ps1 # Replace Image
+ex. `http-server _site/output` --> Then open browser to (http://localhost:8080)
 
 
-### Linux / Mac
+## License
 
-Please run the following:
-
-        $ bash scripts/nix/refresh.sh # Build New Frontend
-        $ bash scripts/nix/build.sh # Build New Image
-        $ bash scripts/nix/start.sh # Replace Image
-
-
-## Usage
-
-Once the deployment has finished, it should if successful, now be running and accessible from your Browser:
-
-        http://localhost/
-
-**Note**: Also exposed via the default port: `8081`
-
-### Best Practices
-
-- You should work in a new branch for a new feature/task. All new changes must go through a pull request system. This ensures that code is thorough tested.
-
-- Always fetch before doing any work. Then if new code is there, pull it in - it shouldn't conflict hopefully. If it does, carefully check the code and fix the conflicts.
-
-- When you have changes you wish to make, you will make
-
-- Make sure you are committing with good frequency so as to make the gits useful but also trackable.
-
-## LICENSE
-
-Please see [LICENSE](LICENSE) for more details.
+For License and more information on Calliope, please see the [LICENSE](./_calliope/LICENSE) file inside of the `_calliope` folder.

@@ -1,0 +1,201 @@
+@import "./colors.less";
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow-wrap: break-word;
+  font-family: monospace;
+  background: linear-gradient(45deg, #141823 0%, #292e49 100%);
+  font-weight: lighter;
+  color: #000810;
+  background: snow;
+  font-family: "Orbitron", sans-serif;
+  font-style: italic;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+  height: 0;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: darkcyan;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: darkcyan;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 2.5%;
+}
+
+p,
+ul {
+  font-family: monospace;
+  margin: 2.5%;
+}
+
+video {
+  max-width: 95%;
+  width: 95%;
+  text-align: center;
+  margin: 2.5% 2.5% auto;
+}
+
+audio {
+  max-width: 95%;
+  width: 95%;
+  text-align: center;
+  margin: 2.5% 2.5% auto;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: snow;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: @background;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: @textColor;
+}
+
+.App-nav {
+  color: white;
+  background: @primaryGrad;
+}
+
+.App-link {
+  color: @linkColor;
+}
+
+button {
+  border: 2px solid black;
+  background: hotpink;
+  border-radius: 5px;
+  margin: 0.25em;
+  padding: 0.5em 1.25em;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+.calliope-modal {
+  .swal2-title {
+    color: white;
+  }
+  .swal2-content {
+    color: white;
+  }
+}
+
+.calliope-input {
+  background: cadetblue;
+  font-size: small;
+  width: 100%;
+  border: none;
+  color: darkslategrey;
+  font-style: oblique;
+  font-weight: 600;
+  font-size: x-small;
+  padding: 0.5em;
+}
+
+.calliope-container {
+  z-index: 5;
+}
+
+.calliope-admin {
+  z-index: 5;
+}
+
+.calliope-list-item {
+  max-height: 37vh;
+  padding: 0.5em;
+  .rs-list-item {
+    padding-left: 1.25em;
+  }
+}
+
+.calliope-post {
+  margin: 1.5em 0.5em 0.25em 1em;
+  padding-left: 0.5em;
+  box-shadow: 0px 0px 5px 10px rgb(0 44 44 / 40%);
+  border: 1px solid rgba(00, 44, 44, 0.4);
+}
+
+.calliope-load-post {
+  padding: 1em;
+  margin: 1em;
+}
+
+.calliope-site-link {
+  padding: 1em;
+  margin: 1em;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.f {
+  z-index: 10;
+  position: fixed;
+  bottom: 5px;
+  right: 15px;
+  font-family: "Arial";
+  font-size: 1rem;
+  color: #1f1329;
+  text-align: center;
+  margin: revert;
+}
+.f a {
+  font-size: 1rem;
+  color: #000;
+}
+
+.container {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 40%;
+  left: 50%;
+}
+
+.rs-panel-body-fill {
+  height: 100%;
+}

@@ -1,0 +1,26 @@
+{
+  "name": "calliope-site-generator-website",
+  "version": "0.1.0",
+  "private": true,
+  "author": "Kyle Derby MacInnis",
+  "homepage": "/",
+  "scripts": {
+    "test": "craco test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

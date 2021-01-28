@@ -1,0 +1,67 @@
+version: "2.0"
+services:
+  # Load Balancer
+  calliope_lb:
+    container_name: "calliope-lb"
+    image: calliope-load-balancer:latest
+    restart: always
+    volumes:
+      - "./scripts/docker/load-balancer/certs:/etc/letsencrypt"
+    depends_on:
+      - "calliope_portal"
+    links:
+      - "calliope_portal:calliope_portal"
+    build:
+      context: ./scripts/docker/load-balancer/
+    ports:
+      - "80:80"
+    environment:
+      WEBSITE_PORT: ${WEBSITE_PORT}
+      ADMIN_PORT: ${ADMIN_PORT}
+  # Database
+  calliope_db:
+    container_name: "calliope-db"
+    image: calliope-database:latest
+    build:
+      context: ./scripts/docker/database
+    restart: always
+    ports:
+      - "${DB_PORT}:5432"
+    # volumes:
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+  # Main API / Portal for calliope
+  calliope_portal:
+    container_name: "calliope-portal"
+    image: calliope:latest
+    restart: always
+    build:
+      context: .
+      dockerfile: ./scripts/docker/server/Dockerfile
+    depends_on:
+      - "calliope_db"
+    links:
+      - "calliope_db:calliope_db"
+    ports:
+      - "${WEBSITE_PORT}:${WEBSITE_PORT}"
+      - "${ADMIN_PORT}:${ADMIN_PORT}"
+    volumes:
+      - "./output/site:/opt/calliope/website/build"
+      - "./output/admin:/opt/calliope/admin/build"
+      - "./content:/opt/calliope/content"
+      - "./app/node_modules:/opt/calliope/node_modules"
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      DB_TYPE: ${DB_TYPE}
+      DB_HOST: ${DB_HOST_DOCKER}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      PUBLIC_URL: ${PUBLIC_URL}
+      WEBSITE_PORT: ${WEBSITE_PORT}
+      WEBSITE_HOST: ${WEBSITE_HOST}
+      ADMIN_PORT: ${ADMIN_PORT}
+      ADMIN_HOST: ${ADMIN_HOST}
