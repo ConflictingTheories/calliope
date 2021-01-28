@@ -79,17 +79,13 @@ module.exports = (() => {
 
       // Generate Static Public HTML
 
-      const nonJSPages = await getPages();
-      page
-        .split("/storage/pages/")[1]
-        .map((x) => `<li><a href=/content/pages/${x}>${x}</a></li>`)
+      const nonJSPages = (await getPages())
+        .map((x) => { let link = x.split("/storage/pages/")[1]; return`<li><a href=/content/pages/${link}>${link}</a></li>`)
         .join("\n");
 
-      const nonJSPosts = await getPosts();
-      page
-        .split("/storage/posts/")[1]
-        .map((x) => `<li><a href=/content/posts/${x}>${x}</a></li>`)
-        .join("\n");
+      const nonJSPosts = (await getPosts())
+      .map((x) => { let link = x.split("/storage/posts/")[1]; return`<li><a href=/content/posts/${link}>${link}</a></li>`)
+      .join("\n");
 
       const indexHtml = `
       <!DOCTYPE html>
