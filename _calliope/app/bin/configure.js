@@ -116,7 +116,7 @@ module.exports = (() => {
             <hr/>
             <strong>This site works best with JavaScript turned On.</strong>
           </header>
-          <iframe src="${nonJSPosts.length > 0 ? nonJSPosts[0]?.split("/storage/posts/")[1] : ""}" style="color: white;background: #34c3ff;" width="100%" height="60%" name="main"></iframe>
+          <iframe src="/content/posts/${nonJSPosts.length > 0 ? nonJSPosts[0]?.split("/storage/posts/")[1] : ""}" style="color: white;background: #34c3ff;" width="100%" height="60%" name="main"></iframe>
           <hr/>
           <details><summary>Pages</summary><ul>${formattedPages}</ul></details>
           <br/>
