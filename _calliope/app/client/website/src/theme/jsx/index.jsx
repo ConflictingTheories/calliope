@@ -15,13 +15,13 @@ import React from "react";
 
 // Code Highlighting
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { materialLight } from "react-syntax-highlighter/dist/esm/styles/prism";
-
+import { synthwave84 } from "react-syntax-highlighter/dist/esm/styles/prism";
 // Math Latex Support
 import { InlineMath, BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
 // Plugins
 import plugins from "../../plugins";
+
 // Customization for Markdown Rendering (react-markdown)
 export const renderers = {
   image: ({ alt, src, title }) => (
@@ -35,7 +35,7 @@ export const renderers = {
   code: ({ language, value }) => {
     return (
       <SyntaxHighlighter
-        style={materialLight}
+        style={synthwave84}
         language={language}
         children={value || ""}
       />

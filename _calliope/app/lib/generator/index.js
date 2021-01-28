@@ -25,7 +25,11 @@ const getPosts = () =>
         );
         reject(err);
       }
-      resolve(files);
+      if (Env.REVERSE_CONTENT == "0") {
+        resolve(files.reverse());
+      } else {
+        resolve(files);
+      }
     });
   });
 
@@ -40,7 +44,11 @@ const getPages = () =>
         );
         reject(err);
       }
-      resolve(files);
+      if (Env.REVERSE_CONTENT == "0") {
+        resolve(files.reverse());
+      } else {
+        resolve(files);
+      }
     });
   });
 

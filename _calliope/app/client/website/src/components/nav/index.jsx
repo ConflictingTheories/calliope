@@ -22,7 +22,7 @@ import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 
 // ASSETS & APP STYLES
 import "../../theme/less/App.less";
-import {exportZip} from "../../services/content";
+import { exportZip } from "../../services/content";
 
 // APP
 class ArchNavBar extends React.Component {
@@ -59,24 +59,17 @@ class ArchNavBar extends React.Component {
   }
 
   renderRight() {
-    return (
-      <React.Fragment>
-        <Button
-          className="bp3-minimal"
-          icon="plus"
-          text="+ IPFS"
-          onClick={() => {
-            console.log("LoadFile for IPFS??");
-          }}
-        />
-      </React.Fragment>
-    );
+    return <React.Fragment></React.Fragment>;
   }
 
   renderAdmin() {
     return (
       <React.Fragment>
-        <button onClick={async () => {await exportZip()}}>
+        <button
+          onClick={async () => {
+            await exportZip();
+          }}
+        >
           Download Zip
         </button>
       </React.Fragment>
@@ -85,10 +78,7 @@ class ArchNavBar extends React.Component {
 
   render() {
     return this.state.isLogin ? (
-      <Navbar
-        className="App-nav"
-        style={{ color: Colors.WHITE, background: Colors.DARK_GRAY4 }}
-      >
+      <Navbar className="App-nav">
         <Navbar.Group align={Alignment.LEFT}>
           {this.state.renderBrand()}
         </Navbar.Group>
@@ -97,10 +87,7 @@ class ArchNavBar extends React.Component {
         </Navbar.Group>
       </Navbar>
     ) : this.state.isAdmin ? (
-      <Navbar
-        className="App-nav"
-        style={{ color: Colors.WHITE, background: Colors.DARK_GRAY4 }}
-      >
+      <Navbar className="App-nav">
         <Navbar.Group align={Alignment.LEFT}>
           {this.state.renderBrand()}
         </Navbar.Group>
@@ -109,10 +96,7 @@ class ArchNavBar extends React.Component {
         </Navbar.Group>
       </Navbar>
     ) : (
-      <Navbar
-        className="App-nav"
-        style={{ color: Colors.WHITE, background: Colors.DARK_GRAY4 }}
-      >
+      <Navbar className="App-nav">
         <Navbar.Group align={Alignment.LEFT}>
           {this.state.renderBrand()}
           {this.state.renderBar()}

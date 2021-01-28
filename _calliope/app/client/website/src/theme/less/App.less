@@ -1,18 +1,39 @@
 @import "./colors.less";
+@import "./cyberpunk.less";
 
 body,
 html {
   width: 100%;
   height: 100%;
-  overflow-wrap: break-word;
   margin: 0;
+  overflow-wrap: break-word;
   font-family: monospace;
   background: linear-gradient(45deg, #141823 0%, #292e49 100%);
   font-weight: lighter;
-  color: #000810;
-  background: snow;
+  color: #fff8f0;
+  background: black;
   font-family: "Orbitron", sans-serif;
   font-style: italic;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+  height: 0;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: darkcyan;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: darkcyan;
 }
 
 h1,
@@ -48,7 +69,7 @@ canvas {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: snow;
+  background-color: black;
 }
 
 .App {
@@ -56,8 +77,8 @@ canvas {
 }
 
 button {
-  border: 2px solid darkcyan;
-  background: white;
+  border: 2px solid hotpink;
+  background: black;
   border-radius: 5px;
   margin: 0.25em;
   padding: 0.5em 1.25em;
@@ -103,8 +124,56 @@ button {
   }
 }
 
-.calliope-post {
+.calliope-post,
+.calliope-page {
+  margin: 1.5em 0.5em 0.25em 1em;
   padding-left: 0.5em;
+  text-shadow: 1px 3px 10px #008b8b;
+  box-shadow: 1px 1px rgb(14, 52, 64);
+  border: 1px solid rgba(00, 44, 44, 0.4);
+  background: rgba(14, 52, 64, 0.7);
+}
+
+.calliope-load-post {
+  padding: 1em;
+  margin: 1em;
+}
+
+.calliope-site-link {
+  padding: 1em;
+  margin: 1em;
+}
+
+.calliope-modal {
+  background: rgba(4, 21, 27, 0.99);
+  display: flex;
+  border: 1px solid #101f1f;
+
+  .swal2-title {
+    color: white;
+  }
+  .swal2-content {
+    color: white;
+  }
+}
+
+.calliope-input {
+  background: cadetblue;
+  font-size: small;
+  width: 100%;
+  border: none;
+  color: darkslategrey;
+  font-style: oblique;
+  font-weight: 600;
+  font-size: x-small;
+  padding: 0.5em;
+}
+
+.App-nav {
+  position: fixed;
+  color: ghostwhite;
+  background: rgba(4, 21, 27, 0.82);
+  text-shadow: 1px 3px 3px darkcyan;
 }
 
 @keyframes App-logo-spin {
@@ -123,22 +192,26 @@ button {
   right: 15px;
   font-family: "Arial";
   font-size: 1rem;
-  color: #1f1329;
+  color: #d7b8f3;
   text-align: center;
   margin: revert;
 }
 .f a {
   font-size: 1rem;
-  color: #000;
+  color: #fff;
 }
-
-.container {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: 40%;
-  left: 50%;
-}
-
 .rs-panel-body-fill {
   height: 100%;
+}
+
+.bp3-non-ideal-state {
+  min-height: 87vh;
+  background: rgba(4, 21, 27, 0.99);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
 }

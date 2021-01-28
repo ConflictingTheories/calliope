@@ -14,12 +14,12 @@ import {
 } from "rsuite";
 import "rsuite/dist/styles/rsuite-default.css";
 // Blueprint
-import { NonIdealState, Tabs, Tab } from "@blueprintjs/core";
+import { NonIdealState, Tabs, Tab, Icon } from "@blueprintjs/core";
 import "@blueprintjs/core/lib/css/blueprint.css";
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 // Misc
 import Swal from "sweetalert2";
-import "@sweetalert2/themes/borderless/borderless.min.css";
+import "@sweetalert2/themes/dark/dark.min.css";
 
 // Components
 import NavBar from "../../components/nav";
@@ -83,6 +83,7 @@ class Dashboard extends React.Component {
 
   async edit(post, type) {
     store.editPost = post;
+    store.selectedType = type;
     // Prompt to Save if Changing
     if (store.selectedPost != post && store.isEditting && !store.isSaved) {
       this.saveChanges();
@@ -98,6 +99,7 @@ class Dashboard extends React.Component {
     const fileResponse = await fetch("/content/" + type + "/" + post);
     if (fileResponse.ok) {
       let content = await fileResponse.text();
+      store.selectedType = type;
       store.selectedPost = post;
       store.selectedContent = content;
       store.isEditting = true;
@@ -114,12 +116,12 @@ class Dashboard extends React.Component {
       denyButtonText: `Don't save`,
     });
     if (result.isConfirmed) {
-      await save(store.selectedPost, store.selectedContent);
+      await save(store.selectedPost, store.selectedContent, store.selectedType);
       Swal.fire("Saved!", "", "success");
-      await this.fetchPost(store.editPost);
+      await this.fetchPost(store.editPost, store.selectedType);
     } else if (result.isDenied) {
       Swal.fire("Changes are not saved", "", "info");
-      await this.fetchPost(store.editPost);
+      await this.fetchPost(store.editPost,store.selectedType);
     }
   }
 
@@ -132,7 +134,7 @@ class Dashboard extends React.Component {
       confirmButtonText: `Create`,
     });
     if (result.isConfirmed) {
-      let newFile = await this.create(store.type, result.value);
+      let newFile = await this.create(store.selectedType, result.value);
       Swal.fire("Created!", "", "success");
       await this.fetchPost(newFile);
     }
@@ -149,8 +151,17 @@ class Dashboard extends React.Component {
                   return (
                     <List.Item>
                       <label>
-                        {post}{" "}
-                        <a onClick={() => this.edit(post, "posts")}>Edit</a>
+                        <a onClick={() => this.edit(post, "posts")}>
+                          {post.replace(/\d+T\d+_/, "")}
+                        </a>{" "}
+                        <a
+                          onClick={async () =>{
+                            await navigator.clipboard.writeText(post);
+                            await Swal.fire("Link Copied!", "", "success");
+                          }}
+                        >
+                          <Icon icon="link"></Icon>
+                        </a>
                       </label>
                     </List.Item>
                   );
@@ -173,8 +184,17 @@ class Dashboard extends React.Component {
                   return (
                     <List.Item>
                       <label>
-                        {page}{" "}
-                        <a onClick={() => this.edit(page, "pages")}>Edit</a>
+                        <a onClick={() => this.edit(page, "pages")}>
+                          {page.replace(/\d+T\d+_/, "")}
+                        </a>{" "}
+                        <a
+                            onClick={async () =>{
+                              await navigator.clipboard.writeText(page);
+                              await Swal.fire("Link Copied!", "", "success");
+                            }                          }
+                        >
+                          <Icon icon="link"></Icon>
+                        </a>
                       </label>
                     </List.Item>
                   );
@@ -198,7 +218,7 @@ class Dashboard extends React.Component {
                   Posts{" "}
                   <button
                     onClick={async () => {
-                      store.type = "posts";
+                      store.selectedType = "posts";
                       await this.newFile();
                     }}
                   >
@@ -212,7 +232,7 @@ class Dashboard extends React.Component {
                   Pages{" "}
                   <button
                     onClick={async () => {
-                      store.type = "pages";
+                      store.selectedType = "pages";
                       await this.newFile();
                     }}
                   >
@@ -263,7 +283,7 @@ class Dashboard extends React.Component {
               renderBar={() => null}
               renderRight={() => null}
             />
-            <Content>{this.renderPanel()}</Content>
+            <Content style={{ marginTop: "3em" }}>{this.renderPanel()}</Content>
           </Container>
         </div>
       </div>

@@ -65,13 +65,13 @@ class Dashboard extends React.Component {
                 {store.page && (
                   <Row>
                     <Container className="calliope-page">
-                      <Post t={'pages'} src={`${store.page}.md`} />
+                      <Post t={"pages"} src={`${store.page}.md`} />
                     </Container>
                   </Row>
                 )}
-                <>
+                <footer className={"calliope-site-link"}>
                   <a href="/">Back Home</a>
-                </>
+                </footer>
               </Content>
             </Container>
           </Col>
@@ -101,7 +101,7 @@ class Dashboard extends React.Component {
                         </Row>
                       );
                     })}
-                <>
+                <footer className={"calliope-load-post"}>
                   {store.end && store.end < store.posts?.length && (
                     <a
                       onClick={() => {
@@ -111,7 +111,7 @@ class Dashboard extends React.Component {
                       Load More Posts
                     </a>
                   )}
-                </>
+                </footer>
               </Content>
             </Container>
           </Col>

@@ -56,17 +56,19 @@ export function register(config?: Config) {
 
     window.addEventListener("load", async () => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
+      // Create Cache
+      await caches.open("calliope-cache").then(function (cache) {
+        return cache.addAll([
+          ...pages.map((x: string) => "/content/pages/" + x),
+          ...posts.map((x: string) => "/content/posts/" + x),
+        ]);
+      });
+      // Refresh if New Version
+      checkValidServiceWorker(swUrl, config);
 
       if (isLocalhost) {
-        await caches.open("calliope-cache").then(function (cache) {
-          return cache.addAll([
-            ...pages.map((x: string) => "/content/pages/" + x),
-            ...posts.map((x: string) => "/content/posts/" + x),
-          ]);
-        });
         // This is running on localhost. Let's check if a service worker still exists or not.
         checkValidServiceWorker(swUrl, config);
-
         // Add some additional logging to localhost, pointing developers to the
         // service worker/PWA documentation.
         navigator.serviceWorker.ready.then(() => {

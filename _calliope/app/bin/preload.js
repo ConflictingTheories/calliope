@@ -133,10 +133,10 @@ module.exports = (async () => {
   // For Service Worker
   fs.writeFileSync(
     path.join(__dirname, "/../client/website/src/content/posts.json"),
-    JSON.stringify(Env.REVERSE_CONTENT ? postJson: postJson.reverse())
+    JSON.stringify(postJson)
   );
   fs.writeFileSync(
     path.join(__dirname, "/../client/website/src/content/pages.json"),
-    JSON.stringify(Env.REVERSE_CONTENT ? pageJson : pageJson.reverse())
+    JSON.stringify(pageJson)
   );
 })();

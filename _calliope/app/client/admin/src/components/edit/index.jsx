@@ -60,7 +60,7 @@ class EditMarkdown extends Component {
   // Write Content Back out to File
   async saveChanges() {
     store.selectedContent = this.state.content;
-    await save(store.selectedPost, store.selectedContent);
+    await save(store.selectedPost, store.selectedContent, store.selectedType);
     store.isSaved = true;
   }
 
@@ -140,7 +140,7 @@ class EditMarkdown extends Component {
                 width: "100%",
               }}
             >
-              <Post content={content} />
+              <Post hideEmbed={true} content={content} />
             </Panel>
           </Col>
         </Row>

@@ -14,7 +14,7 @@
 import * as config from "../config/runtime.json";
 import FileSaver from "file-saver";
 import Swal from "sweetalert2";
-import "@sweetalert2/themes/borderless/borderless.min.css";
+import "sweetalert2/dist/sweetalert2.css";
 
 export async function pages() {
   return await (await fetch(config.pages)).json();

@@ -140,7 +140,7 @@ class EditMarkdown extends Component {
                 width: "100%",
               }}
             >
-              <Post content={content} />
+              <Post hideEmbed={true} content={content} />
             </Panel>
           </Col>
         </Row>
