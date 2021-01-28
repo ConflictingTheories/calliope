@@ -80,12 +80,18 @@ module.exports = (() => {
       // Generate Static Public HTML
 
       const nonJSPages = (await getPages())
-        .map((x) => { let link = x.split("/storage/pages/")[1]; return`<li><a href=/content/pages/${link}>${link}</a></li>`)
+        .map((x) => {
+          let link = x.split("/storage/pages/")[1];
+          return `<li><a target="main" href=/content/pages/${link}>${link}</a></li>`;
+        })
         .join("\n");
 
       const nonJSPosts = (await getPosts())
-      .map((x) => { let link = x.split("/storage/posts/")[1]; return`<li><a href=/content/posts/${link}>${link}</a></li>`)
-      .join("\n");
+        .map((x) => {
+          let link = x.split("/storage/posts/")[1];
+          return `<li><a target="main" href=/content/posts/${link}>${link}</a></li>`;
+        })
+        .join("\n");
 
       const indexHtml = `
       <!DOCTYPE html>
@@ -104,12 +110,14 @@ module.exports = (() => {
           <title>%REACT_APP_SITE_TITLE%</title>
         </head>
         <body>
-          <noscript><h2>%REACT_APP_SITE_TITLE%</h2>
+          <header>
+            <noscript><h2>%REACT_APP_SITE_TITLE%</h2>
+            <hr/>
+            <strong>This site works best with JavaScript turned On.</strong>
+          </header>
+          <iframe style="color: white;background: #34c3ff;" width="100%" height="60%" name="main"></iframe>
           <hr/>
-          <strong>This site works best with JavaScript turned On.</strong>
-          <hr/>
-          <details>
-          <summary>Pages</summary><ul>${nonJSPages}</ul></details>
+          <details><summary>Pages</summary><ul>${nonJSPages}</ul></details>
           <br/>
           <details><summary>Posts</summary><ul>${nonJSPosts}</ul></details>
           </noscript>
