@@ -16,6 +16,7 @@ const fs = require("fs");
 const path = require("path");
 const glob = require("glob");
 const Env = require("../config/env");
+const { getPages, getPosts } = require("../lib/generator");
 
 const publicFiles = path.join(__dirname + `/../config/public`);
 const pluginFiles = path.join(__dirname + `/../config/plugins`);
@@ -26,7 +27,7 @@ const websitemoduleFiles = path.join(
 );
 
 module.exports = (() => {
-  function configureWebsite() {
+  async function configureWebsite() {
     const theme = Env.CALLIOPE_THEME || "default";
     const themeFiles = path.join(__dirname + `/../config/themes/${theme}`);
 
@@ -46,7 +47,7 @@ module.exports = (() => {
     );
 
     // Transfer Public Directory Files
-    glob(publicFiles + "/**/*.*", function (err, files) {
+    glob(publicFiles + "/**/*.*", async function (err, files) {
       if (err) {
         console.log(
           "cannot read the Public folder, something goes wrong with glob",
@@ -54,56 +55,109 @@ module.exports = (() => {
         );
       }
       // Copy Files
-      files.forEach(async (file) => {
-        let filename = file.split(`/config/public/`)[1];
-        let filenamePath = filename.split(/[\/]/);
-        let filepath = filenamePath.pop();
-        console.log("Website :: Transfering -- ", filepath);
-        await fs.promises.mkdir(
-          path.join(
-            __dirname + `/../client/website/public/${filenamePath.join("/")}`
-          ),
-          {
-            recursive: true,
-          }
-        );
-        const readFile = fs.createReadStream(file);
-        const outFile = fs.createWriteStream(
-          path.join(__dirname + `/../client/website/public/${filename}`)
-        );
-        readFile.pipe(outFile);
+      await Promise.all(
+        files.map(async (file) => {
+          let filename = file.split(`/config/public/`)[1];
+          let filenamePath = filename.split(/[\/]/);
+          let filepath = filenamePath.pop();
+          console.log("Website :: Transfering -- ", filepath);
+          await fs.promises.mkdir(
+            path.join(
+              __dirname + `/../client/website/public/${filenamePath.join("/")}`
+            ),
+            {
+              recursive: true,
+            }
+          );
+          const readFile = fs.createReadStream(file);
+          const outFile = fs.createWriteStream(
+            path.join(__dirname + `/../client/website/public/${filename}`)
+          );
+          readFile.pipe(outFile);
+        })
+      );
 
-        // PWA Manifest Configuration
-        const manifest = {
-          short_name: Env.SHORT_NAME,
-          name: Env.SITE_NAME,
-          icons: [
-            {
-              src: "favicon.ico",
-              sizes: "64x64 32x32 24x24 16x16",
-              type: "image/x-icon",
-            },
-            {
-              src: "logo192.png",
-              type: "image/png",
-              sizes: "192x192",
-            },
-            {
-              src: "logo512.png",
-              type: "image/png",
-              sizes: "512x512",
-            },
-          ],
-          start_url: ".",
-          display: "standalone",
-          theme_color: Env.THEME_DARK ? "#777" : "#333",
-          background_color: Env.THEME_DARK ? "#000" : "#fff",
-        };
-        fs.writeFileSync(
-          path.join(__dirname + `/../client/website/public/manifest.json`),
-          JSON.stringify(manifest)
-        );
-      });
+      // Generate Static Public HTML
+
+      const nonJSPages = await getPages();
+      page
+        .split("/storage/pages/")[1]
+        .map((x) => `<li><a href=/content/pages/${x}>${x}</a></li>`)
+        .join("\n");
+
+      const nonJSPosts = await getPosts();
+      page
+        .split("/storage/posts/")[1]
+        .map((x) => `<li><a href=/content/posts/${x}>${x}</a></li>`)
+        .join("\n");
+
+      const indexHtml = `
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="utf-8" />
+          <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="theme-color" content="#000000" />
+          <meta
+            name="description"
+            content="%REACT_APP_SITE_TITLE% - powered by Calliope"
+          />
+          <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+          <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+          <title>%REACT_APP_SITE_TITLE%</title>
+        </head>
+        <body>
+          <noscript><h2>%REACT_APP_SITE_TITLE%</h2>
+          <hr/>
+          <strong>This site works best with JavaScript turned On.</strong>
+          <hr/>
+          <details>
+          <summary>Pages</summary><ul>${nonJSPages}</ul></details>
+          <br/>
+          <details><summary>Posts</summary><ul>${nonJSPosts}</ul></details>
+          </noscript>
+          <!-- Site Entry Point Loads on this Div -->
+          <div id="root"></div>
+        </body>
+      </html>
+      `;
+
+      // PWA Manifest Configuration
+      const manifest = {
+        short_name: Env.SHORT_NAME,
+        name: Env.SITE_NAME,
+        icons: [
+          {
+            src: "favicon.ico",
+            sizes: "64x64 32x32 24x24 16x16",
+            type: "image/x-icon",
+          },
+          {
+            src: "logo192.png",
+            type: "image/png",
+            sizes: "192x192",
+          },
+          {
+            src: "logo512.png",
+            type: "image/png",
+            sizes: "512x512",
+          },
+        ],
+        start_url: ".",
+        display: "standalone",
+        theme_color: Env.THEME_DARK ? "#777" : "#333",
+        background_color: Env.THEME_DARK ? "#000" : "#fff",
+      };
+      fs.writeFileSync(
+        path.join(__dirname + `/../client/website/public/manifest.json`),
+        JSON.stringify(manifest)
+      );
+      // Write Index File for Website (Admin still needs JS)
+      fs.writeFileSync(
+        path.join(__dirname + `/../client/website/public/index.html`),
+        indexHtml
+      );
     });
 
     // Transfer Theme Files
@@ -228,8 +282,6 @@ module.exports = (() => {
         readFile.pipe(outFile);
       });
     });
-
-    // Setup Font Files (TODO)
   }
 
   function configureAdmin() {
