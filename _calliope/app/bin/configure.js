@@ -80,18 +80,19 @@ module.exports = (() => {
       // Generate Static Public HTML
 
       const nonJSPages = (await getPages())
+      const formattedPages =nonJSPages
         .map((x) => {
           let link = x.split("/storage/pages/")[1];
           return `<li><a target="main" href=/content/pages/${link}>${link}</a></li>`;
-        })
-        .join("\n");
+        }).join("")
 
-      const nonJSPosts = (await getPosts())
+      const nonJSPosts = (await getPosts());
+      const formattedPosts =nonJSPosts
         .map((x) => {
           let link = x.split("/storage/posts/")[1];
           return `<li><a target="main" href=/content/posts/${link}>${link}</a></li>`;
-        })
-        .join("\n");
+        }).join("")
+        
 
       const indexHtml = `
       <!DOCTYPE html>
@@ -115,11 +116,11 @@ module.exports = (() => {
             <hr/>
             <strong>This site works best with JavaScript turned On.</strong>
           </header>
-          <iframe style="color: white;background: #34c3ff;" width="100%" height="60%" name="main"></iframe>
+          <iframe src="${nonJSPosts.length > 0 ? nonJSPosts[0]?.split("/storage/posts/")[1] : ""}" style="color: white;background: #34c3ff;" width="100%" height="60%" name="main"></iframe>
           <hr/>
-          <details><summary>Pages</summary><ul>${nonJSPages}</ul></details>
+          <details><summary>Pages</summary><ul>${formattedPages}</ul></details>
           <br/>
-          <details><summary>Posts</summary><ul>${nonJSPosts}</ul></details>
+          <details><summary>Posts</summary><ul>${formattedPosts}</ul></details>
           </noscript>
           <!-- Site Entry Point Loads on this Div -->
           <div id="root"></div>
