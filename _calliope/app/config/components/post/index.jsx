@@ -28,7 +28,6 @@ import shortcodes from "remark-shortcodes";
 import { renderers } from "../../theme/jsx";
 import { Icon } from "@blueprintjs/core";
 import Swal from "sweetalert2";
-import "@sweetalert2/themes/dark/dark.css";
 
 const parseHtml = htmlParser({
   isValidNode: (node) => node.type !== "script",
