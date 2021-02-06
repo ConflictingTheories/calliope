@@ -19,7 +19,6 @@ import "@blueprintjs/core/lib/css/blueprint.css";
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 // Misc
 import Swal from "sweetalert2";
-import "@sweetalert2/themes/dark/dark.min.css";
 
 // Components
 import NavBar from "../../components/nav";
@@ -156,7 +155,7 @@ class Dashboard extends React.Component {
                         </a>{" "}
                         <a
                           onClick={async () =>{
-                            await navigator.clipboard.writeText(post);
+                            await navigator.clipboard.writeText(`/embed/posts/${post.replace(".md","")}`);
                             await Swal.fire("Link Copied!", "", "success");
                           }}
                         >
@@ -189,7 +188,7 @@ class Dashboard extends React.Component {
                         </a>{" "}
                         <a
                             onClick={async () =>{
-                              await navigator.clipboard.writeText(page);
+                              await navigator.clipboard.writeText(`/embed/pages/${page.replace(".md","")}`);
                               await Swal.fire("Link Copied!", "", "success");
                             }                          }
                         >

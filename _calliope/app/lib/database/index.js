@@ -17,6 +17,10 @@ console.log(process.env.DB_TYPE, process.env.DB_PORT);
 class Database {
   static instance = null;
   constructor() {
+    if(process.env.DB_TYPE === ""){
+      return null;
+    }
+
     if (this.instance) return this.instance;
     else {
       this.instance = new Sequelize({

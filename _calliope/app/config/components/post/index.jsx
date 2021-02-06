@@ -22,7 +22,6 @@ import math from "remark-math";
 import a11yEmoji from "@fec/remark-a11y-emoji";
 import html from "remark-html";
 import emoji from "remark-emoji";
-import headings from "remark-autolink-headings";
 import shortcodes from "remark-shortcodes";
 
 import { renderers } from "../../theme/jsx";
@@ -116,7 +115,6 @@ class Post extends Component {
               emoji,
               a11yEmoji,
               math,
-              headings,
               html,
             ]}
             children={content || ""}
