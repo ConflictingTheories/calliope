@@ -29,6 +29,8 @@ export var DIRECTION = (() => {
   return DIR;
 })();
 
+
+// Block Object Model
 export var BLOCK = (() => {
   // Default Functions
   const BLK = {
@@ -748,7 +750,7 @@ export var BLOCK = (() => {
 
   // Add Block Types
   blockType.forEach((type) => {
-    BLK[type] = require(`./blocks/${type}.jsx`);
+    BLK[type] = require(`./types/${type}.jsx`);
   });
 
   return BLK;

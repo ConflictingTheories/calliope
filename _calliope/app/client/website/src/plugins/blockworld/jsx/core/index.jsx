@@ -13,10 +13,7 @@
 
 import React, { useRef, useEffect } from "react";
 
-import { World } from "./world";
-import { Player } from "./player";
-import { Renderer } from "./render";
-import { Physics } from "./physics";
+import { World, Renderer, Physics, Player } from "./engine";
 
 // Splash Screen
 export default function Bitworld({ networkString }) {

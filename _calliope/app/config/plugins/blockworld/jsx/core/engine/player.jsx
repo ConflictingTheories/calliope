@@ -12,7 +12,7 @@
 \*                                                 */
 
 
-import {BLOCK} from "./blocks";
+import {BLOCK} from "../blocks";
 // ==========================================
 // Player
 //

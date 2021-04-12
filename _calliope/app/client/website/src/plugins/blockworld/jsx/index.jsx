@@ -13,7 +13,7 @@
 
 import React, { Component } from "react";
 import { collect } from "react-recollect";
-import Bitworld from "./core/index";
+import Bitworld from "./core";
 // Style
 import "../less/bitworld.less";
 

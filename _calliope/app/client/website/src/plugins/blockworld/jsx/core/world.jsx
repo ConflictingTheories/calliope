@@ -28,7 +28,7 @@
 // sy - World size in the Y-direction.
 // sz - World size in the Z-direction.
 
-import BLOCK from "./blocks";
+import { BLOCK } from "./blocks";
 
 export class World {
   constructor(sx, sy, sz) {

@@ -12,8 +12,8 @@
 \*                                                 */
 
 import { mat4, aniangle } from "gl-matrix";
-import { Vector } from "./helpers";
-import { BLOCK } from "./blocks";
+import { Vector } from "../helpers";
+import { BLOCK } from "../blocks";
 
 // ==========================================
 // Renderer

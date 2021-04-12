@@ -28,7 +28,7 @@
 // sy - World size in the Y-direction.
 // sz - World size in the Z-direction.
 
-import { BLOCK } from "./blocks";
+import { BLOCK } from "../blocks";
 
 export class World {
   constructor(sx, sy, sz) {
@@ -46,6 +46,7 @@ export class World {
 
     this.players = {};
   }
+
   // createFlatWorld()
   //
   // Sets up the world so that the bottom half is filled with dirt
@@ -58,6 +59,7 @@ export class World {
         for (var z = 0; z < this.sz; z++)
           this.blocks[x][y][z] = z < height ? BLOCK.DIRT : BLOCK.AIR;
   }
+
   // createFromString( str )
   //
   // Creates a world from a string representation.
@@ -77,6 +79,7 @@ export class World {
       }
     }
   }
+
   // getBlock( x, y, z )
   //
   // Get the type of the block at the specified position.
@@ -94,11 +97,13 @@ export class World {
       return BLOCK.AIR;
     return this.blocks[x][y][z];
   }
+
   // setBlock( x, y, z )
   setBlock(x, y, z, type) {
     this.blocks[x][y][z] = type;
     if (this.renderer != null) this.renderer.onBlockChanged(x, y, z);
   }
+
   // toNetworkString()
   //
   // Returns a string representation of this world.
@@ -112,6 +117,7 @@ export class World {
 
     return blockArray.join("");
   }
+
   // loadFromFile( filename )
   //
   // Load a world from a file previously saved with saveToFile().
@@ -133,6 +139,7 @@ export class World {
       return false;
     }
   }
+
   // saveToFile( filename )
   //
   // Saves a world and the spawn point to a file.
