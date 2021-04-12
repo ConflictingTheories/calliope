@@ -749,7 +749,7 @@ export var BLOCK = (() => {
 
   // Add Block Types
   blockType.forEach((type) => {
-    BLK[type] = require(`./types/${type}.jsx`);
+    BLK[type] = require(`./types/${type}.jsx`).default;
   });
 
   return BLK;
