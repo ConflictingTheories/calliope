@@ -16,7 +16,7 @@ export var DIRECTION = (() => {
   return DIR;
 })();
 
-export var BLOCK = (() => {
+export default BLOCK = (() => {
   // Default Functions
   const BLK = {
 	  
