@@ -41,10 +41,10 @@ class BlockWorld extends Component {
 
   // TODO - Add Theme Injection Somehow (Or Wrapper)
   render() {
-    const { diagram, updated } = this.state;
+    const { networkString, updated } = this.state;
     return (
       <>
-        <Bitworld key={updated} networkString={this.networkString} />
+        <Bitworld key={updated} networkString={networkString} />
       </>
     );
   }

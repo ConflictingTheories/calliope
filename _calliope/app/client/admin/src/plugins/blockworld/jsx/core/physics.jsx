@@ -1,4 +1,17 @@
-import BLOCK from "./blocks"
+/*                                                 *\
+** ----------------------------------------------- **
+**             Calliope - Site Generator   	       **
+** ----------------------------------------------- **
+**  Copyright (c) 2020-2021 - Kyle Derby MacInnis  **
+**                                                 **
+**    Any unauthorized distribution or transfer    **
+**       of this work is strictly prohibited.      **
+**                                                 **
+**               All Rights Reserved.              **
+** ----------------------------------------------- **
+\*                                                 */
+
+import { BLOCK } from "./blocks";
 // ==========================================
 // Physics
 //
@@ -14,12 +27,14 @@ export class Physics {
   constructor() {
     this.lastStep = -1;
   }
+
   // setWorld( world )
   //
   // Assigns a world to simulate to this physics simulator.
   setWorld(world) {
     this.world = world;
   }
+
   // simulate()
   //
   // Perform one iteration of physics simulation.

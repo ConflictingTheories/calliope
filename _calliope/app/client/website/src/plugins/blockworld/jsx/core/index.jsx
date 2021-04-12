@@ -20,10 +20,9 @@ import { Physics } from "./physics";
 
 // Splash Screen
 export default function Bitworld({ networkString }) {
-  // Initialize Canvas for Theme
   const casvasRef = useRef();
   const selectorRef = useRef();
-  // Pass Handlers
+
   useEffect(() => {
     initializeWorld(casvasRef, selectorRef);
   });

@@ -1,3 +1,16 @@
+/*                                                 *\
+** ----------------------------------------------- **
+**             Calliope - Site Generator   	       **
+** ----------------------------------------------- **
+**  Copyright (c) 2020-2021 - Kyle Derby MacInnis  **
+**                                                 **
+**    Any unauthorized distribution or transfer    **
+**       of this work is strictly prohibited.      **
+**                                                 **
+**               All Rights Reserved.              **
+** ----------------------------------------------- **
+\*                                                 */
+
 // ==========================================
 // Block types
 //
@@ -16,10 +29,9 @@ export var DIRECTION = (() => {
   return DIR;
 })();
 
-export default BLOCK = (() => {
+export var BLOCK = (() => {
   // Default Functions
   const BLK = {
-	  
     // // Air
     // BLK.AIR = {
     //   id: 0,
@@ -267,7 +279,7 @@ export default BLOCK = (() => {
       },
     },
 
-	// Find Block by ID
+    // Find Block by ID
 
     fromId: function (id) {
       for (var mat in BLK)
@@ -731,7 +743,10 @@ export default BLOCK = (() => {
     },
   };
 
-  // Block Types
+  // Block types
+  const blockType = ["AIR", "DIRT", "BEDROCK"];
+
+  // Add Block Types
   blockType.forEach((type) => {
     BLK[type] = require(`./blocks/${type}.jsx`);
   });
