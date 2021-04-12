@@ -14,5 +14,8 @@
 export default {
   id: 0,
   spawnable: false,
+  selflit: false,
+  gravity: false,
+  fluid: false,
   transparent: true,
 };

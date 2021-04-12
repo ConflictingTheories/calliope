@@ -33,7 +33,9 @@ export var MOUSE = (() => {
 // Creates a new local player manager.
 
 export class Player {
-  constructor() {}
+  constructor() {
+    this.pos = new Vector(0, 0, 0);
+  }
   // setWorld( world )
   //
   // Assign the local player to a world.
@@ -61,27 +63,27 @@ export class Player {
     var canvas = (this.canvas = canvasRef.current);
 
     var t = this;
-    document.onkeydown = (e)=> {
+    document.onkeydown = (e) => {
       if (e.target.tagName != "INPUT") {
         t.onKeyEvent(e.keyCode, true);
         return false;
       }
     };
-    document.onkeyup = (e)=> {
+    document.onkeyup = (e) => {
       if (e.target.tagName != "INPUT") {
         t.onKeyEvent(e.keyCode, false);
         return false;
       }
     };
-    canvas.onmousedown = (e)=> {
+    canvas.onmousedown = (e) => {
       t.onMouseEvent(e.clientX, e.clientY, MOUSE.DOWN, e.which == 3);
       return false;
     };
-    canvas.onmouseup = (e)=> {
+    canvas.onmouseup = (e) => {
       t.onMouseEvent(e.clientX, e.clientY, MOUSE.UP, e.which == 3);
       return false;
     };
-    canvas.onmousemove = (e)=> {
+    canvas.onmousemove = (e) => {
       t.onMouseEvent(e.clientX, e.clientY, MOUSE.MOVE, e.which == 3);
       return false;
     };
@@ -101,7 +103,7 @@ export class Player {
 
         var pl = this;
         selector.material = BLOCK[mat];
-        selector.onclick = () =>  {
+        selector.onclick = () => {
           this.style.opacity = "1.0";
 
           pl.prevSelector.style.opacity = null;

@@ -14,8 +14,11 @@
 export default {
   id: 1,
   spawnable: false,
+  selflit: false,
+  gravity: false,
+  fluid: false,
   transparent: false,
-  texture:(world, lightmap, lit, x, y, z, dir) =>{
+  texture: (world, lightmap, lit, x, y, z, dir) => {
     return [1 / 16, 1 / 16, 2 / 16, 2 / 16];
   },
 };

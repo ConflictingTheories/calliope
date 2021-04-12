@@ -44,7 +44,7 @@ export default function Bitworld({ networkString }) {
 // Initialize the World
 function initializeWorld(canvasRef, selectorRef, networkString) {
   // Build World
-  var world = new World(16, 16, 16);
+  var world = new World(8, 8, 8);
   if (networkString && networkString !== "") {
     try {
       world.createFromString(networkString);
@@ -57,8 +57,8 @@ function initializeWorld(canvasRef, selectorRef, networkString) {
   }
   // Renderer
   var render = new Renderer(canvasRef);
-  render.setWorld(world, 8);
-  render.setPerspective(60, 0.01, 200);
+  render.setWorld(world, 4);
+  render.setPerspective(30, 0.01, 100);
   // Create physics simulator
   var physics = new Physics();
   physics.setWorld(world);
