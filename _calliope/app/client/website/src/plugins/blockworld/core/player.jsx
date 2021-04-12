@@ -1,3 +1,4 @@
+import BLOCK from "./blocks";
 // ==========================================
 // Player
 //
@@ -71,8 +72,9 @@ export class Player {
   // setMaterialSelector( id )
   //
   // Sets the table with the material selectors.
-  setMaterialSelector(id) {
-    var tableRow = document.getElementById(id).getElementsByTagName("tr")[0];
+  setMaterialSelector(ref) {
+    var tableElement = ref.current;
+    var tableRow = tableElement.getElementsByTagName("tr")[0];
     var texOffset = 0;
 
     for (var mat in BLOCK) {

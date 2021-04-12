@@ -39,8 +39,8 @@ var fragmentSource =
 // id - Identifier of the HTML canvas element to render to.
 
 export class Renderer {
-  constructor(id) {
-    var canvas = this.canvas = document.getElementById(id);
+  constructor(ref) {
+    var canvas = this.canvas = ref.current;
     canvas.renderer = this;
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
@@ -109,16 +109,16 @@ export class Renderer {
     };
     terrainTexture.image.src = "media/terrain.png";
 
-    // Create canvas used to draw name tags
-    var textCanvas = this.textCanvas = document.createElement("canvas");
-    textCanvas.width = 256;
-    textCanvas.height = 64;
-    textCanvas.style.display = "none";
-    var ctx = this.textContext = textCanvas.getContext("2d");
-    ctx.textAlign = "left";
-    ctx.textBaseline = "middle";
-    ctx.font = "24px Minecraftia";
-    document.getElementsByTagName("body")[0].appendChild(textCanvas);
+    // // Create canvas used to draw name tags
+    // var textCanvas = this.textCanvas = document.createElement("canvas");
+    // textCanvas.width = 256;
+    // textCanvas.height = 64;
+    // textCanvas.style.display = "none";
+    // var ctx = this.textContext = textCanvas.getContext("2d");
+    // ctx.textAlign = "left";
+    // ctx.textBaseline = "middle";
+    // ctx.font = "24px Minecraftia";
+    // document.getElementsByTagName("body")[0].appendChild(textCanvas);
   }
   // draw()
   //
