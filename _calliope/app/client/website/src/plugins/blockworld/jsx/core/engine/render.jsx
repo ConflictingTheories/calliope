@@ -189,8 +189,8 @@ export class Renderer {
 
     gl.enable(gl.BLEND);
 
-    for (var p in world.players) {
-      var player = world.players[p];
+    for (var p in this.world.players) {
+      var player = this.world.players[p];
 
       if (player.moving || Math.abs(player.aniframe) > 0.1) {
         player.aniframe += 0.15;
@@ -205,7 +205,11 @@ export class Renderer {
       if (pitch > 0.32) pitch = 0.32;
 
       mat4.identity(this.modelMatrix);
-      mat4.translate(this.modelMatrix, [player.x, player.y, player.z + 1.7]);
+      mat4.translate(this.modelMatrix, this.modelMatrix, [
+        player.x,
+        player.y,
+        player.z + 1.7,
+      ]);
       mat4.rotateZ(this.modelMatrix, Math.PI - player.yaw);
       mat4.rotateX(this.modelMatrix, -pitch);
       gl.uniformMatrix4fv(this.uModelMat, false, this.modelMatrix);
@@ -215,12 +219,16 @@ export class Renderer {
 
       // Draw body
       mat4.identity(this.modelMatrix);
-      mat4.translate(this.modelMatrix, [player.x, player.y, player.z + 0.01]);
+      mat4.translate(this.modelMatrix, this.modelMatrix, [
+        player.x,
+        player.y,
+        player.z + 0.01,
+      ]);
       mat4.rotateZ(this.modelMatrix, Math.PI - player.yaw);
       gl.uniformMatrix4fv(this.uModelMat, false, this.modelMatrix);
       this.drawBuffer(this.playerBody);
 
-      mat4.translate(this.modelMatrix, [0, 0, 1.4]);
+      mat4.translate(this.modelMatrix, this.modelMatrix, [0, 0, 1.4]);
       mat4.rotateX(this.modelMatrix, 0.75 * aniangle);
       gl.uniformMatrix4fv(this.uModelMat, false, this.modelMatrix);
       this.drawBuffer(this.playerLeftArm);
@@ -230,7 +238,7 @@ export class Renderer {
       this.drawBuffer(this.playerRightArm);
       mat4.rotateX(this.modelMatrix, 0.75 * aniangle);
 
-      mat4.translate(this.modelMatrix, [0, 0, -0.67]);
+      mat4.translate(this.modelMatrix, this.modelMatrix, [0, 0, -0.67]);
 
       mat4.rotateX(this.modelMatrix, 0.5 * aniangle);
       gl.uniformMatrix4fv(this.uModelMat, false, this.modelMatrix);
@@ -251,7 +259,11 @@ export class Renderer {
         Math.atan2(this.camPos[1] - player.y, this.camPos[0] - player.x);
 
       mat4.identity(this.modelMatrix);
-      mat4.translate(this.modelMatrix, [player.x, player.y, player.z + 2.05]);
+      mat4.translate(this.modelMatrix, this.modelMatrix, [
+        player.x,
+        player.y,
+        player.z + 2.05,
+      ]);
       mat4.rotateZ(this.modelMatrix, ang);
       mat4.scale(this.modelMatrix, [0.005, 1, 0.005]);
       gl.uniformMatrix4fv(this.uModelMat, false, this.modelMatrix);
@@ -265,7 +277,7 @@ export class Renderer {
     mat4.identity(this.modelMatrix);
     gl.uniformMatrix4fv(this.uModelMat, false, this.modelMatrix);
   }
-  
+
   // buildPlayerName( nickname )
   //
   // Returns the texture and vertex buffer for drawing the name
@@ -365,7 +377,7 @@ export class Renderer {
       model: buffer,
     };
   }
-  
+
   // pickAt( min, max, mx, myy )
   //
   // Returns the block at mouse position mx and my.
@@ -489,7 +501,7 @@ export class Renderer {
       return false;
     }
   }
-  
+
   // updateViewport()
   //
   // Check if the viewport is still the same size and update
@@ -512,7 +524,7 @@ export class Renderer {
       this.setPerspective(this.fov, this.min, this.max);
     }
   }
-  
+
   // loadShaders()
   //
   // Takes care of loading the shaders.
@@ -567,7 +579,7 @@ export class Renderer {
     gl.enableVertexAttribArray(this.aColor);
     gl.enableVertexAttribArray(this.aTexCoord);
   }
-  
+
   // setWorld( world, chunkSize )
   //
   // Makes the renderer start tracking a new world and set up the chunk structure.
@@ -597,7 +609,7 @@ export class Renderer {
       }
     }
   }
-  
+
   // onBlockChanged( x, y, z )
   //
   // Callback from world to inform the renderer of a changed block
@@ -642,8 +654,7 @@ export class Renderer {
         chunks[i].dirty = true;
     }
   }
-  
-  
+
   buildChunks(count) {
     var gl = this.gl;
     var chunks = this.chunks;
@@ -697,7 +708,7 @@ export class Renderer {
       if (count == 0) break;
     }
   }
-  
+
   // setPerspective( fov, min, max )
   //
   // Sets the properties of the perspective projection.
@@ -709,15 +720,15 @@ export class Renderer {
     this.max = max;
 
     mat4.perspective(
+      this.projMatrix,
       fov,
       gl.viewportWidth / gl.viewportHeight,
       min,
-      max,
-      this.projMatrix
+      max
     );
     gl.uniformMatrix4fv(this.uProjMat, false, this.projMatrix);
   }
-  
+
   // setCamera( pos, ang )
   //
   // Moves the camera to the specified orientation.
@@ -748,8 +759,7 @@ export class Renderer {
 
     gl.uniformMatrix4fv(this.uViewMat, false, this.viewMatrix);
   }
-  
-  
+
   drawBuffer(buffer) {
     var gl = this.gl;
 
@@ -761,7 +771,7 @@ export class Renderer {
 
     gl.drawArrays(gl.TRIANGLES, 0, buffer.vertices);
   }
-  
+
   // loadPlayerHeadModel()
   //
   // Loads the player head model into a vertex buffer for rendering.
@@ -1112,7 +1122,7 @@ export class Renderer {
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.DYNAMIC_DRAW);
   }
-  
+
   // loadPlayerBodyModel()
   //
   // Loads the player body model into a vertex buffer for rendering.

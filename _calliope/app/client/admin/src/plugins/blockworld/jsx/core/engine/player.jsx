@@ -11,8 +11,8 @@
 ** ----------------------------------------------- **
 \*                                                 */
 
-
-import {BLOCK} from "../blocks";
+import { BLOCK } from "../blocks";
+import { Vector, lineRectCollide, rectRectCollide } from "../helpers";
 // ==========================================
 // Player
 //
@@ -20,10 +20,13 @@ import {BLOCK} from "../blocks";
 // ==========================================
 
 // Mouse event enumeration
-MOUSE = {};
-MOUSE.DOWN = 1;
-MOUSE.UP = 2;
-MOUSE.MOVE = 3;
+export var MOUSE = (() => {
+  const MOUSE = {};
+  MOUSE.DOWN = 1;
+  MOUSE.UP = 2;
+  MOUSE.MOVE = 3;
+  return MOUSE;
+})();
 
 // Constructor()
 //
@@ -54,8 +57,8 @@ export class Player {
   // setInputCanvas( id )
   //
   // Set the canvas the renderer uses for some input operations.
-  setInputCanvas(id) {
-    var canvas = (this.canvas = document.getElementById(id));
+  setInputCanvas(canvasRef) {
+    var canvas = (this.canvas = canvasRef.current);
 
     var t = this;
     document.onkeydown = function (e) {

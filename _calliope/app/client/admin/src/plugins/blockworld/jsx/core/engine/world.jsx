@@ -29,6 +29,7 @@
 // sz - World size in the Z-direction.
 
 import { BLOCK } from "../blocks";
+import { Vector } from "../helpers";
 
 export class World {
   constructor(sx, sy, sz) {

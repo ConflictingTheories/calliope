@@ -28,7 +28,7 @@ export default function Bitworld({ networkString }) {
 
   return (
     <div className="bitworld">
-      <canvas class="renderSurface" ref={canvasRef} />
+      <canvas style={{height:"400px", width:"400px"}} class="renderSurface" ref={canvasRef} />
       <table class="materialSelector" ref={selectorRef}>
         <tr></tr>
       </table>
@@ -41,7 +41,8 @@ function initializeWorld(canvasRef, selectorRef, networkString) {
   // Build World
   var world = new World(16, 16, 16);
   if (networkString && networkString !== "") {
-    world.createFromString(networkString);
+    // world.createFromString(networkString);
+    world.createFlatWorld(6);
   } else {
     world.createFlatWorld(6);
   }

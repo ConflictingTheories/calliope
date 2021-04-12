@@ -10,7 +10,7 @@
 **               All Rights Reserved.              **
 ** ----------------------------------------------- **
 \*                                                 */
-
+import { pushQuad } from "../engine/render";
 // ==========================================
 // Block types
 //
@@ -28,7 +28,6 @@ export var DIRECTION = (() => {
   DIR.BACK = 6;
   return DIR;
 })();
-
 
 // Block Object Model
 export var BLOCK = (() => {
