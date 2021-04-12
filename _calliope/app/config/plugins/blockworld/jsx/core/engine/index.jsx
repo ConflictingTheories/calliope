@@ -4,8 +4,8 @@ import { Renderer } from "./render";
 import { Player } from "./player";
 
 export default {
-  Physics,
-  World,
-  Renderer,
-  Player,
+  Physics : Physics,
+  World: World,
+  Renderer : Renderer,
+  Player : Player,
 };

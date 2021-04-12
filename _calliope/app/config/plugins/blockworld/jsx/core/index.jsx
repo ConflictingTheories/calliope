@@ -12,16 +12,18 @@
 \*                                                 */
 
 import React, { useRef, useEffect } from "react";
+import BitWorldEngine from "./engine";
 
-import { World, Renderer, Physics, Player } from "./engine";
+// Bitworld Engine Components
+const { World, Renderer, Physics, Player } = BitWorldEngine;
 
 // Splash Screen
 export default function Bitworld({ networkString }) {
-  const casvasRef = useRef();
+  const canvasRef = useRef();
   const selectorRef = useRef();
 
   useEffect(() => {
-    initializeWorld(casvasRef, selectorRef);
+    initializeWorld(canvasRef, selectorRef, networkString);
   });
 
   return (
@@ -35,10 +37,14 @@ export default function Bitworld({ networkString }) {
 }
 
 // Initialize the World
-function initializeWorld(canvasRef, selectorRef) {
+function initializeWorld(canvasRef, selectorRef, networkString) {
   // Build World
   var world = new World(16, 16, 16);
-  world.createFlatWorld(6);
+  if (networkString && networkString !== "") {
+    world.createFromString(networkString);
+  } else {
+    world.createFlatWorld(6);
+  }
 
   // Renderer
   var render = new Renderer(canvasRef);

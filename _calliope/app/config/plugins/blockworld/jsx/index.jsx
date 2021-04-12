@@ -39,7 +39,7 @@ class BlockWorld extends Component {
     }
   }
 
-  // TODO - Add Theme Injection Somehow (Or Wrapper)
+  // Render World as Passed in String or FlatLand (Default)
   render() {
     const { networkString, updated } = this.state;
     return (
