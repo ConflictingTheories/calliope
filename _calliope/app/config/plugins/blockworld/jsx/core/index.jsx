@@ -19,7 +19,7 @@ import { Renderer } from "./render";
 import { Physics } from "./physics";
 
 // Splash Screen
-export default function Blockworld({ networkString }) {
+export default function Bitworld({ networkString }) {
   // Initialize Canvas for Theme
   const casvasRef = useRef();
   const selectorRef = useRef();
@@ -30,8 +30,8 @@ export default function Blockworld({ networkString }) {
 
   return (
     <div className="bitworld">
-      <canvas id="renderSurface" ref={canvasRef} />
-      <table id="materialSelector" ref={selectorRef}>
+      <canvas class="renderSurface" ref={canvasRef} />
+      <table class="materialSelector" ref={selectorRef}>
         <tr></tr>
       </table>
     </div>

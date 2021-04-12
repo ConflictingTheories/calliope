@@ -43,6 +43,7 @@
     "express-fileupload": "^1.2.0",
     "express-session": "^1.17.1",
     "file-saver": "^2.0.5",
+    "gl-matrix": "^3.3.0",
     "glob": "^7.1.6",
     "hls.js": "^0.14.17",
     "hlsjs-ipfs-loader": "^0.3.0",

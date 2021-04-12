@@ -29,6 +29,10 @@ module.exports = (() => {
         name: "mermaid",
         active: true,
       },
+      {
+        name: "blockworld",
+        active: true,
+      },
     ],
   };
 })();
