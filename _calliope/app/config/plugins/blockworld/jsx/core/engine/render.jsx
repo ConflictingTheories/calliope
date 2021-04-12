@@ -118,7 +118,7 @@ export class Renderer {
     // Load player texture
     var playerTexture = (this.texPlayer = gl.createTexture());
     playerTexture.image = new Image();
-    playerTexture.image.onload = function () {
+    playerTexture.image.onload = () =>  {
       gl.bindTexture(gl.TEXTURE_2D, playerTexture);
       gl.texImage2D(
         gl.TEXTURE_2D,
@@ -136,7 +136,7 @@ export class Renderer {
     // Load terrain texture
     var terrainTexture = (this.texTerrain = gl.createTexture());
     terrainTexture.image = new Image();
-    terrainTexture.image.onload = function () {
+    terrainTexture.image.onload = () =>  {
       gl.bindTexture(gl.TEXTURE_2D, terrainTexture);
       gl.texImage2D(
         gl.TEXTURE_2D,

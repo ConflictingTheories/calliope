@@ -33,38 +33,45 @@ export var DIRECTION = (() => {
 export var BLOCK = (() => {
   // Default Functions
   const BLK = {
-    // // Air
-    // BLK.AIR = {
-    //   id: 0,
-    //   spawnable: false,
-    //   transparent: true,
-    // };
+    // Air
+    AIR: {
+      id: 0,
+      spawnable: false,
+      selflit: false,
+      gravity: false,
+      fluid: false,
+      transparent: true,
+    },
 
-    // // Bedrock
-    // BLK.BEDROCK = {
-    //   id: 1,
-    //   spawnable: false,
-    //   transparent: false,
-    //   texture: function (world, lightmap, lit, x, y, z, dir) {
-    //     return [1 / 16, 1 / 16, 2 / 16, 2 / 16];
-    //   },
-    // };
+    // Bedrock
+    BEDROCK: {
+      id: 1,
+      spawnable: false,
+      selflit: false,
+      gravity: false,
+      fluid: false,
+      transparent: false,
+      texture: (world, lightmap, lit, x, y, z, dir) => {
+        return [1 / 16, 1 / 16, 2 / 16, 2 / 16];
+      },
+    },
 
-    // // Dirt
-    // BLK.DIRT = {
-    //   id: 2,
-    //   spawnable: true,
-    //   transparent: false,
-    //   selflit: false,
-    //   gravity: false,
-    //   fluid: false,
-    //   texture: function (world, lightmap, lit, x, y, z, dir) {
-    //     if (dir == DIRECTION.UP && lit) return [14 / 16, 0 / 16, 15 / 16, 1 / 16];
-    //     else if (dir == DIRECTION.DOWN || !lit)
-    //       return [2 / 16, 0 / 16, 3 / 16, 1 / 16];
-    //     else return [3 / 16, 0 / 16, 4 / 16, 1 / 16];
-    //   },
-    // };
+    // Dirt
+    DIRT: {
+      id: 2,
+      spawnable: true,
+      transparent: false,
+      selflit: false,
+      gravity: false,
+      fluid: false,
+      texture: (world, lightmap, lit, x, y, z, dir) => {
+        if (dir == DIRECTION.UP && lit)
+          return [14 / 16, 0 / 16, 15 / 16, 1 / 16];
+        else if (dir == DIRECTION.DOWN || !lit)
+          return [2 / 16, 0 / 16, 3 / 16, 1 / 16];
+        else return [3 / 16, 0 / 16, 4 / 16, 1 / 16];
+      },
+    },
 
     // Wood
     WOOD: {
@@ -74,7 +81,7 @@ export var BLOCK = (() => {
       selflit: false,
       gravity: false,
       fluid: false,
-      texture: function (world, lightmap, lit, x, y, z, dir) {
+      texture: (world, lightmap, lit, x, y, z, dir) => {
         if (dir == DIRECTION.UP || dir == DIRECTION.DOWN)
           return [5 / 16, 1 / 16, 6 / 16, 2 / 16];
         else return [4 / 16, 1 / 16, 5 / 16, 2 / 16];
@@ -89,7 +96,7 @@ export var BLOCK = (() => {
       selflit: false,
       gravity: false,
       fluid: false,
-      texture: function (world, lightmap, lit, x, y, z, dir) {
+      texture: (world, lightmap, lit, x, y, z, dir) => {
         if (dir == DIRECTION.UP || dir == DIRECTION.DOWN)
           return [10 / 16, 0 / 16, 11 / 16, 1 / 16];
         else return [8 / 16, 0 / 16, 9 / 16, 1 / 16];
@@ -104,7 +111,7 @@ export var BLOCK = (() => {
       selflit: false,
       gravity: false,
       fluid: false,
-      texture: function (world, lightmap, lit, x, y, z, dir) {
+      texture: (world, lightmap, lit, x, y, z, dir) => {
         if (dir == DIRECTION.FORWARD || dir == DIRECTION.BACK)
           return [3 / 16, 2 / 16, 4 / 16, 3 / 16];
         else return [4 / 16, 0 / 16, 5 / 16, 1 / 16];
@@ -119,7 +126,7 @@ export var BLOCK = (() => {
       selflit: true,
       gravity: true,
       fluid: true,
-      texture: function (world, lightmap, lit, x, y, z, dir) {
+      texture: (world, lightmap, lit, x, y, z, dir) => {
         return [13 / 16, 14 / 16, 14 / 16, 15 / 16];
       },
     },
@@ -132,7 +139,7 @@ export var BLOCK = (() => {
       selflit: false,
       gravity: false,
       fluid: false,
-      texture: function (world, lightmap, lit, x, y, z, dir) {
+      texture: (world, lightmap, lit, x, y, z, dir) => {
         return [4 / 16, 0 / 16, 5 / 16, 1 / 16];
       },
     },
@@ -145,7 +152,7 @@ export var BLOCK = (() => {
       selflit: false,
       gravity: false,
       fluid: false,
-      texture: function (world, lightmap, lit, x, y, z, dir) {
+      texture: (world, lightmap, lit, x, y, z, dir) => {
         return [0 / 16, 1 / 16, 1 / 16, 2 / 16];
       },
     },
@@ -158,7 +165,7 @@ export var BLOCK = (() => {
       selflit: false,
       gravity: false,
       fluid: false,
-      texture: function (world, lightmap, lit, x, y, z, dir) {
+      texture: (world, lightmap, lit, x, y, z, dir) => {
         return [1 / 16, 0 / 16, 2 / 16, 1 / 16];
       },
     },
@@ -171,7 +178,7 @@ export var BLOCK = (() => {
       selflit: false,
       gravity: false,
       fluid: false,
-      texture: function (world, lightmap, lit, x, y, z, dir) {
+      texture: (world, lightmap, lit, x, y, z, dir) => {
         return [7 / 16, 0 / 16, 8 / 16, 1 / 16];
       },
     },
@@ -184,7 +191,7 @@ export var BLOCK = (() => {
       selflit: false,
       gravity: true,
       fluid: false,
-      texture: function (world, lightmap, lit, x, y, z, dir) {
+      texture: (world, lightmap, lit, x, y, z, dir) => {
         return [2 / 16, 1 / 16, 3 / 16, 2 / 16];
       },
     },
@@ -197,7 +204,7 @@ export var BLOCK = (() => {
       selflit: false,
       gravity: true,
       fluid: false,
-      texture: function (world, lightmap, lit, x, y, z, dir) {
+      texture: (world, lightmap, lit, x, y, z, dir) => {
         return [3 / 16, 1 / 16, 4 / 16, 2 / 16];
       },
     },
@@ -210,7 +217,7 @@ export var BLOCK = (() => {
       selflit: false,
       gravity: false,
       fluid: false,
-      texture: function (world, lightmap, lit, x, y, z, dir) {
+      texture: (world, lightmap, lit, x, y, z, dir) => {
         return [6 / 16, 1 / 16, 7 / 16, 2 / 16];
       },
     },
@@ -223,7 +230,7 @@ export var BLOCK = (() => {
       selflit: false,
       gravity: false,
       fluid: false,
-      texture: function (world, lightmap, lit, x, y, z, dir) {
+      texture: (world, lightmap, lit, x, y, z, dir) => {
         return [7 / 16, 1 / 16, 8 / 16, 2 / 16];
       },
     },
@@ -236,7 +243,7 @@ export var BLOCK = (() => {
       selflit: false,
       gravity: false,
       fluid: false,
-      texture: function (world, lightmap, lit, x, y, z, dir) {
+      texture: (world, lightmap, lit, x, y, z, dir) => {
         return [8 / 16, 1 / 16, 9 / 16, 2 / 16];
       },
     },
@@ -249,7 +256,7 @@ export var BLOCK = (() => {
       selflit: false,
       gravity: false,
       fluid: false,
-      texture: function (world, lightmap, lit, x, y, z, dir) {
+      texture: (world, lightmap, lit, x, y, z, dir) => {
         return [5 / 16, 2 / 16, 6 / 16, 3 / 16];
       },
     },
@@ -262,7 +269,7 @@ export var BLOCK = (() => {
       selflit: false,
       gravity: false,
       fluid: false,
-      texture: function (world, lightmap, lit, x, y, z, dir) {
+      texture: (world, lightmap, lit, x, y, z, dir) => {
         return [1 / 16, 3 / 16, 2 / 16, 4 / 16];
       },
     },
@@ -275,17 +282,89 @@ export var BLOCK = (() => {
       selflit: false,
       gravity: false,
       fluid: false,
-      texture: function (world, lightmap, lit, x, y, z, dir) {
+      texture: (world, lightmap, lit, x, y, z, dir) => {
         return [0 / 16, 3 / 16, 1 / 16, 4 / 16];
       },
     },
 
     // Find Block by ID
 
-    fromId: function (id) {
+    fromId: (id) => {
       for (var mat in BLK)
         if (typeof BLK[mat] == "object" && BLK[mat].id == id) return BLK[mat];
       return null;
+    },
+
+    // Push Top Vertices
+
+    pushTop: (vertices, x, y, z, bH, c, lm) => {
+      pushQuad(
+        vertices,
+        [x, y, z + bH, c[0], c[1], lm, lm, lm, 1.0],
+        [x + 1.0, y, z + bH, c[2], c[1], lm, lm, lm, 1.0],
+        [x + 1.0, y + 1.0, z + bH, c[2], c[3], lm, lm, lm, 1.0],
+        [x, y + 1.0, z + bH, c[0], c[3], lm, lm, lm, 1.0]
+      );
+    },
+
+    // Push Front Vertices
+
+    pushFront: (vertices, x, y, z, bH, c, lm) => {
+      pushQuad(
+        vertices,
+        [x, y, z, c[0], c[3], lm, lm, lm, 1.0],
+        [x + 1.0, y, z, c[2], c[3], lm, lm, lm, 1.0],
+        [x + 1.0, y, z + bH, c[2], c[1], lm, lm, lm, 1.0],
+        [x, y, z + bH, c[0], c[1], lm, lm, lm, 1.0]
+      );
+    },
+
+    // Push Back Vertices
+
+    pushBack: (vertices, x, y, z, bH, c, lm) => {
+      pushQuad(
+        vertices,
+        [x, y, z + bH, c[2], c[1], lm, lm, lm, 1.0],
+        [x, y + 1.0, z + bH, c[0], c[1], lm, lm, lm, 1.0],
+        [x, y + 1.0, z, c[0], c[3], lm, lm, lm, 1.0],
+        [x, y, z, c[2], c[3], lm, lm, lm, 1.0]
+      );
+    },
+
+    // Push Bottom Vertices
+
+    pushBottom: (vertices, x, y, z, bH, c, lm) => {
+      pushQuad(
+        vertices,
+        [x, y + 1.0, z, c[0], c[3], lm, lm, lm, 1.0],
+        [x + 1.0, y + 1.0, z, c[2], c[3], lm, lm, lm, 1.0],
+        [x + 1.0, y, z, c[2], c[1], lm, lm, lm, 1.0],
+        [x, y, z, c[0], c[1], lm, lm, lm, 1.0]
+      );
+    },
+
+    // Push Right Vertices
+
+    pushRight: (vertices, x, y, z, bH, c, lm) => {
+      pushQuad(
+        vertices,
+        [x + 1.0, y, z, c[0], c[3], lm, lm, lm, 1.0],
+        [x + 1.0, y + 1.0, z, c[2], c[3], lm, lm, lm, 1.0],
+        [x + 1.0, y + 1.0, z + bH, c[2], c[1], lm, lm, lm, 1.0],
+        [x + 1.0, y, z + bH, c[0], c[1], lm, lm, lm, 1.0]
+      );
+    },
+
+    // Push Left Vertices
+
+    pushLeft: (vertices, x, y, z, bH, c, lm) => {
+      pushQuad(
+        vertices,
+        [x, y, z + bH, c[2], c[1], lm, lm, lm, 1.0],
+        [x, y + 1.0, z + bH, c[0], c[1], lm, lm, lm, 1.0],
+        [x, y + 1.0, z, c[0], c[3], lm, lm, lm, 1.0],
+        [x, y, z, c[2], c[3], lm, lm, lm, 1.0]
+      );
     },
 
     // pushVertices( vertices, world, lightmap, x, y, z )
@@ -293,7 +372,7 @@ export var BLOCK = (() => {
     // Pushes the vertices necessary for rendering a
     // specific block into the array.
 
-    pushVertices: function (vertices, world, lightmap, x, y, z) {
+    pushVertices: (vertices, world, lightmap, x, y, z) => {
       var blocks = world.blocks;
       var blockLit = z >= lightmap[x][y];
       var block = blocks[x][y][z];
@@ -313,53 +392,7 @@ export var BLOCK = (() => {
         var lightMultiplier = z >= lightmap[x][y] ? 1.0 : 0.6;
         if (block.selflit) lightMultiplier = 1.0;
 
-        pushQuad(
-          vertices,
-          [
-            x,
-            y,
-            z + bH,
-            c[0],
-            c[1],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ],
-          [
-            x + 1.0,
-            y,
-            z + bH,
-            c[2],
-            c[1],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ],
-          [
-            x + 1.0,
-            y + 1.0,
-            z + bH,
-            c[2],
-            c[3],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ],
-          [
-            x,
-            y + 1.0,
-            z + bH,
-            c[0],
-            c[3],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ]
-        );
+        this.pushTop(vertices, x, y, z, bH, c, lightMultiplier);
       }
 
       // Bottom
@@ -376,53 +409,7 @@ export var BLOCK = (() => {
 
         var lightMultiplier = block.selflit ? 1.0 : 0.6;
 
-        pushQuad(
-          vertices,
-          [
-            x,
-            y + 1.0,
-            z,
-            c[0],
-            c[3],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ],
-          [
-            x + 1.0,
-            y + 1.0,
-            z,
-            c[2],
-            c[3],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ],
-          [
-            x + 1.0,
-            y,
-            z,
-            c[2],
-            c[1],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ],
-          [
-            x,
-            y,
-            z,
-            c[0],
-            c[1],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ]
-        );
+        this.pushBottom(vertices, x, y, z, bH, c, lightMultiplier);
       }
 
       // Front
@@ -440,53 +427,8 @@ export var BLOCK = (() => {
         var lightMultiplier = y == 0 || z >= lightmap[x][y - 1] ? 1.0 : 0.6;
         if (block.selflit) lightMultiplier = 1.0;
 
-        pushQuad(
-          vertices,
-          [
-            x,
-            y,
-            z,
-            c[0],
-            c[3],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ],
-          [
-            x + 1.0,
-            y,
-            z,
-            c[2],
-            c[3],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ],
-          [
-            x + 1.0,
-            y,
-            z + bH,
-            c[2],
-            c[1],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ],
-          [
-            x,
-            y,
-            z + bH,
-            c[0],
-            c[1],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ]
-        );
+        // Push Shader Vertex Shaders
+        this.pushFront(vertices, x, y, z, bH, c, lightMultiplier);
       }
 
       // Back
@@ -503,53 +445,7 @@ export var BLOCK = (() => {
 
         var lightMultiplier = block.selflit ? 1.0 : 0.6;
 
-        pushQuad(
-          vertices,
-          [
-            x,
-            y + 1.0,
-            z + bH,
-            c[2],
-            c[1],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ],
-          [
-            x + 1.0,
-            y + 1.0,
-            z + bH,
-            c[0],
-            c[1],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ],
-          [
-            x + 1.0,
-            y + 1.0,
-            z,
-            c[0],
-            c[3],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ],
-          [
-            x,
-            y + 1.0,
-            z,
-            c[2],
-            c[3],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ]
-        );
+        this.pushBack(vertices, x, y, z, bH, c, lightMultiplier);
       }
 
       // Left
@@ -566,53 +462,7 @@ export var BLOCK = (() => {
 
         var lightMultiplier = block.selflit ? 1.0 : 0.6;
 
-        pushQuad(
-          vertices,
-          [
-            x,
-            y,
-            z + bH,
-            c[2],
-            c[1],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ],
-          [
-            x,
-            y + 1.0,
-            z + bH,
-            c[0],
-            c[1],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ],
-          [
-            x,
-            y + 1.0,
-            z,
-            c[0],
-            c[3],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ],
-          [
-            x,
-            y,
-            z,
-            c[2],
-            c[3],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ]
-        );
+        this.pushLeft(vertices, x, y, z, bH, c, lightMultiplier);
       }
 
       // Right
@@ -631,53 +481,7 @@ export var BLOCK = (() => {
           x == world.sx - 1 || z >= lightmap[x + 1][y] ? 1.0 : 0.6;
         if (block.selflit) lightMultiplier = 1.0;
 
-        pushQuad(
-          vertices,
-          [
-            x + 1.0,
-            y,
-            z,
-            c[0],
-            c[3],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ],
-          [
-            x + 1.0,
-            y + 1.0,
-            z,
-            c[2],
-            c[3],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ],
-          [
-            x + 1.0,
-            y + 1.0,
-            z + bH,
-            c[2],
-            c[1],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ],
-          [
-            x + 1.0,
-            y,
-            z + bH,
-            c[0],
-            c[1],
-            lightMultiplier,
-            lightMultiplier,
-            lightMultiplier,
-            1.0,
-          ]
-        );
+        this.pushRight(vertices, x, y, z, bH, c, lightMultiplier);
       }
     },
 
@@ -685,7 +489,7 @@ export var BLOCK = (() => {
     //
     // Pushes vertices with the data needed for picking.
 
-    pushPickingVertices: function (vertices, x, y, z) {
+    pushPickingVertices: (vertices, x, y, z) => {
       var color = { r: x / 255, g: y / 255, b: z / 255 };
 
       // Top
@@ -744,13 +548,13 @@ export var BLOCK = (() => {
     },
   };
 
-  // Block types
-  const blockType = ["AIR", "DIRT", "BEDROCK"];
+  // // Block types
+  // const blockType = ["AIR", "DIRT", "BEDROCK"];
 
-  // Add Block Types
-  blockType.forEach((type) => {
-    BLK[type] = require(`./types/${type}.jsx`).default;
-  });
+  // // Add Block Types
+  // blockType.forEach((type) => {
+  //   BLK[type] = require(`./types/${type}.jsx`).default;
+  // });
 
   return BLK;
 })();

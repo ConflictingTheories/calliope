@@ -61,27 +61,27 @@ export class Player {
     var canvas = (this.canvas = canvasRef.current);
 
     var t = this;
-    document.onkeydown = function (e) {
+    document.onkeydown = (e)=> {
       if (e.target.tagName != "INPUT") {
         t.onKeyEvent(e.keyCode, true);
         return false;
       }
     };
-    document.onkeyup = function (e) {
+    document.onkeyup = (e)=> {
       if (e.target.tagName != "INPUT") {
         t.onKeyEvent(e.keyCode, false);
         return false;
       }
     };
-    canvas.onmousedown = function (e) {
+    canvas.onmousedown = (e)=> {
       t.onMouseEvent(e.clientX, e.clientY, MOUSE.DOWN, e.which == 3);
       return false;
     };
-    canvas.onmouseup = function (e) {
+    canvas.onmouseup = (e)=> {
       t.onMouseEvent(e.clientX, e.clientY, MOUSE.UP, e.which == 3);
       return false;
     };
-    canvas.onmousemove = function (e) {
+    canvas.onmousemove = (e)=> {
       t.onMouseEvent(e.clientX, e.clientY, MOUSE.MOVE, e.which == 3);
       return false;
     };
@@ -101,7 +101,7 @@ export class Player {
 
         var pl = this;
         selector.material = BLOCK[mat];
-        selector.onclick = function () {
+        selector.onclick = () =>  {
           this.style.opacity = "1.0";
 
           pl.prevSelector.style.opacity = null;

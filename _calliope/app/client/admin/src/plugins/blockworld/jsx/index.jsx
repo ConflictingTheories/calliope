@@ -44,7 +44,7 @@ class BlockWorld extends Component {
     const { networkString, updated } = this.state;
     return (
       <>
-        <Bitworld key={updated} networkString={networkString} />
+        <Bitworld class="bitworld" key={updated} networkString={networkString} />
       </>
     );
   }
