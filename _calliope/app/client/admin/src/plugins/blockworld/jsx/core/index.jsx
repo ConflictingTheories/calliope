@@ -28,7 +28,7 @@ export default function Bitworld({ networkString }) {
 
   return (
     <div className="bitworld">
-      <canvas style={{height:"400px", width:"400px"}} class="renderSurface" ref={canvasRef} />
+      <canvas class="renderSurface" ref={canvasRef} />
       <table class="materialSelector" ref={selectorRef}>
         <tr></tr>
       </table>
