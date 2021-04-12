@@ -54,11 +54,11 @@ export class World {
   // and the top half with air.
   createFlatWorld(height) {
     this.spawnPoint = new Vector(this.sx / 2 + 0.5, this.sy / 2 + 0.5, height);
-
     for (var x = 0; x < this.sx; x++)
       for (var y = 0; y < this.sy; y++)
         for (var z = 0; z < this.sz; z++)
           this.blocks[x][y][z] = z < height ? BLOCK.DIRT : BLOCK.AIR;
+    console.log("Generating - Flat World -- ", this.toNetworkString());
   }
 
   // createFromString( str )
@@ -70,7 +70,7 @@ export class World {
   // with the appropriate size!
   createFromString(str) {
     var i = 0;
-
+    console.log("Generating - World -- ", str);
     for (var x = 0; x < this.sx; x++) {
       for (var y = 0; y < this.sy; y++) {
         for (var z = 0; z < this.sz; z++) {

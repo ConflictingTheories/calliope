@@ -73,7 +73,7 @@ function mainLoop(physics, player, render) {
     var time = new Date().getTime() / 1000.0;
 
     // Simulate physics
-    physics.simulate();
+    // physics.simulate();
 
     // Update local player
     player.update();
