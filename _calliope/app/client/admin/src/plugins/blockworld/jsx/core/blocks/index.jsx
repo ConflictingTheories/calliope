@@ -333,7 +333,7 @@ export var BLOCK = (() => {
 
     // Push Bottom Vertices
 
-    pushBottom: (vertices, x, y, z, bH, c, lm) => {
+    pushBottom: (vertices, x, y, z, c, lm) => {
       pushQuad(
         vertices,
         [x, y + 1.0, z, c[0], c[3], lm, lm, lm, 1.0],
@@ -392,7 +392,7 @@ export var BLOCK = (() => {
         var lightMultiplier = z >= lightmap[x][y] ? 1.0 : 0.6;
         if (block.selflit) lightMultiplier = 1.0;
 
-        this.pushTop(vertices, x, y, z, bH, c, lightMultiplier);
+        BLK.pushTop(vertices, x, y, z, bH, c, lightMultiplier);
       }
 
       // Bottom
@@ -409,7 +409,7 @@ export var BLOCK = (() => {
 
         var lightMultiplier = block.selflit ? 1.0 : 0.6;
 
-        this.pushBottom(vertices, x, y, z, bH, c, lightMultiplier);
+        BLK.pushBottom(vertices, x, y, z, c, lightMultiplier);
       }
 
       // Front
@@ -428,7 +428,7 @@ export var BLOCK = (() => {
         if (block.selflit) lightMultiplier = 1.0;
 
         // Push Shader Vertex Shaders
-        this.pushFront(vertices, x, y, z, bH, c, lightMultiplier);
+        BLK.pushFront(vertices, x, y, z, bH, c, lightMultiplier);
       }
 
       // Back
@@ -445,7 +445,7 @@ export var BLOCK = (() => {
 
         var lightMultiplier = block.selflit ? 1.0 : 0.6;
 
-        this.pushBack(vertices, x, y, z, bH, c, lightMultiplier);
+        BLK.pushBack(vertices, x, y, z, bH, c, lightMultiplier);
       }
 
       // Left
@@ -462,7 +462,7 @@ export var BLOCK = (() => {
 
         var lightMultiplier = block.selflit ? 1.0 : 0.6;
 
-        this.pushLeft(vertices, x, y, z, bH, c, lightMultiplier);
+        BLK.pushLeft(vertices, x, y, z, bH, c, lightMultiplier);
       }
 
       // Right
@@ -481,7 +481,7 @@ export var BLOCK = (() => {
           x == world.sx - 1 || z >= lightmap[x + 1][y] ? 1.0 : 0.6;
         if (block.selflit) lightMultiplier = 1.0;
 
-        this.pushRight(vertices, x, y, z, bH, c, lightMultiplier);
+        BLK.pushRight(vertices, x, y, z, bH, c, lightMultiplier);
       }
     },
 

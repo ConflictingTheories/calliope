@@ -22,18 +22,42 @@ export default function Bitworld({ networkString }) {
   const canvasRef = useRef();
   const selectorRef = useRef();
 
+  let player,
+    render,
+    physics,
+    world = null;
+
+  // Initialize the World
   useEffect(() => {
-    // Initialize Blockword
-    let loop = initializeWorld(canvasRef, selectorRef, networkString);
-    // Cleanup when done
+    if (!player || !render || !physics || !world) {
+      let init = initializeWorld(canvasRef, selectorRef, networkString);
+      player = init.player;
+      render = init.render;
+      physics = init.physics;
+      world = init.world;
+    }
+  }, [canvasRef, selectorRef, networkString]);
+
+  // Render Game Loop
+  useEffect(() => {
+    let frameCount = 0;
+    let loop = mainLoop(player, render, physics, frameCount);
     return () => {
       cancelAnimationFrame(loop);
     };
-  }, [canvasRef, selectorRef, networkString]);
-  
+  }, []);
+
   return (
     <div className="bitworld">
-      <canvas className="renderSurface" ref={canvasRef} />
+      <canvas
+        className="renderSurface"
+        ref={canvasRef}
+        onKeyDown={player ? player.playerKeyDownHandler : null}
+        onKeyUp={player ? player.playerKeyUpHandler : null}
+        onMouseMove={player ? player.playerMouseMoveHandler : null}
+        onMouseUp={player ? player.playerMouseUpHandler : null}
+        onMouseDown={player ? player.playerMouseDownHandler : null}
+      />
       <table className="materialSelector" ref={selectorRef}>
         <tr></tr>
       </table>
@@ -41,10 +65,29 @@ export default function Bitworld({ networkString }) {
   );
 }
 
+function mainLoop(player, render, physics, frameCount) {
+  // Simulate physics
+  if (physics) physics.simulate();
+  // Update local player
+  if (player) player.update();
+  // Draw world
+  if (render) {
+    render.buildChunks(1);
+    render.setCamera(player.getEyePos().toArray(), player.angles);
+    render.draw();
+  }
+  // Loop
+  frameCount++;
+  return requestAnimationFrame(() =>
+    mainLoop(player, render, physics, frameCount)
+  );
+}
+
 // Initialize the World
 function initializeWorld(canvasRef, selectorRef, networkString) {
+  console.log("--INITIATLIZATION");
   // Build World
-  var world = new World(8, 8, 8);
+  var world = new World(16, 16, 16);
   if (networkString && networkString !== "") {
     try {
       world.createFromString(networkString);
@@ -57,8 +100,8 @@ function initializeWorld(canvasRef, selectorRef, networkString) {
   }
   // Renderer
   var render = new Renderer(canvasRef);
-  render.setWorld(world, 4);
-  render.setPerspective(30, 0.01, 100);
+  render.setWorld(world, 8);
+  render.setPerspective(60, 0.01, 200);
   // Create physics simulator
   var physics = new Physics();
   physics.setWorld(world);
@@ -67,22 +110,10 @@ function initializeWorld(canvasRef, selectorRef, networkString) {
   player.setWorld(world);
   player.setInputCanvas(canvasRef);
   player.setMaterialSelector(selectorRef);
-  // Run Game Loop
-  return mainLoop(physics, player, render);
-}
-
-// Run the Main Game Loop on the World
-function mainLoop(physics, player, render) {
-  // Render loop
-  return requestAnimationFrame(() => {
-    // Simulate physics
-    physics.simulate();
-    // Update local player
-    player.update();
-    // Build a chunk
-    render.buildChunks(1);
-    // Draw world
-    render.setCamera(player.getEyePos().toArray(), player.angles);
-    render.draw();
-  });
+  return {
+    player,
+    render,
+    physics,
+    world,
+  };
 }

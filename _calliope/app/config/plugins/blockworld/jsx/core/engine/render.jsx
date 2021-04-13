@@ -118,7 +118,7 @@ export class Renderer {
     // Load player texture
     var playerTexture = (this.texPlayer = gl.createTexture());
     playerTexture.image = new Image();
-    playerTexture.image.onload = () =>  {
+    playerTexture.image.onload = () => {
       gl.bindTexture(gl.TEXTURE_2D, playerTexture);
       gl.texImage2D(
         gl.TEXTURE_2D,
@@ -136,7 +136,7 @@ export class Renderer {
     // Load terrain texture
     var terrainTexture = (this.texTerrain = gl.createTexture());
     terrainTexture.image = new Image();
-    terrainTexture.image.onload = () =>  {
+    terrainTexture.image.onload = () => {
       gl.bindTexture(gl.TEXTURE_2D, terrainTexture);
       gl.texImage2D(
         gl.TEXTURE_2D,
@@ -152,15 +152,15 @@ export class Renderer {
     terrainTexture.image.src = "media/terrain.png";
 
     // // Create canvas used to draw name tags
-    // var textCanvas = this.textCanvas = document.createElement("canvas");
-    // textCanvas.width = 256;
-    // textCanvas.height = 64;
-    // textCanvas.style.display = "none";
-    // var ctx = this.textContext = textCanvas.getContext("2d");
-    // ctx.textAlign = "left";
-    // ctx.textBaseline = "middle";
-    // ctx.font = "24px Minecraftia";
-    // document.getElementsByTagName("body")[0].appendChild(textCanvas);
+    var textCanvas = this.textCanvas = document.createElement("canvas");
+    textCanvas.width = 256;
+    textCanvas.height = 64;
+    textCanvas.style.display = "none";
+    var ctx = this.textContext = textCanvas.getContext("2d");
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    ctx.font = "24px Minecraftia";
+    document.getElementsByTagName("body")[0].appendChild(textCanvas);
   }
 
   // draw()

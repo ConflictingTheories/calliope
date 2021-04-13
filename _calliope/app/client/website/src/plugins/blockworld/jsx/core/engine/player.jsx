@@ -88,6 +88,37 @@ export class Player {
       return false;
     };
   }
+
+  playerUpHandler(e) {
+    this.onKeyEvent(e.keyCode, false);
+    console.log('---')
+    return false;
+  }
+
+  playerDownHandler(e) {
+    this.onKeyEvent(e.keyCode, true);
+    console.log('---')
+    return false;
+  }
+
+  playerMouseDownHandler(e) {
+    this.onMouseEvent(e.clientX, e.clientY, MOUSE.DOWN, e.which == 3);
+    console.log('---')
+    return false;
+  }
+
+  playerMouseUpHandler(e) {
+    this.onMouseEvent(e.clientX, e.clientY, MOUSE.UP, e.which == 3);
+    console.log('---')
+    return false;
+  }
+
+  playerMouseMoveHandler(e) {
+    this.onMouseEvent(e.clientX, e.clientY, MOUSE.MOVE, e.which == 3);
+    console.log('---')
+    return false;
+  }
+
   // setMaterialSelector( id )
   //
   // Sets the table with the material selectors.
