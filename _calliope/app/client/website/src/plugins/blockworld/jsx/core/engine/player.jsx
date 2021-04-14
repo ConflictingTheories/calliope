@@ -34,12 +34,19 @@ export var MOUSE = (() => {
 
 export class Player {
   constructor() {
-    this.pos = new Vector(0, 0, 0);
+    this.world = null;
+    this.velocity = new Vector(0, 0, 0);
+    this.angles = [0, Math.PI, 0];
+    this.falling = false;
+    this.keys = {};
+    this.buildMaterial = BLOCK.DIRT;
+    this.eventHandlers = {};
+    this.pos = new Vector(8, 8, 8);
   }
   // setWorld( world )
   //
   // Assign the local player to a world.
-  setWorld(world) {
+  setWorld = (world) => {
     this.world = world;
     this.world.localPlayer = this;
     this.pos = world.spawnPoint;
@@ -49,17 +56,17 @@ export class Player {
     this.keys = {};
     this.buildMaterial = BLOCK.DIRT;
     this.eventHandlers = {};
-  }
+  };
   // setClient( client )
   //
   // Assign the local player to a socket client.
-  setClient(client) {
+  setClient = (client) => {
     this.client = client;
-  }
+  };
   // setInputCanvas( id )
   //
   // Set the canvas the renderer uses for some input operations.
-  setInputCanvas(canvasRef) {
+  setInputCanvas = (canvasRef) => {
     var canvas = (this.canvas = canvasRef.current);
 
     var t = this;
@@ -87,42 +94,12 @@ export class Player {
       t.onMouseEvent(e.clientX, e.clientY, MOUSE.MOVE, e.which == 3);
       return false;
     };
-  }
-
-  playerUpHandler(e) {
-    this.onKeyEvent(e.keyCode, false);
-    console.log('---')
-    return false;
-  }
-
-  playerDownHandler(e) {
-    this.onKeyEvent(e.keyCode, true);
-    console.log('---')
-    return false;
-  }
-
-  playerMouseDownHandler(e) {
-    this.onMouseEvent(e.clientX, e.clientY, MOUSE.DOWN, e.which == 3);
-    console.log('---')
-    return false;
-  }
-
-  playerMouseUpHandler(e) {
-    this.onMouseEvent(e.clientX, e.clientY, MOUSE.UP, e.which == 3);
-    console.log('---')
-    return false;
-  }
-
-  playerMouseMoveHandler(e) {
-    this.onMouseEvent(e.clientX, e.clientY, MOUSE.MOVE, e.which == 3);
-    console.log('---')
-    return false;
-  }
+  };
 
   // setMaterialSelector( id )
   //
   // Sets the table with the material selectors.
-  setMaterialSelector(ref) {
+  setMaterialSelector = (ref) => {
     var tableElement = ref.current;
     var tableRow = tableElement.getElementsByTagName("tr")[0];
     var texOffset = 0;
@@ -132,15 +109,15 @@ export class Player {
         var selector = document.createElement("td");
         selector.style.backgroundPosition = texOffset + "px 0px";
 
-        var pl = this;
+        let pl = this;
         selector.material = BLOCK[mat];
         selector.onclick = () => {
-          this.style.opacity = "1.0";
+          selector.style.opacity = "1.0";
 
           pl.prevSelector.style.opacity = null;
-          pl.prevSelector = this;
+          pl.prevSelector = selector;
 
-          pl.buildMaterial = this.material;
+          pl.buildMaterial = selector.material;
         };
 
         if (mat == "DIRT") {
@@ -152,28 +129,28 @@ export class Player {
         texOffset -= 70;
       }
     }
-  }
+  };
   // on( event, callback )
   //
   // Hook a player event.
-  on(event, callback) {
+  on = (event, callback) => {
     this.eventHandlers[event] = callback;
-  }
+  };
   // onKeyEvent( keyCode, down )
   //
   // Hook for keyboard input.
-  onKeyEvent(keyCode, down) {
+  onKeyEvent = (keyCode, down) => {
     var key = String.fromCharCode(keyCode).toLowerCase();
     this.keys[key] = down;
     this.keys[keyCode] = down;
 
     if (!down && key == "t" && this.eventHandlers["openChat"])
       this.eventHandlers.openChat();
-  }
+  };
   // onMouseEvent( x, y, type, rmb )
   //
   // Hook for mouse input.
-  onMouseEvent(x, y, type, rmb) {
+  onMouseEvent = (x, y, type, rmb) => {
     if (type == MOUSE.DOWN) {
       this.dragStart = { x: x, y: y };
       this.mouseDown = true;
@@ -193,11 +170,11 @@ export class Player {
 
       this.canvas.style.cursor = "move";
     }
-  }
+  };
   // doBlockAction( x, y )
   //
   // Called to perform an action based on the player's block selection and input.
-  doBlockAction(x, y, destroy) {
+  doBlockAction = (x, y, destroy) => {
     var bPos = new Vector(
       Math.floor(this.pos.x),
       Math.floor(this.pos.y),
@@ -222,20 +199,20 @@ export class Player {
           this.buildMaterial
         );
     }
-  }
+  };
   // getEyePos()
   //
   // Returns the position of the eyes of the player for rendering.
-  getEyePos() {
+  getEyePos = () => {
     return this.pos.add(new Vector(0.0, 0.0, 1.7));
-  }
-  getIsoPos() {
+  };
+  getIsoPos = () => {
     return this.pos.add(new Vector(3.0, 3.0, 1.7));
-  }
+  };
   // update()
   //
   // Updates this local player (gravity, movement)
-  update() {
+  update = () => {
     var world = this.world;
     var velocity = this.velocity;
     var pos = this.pos;
@@ -244,6 +221,9 @@ export class Player {
       Math.floor(pos.y),
       Math.floor(pos.z)
     );
+
+
+    console.log(pos,bPos);
 
     if (this.lastUpdate != null) {
       var delta = (new Date().getTime() - this.lastUpdate) / 1000;
@@ -304,11 +284,11 @@ export class Player {
     }
 
     this.lastUpdate = new Date().getTime();
-  }
+  };
   // resolveCollision( pos, bPos, velocity )
   //
   // Resolves collisions between the player and blocks on XY level for the next movement step.
-  resolveCollision(pos, bPos, velocity) {
+  resolveCollision = (pos, bPos, velocity) => {
     var world = this.world;
     var playerRect = {
       x: pos.x + velocity.x,
@@ -409,5 +389,5 @@ export class Player {
 
     // Return solution
     return pos.add(velocity);
-  }
+  };
 }

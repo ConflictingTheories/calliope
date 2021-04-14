@@ -10,7 +10,8 @@
 **               All Rights Reserved.              **
 ** ----------------------------------------------- **
 \*                                                 */
-import { pushQuad } from "../engine/render";
+// import { pushQuad } from "../engine/render";
+import { pushQuad } from "../engine/renderer";
 // ==========================================
 // Block types
 //
@@ -32,7 +33,7 @@ export var DIRECTION = (() => {
 // Block Object Model
 export var BLOCK = (() => {
   // Default Functions
-  const BLK = {
+  let BLK = {
     // Air
     AIR: {
       id: 0,

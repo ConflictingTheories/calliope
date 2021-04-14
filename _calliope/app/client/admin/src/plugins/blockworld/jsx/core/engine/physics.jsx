@@ -53,7 +53,7 @@ export class Physics {
         for (var y = 0; y < world.sy; y++) {
           for (var z = 0; z < world.sz; z++) {
             if (
-              blocks[x][y][z].gravity &&
+              blocks[x][y][z]?.gravity &&
               z > 0 &&
               blocks[x][y][z - 1] == BLOCK.AIR
             ) {

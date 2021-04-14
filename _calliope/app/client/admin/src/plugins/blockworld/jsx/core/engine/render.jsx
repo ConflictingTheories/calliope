@@ -65,12 +65,23 @@ export class Renderer {
     canvas.height = canvas.clientHeight;
 
     // Initialise WebGL
-    var gl;
     try {
-      gl = this.gl = canvas.getContext("experimental-webgl");
+      // Context
+      var gl = (this.gl = canvas.getContext("experimental-webgl"));
     } catch (e) {
       throw "Your browser doesn't support WebGL!";
     }
+
+    // Textures
+    this.textCanvas = null;
+    this.texTerrain = gl.createTexture();
+    this.texPlayer = gl.createTexture();
+    this.texWhite = gl.createTexture();
+
+    // Create projection and view matrices
+    this.projMatrix = mat4.create();
+    this.viewMatrix = mat4.create();
+    this.modelMatrix = mat4.create();
 
     gl.viewportWidth = canvas.width;
     gl.viewportHeight = canvas.height;
@@ -86,19 +97,13 @@ export class Renderer {
     // Load player model
     loadPlayerModel(this);
 
-    // Create projection and view matrices
-    var projMatrix = (this.projMatrix = mat4.create());
-    var viewMatrix = (this.viewMatrix = mat4.create());
-
     // Create dummy model matrix
-    var modelMatrix = (this.modelMatrix = mat4.create());
-    mat4.identity(modelMatrix);
-    gl.uniformMatrix4fv(this.uModelMat, false, modelMatrix);
+    mat4.identity(this.modelMatrix);
+    gl.uniformMatrix4fv(this.uModelMat, false, this.modelMatrix);
 
     // Create 1px white texture for pure vertex color operations (e.g. picking)
-    var whiteTexture = (this.texWhite = gl.createTexture());
     gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, whiteTexture);
+    gl.bindTexture(gl.TEXTURE_2D, this.texWhite);
     var white = new Uint8Array([255, 255, 255, 255]);
     gl.texImage2D(
       gl.TEXTURE_2D,
@@ -116,51 +121,49 @@ export class Renderer {
     gl.uniform1i(this.uSampler, 0);
 
     // Load player texture
-    var playerTexture = (this.texPlayer = gl.createTexture());
-    playerTexture.image = new Image();
-    playerTexture.image.onload = () => {
-      gl.bindTexture(gl.TEXTURE_2D, playerTexture);
+    this.texPlayer.image = new Image();
+    this.texPlayer.image.onload = () => {
+      gl.bindTexture(gl.TEXTURE_2D, this.texPlayer);
       gl.texImage2D(
         gl.TEXTURE_2D,
         0,
         gl.RGBA,
         gl.RGBA,
         gl.UNSIGNED_BYTE,
-        playerTexture.image
+        this.texPlayer.image
       );
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
     };
-    playerTexture.image.src = "media/player.png";
+    this.texPlayer.image.src = "media/player.png";
 
     // Load terrain texture
-    var terrainTexture = (this.texTerrain = gl.createTexture());
-    terrainTexture.image = new Image();
-    terrainTexture.image.onload = () => {
-      gl.bindTexture(gl.TEXTURE_2D, terrainTexture);
+    this.texTerrain.image = new Image();
+    this.texTerrain.image.onload = () => {
+      gl.bindTexture(gl.TEXTURE_2D, this.texTerrain);
       gl.texImage2D(
         gl.TEXTURE_2D,
         0,
         gl.RGBA,
         gl.RGBA,
         gl.UNSIGNED_BYTE,
-        terrainTexture.image
+        this.texTerrain.image
       );
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
     };
-    terrainTexture.image.src = "media/terrain.png";
+    this.texTerrain.image.src = "media/terrain.png";
 
     // // Create canvas used to draw name tags
-    var textCanvas = this.textCanvas = document.createElement("canvas");
-    textCanvas.width = 256;
-    textCanvas.height = 64;
-    textCanvas.style.display = "none";
-    var ctx = this.textContext = textCanvas.getContext("2d");
-    ctx.textAlign = "left";
-    ctx.textBaseline = "middle";
-    ctx.font = "24px Minecraftia";
-    document.getElementsByTagName("body")[0].appendChild(textCanvas);
+    // this.textCanvas = document.createElement("canvas");
+    // this.textCanvas.width = 256;
+    // this.textCanvas.height = 64;
+    // this.textCanvas.style.display = "none";
+    // var ctx = this.textContext = this.textCanvas.getContext("2d");
+    // ctx.textAlign = "left";
+    // ctx.textBaseline = "middle";
+    // ctx.font = "24px Minecraftia";
+    // document.getElementsByTagName("body")[0].appendChild(this.textCanvas);
   }
 
   // draw()
@@ -250,9 +253,9 @@ export class Renderer {
       this.drawBuffer(this.playerLeftLeg);
 
       // Draw player name
-      if (!player.nametag) {
-        player.nametag = this.buildPlayerName(player.nick);
-      }
+      // if (!player.nametag) {
+      //   player.nametag = this.buildPlayerName(player.nick);
+      // }
 
       // Calculate angle so that the nametag always faces the local player
       var ang =

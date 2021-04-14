@@ -44,7 +44,7 @@ export class World {
     this.sx = sx;
     this.sy = sy;
     this.sz = sz;
-    this.spawnPoint = new Vector(0, 0, 0);
+    this.spawnPoint = new Vector(this.sx / 2 + 0.5, this.sy / 2 + 0.5, sz);
 
     this.players = {};
   }
