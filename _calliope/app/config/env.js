@@ -61,7 +61,7 @@ module.exports = {
   ADMIN_THEME_DARK: process.env.ADMIN_THEME_DARK,
   THEME_DARK: process.env.THEME_DARK,
   // DNS
-  ENABLE_DNS: process.env.ENABLE_DNS,
+  ENABLE_DNS: false,
   DNS_APIKEY: process.env.DNS_APIKEY,
   DNS_USERNAME: process.env.DNS_USERNAME,
   DNS_IP: process.env.DNS_IP,

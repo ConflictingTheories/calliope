@@ -80,8 +80,15 @@ The following are the features I am working on getting ready:
 - ✔️ DNS Name Configuration via Namecheap
 
 More Complex Features (Will come later)
+- :construction: Blockworld 3D
 - :construction: Better Themes and More Robust Effects
 - :construction: Publish / Edit Buttons
 - :construction: Injectable Posts / Nested Content via Reference
 - :construction: Deployment to Git / S3 / Others
 - :construction: Permissions & Roles
+
+
+# Play with blocks in your Blog
+You can even add a simple block building plugin to your blog. (In Progress)
+
+[[ blockworld networkString="test" ]]
