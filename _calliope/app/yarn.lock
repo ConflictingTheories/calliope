@@ -2077,6 +2077,11 @@
     "@nodelib/fs.scandir" "2.1.4"
     fastq "^1.6.0"
 
+"@nvd/use-webgl@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@nvd/use-webgl/-/use-webgl-0.1.0.tgz#ee6b914189d9ba3d7ad962d0e2c3ebeba0e47f72"
+  integrity sha512-yzmJ8jvs43gRrmBNY4C50bagJwovfvKzoj5gr10sbS0AZqRpinjAE3GxBziEzCSfAeHZe9p/ZO/4ED6/J+SwZg==
+
 "@protobufjs/aspromise@^1.1.1", "@protobufjs/aspromise@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@protobufjs/aspromise/-/aspromise-1.1.2.tgz#9b8b0cc663d669a7d8f6f5d0893a14d348f30fbf"

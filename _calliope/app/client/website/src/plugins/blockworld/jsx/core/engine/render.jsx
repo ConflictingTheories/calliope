@@ -58,19 +58,22 @@ var fragmentSource =
 // id - Identifier of the HTML canvas element to render to.
 
 export class Renderer {
-  constructor(ref) {
-    var canvas = (this.canvas = ref.current);
+  constructor(gl, canvas) {
+    // var canvas = (this.canvas = ref.current);
+    this.gl = gl;
+    this.canvas = canvas;
+    
     canvas.renderer = this;
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
 
-    // Initialise WebGL
-    try {
-      // Context
-      var gl = (this.gl = canvas.getContext("experimental-webgl"));
-    } catch (e) {
-      throw "Your browser doesn't support WebGL!";
-    }
+    // // Initialise WebGL
+    // try {
+    //   // Context
+    //   // var gl = (this.gl = canvas.getContext("experimental-webgl"));
+    // } catch (e) {
+    //   throw "Your browser doesn't support WebGL!";
+    // }
 
     // Textures
     this.textCanvas = null;

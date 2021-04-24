@@ -12,67 +12,62 @@
 \*                                                 */
 
 import React, { useRef, useEffect } from "react";
+import useWebGL from "@nvd/use-webgl/dist";
 import BitWorldEngine from "./engine";
-import { Renderer as Render } from "./engine/renderer";
+
 // Bitworld Engine Components
 const { World, Renderer, Physics, Player } = BitWorldEngine;
-let loop,
-  render,
-  world,
-  physics,
-  player = null;
 
 // Splash Screen
 export default function Bitworld({ networkString }) {
-  const canvasRef = useRef();
-  const selectorRef = useRef();
+  let selectorRef = useRef();
 
-  console.log("--INITIATLIZATION");
+  let loop,
+    render,
+    world,
+    physics,
+    player = null;
 
-  useEffect(() => {
-    world = new World(16, 16, 32);
-    world.createFlatWorld(6);
-    // Renderer
-    render = new Render(canvasRef);
-    render.setWorld(world, 8);
-    render.setPerspective(60, 0.01, 200);
-    // Create physics simulator
-    physics = new Physics();
-    physics.setWorld(world);
-    // Create new local player
-    player = new Player();
-    player.setWorld(world);
-    // player.setInputCanvas(canvasRef);
-    // player.setMaterialSelector(selectorRef);
-  }, [networkString]);
+  const [canvas, resizeCanvas] = useWebGL({
+    width: 800,
+    height: 800,
+    onInit: (gl, canvas) => {
+      // Create World
+      world = new World(16, 16, 16);
+      world.createFlatWorld(6);
+      // Atttach Renderer to Canvas
+      render = new Renderer(gl, canvas);
+      render.setWorld(world, 8);
+      render.setPerspective(60, 0.01, 200);
+      // Create physics simulator
+      physics = new Physics();
+      physics.setWorld(world);
+      // Create new local player
+      player = new Player();
+      player.setWorld(world);
+      // player.setInputCanvas(canvas);
+      // player.setMaterialSelector(selectorRef);
 
-  let frameCount = 0;
-
-  // Render Game Loop
-  useEffect(
-    function mainLoop() {
-      // Simulate physics
-      physics?.simulate();
-      // Update local player
-      player?.update();
-      // Draw world
-      render?.buildChunks(1);
-      render?.setCamera(player.getEyePos().toArray(), player.angles);
-      render?.draw();
-      // Loop
-      loop = requestAnimationFrame(mainLoop);
-      frameCount++;
-      // Cleanup
-      return () => {
-        cancelAnimationFrame(loop);
-      };
+      // Game Loop
+      (function mainLoop() {
+        // Simulate physics
+        physics.simulate();
+        // Update local player
+        player.update();
+        // Draw world
+        render.buildChunks(1);
+        render.setCamera(player.getEyePos().toArray(), player.angles);
+        render.draw();
+        // 
+        loop = requestAnimationFrame(mainLoop);
+      })();
     },
-    [frameCount]
-  );
+  });
 
   return (
     <div onContextMenu={() => false} className="bitworld">
-      <canvas className="renderSurface" ref={canvasRef} />
+      {canvas}
+      {/* <canvas className="renderSurface" ref={canvasRef} /> */}
       <table className="materialSelector" ref={selectorRef}>
         <tr></tr>
       </table>

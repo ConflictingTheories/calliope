@@ -13,10 +13,12 @@
 
 import React, { Component } from "react";
 import { collect } from "react-recollect";
-import Bitworld from "./core";
+import GLView from "./GLView";
+// import Bitworld from "./core";
+
 // Style
 import "../less/bitworld.less";
-
+import scene from "./scene";
 class BlockWorld extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +46,7 @@ class BlockWorld extends Component {
     const { networkString, updated } = this.state;
     return (
       <>
-        <Bitworld class="bitworld" key={updated} networkString={networkString} />
+        <GLView className="bitworld" key={updated} width={720} height={480} Scene={scene} networkString={networkString} />
       </>
     );
   }

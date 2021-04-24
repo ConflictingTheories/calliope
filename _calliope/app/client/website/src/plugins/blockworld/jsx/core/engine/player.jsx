@@ -66,8 +66,8 @@ export class Player {
   // setInputCanvas( id )
   //
   // Set the canvas the renderer uses for some input operations.
-  setInputCanvas = (canvasRef) => {
-    var canvas = (this.canvas = canvasRef.current);
+  setInputCanvas = (canvas) => {
+    // var canvas = (this.canvas = canvasRef.current);
 
     var t = this;
     document.onkeydown = (e) => {
