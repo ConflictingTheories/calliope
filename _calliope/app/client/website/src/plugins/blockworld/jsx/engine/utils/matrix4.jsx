@@ -1,13 +1,15 @@
-/* eslint-disable prefer-destructuring */
-/**
- * Copyright (c) Mik BRY
- * mik@miklabs.com
- *
- * This source code is licensed under private license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-// Inspiration from gl-matrix
+/*                                                 *\
+** ----------------------------------------------- **
+**             Calliope - Site Generator   	       **
+** ----------------------------------------------- **
+**  Copyright (c) 2020-2021 - Kyle Derby MacInnis  **
+**                                                 **
+**    Any unauthorized distribution or transfer    **
+**       of this work is strictly prohibited.      **
+**                                                 **
+**               All Rights Reserved.              **
+** ----------------------------------------------- **
+\*                                                 */
 
 const EPSILON = 0.000001;
 

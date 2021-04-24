@@ -1,20 +1,16 @@
-/* eslint-disable no-plusplus */
-// ==========================================
-// World container
-//
-// This class contains the elements that make up the game world.
-// Other modules retrieve information from the world or alter it
-// using this class.
-// ==========================================
+/*                                                 *\
+** ----------------------------------------------- **
+**             Calliope - Site Generator   	       **
+** ----------------------------------------------- **
+**  Copyright (c) 2020-2021 - Kyle Derby MacInnis  **
+**                                                 **
+**    Any unauthorized distribution or transfer    **
+**       of this work is strictly prohibited.      **
+**                                                 **
+**               All Rights Reserved.              **
+** ----------------------------------------------- **
+\*                                                 */
 
-// Constructor( sx, sy, sz )
-//
-// Creates a new world container with the specified world size.
-// Up and down should always be aligned with the Z-direction.
-//
-// sx - World size in the X-direction.
-// sy - World size in the Y-direction.
-// sz - World size in the Z-direction.
 import { Vector } from '../utils/vector';
 import BLOCK from './blocks';
 

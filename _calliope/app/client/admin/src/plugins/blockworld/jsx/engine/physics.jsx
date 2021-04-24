@@ -1,16 +1,17 @@
-/* eslint-disable no-plusplus */
-// ==========================================
-// Physics
-//
-// This class contains the code that takes care of simulating
-// processes like gravity and fluid flow in the world.
-// ==========================================
+/*                                                 *\
+** ----------------------------------------------- **
+**             Calliope - Site Generator   	       **
+** ----------------------------------------------- **
+**  Copyright (c) 2020-2021 - Kyle Derby MacInnis  **
+**                                                 **
+**    Any unauthorized distribution or transfer    **
+**       of this work is strictly prohibited.      **
+**                                                 **
+**               All Rights Reserved.              **
+** ----------------------------------------------- **
+\*                                                 */
+
 import BLOCK from './blocks';
-
-// Constructor()
-//
-// Creates a new physics simulator.
-
 export default class Physics {
   constructor(world = null) {
     this.world = world;

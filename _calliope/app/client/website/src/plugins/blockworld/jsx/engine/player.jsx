@@ -1,19 +1,20 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable guard-for-in */
-/* eslint-disable no-plusplus */
-// ==========================================
-// Player
-//
-// This class contains the code that manages the local player.
-// ==========================================
+/*                                                 *\
+** ----------------------------------------------- **
+**             Calliope - Site Generator   	       **
+** ----------------------------------------------- **
+**  Copyright (c) 2020-2021 - Kyle Derby MacInnis  **
+**                                                 **
+**    Any unauthorized distribution or transfer    **
+**       of this work is strictly prohibited.      **
+**                                                 **
+**               All Rights Reserved.              **
+** ----------------------------------------------- **
+\*                                                 */
 
 import { Vector, lineRectCollide, rectRectCollide } from '../utils/vector';
 import BLOCK from './blocks';
 import { MOUSE } from './enums';
 
-// Constructor()
-//
-// Creates a new local player manager.
 export default class Player {
   constructor(world, scene) {
     this.scene = scene;

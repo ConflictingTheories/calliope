@@ -1,9 +1,16 @@
-/* eslint-disable no-unused-vars */
-// ==========================================
-// Block types
-//
-// This file contains all available block types and their properties.
-// ==========================================
+/*                                                 *\
+** ----------------------------------------------- **
+**             Calliope - Site Generator   	       **
+** ----------------------------------------------- **
+**  Copyright (c) 2020-2021 - Kyle Derby MacInnis  **
+**                                                 **
+**    Any unauthorized distribution or transfer    **
+**       of this work is strictly prohibited.      **
+**                                                 **
+**               All Rights Reserved.              **
+** ----------------------------------------------- **
+\*                                                 */
+
 import { pushQuad } from '../utils/vector';
 import { DIRECTION } from './enums';
 
@@ -11,236 +18,13 @@ import { DIRECTION } from './enums';
 export default (() => {
   // Default Functions
   const BLK = {
-    // Air
-    AIR: {
-      id: 0,
-      spawnable: false,
-      selflit: false,
-      gravity: false,
-      fluid: false,
-      transparent: true,
-    },
-
-    // Bedrock
-    BEDROCK: {
-      id: 1,
-      spawnable: false,
-      selflit: false,
-      gravity: false,
-      fluid: false,
-      transparent: false,
-      texture: (world, lightmap, lit, x, y, z, dir) => [1 / 16, 1 / 16, 2 / 16, 2 / 16],
-    },
-
-    // Dirt
-    DIRT: {
-      id: 2,
-      spawnable: true,
-      transparent: false,
-      selflit: false,
-      gravity: false,
-      fluid: false,
-      texture: (world, lightmap, lit, x, y, z, dir) => {
-        if (dir === DIRECTION.UP && lit) return [14 / 16, 0 / 16, 15 / 16, 1 / 16];
-        if (dir === DIRECTION.DOWN || !lit) return [2 / 16, 0 / 16, 3 / 16, 1 / 16];
-        return [3 / 16, 0 / 16, 4 / 16, 1 / 16];
-      },
-    },
-
-    // Wood
-    WOOD: {
-      id: 3,
-      spawnable: true,
-      transparent: false,
-      selflit: false,
-      gravity: false,
-      fluid: false,
-      texture: (world, lightmap, lit, x, y, z, dir) => {
-        if (dir === DIRECTION.UP || dir === DIRECTION.DOWN) return [5 / 16, 1 / 16, 6 / 16, 2 / 16];
-        return [4 / 16, 1 / 16, 5 / 16, 2 / 16];
-      },
-    },
-
-    // TNT
-    TNT: {
-      id: 4,
-      spawnable: true,
-      transparent: false,
-      selflit: false,
-      gravity: false,
-      fluid: false,
-      texture: (world, lightmap, lit, x, y, z, dir) => {
-        if (dir === DIRECTION.UP || dir === DIRECTION.DOWN) return [10 / 16, 0 / 16, 11 / 16, 1 / 16];
-        return [8 / 16, 0 / 16, 9 / 16, 1 / 16];
-      },
-    },
-
-    // Bookcase
-    BOOKCASE: {
-      id: 5,
-      spawnable: true,
-      transparent: false,
-      selflit: false,
-      gravity: false,
-      fluid: false,
-      texture: (world, lightmap, lit, x, y, z, dir) => {
-        if (dir === DIRECTION.FORWARD || dir === DIRECTION.BACK) return [3 / 16, 2 / 16, 4 / 16, 3 / 16];
-        return [4 / 16, 0 / 16, 5 / 16, 1 / 16];
-      },
-    },
-
-    // Lava
-    LAVA: {
-      id: 6,
-      spawnable: false,
-      transparent: true,
-      selflit: true,
-      gravity: true,
-      fluid: true,
-      texture: (world, lightmap, lit, x, y, z, dir) => [13 / 16, 14 / 16, 14 / 16, 15 / 16],
-    },
-
-    // Plank
-    PLANK: {
-      id: 7,
-      spawnable: true,
-      transparent: false,
-      selflit: false,
-      gravity: false,
-      fluid: false,
-      texture: (world, lightmap, lit, x, y, z, dir) => [4 / 16, 0 / 16, 5 / 16, 1 / 16],
-    },
-
-    // Cobblestone
-    COBBLESTONE: {
-      id: 8,
-      spawnable: true,
-      transparent: false,
-      selflit: false,
-      gravity: false,
-      fluid: false,
-      texture: (world, lightmap, lit, x, y, z, dir) => [0 / 16, 1 / 16, 1 / 16, 2 / 16],
-    },
-
-    // Concrete
-    CONCRETE: {
-      id: 9,
-      spawnable: true,
-      transparent: false,
-      selflit: false,
-      gravity: false,
-      fluid: false,
-      texture: (world, lightmap, lit, x, y, z, dir) => [1 / 16, 0 / 16, 2 / 16, 1 / 16],
-    },
-
-    // Brick
-    BRICK: {
-      id: 10,
-      spawnable: true,
-      transparent: false,
-      selflit: false,
-      gravity: false,
-      fluid: false,
-      texture: (world, lightmap, lit, x, y, z, dir) => [7 / 16, 0 / 16, 8 / 16, 1 / 16],
-    },
-
-    // Sand
-    SAND: {
-      id: 11,
-      spawnable: true,
-      transparent: false,
-      selflit: false,
-      gravity: true,
-      fluid: false,
-      texture: (world, lightmap, lit, x, y, z, dir) => [2 / 16, 1 / 16, 3 / 16, 2 / 16],
-    },
-
-    // Gravel
-    GRAVEL: {
-      id: 12,
-      spawnable: true,
-      transparent: false,
-      selflit: false,
-      gravity: true,
-      fluid: false,
-      texture: (world, lightmap, lit, x, y, z, dir) => [3 / 16, 1 / 16, 4 / 16, 2 / 16],
-    },
-
-    // Iron
-    IRON: {
-      id: 13,
-      spawnable: true,
-      transparent: false,
-      selflit: false,
-      gravity: false,
-      fluid: false,
-      texture: (world, lightmap, lit, x, y, z, dir) => [6 / 16, 1 / 16, 7 / 16, 2 / 16],
-    },
-
-    // Gold
-    GOLD: {
-      id: 14,
-      spawnable: true,
-      transparent: false,
-      selflit: false,
-      gravity: false,
-      fluid: false,
-      texture: (world, lightmap, lit, x, y, z, dir) => [7 / 16, 1 / 16, 8 / 16, 2 / 16],
-    },
-
-    // Diamond
-    DIAMOND: {
-      id: 15,
-      spawnable: true,
-      transparent: false,
-      selflit: false,
-      gravity: false,
-      fluid: false,
-      texture: (world, lightmap, lit, x, y, z, dir) => [8 / 16, 1 / 16, 9 / 16, 2 / 16],
-    },
-
-    // Obsidian
-    OBSIDIAN: {
-      id: 16,
-      spawnable: true,
-      transparent: false,
-      selflit: false,
-      gravity: false,
-      fluid: false,
-      texture: (world, lightmap, lit, x, y, z, dir) => [5 / 16, 2 / 16, 6 / 16, 3 / 16],
-    },
-
-    // Glass
-    GLASS: {
-      id: 17,
-      spawnable: true,
-      transparent: true,
-      selflit: false,
-      gravity: false,
-      fluid: false,
-      texture: (world, lightmap, lit, x, y, z, dir) => [1 / 16, 3 / 16, 2 / 16, 4 / 16],
-    },
-
-    // Sponge
-    SPONGE: {
-      id: 18,
-      spawnable: true,
-      transparent: false,
-      selflit: false,
-      gravity: false,
-      fluid: false,
-      texture: (world, lightmap, lit, x, y, z, dir) => [0 / 16, 3 / 16, 1 / 16, 4 / 16],
-    },
-
     // Find Block by ID
-
     fromId: id => {
       for (const mat in BLK) if (typeof BLK[mat] === 'object' && BLK[mat].id === id) return BLK[mat];
       return null;
     },
 
     // Push Top Vertices
-
     pushTop: (vertices, x, y, z, bH, c, lm) => {
       pushQuad(
         vertices,
@@ -252,7 +36,6 @@ export default (() => {
     },
 
     // Push Front Vertices
-
     pushFront: (vertices, x, y, z, bH, c, lm) => {
       pushQuad(
         vertices,
@@ -264,7 +47,6 @@ export default (() => {
     },
 
     // Push Back Vertices
-
     pushBack: (vertices, x, y, z, bH, c, lm) => {
       pushQuad(
         vertices,
@@ -276,7 +58,6 @@ export default (() => {
     },
 
     // Push Bottom Vertices
-
     pushBottom: (vertices, x, y, z, c, lm) => {
       pushQuad(
         vertices,
@@ -288,7 +69,6 @@ export default (() => {
     },
 
     // Push Right Vertices
-
     pushRight: (vertices, x, y, z, bH, c, lm) => {
       pushQuad(
         vertices,
@@ -300,7 +80,6 @@ export default (() => {
     },
 
     // Push Left Vertices
-
     pushLeft: (vertices, x, y, z, bH, c, lm) => {
       pushQuad(
         vertices,
@@ -311,11 +90,7 @@ export default (() => {
       );
     },
 
-    // pushVertices( vertices, world, lightmap, x, y, z )
-    //
-    // Pushes the vertices necessary for rendering a
-    // specific block into the array.
-
+    // Pushes the vertices necessary for rendering
     pushVertices: (vertices, world, lightmap, x, y, z) => {
       const { blocks } = world;
       const blockLit = z >= lightmap[x][y];
@@ -381,10 +156,7 @@ export default (() => {
       }
     },
 
-    // pushPickingVertices( vertices, x, y, z )
-    //
     // Pushes vertices with the data needed for picking.
-
     pushPickingVertices: (vertices, x, y, z) => {
       const color = { r: x / 255, g: y / 255, b: z / 255 };
 
@@ -444,13 +216,13 @@ export default (() => {
     },
   };
 
-  // // Block types
-  // const blockType = ["AIR", "DIRT", "BEDROCK"];
+  // Block types
+  const blockType = ["AIR", "DIRT", "BEDROCK", "BOOKCASE", "BRICK", "COBBLESTONE", "CONCRETE", "DIAMOND", "GLASS", "GOLD", "GRAVEL", "LAVA", "OBSIDIAN", "PLANK", "SPONGE", "TNT", "WOOD"];
 
-  // // Add Block Types
-  // blockType.forEach((type) => {
-  //   BLK[type] = require(`./types/${type}.jsx`).default;
-  // });
+  // Add Block Types
+  blockType.forEach((type) => {
+    BLK[type] = require(`./types/${type}.jsx`).default;
+  });
 
   return BLK;
 })();

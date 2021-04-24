@@ -1,6 +1,19 @@
+/*                                                 *\
+** ----------------------------------------------- **
+**             Calliope - Site Generator   	       **
+** ----------------------------------------------- **
+**  Copyright (c) 2020-2021 - Kyle Derby MacInnis  **
+**                                                 **
+**    Any unauthorized distribution or transfer    **
+**       of this work is strictly prohibited.      **
+**                                                 **
+**               All Rights Reserved.              **
+** ----------------------------------------------- **
+\*                                                 */
+
 import { create, rotate, translate, perspective, isPowerOf2 } from './utils/matrix4';
 
-export default class WebGL {
+export default class GLEngine {
   constructor(canvas, width, height) {
     this.canvas = canvas;
     this.width = width;

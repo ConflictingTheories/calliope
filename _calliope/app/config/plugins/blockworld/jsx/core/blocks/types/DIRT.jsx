@@ -11,7 +11,7 @@
 ** ----------------------------------------------- **
 \*                                                 */
 
-import { DIRECTION } from "../";
+import { DIRECTION } from "../enums";
 export default {
   id: 2,
   spawnable: true,
