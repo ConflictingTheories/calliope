@@ -1,20 +1,20 @@
 export default function vs() {
   return `
-  attribute vec3 aVertexPosition;
-  attribute vec4 aVertexColor;
-  attribute vec2 aTextureCoord;
-
-  uniform mat4 uModelViewMatrix;
+  uniform mat4 uModelMatrix;
   uniform mat4 uViewMatrix;
-  uniform mat4 uProjectionMatrix;
+  uniform mat4 uProjMatrix;
 
-  varying vec2 vTexCoord;
+  attribute vec3 aPos;
+  attribute vec4 aColor;
+  attribute vec2 aTexCoord;
+
   varying vec4 vColor;
+  varying vec2 vTexCoord;
 
   void main(void) {
-    gl_Position = uProjectionMatrix * uViewMatrix * ( uModelViewMatrix * vec4( aVertexPosition, 1.0 ) );
-    vColor = aVertexColor;
-    vTexCoord = aTextureCoord;
+    gl_Position = uProjMatrix * uViewMatrix * ( uModelMatrix * vec4( aPos, 1.0 ) );
+    vColor = aColor;
+    vTexCoord = aTexCoord;
   }
 `;
 }

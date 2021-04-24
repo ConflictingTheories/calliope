@@ -72,7 +72,7 @@ export function Renderer(ref) {
 
   // Create projection and view matrices
   var projMatrix = (this.projMatrix = mat4.create());
-  var viewMatrix = (this.viewMatrix = mat4.create());
+  var uViewMat = (this.uViewMat = mat4.create());
 
   // Create dummy model matrix
   var modelMatrix = (this.modelMatrix = mat4.create());
@@ -737,20 +737,20 @@ Renderer.prototype.setCamera = function (pos, ang) {
 
   this.camPos = pos;
 
-  mat4.identity(this.viewMatrix);
+  mat4.identity(this.uViewMat);
 
   mat4.rotate(
-    this.viewMatrix,
+    this.uViewMat,
     -ang[0] - Math.PI / 2,
     [1, 0, 0],
-    this.viewMatrix
+    this.uViewMat
   );
-  mat4.rotate(this.viewMatrix, ang[1], [0, 0, 1], this.viewMatrix);
-  mat4.rotate(this.viewMatrix, -ang[2], [0, 1, 0], this.viewMatrix);
+  mat4.rotate(this.uViewMat, ang[1], [0, 0, 1], this.uViewMat);
+  mat4.rotate(this.uViewMat, -ang[2], [0, 1, 0], this.uViewMat);
 
-  mat4.translate(this.viewMatrix, [-pos[0], -pos[1], -pos[2]], this.viewMatrix);
+  mat4.translate(this.uViewMat, [-pos[0], -pos[1], -pos[2]], this.uViewMat);
 
-  gl.uniformMatrix4fv(this.uViewMat, false, this.viewMatrix);
+  gl.uniformMatrix4fv(this.uViewMat, false, this.uViewMat);
 };
 
 Renderer.prototype.drawBuffer = function (buffer) {

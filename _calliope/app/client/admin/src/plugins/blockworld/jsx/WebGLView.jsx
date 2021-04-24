@@ -14,9 +14,9 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import glEngine from './engine/core';
-
+import { MOUSE } from "./engine/enums"
 //
-const WebGLView = ({ width, height, SceneProvider, class:string }) => {
+const WebGLView = ({ width, height, SceneProvider, class: string }) => {
   const ref = useRef();
   useEffect(() => {
     const canvas = ref.current;
@@ -27,7 +27,16 @@ const WebGLView = ({ width, height, SceneProvider, class:string }) => {
     };
   }, [SceneProvider]);
 
-  return <canvas ref={ref} width={width} height={height} className={string}/>;
+  return <canvas
+    ref={ref}
+    width={width}
+    height={height}
+    className={string}
+    onKeyDown={(e) => SceneProvider.onKeyEvent(e.nativeEvent.key, true)}
+    onKeyUp={(e) => SceneProvider.onKeyEvent(e.nativeEvent.key, false)}
+    onMouseUp={(e) => SceneProvider.onMouseEvent(e.nativeEvent.clientX, e.nativeEvent.clientY, MOUSE.UP, e.nativeEvent.button == 3)}
+    onMouseDown={(e) => SceneProvider.onMouseEvent(e.nativeEvent.clientX, e.nativeEvent.clientY, MOUSE.DOWN, e.nativeEvent.button == 3)}
+    onMouseMove={(e) => SceneProvider.onMouseEvent(e.nativeEvent.clientX, e.nativeEvent.clientY, MOUSE.MOVE, e.nativeEvent.button == 3)} />;
 };
 
 WebGLView.propTypes = {

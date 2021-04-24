@@ -9,11 +9,11 @@
 
 import { Vector, lineRectCollide, rectRectCollide } from '../utils/vector';
 import BLOCK from './blocks';
+import { MOUSE } from './enums';
 
 // Constructor()
 //
 // Creates a new local player manager.
-
 export default class Player {
   constructor(world, scene) {
     this.scene = scene;
@@ -91,6 +91,47 @@ export default class Player {
     this.lastUpdate = new Date().getTime();
   }
 
+  // Perform Action on Block
+  doBlockAction(x, y, destroy) {
+    var bPos = new Vector(Math.floor(this.pos.x), Math.floor(this.pos.y), Math.floor(this.pos.z));
+    var block = this.scene.pickAt(new Vector(bPos.x - 4, bPos.y - 4, bPos.z - 4), new Vector(bPos.x + 4, bPos.y + 4, bPos.z + 4), x, y);
+
+    if (block != false) {
+      var obj = this.world;
+
+      if (destroy)
+        obj.setBlock(block.x, block.y, block.z, BLOCK.AIR);
+      else
+        obj.setBlock(block.x + block.n.x, block.y + block.n.y, block.z + block.n.z, this.buildMaterial);
+    }
+  }
+
+  // Mouse Event handler for Player
+  onMouseEvent(x, y, type, rmb) {
+    if (type == MOUSE.DOWN) {
+      this.dragStart = { x: x, y: y };
+      this.mouseDown = true;
+      this.yawStart = this.targetYaw = this.angles[1];
+      this.pitchStart = this.targetPitch = this.angles[0];
+    } else if (type == MOUSE.UP) {
+      if (Math.abs(this.dragStart.x - x) + Math.abs(this.dragStart.y - y) < 4)
+        this.doBlockAction(x, y, !rmb);
+
+      this.dragging = false;
+      this.mouseDown = false;
+    } else if (type == MOUSE.MOVE && this.mouseDown) {
+      this.dragging = true;
+      this.targetPitch = this.pitchStart - (y - this.dragStart.y) / 200;
+      this.targetYaw = this.yawStart + (x - this.dragStart.x) / 200;
+    }
+  }
+
+  // key Event Handler for Player
+  onKeyEvent(key, down) {
+    this.keys[key] = down;
+    if (!down && key == "t" && this.eventHandlers["openChat"]) this.eventHandlers.openChat();
+  }
+
   // Resolves collisions between the player and blocks on XY level for the next movement step.
   resolveCollision(pos, bPos, velocity) {
     const { world } = this;
@@ -102,7 +143,6 @@ export default class Player {
 
     // Collect XY collision sides
     let collisionCandidates = [];
-
     for (let x = bPos.x - 1; x <= bPos.x + 1; x++) {
       for (let y = bPos.y - 1; y <= bPos.y + 1; y++) {
         for (let { z } = bPos; z <= bPos.z + 1; z++) {
@@ -121,7 +161,6 @@ export default class Player {
     // Solve XY collisions
     for (const i in collisionCandidates) {
       const side = collisionCandidates[i];
-
       if (lineRectCollide(side, playerRect)) {
         if (side.x != null && velocity.x * side.dir < 0) {
           pos.x = side.x + (playerRect.size / 2) * (velocity.x > 0 ? -1 : 1);
@@ -144,7 +183,6 @@ export default class Player {
 
     // Collect Z collision sides
     collisionCandidates = [];
-
     for (let x = bPos.x - 1; x <= bPos.x + 1; x++) {
       for (let y = bPos.y - 1; y <= bPos.y + 1; y++) {
         if (world.getBlock(x, y, newBZLower) != BLOCK.AIR)
@@ -172,7 +210,6 @@ export default class Player {
     this.falling = true;
     for (const i in collisionCandidates) {
       const face = collisionCandidates[i];
-
       if (rectRectCollide(face, playerFace) && velocity.z * face.dir < 0) {
         if (velocity.z < 0) {
           this.falling = false;

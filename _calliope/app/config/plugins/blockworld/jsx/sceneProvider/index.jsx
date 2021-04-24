@@ -1,13 +1,19 @@
 import { create, translate, rotate } from '../engine/utils/matrix4';
 import { cube, modelMerge } from '../engine/utils/elements';
 import { Vector } from '../engine/utils/vector';
+
+// Shaders
+import fs from '../shaders/fs';
+import vs from '../shaders/vs';
+
+// Blockworld 
 import World from "../engine/world";
 import Physics from "../engine/physics";
 import Player from "../engine/player";
 import BLOCK from "../engine/blocks";
-// Shaders
-import fs from '../shaders/fs';
-import vs from '../shaders/vs';
+
+// Instance
+const impl = {};
 
 // Scene Object
 const scene = {
@@ -16,43 +22,33 @@ const scene = {
     fs: fs(),
     vs: vs(),
   },
-  // Model Vertices / Indices / Etc...
-  model: modelMerge(new Array(5).fill(0).map((_, i) => cube(new Vector(i*2, i*2, i*3)))),
+  // Model Vertices / Indices / Etc... (OLD Method..... - For Static Model/Scenes)
+  model: modelMerge(new Array(5).fill(0).map((_, i) => cube(new Vector(i * 2, i * 2, i * 3)))),
 };
-
-// Instance
-const impl = {};
 
 // Init Scene
 scene.init = engine => {
-
   // game Engine & Timing
   impl.engine = engine;
   impl.squareRotation = 0;
   impl.from = null;
-
   // Load Game Textures
   scene.loadTextures(engine);
-  
   // Build World
-  let world = new World(16,16,16);
+  let world = new World(16, 16, 16);
   world.createFlatWorld(6);
-  
   // Connect Physics Engine
   impl.physics = new Physics(world);
-  
   // Add player to world
   impl.player = new Player(world, scene);
-
   // Set World in Scene
   scene.setWorld(world, 8);
-
 };
 
 // Build Chunks from World
 scene.buildChunks = (count) => {
-  let {gl} = impl.engine;
-  let {chunks,world} = impl;
+  let { gl } = impl.engine;
+  let { chunks, world } = impl;
 
   for (let i = 0; i < chunks.length; i++) {
     let chunk = chunks[i];
@@ -85,7 +81,6 @@ scene.buildChunks = (count) => {
 
       // Create WebGL buffer
       if (chunk.buffer) gl.deleteBuffer(chunk.buffer);
-
       let buffer = (chunk.buffer = gl.createBuffer());
       buffer.vertices = vertices.length / 9;
       gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
@@ -171,7 +166,7 @@ scene.setWorld = (world, chunkSize) => {
 };
 
 // Load Scene Textures
-scene.loadTextures = engine =>{
+scene.loadTextures = engine => {
   let { gl } = engine;
   // Create 1px white texture for pure vertex color operations (e.g. picking)
   var white = new Uint8Array([255, 255, 255, 255]);
@@ -184,19 +179,18 @@ scene.loadTextures = engine =>{
 }
 
 // Render Loop
-scene.render = (engine, now) => { 
-  
+scene.render = (engine, now) => {
+
   // Simulate Physics for Game
   impl.physics.simulate();
-  
+
   // Update Player Position
   impl.player.update();
-  
+
   // Build
-  // scene.buildChunks(impl.chunks.length);
   scene.buildChunks(1);
   engine.setCamera(impl.player.getEyePos().toArray(), impl.player.angles);
-  
+
   // Draw Frame
   scene.draw(engine);
 
@@ -206,58 +200,116 @@ scene.render = (engine, now) => {
   impl.squareRotation += deltaTime * 0.001;
 };
 
+// Pick Block in Scene
+scene.pickAt = (min, max, mx, my) => {
+  let { engine, world } = impl;
+  let { gl } = engine;
+
+  // Create framebuffer for picking render
+  var fbo = gl.createFramebuffer();
+  gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+
+  var bt = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, bt);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 512, 512, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+
+  var renderbuffer = gl.createRenderbuffer();
+  gl.bindRenderbuffer(gl.RENDERBUFFER, renderbuffer);
+  gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, 512, 512);
+
+  gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, bt, 0);
+  gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, renderbuffer);
+
+  // Build buffer with block pick candidates
+  var vertices = [];
+
+  for (var x = min.x; x <= max.x; x++) {
+    for (var y = min.y; y <= max.y; y++) {
+      for (var z = min.z; z <= max.z; z++) {
+        if (world.getBlock(x, y, z) != BLOCK.AIR)
+          BLOCK.pushPickingVertices(vertices, x, y, z);
+      }
+    }
+  }
+
+  var buffer = gl.createBuffer();
+  buffer.vertices = vertices.length / 9;
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STREAM_DRAW);
+
+  // Draw buffer
+  gl.bindTexture(gl.TEXTURE_2D, this.texWhite);
+
+  gl.viewport(0, 0, 512, 512);
+  gl.clearColor(1.0, 1.0, 1.0, 1.0);
+  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+  this.drawBuffer(buffer);
+
+  // Read pixel
+  var pixel = new Uint8Array(4);
+  gl.readPixels(mx / gl.viewportWidth * 512, (1 - my / gl.viewportHeight) * 512, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, pixel);
+
+  // Reset states
+  gl.bindTexture(gl.TEXTURE_2D, this.texTerrain);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+  gl.clearColor(0.62, 0.81, 1.0, 1.0);
+
+  // Clean up
+  gl.deleteBuffer(buffer);
+  gl.deleteRenderbuffer(renderbuffer);
+  gl.deleteTexture(bt);
+  gl.deleteFramebuffer(fbo);
+
+  // Build result
+  if (pixel[0] != 255) {
+    var normal;
+    if (pixel[3] == 1) normal = new Vector(0, 0, 1);
+    else if (pixel[3] == 2) normal = new Vector(0, 0, -1);
+    else if (pixel[3] == 3) normal = new Vector(0, -1, 0);
+    else if (pixel[3] == 4) normal = new Vector(0, 1, 0);
+    else if (pixel[3] == 5) normal = new Vector(-1, 0, 0);
+    else if (pixel[3] == 6) normal = new Vector(1, 0, 0);
+
+    return {
+      x: pixel[0],
+      y: pixel[1],
+      z: pixel[2],
+      n: normal
+    }
+  } else {
+    return false;
+  }
+}
+
 // Draw Scene
-scene.draw = (engine) =>{
-  const { gl, programInfo, buffers } = engine;
-
-  // Clear Sceen
-  engine.clearScreen([0.0, 0.0, 0.0, 1.0]);
-
-  // Model Matrix
-  const modelViewMatrix = create();
-
-  // Move & Rotate Model
-  // translate(modelViewMatrix, modelViewMatrix, [-0.0, 0.0, -20.0]);
-  // rotate(modelViewMatrix, modelViewMatrix, -impl.squareRotation, [0, 0, 1]);
-  // rotate(modelViewMatrix, modelViewMatrix, -impl.squareRotation, [0, 1, 0]);
-  // rotate(modelViewMatrix, modelViewMatrix, -impl.squareRotation, [1, 0, 0]);
-   
-  // Draw Terrain chunks (NOT WORKING)
+scene.draw = (engine) => {
+  const { gl, programInfo } = engine;
+  engine.clearScreen();
+  // Draw Terrain chunks (NOT WORKING for Texture)
   var chunks = impl.chunks;
   gl.bindTexture(gl.TEXTURE_2D, impl.texTerrain);
   if (chunks != null) {
     for (var i = 0; i < chunks.length; i++) {
-      if (chunks[i].buffer != null) engine.drawBuffer(chunks[i].buffer, modelViewMatrix);
+      if (chunks[i].buffer != null) engine.drawBuffer(chunks[i].buffer);
     }
   }
-
-	gl.uniformMatrix4fv( programInfo.attribLocations.modelViewMatrix, false, modelViewMatrix );
-  
-  // Vertices
-  // gl.bindBuffer(gl.ARRAY_BUFFER, buffers.position);
-  // gl.vertexAttribPointer(programInfo.attribLocations.vertexPosition, 3, gl.FLOAT, false, 0, 0);
-  // gl.enableVertexAttribArray(programInfo.attribLocations.vertexPosition);
-
-  // Colours
-  // gl.bindBuffer(gl.ARRAY_BUFFER, buffers.color);
-  // gl.vertexAttribPointer(programInfo.attribLocations.vertexColor, 4, gl.FLOAT, false, 0, 0);
-  // gl.enableVertexAttribArray(programInfo.attribLocations.vertexColor);
-
-  // // Texture
-  // gl.bindBuffer(gl.ARRAY_BUFFER, buffers.textureCoord);
-  // gl.vertexAttribPointer(programInfo.attribLocations.textureCoord, 2, gl.FLOAT, false, 0, 0);
-  // gl.enableVertexAttribArray(programInfo.attribLocations.textureCoord);
-
-  // // Indices
-  // gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffers.index);
-
-  // Shade & Project
-  // gl.useProgram(programInfo.program);
-  // gl.uniformMatrix4fv(programInfo.uniformLocations.projectionMatrix, false, engine.projectionMatrix);
-  // gl.uniformMatrix4fv(programInfo.uniformLocations.modelViewMatrix, false, modelViewMatrix);
-
-  // // Draw using Triangles
-  // gl.drawElements(gl.TRIANGLES, scene.model.indices.length, gl.UNSIGNED_SHORT, 0);
+  // Update Model
+  const uModelMat = create();
+  gl.uniformMatrix4fv(programInfo.attribLocations.uModelMat, false, uModelMat);
 
 }
+
+// Keyboard handler for Scene
+scene.onKeyEvent = (key, down) => {
+  impl.player.onKeyEvent(key, down)
+}
+
+// Mouse Handler for Scene
+scene.onMouseEvent = (x, y, type, rmb) => {
+  impl.player.onMouseEvent(x, y, type, rmb);
+}
+
 export default scene;

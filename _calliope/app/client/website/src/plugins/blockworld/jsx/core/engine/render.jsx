@@ -83,7 +83,7 @@ export class Renderer {
 
     // Create projection and view matrices
     this.projMatrix = mat4.create();
-    this.viewMatrix = mat4.create();
+    this.uViewMat = mat4.create();
     this.modelMatrix = mat4.create();
 
     gl.viewportWidth = canvas.width;
@@ -747,24 +747,24 @@ export class Renderer {
 
     this.camPos = pos;
 
-    mat4.identity(this.viewMatrix);
+    mat4.identity(this.uViewMat);
 
     mat4.rotate(
-      this.viewMatrix,
+      this.uViewMat,
       -ang[0] - Math.PI / 2,
       [1, 0, 0],
-      this.viewMatrix
+      this.uViewMat
     );
-    mat4.rotate(this.viewMatrix, ang[1], [0, 0, 1], this.viewMatrix);
-    mat4.rotate(this.viewMatrix, -ang[2], [0, 1, 0], this.viewMatrix);
+    mat4.rotate(this.uViewMat, ang[1], [0, 0, 1], this.uViewMat);
+    mat4.rotate(this.uViewMat, -ang[2], [0, 1, 0], this.uViewMat);
 
     mat4.translate(
-      this.viewMatrix,
+      this.uViewMat,
       [-pos[0], -pos[1], -pos[2]],
-      this.viewMatrix
+      this.uViewMat
     );
 
-    gl.uniformMatrix4fv(this.uViewMat, false, this.viewMatrix);
+    gl.uniformMatrix4fv(this.uViewMat, false, this.uViewMat);
   }
 
   drawBuffer(buffer) {

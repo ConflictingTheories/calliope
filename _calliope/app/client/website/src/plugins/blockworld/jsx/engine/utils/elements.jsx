@@ -11,7 +11,7 @@ export function colorRGB(r, g, b) {
 }
 
 // Map to Points from Coordinates
-export function textureCoordinates(a, b, c, d) {
+export function aTexCoordinates(a, b, c, d) {
   return [...a.toArray(), ...b.toArray(), ...c.toArray(), ...d.toArray()];
 }
 
@@ -34,7 +34,7 @@ export function texSquare(a, b, c, d, texPos) {
   const indices = [0, 1, 2, 0, 2, 3];
   return {
     positions,
-    textureCoordinates: texPos.toArray(),
+    aTexCoordinates: texPos.toArray(),
     indices,
   };
 }
@@ -125,7 +125,7 @@ export function texCube(pos, texPos) {
     new Vector(x + 1, y - 1, z + 1),
     new Vector(x + 1, y + 1, z + 1),
     new Vector(x - 1, y + 1, z + 1),
-    textureCoordinates(...texPos[0]),
+    aTexCoordinates(...texPos[0]),
   );
 
   const back = texSquare(
@@ -133,7 +133,7 @@ export function texCube(pos, texPos) {
     new Vector(x - 1, y + 1, z - 1),
     new Vector(x + 1, y + 1, z - 1),
     new Vector(x + 1, y - 1, z - 1),
-    textureCoordinates(...texPos[1]),
+    aTexCoordinates(...texPos[1]),
   );
 
   const top = texSquare(
@@ -141,7 +141,7 @@ export function texCube(pos, texPos) {
     new Vector(x - 1, y + 1, z + 1),
     new Vector(x + 1, y + 1, z + 1),
     new Vector(x + 1, y + 1, z - 1),
-    textureCoordinates(...texPos[2]),
+    aTexCoordinates(...texPos[2]),
   );
 
   const bottom = texSquare(
@@ -149,7 +149,7 @@ export function texCube(pos, texPos) {
     new Vector(x + 1, y - 1, z - 1),
     new Vector(x + 1, y - 1, z + 1),
     new Vector(x + 1, y - 1, z + 1),
-    textureCoordinates(...texPos[3]),
+    aTexCoordinates(...texPos[3]),
   );
 
   const right = texSquare(
@@ -157,7 +157,7 @@ export function texCube(pos, texPos) {
     new Vector(x + 1, y + 1, z - 1),
     new Vector(x + 1, y + 1, z + 1),
     new Vector(x + 1, y - 1, z + 1),
-    textureCoordinates(...texPos[4]),
+    aTexCoordinates(...texPos[4]),
   );
 
   const left = texSquare(
@@ -165,7 +165,7 @@ export function texCube(pos, texPos) {
     new Vector(x - 1, y - 1, z + 1),
     new Vector(x - 1, y + 1, z + 1),
     new Vector(x - 1, y + 1, z - 1),
-    textureCoordinates(...texPos[5]),
+    aTexCoordinates(...texPos[5]),
   );
 
   return {
@@ -177,7 +177,7 @@ export function texCube(pos, texPos) {
       ...right.positions,
       ...left.positions,
     ],
-    textureCoordinates: [
+    aTexCoordinates: [
       ...front.colors,
       ...back.colors,
       ...top.colors,
