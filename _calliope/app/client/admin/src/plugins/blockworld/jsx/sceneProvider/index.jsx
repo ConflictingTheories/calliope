@@ -32,15 +32,16 @@ scene.init = engine => {
   impl.engine = engine;
   impl.squareRotation = 0;
   impl.from = null;
+  // load Textures
+  scene.loadTextures(engine);
   // Build World
   let world = new World(16, 16, 16);
+  world.createFlatWorld(6);
   // Connect Physics Engine
   impl.physics = new Physics(world);
   // Add player to world
   impl.player = new Player(world, scene);
   // Create Flat World in Scene
-  world.createFlatWorld(6);
-  scene.loadTextures(engine);
   scene.setWorld(world, 8);
 };
 
@@ -241,20 +242,17 @@ scene.pickAt = (min, max, mx, my) => {
   // Draw buffer
   gl.bindTexture(gl.TEXTURE_2D, impl.texWhite);
 
-  gl.viewport(0, 0, 512, 512);
-  gl.clearColor(1.0, 1.0, 1.0, 1.0);
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
   engine.drawBuffer(buffer);
 
   // Read pixel
   var pixel = new Uint8Array(4);
-  gl.readPixels(mx / gl.viewportWidth * 512, (1 - my / gl.viewportHeight) * 512, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, pixel);
+  gl.readPixels(mx / gl.viewportWidth * gl.viewportWidth, (1 - my / gl.viewportHeight) * gl.viewportWidth, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, pixel);
 
   // Reset states
   gl.bindTexture(gl.TEXTURE_2D, impl.texTerrain);
   gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-  gl.clearColor(0.62, 0.81, 1.0, 1.0);
 
   // Clean up
   gl.deleteBuffer(buffer);
@@ -303,6 +301,7 @@ scene.draw = (engine) => {
 
 // Keyboard handler for Scene
 scene.onKeyEvent = (key, down) => {
+  console.log(key);
   impl.player.onKeyEvent(key, down)
 }
 
