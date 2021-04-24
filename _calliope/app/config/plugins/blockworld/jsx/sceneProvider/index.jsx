@@ -32,16 +32,15 @@ scene.init = engine => {
   impl.engine = engine;
   impl.squareRotation = 0;
   impl.from = null;
-  // Load Game Textures
-  scene.loadTextures(engine);
   // Build World
   let world = new World(16, 16, 16);
-  world.createFlatWorld(6);
   // Connect Physics Engine
   impl.physics = new Physics(world);
   // Add player to world
   impl.player = new Player(world, scene);
-  // Set World in Scene
+  // Create Flat World in Scene
+  world.createFlatWorld(6);
+  scene.loadTextures(engine);
   scene.setWorld(world, 8);
 };
 
@@ -144,7 +143,7 @@ scene.onBlockChanged = (x, y, z) => {
 // Attach World and Build Chunks
 scene.setWorld = (world, chunkSize) => {
   impl.world = world;
-  world.setScene(impl);
+  world.setScene(scene);
   impl.chunkSize = chunkSize;
   // Create chunk list
   var chunks = (impl.chunks = []);
@@ -240,20 +239,20 @@ scene.pickAt = (min, max, mx, my) => {
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STREAM_DRAW);
 
   // Draw buffer
-  gl.bindTexture(gl.TEXTURE_2D, this.texWhite);
+  gl.bindTexture(gl.TEXTURE_2D, impl.texWhite);
 
   gl.viewport(0, 0, 512, 512);
   gl.clearColor(1.0, 1.0, 1.0, 1.0);
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-  this.drawBuffer(buffer);
+  engine.drawBuffer(buffer);
 
   // Read pixel
   var pixel = new Uint8Array(4);
   gl.readPixels(mx / gl.viewportWidth * 512, (1 - my / gl.viewportHeight) * 512, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, pixel);
 
   // Reset states
-  gl.bindTexture(gl.TEXTURE_2D, this.texTerrain);
+  gl.bindTexture(gl.TEXTURE_2D, impl.texTerrain);
   gl.bindFramebuffer(gl.FRAMEBUFFER, null);
   gl.clearColor(0.62, 0.81, 1.0, 1.0);
 
