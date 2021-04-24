@@ -172,33 +172,37 @@ scene.setWorld = (world, chunkSize) => {
 
 // Load Scene Textures
 scene.loadTextures = engine =>{
-  const { gl, programInfo, buffers } = engine;
-
-  // Load Images
-  impl.texTerrain = engine.loadTexture("media/terrain.png")
-  impl.texPlayer = engine.loadTexture("media/player.png")
-  
+  let { gl } = engine;
   // Create 1px white texture for pure vertex color operations (e.g. picking)
   var white = new Uint8Array([255, 255, 255, 255]);
-  impl.texWhite = engine.blankTexture(white);
+  impl.texWhite = engine.blankTexture(white, gl.TEXTURE0);
+
+  // Load Image Textures
+  impl.texTerrain = engine.loadTexture("media/terrain.png")
+  impl.texPlayer = engine.loadTexture("media/player.png")
 
 }
 
 // Render Loop
 scene.render = (engine, now) => { 
+  
   // Simulate Physics for Game
   impl.physics.simulate();
+  
   // Update Player Position
   impl.player.update();
+  
   // Build
-  scene.buildChunks(impl.chunks.length);
-  // engine.setCamera(impl.player.getEyePos().toArray(), impl.player.angles);
-  // Draw
+  // scene.buildChunks(impl.chunks.length);
+  scene.buildChunks(1);
+  engine.setCamera(impl.player.getEyePos().toArray(), impl.player.angles);
+  
+  // Draw Frame
   scene.draw(engine);
-  // Frame speed
+
+  // Update for next frame
   const deltaTime = impl.from === null ? 0 : now - impl.from;
   impl.from = now;
-  // Update for next frame
   impl.squareRotation += deltaTime * 0.001;
 };
 
@@ -207,62 +211,53 @@ scene.draw = (engine) =>{
   const { gl, programInfo, buffers } = engine;
 
   // Clear Sceen
-  gl.clearColor(0.0, 0.0, 0.0, 1.0);
-  gl.clearDepth(1.0);
-  gl.enable(gl.DEPTH_TEST);
-  gl.depthFunc(gl.LEQUAL);
-  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+  engine.clearScreen([0.0, 0.0, 0.0, 1.0]);
 
   // Model Matrix
   const modelViewMatrix = create();
-  
-  // Shade & Project
-  gl.useProgram(programInfo.program);
-  gl.uniformMatrix4fv(programInfo.uniformLocations.projectionMatrix, false, engine.projectionMatrix);
-  gl.uniformMatrix4fv(programInfo.uniformLocations.modelViewMatrix, false, modelViewMatrix);
-
-    // Draw level chunks
-    var chunks = impl.chunks;
-
-    gl.bindTexture(gl.TEXTURE_2D, impl.texTerrain);
-    if (chunks != null) {
-      for (var i = 0; i < chunks.length; i++) {
-        if (chunks[i].buffer != null) engine.drawBuffer(chunks[i].buffer);
-      }
-    }
-
 
   // Move & Rotate Model
-  translate(modelViewMatrix, modelViewMatrix, [-0.0, 0.0, -20.0]);
-  rotate(modelViewMatrix, modelViewMatrix, -impl.squareRotation, [0, 0, 1]);
-  rotate(modelViewMatrix, modelViewMatrix, -impl.squareRotation, [0, 1, 0]);
-  rotate(modelViewMatrix, modelViewMatrix, -impl.squareRotation, [1, 0, 0]);
+  // translate(modelViewMatrix, modelViewMatrix, [-0.0, 0.0, -20.0]);
+  // rotate(modelViewMatrix, modelViewMatrix, -impl.squareRotation, [0, 0, 1]);
+  // rotate(modelViewMatrix, modelViewMatrix, -impl.squareRotation, [0, 1, 0]);
+  // rotate(modelViewMatrix, modelViewMatrix, -impl.squareRotation, [1, 0, 0]);
+   
+  // Draw Terrain chunks (NOT WORKING)
+  var chunks = impl.chunks;
+  gl.bindTexture(gl.TEXTURE_2D, impl.texTerrain);
+  if (chunks != null) {
+    for (var i = 0; i < chunks.length; i++) {
+      if (chunks[i].buffer != null) engine.drawBuffer(chunks[i].buffer, modelViewMatrix);
+    }
+  }
 
+	gl.uniformMatrix4fv( programInfo.attribLocations.modelViewMatrix, false, modelViewMatrix );
+  
   // Vertices
-  gl.bindBuffer(gl.ARRAY_BUFFER, buffers.position);
-  gl.vertexAttribPointer(programInfo.attribLocations.vertexPosition, 3, gl.FLOAT, false, 0, 0);
-  gl.enableVertexAttribArray(programInfo.attribLocations.vertexPosition);
+  // gl.bindBuffer(gl.ARRAY_BUFFER, buffers.position);
+  // gl.vertexAttribPointer(programInfo.attribLocations.vertexPosition, 3, gl.FLOAT, false, 0, 0);
+  // gl.enableVertexAttribArray(programInfo.attribLocations.vertexPosition);
 
   // Colours
-  gl.bindBuffer(gl.ARRAY_BUFFER, buffers.color);
-  gl.vertexAttribPointer(programInfo.attribLocations.vertexColor, 4, gl.FLOAT, false, 0, 0);
-  gl.enableVertexAttribArray(programInfo.attribLocations.vertexColor);
+  // gl.bindBuffer(gl.ARRAY_BUFFER, buffers.color);
+  // gl.vertexAttribPointer(programInfo.attribLocations.vertexColor, 4, gl.FLOAT, false, 0, 0);
+  // gl.enableVertexAttribArray(programInfo.attribLocations.vertexColor);
 
-  // Texture
-  gl.bindBuffer(gl.ARRAY_BUFFER, buffers.textureCoord);
-  gl.vertexAttribPointer(programInfo.attribLocations.textureCoord, 2, gl.FLOAT, false, 0, 0);
-  gl.enableVertexAttribArray(programInfo.attribLocations.textureCoord);
+  // // Texture
+  // gl.bindBuffer(gl.ARRAY_BUFFER, buffers.textureCoord);
+  // gl.vertexAttribPointer(programInfo.attribLocations.textureCoord, 2, gl.FLOAT, false, 0, 0);
+  // gl.enableVertexAttribArray(programInfo.attribLocations.textureCoord);
 
-  // Indices
-  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffers.index);
+  // // Indices
+  // gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffers.index);
 
   // Shade & Project
-  gl.useProgram(programInfo.program);
-  gl.uniformMatrix4fv(programInfo.uniformLocations.projectionMatrix, false, engine.projectionMatrix);
-  gl.uniformMatrix4fv(programInfo.uniformLocations.modelViewMatrix, false, modelViewMatrix);
+  // gl.useProgram(programInfo.program);
+  // gl.uniformMatrix4fv(programInfo.uniformLocations.projectionMatrix, false, engine.projectionMatrix);
+  // gl.uniformMatrix4fv(programInfo.uniformLocations.modelViewMatrix, false, modelViewMatrix);
 
-  // Draw using Triangles
-  gl.drawElements(gl.TRIANGLES, scene.model.indices.length, gl.UNSIGNED_SHORT, 0);
+  // // Draw using Triangles
+  // gl.drawElements(gl.TRIANGLES, scene.model.indices.length, gl.UNSIGNED_SHORT, 0);
 
 }
 export default scene;

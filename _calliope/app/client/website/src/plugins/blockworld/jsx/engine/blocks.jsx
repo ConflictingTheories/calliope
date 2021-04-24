@@ -373,7 +373,7 @@ export default (() => {
       // Right
       if (x === world.sx - 1 || world.blocks[x + 1][y][z].transparent) {
         const c = block.texture(world, lightmap, blockLit, x, y, z, DIRECTION.RIGHT);
-
+        console.log(c);
         let lightMultiplier = x === world.sx - 1 || z >= lightmap[x + 1][y] ? 1.0 : 0.6;
         if (block.selflit) lightMultiplier = 1.0;
 
