@@ -19,25 +19,34 @@ import { MOUSE } from "./engine/enums"
 const WebGLView = ({ width, height, SceneProvider, class: string }) => {
   const ref = useRef();
 
+  let onMouseEvent = () =>null;
+  let onKeyEvent = () =>null;
+
   useEffect(() => {
     const canvas = ref.current;
     const engine = new glEngine(canvas, width, height);
+    // Initialize Scene
     engine.init(SceneProvider);
+    // Attach Handlers
+    onMouseEvent = SceneProvider.onMouseEvent;
+    onKeyEvent = SceneProvider.onKeyEvent;
     return () => {
       engine.close();
     };
   }, [SceneProvider]);
 
   return <canvas
+    tabIndex={0}
     ref={ref}
     width={width}
     height={height}
     className={string}
-    onKeyDownCapture={(e)=> SceneProvider.onKeyEvent(e.nativeEvent.key, true)}
-    onKeyUpCapture={(e) => SceneProvider.onKeyEvent(e.nativeEvent.key, false)}
-    onMouseUp={(e) => SceneProvider.onMouseEvent(e.nativeEvent.clientX, e.nativeEvent.clientY, MOUSE.UP, e.nativeEvent.button == 3)}
-    onMouseDown={(e) => SceneProvider.onMouseEvent(e.nativeEvent.clientX, e.nativeEvent.clientY, MOUSE.DOWN, e.nativeEvent.button == 3)}
-    onMouseMove={(e) => SceneProvider.onMouseEvent(e.nativeEvent.clientX, e.nativeEvent.clientY, MOUSE.MOVE, e.nativeEvent.button == 3)} />;
+    onKeyDownCapture={(e)=> onKeyEvent(e.key, true)}
+    onKeyUpCapture={(e) => onKeyEvent(e.key, false)}
+    onContextMenu={(e) => onMouseEvent(e.nativeEvent.clientX, e.nativeEvent.clientY, MOUSE.UP, true, e)}
+    onMouseUp={(e) => onMouseEvent(e.nativeEvent.clientX, e.nativeEvent.clientY, MOUSE.UP, e.nativeEvent.button == 3, e)}
+    onMouseDown={(e) => onMouseEvent(e.nativeEvent.clientX, e.nativeEvent.clientY, MOUSE.DOWN, e.nativeEvent.button == 3, e)}
+    onMouseMove={(e) => onMouseEvent(e.nativeEvent.clientX, e.nativeEvent.clientY, MOUSE.MOVE, e.nativeEvent.button == 3, e)} />;
 };
 
 WebGLView.propTypes = {

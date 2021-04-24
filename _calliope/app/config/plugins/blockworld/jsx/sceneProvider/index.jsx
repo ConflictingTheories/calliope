@@ -315,12 +315,13 @@ scene.draw = (engine) => {
 
 // Keyboard handler for Scene
 scene.onKeyEvent = (key, down) => {
-  console.log(key);
+  console.log("-----",key);
   impl.player.onKeyEvent(key, down)
 }
 
 // Mouse Handler for Scene
-scene.onMouseEvent = (x, y, type, rmb) => {
+scene.onMouseEvent = (x, y, type, rmb, e) => {
+  console.log()
   impl.player.onMouseEvent(x, y, type, rmb);
 }
 
