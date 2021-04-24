@@ -13,21 +13,25 @@
   "homepage": "/",
   "build": {
     "appId": "com.kderbyma.calliope",
+    "productName": "Calliope",
+    "copyright": "Copyright © 2020-2021 ${author}",
     "win": {
-      "icon": "./client/website/build/logo512.png"
+      "icon": "/config/public/logo512.png"
     },
     "linux": {
-      "icon": "./client/website/build/logo512.png",
+      "icon": "/config/public/logo512.png",
       "category": "Internet"
     },
     "mac": {
-      "icon": "./client/website/build/logo512.png",
-      "category": "Internet"
+      "icon": "/config/public/logo512.png",
+      "category": "public.app-category.internet"
     }
   },
   "dependencies": {
     "@blueprintjs/core": "^3.31.0",
     "@fec/remark-a11y-emoji": "^2.0.0",
+    "@nvd/use-webgl": "^0.1.0",
+    "@sweetalert2/themes": "^4.0.2",
     "@uiw/react-md-editor": "^2.0.3",
     "archiver": "^5.2.0",
     "body-parser": "^1.19.0",
@@ -39,6 +43,7 @@
     "express-fileupload": "^1.2.0",
     "express-session": "^1.17.1",
     "file-saver": "^2.0.5",
+    "gl-matrix": "^3.3.0",
     "glob": "^7.1.6",
     "hls.js": "^0.14.17",
     "hlsjs-ipfs-loader": "^0.3.0",

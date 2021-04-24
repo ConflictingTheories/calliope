@@ -14,6 +14,7 @@ import React from "react";
 // Plugins
 import ipfsStream from "./ipfs-stream/jsx";
 import MermaidDiagram from "./mermaid/jsx";
+import BlockWorld from "./blockworld/jsx";
 
 // TODO - Add Theme Injection Somehow (Or Wrapper)
 
@@ -33,6 +34,14 @@ export default function plugins(props) {
       let { diagram } = props.attributes;
       if (diagram) {
         return <MermaidDiagram diagram={diagram} />;
+      } else {
+        return <></>;
+      }
+    // Blockworld Diagrams
+    case "blockworld":
+      let { networkString } = props.attributes;
+      if (networkString) {
+        return <BlockWorld networkString={networkString} />;
       } else {
         return <></>;
       }

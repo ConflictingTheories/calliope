@@ -208,7 +208,7 @@ class Dashboard extends React.Component {
   renderPanel() {
     let content = store.selectedContent;
     return (
-      <Panel style={{ width: "100%" }}>
+      <Panel style={{ width: "100%", maxWidth: "100vw" }}>
         <Content>
           <Row>
             <Col md={4}>

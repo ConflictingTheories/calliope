@@ -1,0 +1,44 @@
+{
+  "sections": [
+    {
+      "type": "section",
+      "title": "Pages",
+      "links": [
+        {
+          "label": "Home",
+          "url": "/",
+          "type": "relative"
+        },
+        {
+          "label": "Hello",
+          "url": "/hello",
+          "type": "relative"
+        }
+      ]
+    },
+    {
+      "type": "separator"
+    },
+    {
+      "type": "section",
+      "title": "Posts",
+      "links": [
+        {
+          "label": "Welcome",
+          "url": "/embed/e/00_header",
+          "type": "relative"
+        },
+        {
+          "label": "Features",
+          "url": "/embed/e/00_header",
+          "type": "relative"
+        },
+        {
+          "label": "Release Notes",
+          "url": "/embed/e/02_features",
+          "type": "relative"
+        }
+      ]
+    }
+  ]
+}
