@@ -10,7 +10,7 @@ import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import WebGL from './engine/WebGL';
 
-const GLView = ({ width, height, Scene }) => {
+const GLView = ({ width, height, Scene, class:string }) => {
   const ref = useRef();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const GLView = ({ width, height, Scene }) => {
     };
   }, [Scene]);
 
-  return <canvas ref={ref} width={width} height={height} />;
+  return <canvas ref={ref} width={width} height={height} className={string}/>;
 };
 
 GLView.propTypes = {
@@ -30,6 +30,8 @@ GLView.propTypes = {
   height: PropTypes.number.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   Scene: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  class: PropTypes.string.isRequired,
 };
 
 export default GLView;

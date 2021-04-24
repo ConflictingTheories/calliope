@@ -20,25 +20,11 @@ const create = () => {
   return matrix;
 };
 
+// Set Perspective (FOV / Aspect Ratio)
 const perspective = (fovy, aspect, near, far) => {
   const matrix = new Float32Array(16);
   const f = 1.0 / Math.tan(fovy / 2);
-  matrix[0] = f / aspect;
-  matrix[1] = 0;
-  matrix[2] = 0;
-  matrix[3] = 0;
-  matrix[4] = 0;
-  matrix[5] = f;
-  matrix[6] = 0;
-  matrix[7] = 0;
-  matrix[8] = 0;
-  matrix[9] = 0;
-  matrix[10] = -1;
-  matrix[11] = -1;
-  matrix[12] = 0;
-  matrix[13] = 0;
-  matrix[14] = -2 * near;
-  matrix[15] = 0;
+  matrix = [f / aspect, 0, 0, 0, 0, f, 0, 0, 0, 0, -1, -1, 0, 0, -2 * near, 0];
   if (far != null && far !== Infinity && far !== near) {
     const nf = 1 / (near - far);
     matrix[10] = (far + near) * nf;
@@ -47,6 +33,7 @@ const perspective = (fovy, aspect, near, far) => {
   return matrix;
 };
 
+// translation
 const translate = (m1, m2, v) => {
   const matrix = m1;
   const [x, y, z] = v;
@@ -73,13 +60,14 @@ const translate = (m1, m2, v) => {
   return matrix;
 };
 
+// Rotate Quaternion
 const rotate = (m1, m2, rad, axis) => {
   const matrix = m1;
   let [x, y, z] = axis;
   let len = Math.hypot(x, y, z);
 
   if (len < EPSILON) {
-    throw new Error('Matrix4*4 rotate has wrong axis');
+    throw new Error("Matrix4*4 rotate has wrong axis");
   }
 
   len = 1 / len;
@@ -125,4 +113,9 @@ const rotate = (m1, m2, rad, axis) => {
   return matrix;
 };
 
-export { create, perspective, translate, rotate };
+
+function isPowerOf2(value) {
+  return (value & (value - 1)) == 0;
+}
+
+export { create, perspective, translate, rotate, isPowerOf2 };

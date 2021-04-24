@@ -13,12 +13,13 @@
 
 import React, { Component } from "react";
 import { collect } from "react-recollect";
-import GLView from "./GLView";
-// import Bitworld from "./core";
-
-// Style
+// WebGL Component
+import WebGLView from "./WebGLView";
+// Blockworld Scene Provider
+import SceneProvider from "./sceneProvider";
+// Style Plugin
 import "../less/bitworld.less";
-import scene from "./scene";
+
 class BlockWorld extends Component {
   constructor(props) {
     super(props);
@@ -28,6 +29,7 @@ class BlockWorld extends Component {
     };
   }
 
+  // Update world on Edit
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
     if (
@@ -46,7 +48,7 @@ class BlockWorld extends Component {
     const { networkString, updated } = this.state;
     return (
       <>
-        <GLView className="bitworld" key={updated} width={720} height={480} Scene={scene} networkString={networkString} />
+        <WebGLView class="bitworld" key={updated} width={720} height={480} SceneProvider={SceneProvider} networkString={networkString} />
       </>
     );
   }
