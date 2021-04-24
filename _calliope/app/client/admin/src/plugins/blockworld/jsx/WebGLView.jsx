@@ -18,6 +18,7 @@ import { MOUSE } from "./engine/enums"
 //
 const WebGLView = ({ width, height, SceneProvider, class: string }) => {
   const ref = useRef();
+
   useEffect(() => {
     const canvas = ref.current;
     const engine = new glEngine(canvas, width, height);
@@ -32,8 +33,8 @@ const WebGLView = ({ width, height, SceneProvider, class: string }) => {
     width={width}
     height={height}
     className={string}
-    onKeyDown={(e) => SceneProvider.onKeyEvent(e.nativeEvent.key, true)}
-    onKeyUp={(e) => SceneProvider.onKeyEvent(e.nativeEvent.key, false)}
+    onKeyDownCapture={(e)=> SceneProvider.onKeyEvent(e.nativeEvent.key, true)}
+    onKeyUpCapture={(e) => SceneProvider.onKeyEvent(e.nativeEvent.key, false)}
     onMouseUp={(e) => SceneProvider.onMouseEvent(e.nativeEvent.clientX, e.nativeEvent.clientY, MOUSE.UP, e.nativeEvent.button == 3)}
     onMouseDown={(e) => SceneProvider.onMouseEvent(e.nativeEvent.clientX, e.nativeEvent.clientY, MOUSE.DOWN, e.nativeEvent.button == 3)}
     onMouseMove={(e) => SceneProvider.onMouseEvent(e.nativeEvent.clientX, e.nativeEvent.clientY, MOUSE.MOVE, e.nativeEvent.button == 3)} />;

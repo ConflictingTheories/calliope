@@ -45,16 +45,17 @@ scene.init = engine => {
   impl.engine = engine;
   impl.squareRotation = 0;
   impl.from = null;
-  // load Textures
-  scene.loadTextures(engine);
-  // Build World
-  let world = new World(16, 16, 16);
+
+  // Init Game Engine Components
+  let world = impl.world = new World(16, 16, 16);
   world.createFlatWorld(6);
-  // Connect Physics Engine
+  // Physics
   impl.physics = new Physics(world);
-  // Add player to world
+  // Player & Controls
   impl.player = new Player(world, scene);
+
   // Create Flat World in Scene
+  scene.loadTextures(engine);
   scene.setWorld(world, 8);
 };
 

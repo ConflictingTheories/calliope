@@ -11,9 +11,9 @@
 ** ----------------------------------------------- **
 \*                                                 */
 
-import { Vector, lineRectCollide, rectRectCollide } from '../utils/vector';
-import BLOCK from './blocks';
-import { MOUSE } from './enums';
+import { Vector, lineRectCollide, rectRectCollide } from "../utils/vector";
+import BLOCK from "./blocks";
+import { MOUSE } from "./enums";
 
 export default class Player {
   constructor(world, scene) {
@@ -37,7 +37,11 @@ export default class Player {
   // Updates this local player (gravity, movement)
   update() {
     const { pos, velocity } = this;
-    const bPos = new Vector(Math.floor(pos.x), Math.floor(pos.y), Math.floor(pos.z));
+    const bPos = new Vector(
+      Math.floor(pos.x),
+      Math.floor(pos.y),
+      Math.floor(pos.z)
+    );
 
     if (this.lastUpdate != null) {
       const delta = (new Date().getTime() - this.lastUpdate) / 1000;
@@ -54,7 +58,7 @@ export default class Player {
       if (this.falling) velocity.z += -0.5;
 
       // Jumping
-      if (this.keys[' '] && !this.falling) velocity.z = 8;
+      if (this.keys[" "] && !this.falling) velocity.z = 8;
 
       // Walking
       let walkVelocity = new Vector(0, 0, 0);
@@ -68,12 +72,20 @@ export default class Player {
           walkVelocity.y += Math.sin(Math.PI + Math.PI / 2 - this.angles[1]);
         }
         if (this.keys.a) {
-          walkVelocity.x += Math.cos(Math.PI / 2 + Math.PI / 2 - this.angles[1]);
-          walkVelocity.y += Math.sin(Math.PI / 2 + Math.PI / 2 - this.angles[1]);
+          walkVelocity.x += Math.cos(
+            Math.PI / 2 + Math.PI / 2 - this.angles[1]
+          );
+          walkVelocity.y += Math.sin(
+            Math.PI / 2 + Math.PI / 2 - this.angles[1]
+          );
         }
         if (this.keys.d) {
-          walkVelocity.x += Math.cos(-Math.PI / 2 + Math.PI / 2 - this.angles[1]);
-          walkVelocity.y += Math.sin(-Math.PI / 2 + Math.PI / 2 - this.angles[1]);
+          walkVelocity.x += Math.cos(
+            -Math.PI / 2 + Math.PI / 2 - this.angles[1]
+          );
+          walkVelocity.y += Math.sin(
+            -Math.PI / 2 + Math.PI / 2 - this.angles[1]
+          );
         }
       }
       if (walkVelocity.length() > 0) {
@@ -94,16 +106,29 @@ export default class Player {
 
   // Perform Action on Block
   doBlockAction(x, y, destroy) {
-    var bPos = new Vector(Math.floor(this.pos.x), Math.floor(this.pos.y), Math.floor(this.pos.z));
-    var block = this.scene.pickAt(new Vector(bPos.x - 4, bPos.y - 4, bPos.z - 4), new Vector(bPos.x + 4, bPos.y + 4, bPos.z + 4), x, y);
+    var bPos = new Vector(
+      Math.floor(this.pos.x),
+      Math.floor(this.pos.y),
+      Math.floor(this.pos.z)
+    );
+    var block = this.scene.pickAt(
+      new Vector(bPos.x - 4, bPos.y - 4, bPos.z - 4),
+      new Vector(bPos.x + 4, bPos.y + 4, bPos.z + 4),
+      x,
+      y
+    );
 
     if (block != false) {
       var obj = this.world;
 
-      if (destroy)
-        obj.setBlock(block.x, block.y, block.z, BLOCK.AIR);
+      if (destroy) obj.setBlock(block.x, block.y, block.z, BLOCK.AIR);
       else
-        obj.setBlock(block.x + block.n.x, block.y + block.n.y, block.z + block.n.z, this.buildMaterial);
+        obj.setBlock(
+          block.x + block.n.x,
+          block.y + block.n.y,
+          block.z + block.n.z,
+          this.buildMaterial
+        );
     }
   }
 
@@ -130,7 +155,8 @@ export default class Player {
   // key Event Handler for Player
   onKeyEvent(key, down) {
     this.keys[key] = down;
-    if (!down && key == "t" && this.eventHandlers["openChat"]) this.eventHandlers.openChat();
+    if (!down && key == "t" && this.eventHandlers["openChat"])
+      this.eventHandlers.openChat();
   }
 
   // Resolves collisions between the player and blocks on XY level for the next movement step.
@@ -148,10 +174,12 @@ export default class Player {
       for (let y = bPos.y - 1; y <= bPos.y + 1; y++) {
         for (let { z } = bPos; z <= bPos.z + 1; z++) {
           if (world.getBlock(x, y, z) != BLOCK.AIR) {
-            if (world.getBlock(x - 1, y, z) == BLOCK.AIR) collisionCandidates.push({ x, dir: -1, y1: y, y2: y + 1 });
+            if (world.getBlock(x - 1, y, z) == BLOCK.AIR)
+              collisionCandidates.push({ x, dir: -1, y1: y, y2: y + 1 });
             if (world.getBlock(x + 1, y, z) == BLOCK.AIR)
               collisionCandidates.push({ x: x + 1, dir: 1, y1: y, y2: y + 1 });
-            if (world.getBlock(x, y - 1, z) == BLOCK.AIR) collisionCandidates.push({ y, dir: -1, x1: x, x2: x + 1 });
+            if (world.getBlock(x, y - 1, z) == BLOCK.AIR)
+              collisionCandidates.push({ y, dir: -1, x1: x, x2: x + 1 });
             if (world.getBlock(x, y + 1, z) == BLOCK.AIR)
               collisionCandidates.push({ y: y + 1, dir: 1, x1: x, x2: x + 1 });
           }

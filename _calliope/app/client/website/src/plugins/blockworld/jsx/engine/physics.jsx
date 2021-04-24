@@ -23,8 +23,7 @@ export default class Physics {
     this.world = world;
   }
 
-  // Perform one iteration of physics simulation.
-  // Should be called about once every second.
+// Simulate Change Iteration
   simulate() {
     const { world } = this;
     const { blocks } = world;

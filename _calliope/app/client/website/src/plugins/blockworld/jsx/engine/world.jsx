@@ -11,12 +11,11 @@
 ** ----------------------------------------------- **
 \*                                                 */
 
-import { Vector } from '../utils/vector';
-import BLOCK from './blocks';
+import { Vector } from "../utils/vector";
+import BLOCK from "./blocks";
 
 export default class World {
   constructor(sx, sy, sz) {
-    // Initialise world array
     this.blocks = new Array(sx);
     for (let x = 0; x < sx; x++) {
       this.blocks[x] = new Array(sy);
@@ -27,32 +26,24 @@ export default class World {
     this.sx = sx;
     this.sy = sy;
     this.sz = sz;
-
     this.players = {};
   }
 
-  // createFlatWorld()
-  //
-  // Sets up the world so that the bottom half is filled with dirt
-  // and the top half with air.
+  // Flat World at given height
   createFlatWorld(height) {
     this.spawnPoint = new Vector(this.sx / 2 + 0.5, this.sy / 2 + 0.5, height);
-
     for (let x = 0; x < this.sx; x++)
       for (let y = 0; y < this.sy; y++)
-        for (let z = 0; z < this.sz; z++) this.blocks[x][y][z] = z < height ? BLOCK.DIRT : BLOCK.AIR;
+        for (let z = 0; z < this.sz; z++)
+          this.blocks[x][y][z] = z < height ? BLOCK.DIRT : BLOCK.AIR;
   }
 
-  // createFromString( str )
-  //
   // Creates a world from a string representation.
-  // This is the opposite of toNetworkString().
-  //
-  // NOTE: The world must have already been created
-  // with the appropriate size!
-  createFromString(str) {
+  createFromString(str, spawn = null) {
+    this.spawnPoint = spawn
+      ? spawn
+      : new Vector(this.sx / 2 + 0.5, this.sy / 2 + 0.5, this.sz);
     let i = 0;
-
     for (let x = 0; x < this.sx; x++) {
       for (let y = 0; y < this.sy; y++) {
         for (let z = 0; z < this.sz; z++) {
@@ -63,33 +54,36 @@ export default class World {
     }
   }
 
-  // getBlock( x, y, z )
-  //
-  // Get the type of the block at the specified position.
-  // Mostly for neatness, since accessing the array
-  // directly is easier and faster.
+  // Gett block at location
   getBlock(x, y, z) {
-    if (x < 0 || y < 0 || z < 0 || x > this.sx - 1 || y > this.sy - 1 || z > this.sz - 1) return BLOCK.AIR;
+    if (
+      x < 0 ||
+      y < 0 ||
+      z < 0 ||
+      x > this.sx - 1 ||
+      y > this.sy - 1 ||
+      z > this.sz - 1
+    )
+      return BLOCK.AIR;
     return this.blocks[x][y][z];
   }
 
-  // setBlock( x, y, z )
+  // Set Block at location
   setBlock(x, y, z, type) {
     this.blocks[x][y][z] = type;
     if (this.scene != null) this.scene.onBlockChanged(x, y, z);
   }
 
-  // toNetworkString()
-  //
-  // Returns a string representation of this world.
+  // Return a string representation of the world
   toNetworkString() {
     const blockArray = [];
 
     for (let x = 0; x < this.sx; x++)
       for (let y = 0; y < this.sy; y++)
-        for (let z = 0; z < this.sz; z++) blockArray.push(String.fromCharCode(97 + this.blocks[x][y][z].id));
+        for (let z = 0; z < this.sz; z++)
+          blockArray.push(String.fromCharCode(97 + this.blocks[x][y][z].id));
 
-    return blockArray.join('');
+    return blockArray.join("");
   }
 
   // Set Scene Handler
