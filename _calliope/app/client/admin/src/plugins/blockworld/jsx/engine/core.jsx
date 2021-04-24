@@ -1,4 +1,4 @@
-import { perspective, isPowerOf2 } from './utils/matrix4';
+import { create, rotate, translate, perspective, isPowerOf2 } from './utils/matrix4';
 
 export default class WebGL {
   constructor(canvas, width, height) {
@@ -65,6 +65,20 @@ export default class WebGL {
     this.projectionMatrix = perspective(fieldOfView, aspect, zNear, zFar);
   }
 
+  // Set Camera Pos & Angle
+  setCamera(pos, ang) {
+    var gl = this.gl;
+    this.camPos = pos;
+
+    this.viewMatrix = create();
+    rotate(this.viewMatrix,this.viewMatrix, -ang[0] - Math.PI / 2, [1, 0, 0] );
+    rotate(this.viewMatrix,this.viewMatrix, ang[1], [0, 0, 1]);
+    rotate(this.viewMatrix,this.viewMatrix, -ang[2], [0, 1, 0]);
+    translate(this.viewMatrix, this.viewMatrix, [-pos[0], -pos[1], -pos[2]], );
+
+    gl.uniformMatrix4fv(this.programInfo.uniformLocations.projectionMatrix, false, this.viewMatrix);
+  }
+
   // Render Frame
   render(now) {
     this.scene.render(this, now);
@@ -113,10 +127,23 @@ export default class WebGL {
     this.buffers = {
       position: vertexBuffer,
       color: colorBuffer,
+      texture: textureCoordBuffer,
       index: indexBuffer,
     };
   }
-
+  // Draw Buffer
+  drawBuffer (buffer) {
+    var gl = this.gl;
+  
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+  
+    gl.vertexAttribPointer(this.aPos, 3, gl.FLOAT, false, 9 * 4, 0);
+    gl.vertexAttribPointer(this.aColor, 4, gl.FLOAT, false, 9 * 4, 5 * 4);
+    gl.vertexAttribPointer(this.aTexCoord, 2, gl.FLOAT, false, 9 * 4, 3 * 4);
+  
+    gl.drawArrays(gl.TRIANGLES, 0, buffer.vertices);
+  };
+  
   // Load Texture from File
   loadTexture( url) {
     let {gl} = this;

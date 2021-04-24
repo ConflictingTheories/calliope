@@ -12,7 +12,7 @@
 const EPSILON = 0.000001;
 
 const create = () => {
-  const matrix = new Float32Array(16);
+  let matrix = new Float32Array(16);
   matrix[0] = 1;
   matrix[5] = 1;
   matrix[10] = 1;
@@ -21,8 +21,8 @@ const create = () => {
 };
 
 const perspective = (fovy, aspect, near, far) => {
-  const matrix = new Float32Array(16);
-  const f = 1.0 / Math.tan(fovy / 2);
+  let matrix = new Float32Array(16);
+  let f = 1.0 / Math.tan(fovy / 2);
   matrix[0] = f / aspect;
   matrix[1] = 0;
   matrix[2] = 0;
@@ -48,10 +48,10 @@ const perspective = (fovy, aspect, near, far) => {
 };
 
 const translate = (m1, m2, v) => {
-  const matrix = m1;
-  const [x, y, z] = v;
+  let matrix = m1;
+  let [x, y, z] = v;
 
-  const [a00, a01, a02, a03, a10, a11, a12, a13, a20, a21, a22, a23] = m2;
+  let [a00, a01, a02, a03, a10, a11, a12, a13, a20, a21, a22, a23] = m2;
   if (m1 !== m2) {
     matrix[0] = a00;
     matrix[1] = a01;
@@ -74,7 +74,7 @@ const translate = (m1, m2, v) => {
 };
 
 const rotate = (m1, m2, rad, axis) => {
-  const matrix = m1;
+  let matrix = m1;
   let [x, y, z] = axis;
   let len = Math.hypot(x, y, z);
 
@@ -87,21 +87,21 @@ const rotate = (m1, m2, rad, axis) => {
   y *= len;
   z *= len;
 
-  const s = Math.sin(rad);
-  const c = Math.cos(rad);
-  const t = 1 - c;
+  let s = Math.sin(rad);
+  let c = Math.cos(rad);
+  let t = 1 - c;
 
-  const [a00, a01, a02, a03, a10, a11, a12, a13, a20, a21, a22, a23] = m2;
+  let [a00, a01, a02, a03, a10, a11, a12, a13, a20, a21, a22, a23] = m2;
 
-  const b00 = x * x * t + c;
-  const b01 = y * x * t + z * s;
-  const b02 = z * x * t - y * s;
-  const b10 = x * y * t - z * s;
-  const b11 = y * y * t + c;
-  const b12 = z * y * t + x * s;
-  const b20 = x * z * t + y * s;
-  const b21 = y * z * t - x * s;
-  const b22 = z * z * t + c;
+  let b00 = x * x * t + c;
+  let b01 = y * x * t + z * s;
+  let b02 = z * x * t - y * s;
+  let b10 = x * y * t - z * s;
+  let b11 = y * y * t + c;
+  let b12 = z * y * t + x * s;
+  let b20 = x * z * t + y * s;
+  let b21 = y * z * t - x * s;
+  let b22 = z * z * t + c;
 
   matrix[0] = a00 * b00 + a10 * b01 + a20 * b02;
   matrix[1] = a01 * b00 + a11 * b01 + a21 * b02;
