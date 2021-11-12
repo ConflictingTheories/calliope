@@ -31,7 +31,7 @@ export default class Zone {
     // TODO: Check LocalStorage / IndexDB for cached data
     // Pull zone data from server
     this.id = zoneId;
-    var self = this;
+    let self = this;
     new Request.JSON({
       url: config.zoneRequestUrl(zoneId),
       method: "get",
@@ -41,11 +41,11 @@ export default class Zone {
         self.onJsonLoaded(json);
       },
       onFailure() {
-        debug.error("Error fetching zone " + zoneId);
+        console.error("Error fetching zone " + zoneId);
       },
       onError(text, error) {
-        debug.error("Error parsing zone " + zoneId + ": " + error);
-        debug.error(text);
+        console.error("Error parsing zone " + zoneId + ": " + error);
+        console.error(text);
       },
     }).send();
   }
@@ -83,16 +83,16 @@ export default class Zone {
     this.vertexTexBuf = [];
     this.walkability = [];
 
-    for (var j = 0, k = 0; j < this.size[1]; j++) {
-      var vertices = [];
-      var vertexTexCoords = [];
-      for (var i = 0; i < this.size[0]; i++, k++) {
-        var cell = this.cells[k];
+    for (let j = 0, k = 0; j < this.size[1]; j++) {
+      let vertices = [];
+      let vertexTexCoords = [];
+      for (let i = 0; i < this.size[0]; i++, k++) {
+        let cell = this.cells[k];
         this.walkability[k] = Direction.All;
 
-        var n = Math.floor(cell.length / 3);
-        for (var l = 0; l < n; l++) {
-          var tilePos = vec3.create([
+        let n = Math.floor(cell.length / 3);
+        for (let l = 0; l < n; l++) {
+          let tilePos = vec3.create([
             this.bounds[0] + i,
             this.bounds[1] + j,
             cell[3 * l + 2],
@@ -129,13 +129,13 @@ export default class Zone {
       return;
 
     this.loaded = true;
-    debug.log("Initialized zone '" + this.id + "'");
+    console.log("Initialized zone '" + this.id + "'");
     this.onLoadActions.run();
   }
 
   loadActor(data) {
     data.zone = this;
-    var a = ActorLoader.load(data.type, function (b) {
+    let a = ActorLoader.load(data.type, function (b) {
       b.onLoad(data);
     });
     this.actorDict[data.id] = a;
@@ -158,44 +158,44 @@ export default class Zone {
   // Calculate the height of a point in the zone
   getHeight(x, y) {
     if (!this.isInZone(x, y)) {
-      debug.error(
+      console.error(
         "Requesting height for [" + x + ", " + y + "] outside zone bounds"
       );
       return 0;
     }
 
-    var i = Math.floor(x);
-    var j = Math.floor(y);
-    var dp = [x - i, y - j];
+    let i = Math.floor(x);
+    let j = Math.floor(y);
+    let dp = [x - i, y - j];
 
     // Calculate point inside a triangle
-    var getUV = function (t, p) {
+    let getUV = function (t, p) {
       // Vectors relative to first vertex
-      var u = [t[1][0] - t[0][0], t[1][1] - t[0][1]];
-      var v = [t[2][0] - t[0][0], t[2][1] - t[0][1]];
+      let u = [t[1][0] - t[0][0], t[1][1] - t[0][1]];
+      let v = [t[2][0] - t[0][0], t[2][1] - t[0][1]];
 
       // Calculate basis transformation
-      var d = 1 / (u[0] * v[1] - u[1] * v[0]);
-      var T = [d * v[1], -d * v[0], -d * u[1], d * u[0]];
+      let d = 1 / (u[0] * v[1] - u[1] * v[0]);
+      let T = [d * v[1], -d * v[0], -d * u[1], d * u[0]];
 
       // Return new coords
-      var u = (p[0] - t[0][0]) * T[0] + (p[1] - t[0][1]) * T[1];
-      var v = (p[0] - t[0][0]) * T[2] + (p[1] - t[0][1]) * T[3];
+      let u = (p[0] - t[0][0]) * T[0] + (p[1] - t[0][1]) * T[1];
+      let v = (p[0] - t[0][0]) * T[2] + (p[1] - t[0][1]) * T[3];
       return [u, v];
     };
 
     // Check if any of the tiles defines a custom walk polygon
-    var cell =
+    let cell =
       this.cells[(j - this.bounds[1]) * this.size[0] + i - this.bounds[0]];
-    var n = Math.floor(cell.length / 3);
-    for (var l = 0; l < n; l++) {
-      var poly = this.tileset.getTileWalkPoly(cell[3 * l]);
+    let n = Math.floor(cell.length / 3);
+    for (let l = 0; l < n; l++) {
+      let poly = this.tileset.getTileWalkPoly(cell[3 * l]);
       if (!poly) continue;
 
       // Loop over triangles
-      for (var p = 0; p < poly.length; p++) {
-        var uv = getUV(poly[p], dp);
-        var w = uv[0] + uv[1];
+      for (let p = 0; p < poly.length; p++) {
+        let uv = getUV(poly[p], dp);
+        let w = uv[0] + uv[1];
         if (w <= 1)
           return (
             cell[3 * l + 2] +
@@ -225,25 +225,25 @@ export default class Zone {
     gl.drawArrays(gl.TRIANGLES, 0, this.vertexPosBuf[row].numItems);
   }
 
-  draw() {
+  draw(engine) {
     if (!this.loaded) return;
 
     this.actorList.sort(function (a, b) {
       return a.pos[1] - b.pos[1];
     });
-    mvPushMatrix();
-    renderer.setCamera();
+    engine.mvPushMatrix();
+    engine.setCamera();
 
-    var k = 0,
+    let k = 0,
       maxK = this.actorList.length;
-    for (var j = 0; j < this.size[1]; j++) {
+    for (let j = 0; j < this.size[1]; j++) {
       this.drawRow(j);
 
       while (k < maxK && this.actorList[k].pos[1] - this.bounds[1] <= j)
-        this.actorList[k++].draw();
+        this.actorList[k++].draw(engine);
     }
     while (k < maxK) this.actorList[k++].draw();
-    mvPopMatrix();
+    engine.mvPopMatrix();
   }
 
   tick(time) {
@@ -266,8 +266,8 @@ export default class Zone {
   isWalkable(x, y, direction) {
     if (!this.isInZone(x, y)) return null;
 
-    var i = Math.floor();
-    var j = Math.floor(y - this.bounds[1]);
+    let i = Math.floor();
+    let j = Math.floor(y - this.bounds[1]);
 
     return (
       (this.walkability[

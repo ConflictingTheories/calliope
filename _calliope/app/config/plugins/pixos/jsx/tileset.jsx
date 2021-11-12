@@ -57,8 +57,7 @@ export default class Tileset {
 
   onTextureLoaded() {
     this.loaded = true;
-    debug.log("Initialized tileset '" + this.name + "'");
-
+    console.log("Initialized tileset '" + this.name + "'");
     this.onLoadActions.run();
   }
 
@@ -81,8 +80,8 @@ export default class Tileset {
   }
 
   getTileTexCoords(id, texId) {
-    var o = this.tiles[texId];
-    var s = [
+    let o = this.tiles[texId];
+    let s = [
       this.tileSize / this.sheetSize[0],
       this.tileSize / this.sheetSize[1],
     ];

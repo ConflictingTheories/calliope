@@ -106,12 +106,12 @@ export default class Player {
 
   // Perform Action on Block
   doBlockAction(x, y, destroy) {
-    var bPos = new Vector(
+    let bPos = new Vector(
       Math.floor(this.pos.x),
       Math.floor(this.pos.y),
       Math.floor(this.pos.z)
     );
-    var block = this.scene.pickAt(
+    let block = this.scene.pickAt(
       new Vector(bPos.x - 4, bPos.y - 4, bPos.z - 4),
       new Vector(bPos.x + 4, bPos.y + 4, bPos.z + 4),
       x,
@@ -119,7 +119,7 @@ export default class Player {
     );
 
     if (block != false) {
-      var obj = this.world;
+      let obj = this.world;
 
       if (destroy) obj.setBlock(block.x, block.y, block.z, BLOCK.AIR);
       else

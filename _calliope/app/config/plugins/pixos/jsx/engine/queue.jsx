@@ -11,16 +11,19 @@
 ** ----------------------------------------------- **
 \*                                                 */
 
-export default (() => {
-  return {
-    id: 1,
-    spawnable: false,
-    selflit: false,
-    gravity: false,
-    fluid: false,
-    transparent: false,
-    texture: (world, lightmap, lit, x, y, z, dir) => {
-      return [1 / 16, 1 / 16, 2 / 16, 2 / 16];
-    },
-  };
-})();
+export default class ActionQueue {
+  constructor() {
+    this.actions = [];
+  }
+
+  add(a) {
+    this.actions.push(a);
+  }
+
+  run() {
+    let args = arguments;
+    this.actions = this.actions.filter(function (a) {
+      return a(args);
+    });
+  }
+}

@@ -56,6 +56,10 @@ export class Coord {
   toString() {
     return `( ${this.x}, ${this.y} )`;
   }
+  
+  negate() {
+    return new Vector(this.x * -1, this.y * -1);
+  }
 }
 
 export class Vector {
@@ -86,7 +90,8 @@ export class Vector {
   }
 
   normal() {
-    if (this.x === 0 && this.y === 0 && this.z === 0) return new Vector(0, 0, 0);
+    if (this.x === 0 && this.y === 0 && this.z === 0)
+      return new Vector(0, 0, 0);
     const l = this.length();
     return new Vector(this.x / l, this.y / l, this.z / l);
   }
@@ -102,6 +107,9 @@ export class Vector {
   toString() {
     return `( ${this.x}, ${this.y}, ${this.z} )`;
   }
+  negate() {
+    return new Vector(this.x * -1, this.y * -1, this.z * -1);
+  }
 }
 
 export class Vector4 {
@@ -113,11 +121,21 @@ export class Vector4 {
   }
 
   add(vec) {
-    return new Vector4(this.x + vec.x, this.y + vec.y, this.z + vec.z, this.w + vec.w);
+    return new Vector4(
+      this.x + vec.x,
+      this.y + vec.y,
+      this.z + vec.z,
+      this.w + vec.w
+    );
   }
 
   sub(vec) {
-    return new Vector4(this.x - vec.x, this.y - vec.y, this.z - vec.z, this.w - vec.w);
+    return new Vector4(
+      this.x - vec.x,
+      this.y - vec.y,
+      this.z - vec.z,
+      this.w - vec.w
+    );
   }
 
   mul(n) {
@@ -125,7 +143,9 @@ export class Vector4 {
   }
 
   length() {
-    return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w);
+    return Math.sqrt(
+      this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w
+    );
   }
 
   distance(vec) {
@@ -133,7 +153,8 @@ export class Vector4 {
   }
 
   normal() {
-    if (this.x === 0 && this.y === 0 && this.z === 0 && this.w === 0) return new Vector4(0, 0, 0, 0);
+    if (this.x === 0 && this.y === 0 && this.z === 0 && this.w === 0)
+      return new Vector4(0, 0, 0, 0);
     const l = this.length();
     return new Vector4(this.x / l, this.y / l, this.z / l, this.w / l);
   }
@@ -148,6 +169,10 @@ export class Vector4 {
 
   toString() {
     return `( ${this.x}, ${this.y}, ${this.z}, ${this.w} )`;
+  }
+
+  negate() {
+    return new Vector(this.x * -1, this.y * -1, this.z * -1, this.w * -1);
   }
 }
 
@@ -171,10 +196,14 @@ export function lineRectCollide(line, rect) {
 // Checks if two rectangles (x1, y1, x2, y2) overlap.
 
 export function rectRectCollide(r1, r2) {
-  if (r2.x1 > r1.x1 && r2.x1 < r1.x2 && r2.y1 > r1.y1 && r2.y1 < r1.y2) return true;
-  if (r2.x2 > r1.x1 && r2.x2 < r1.x2 && r2.y1 > r1.y1 && r2.y1 < r1.y2) return true;
-  if (r2.x2 > r1.x1 && r2.x2 < r1.x2 && r2.y2 > r1.y1 && r2.y2 < r1.y2) return true;
-  if (r2.x1 > r1.x1 && r2.x1 < r1.x2 && r2.y2 > r1.y1 && r2.y2 < r1.y2) return true;
+  if (r2.x1 > r1.x1 && r2.x1 < r1.x2 && r2.y1 > r1.y1 && r2.y1 < r1.y2)
+    return true;
+  if (r2.x2 > r1.x1 && r2.x2 < r1.x2 && r2.y1 > r1.y1 && r2.y1 < r1.y2)
+    return true;
+  if (r2.x2 > r1.x1 && r2.x2 < r1.x2 && r2.y2 > r1.y1 && r2.y2 < r1.y2)
+    return true;
+  if (r2.x1 > r1.x1 && r2.x1 < r1.x2 && r2.y2 > r1.y1 && r2.y2 < r1.y2)
+    return true;
   return false;
 }
 

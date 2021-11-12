@@ -60,14 +60,14 @@ Typical game set-up
 
 First a new world is created and the block structure is initialised.
 
-	var world = new World( 16, 16, 16 );
+	let world = new World( 16, 16, 16 );
 	world.createFlatWorld( 6 );
 
 The *6* in *createFlatWorld* here is the line between the ground and the first air layer.
 
 Now that we have a world, we can set up a renderer, which will subsequently divide the world into chunks for rendering.
 
-	var render = new Renderer( "renderSurface" );
+	let render = new Renderer( "renderSurface" );
 	render.setWorld( world, 8 );
 	render.setPerspective( 60, 0.01, 200 );
 
@@ -75,12 +75,12 @@ The *8* here determines the XYZ size of one chunk. In this case the entire world
 
 To finish the code that deals with world management, we create the physics simulator.
 
-	var physics = new Physics();
+	let physics = new Physics();
 	physics.setWorld( world );
 
 And finally, we add a local player to the game:
 
-	var player = new Player();
+	let player = new Player();
 	player.setWorld( world );
 	player.setInputCanvas( "renderSurface" );
 	player.setMaterialSelector( "materialSelector" );
@@ -89,7 +89,7 @@ That concludes the set-up code. The render loop can be constructed with a timer 
 
 	setInterval( function()
 	{
-		var time = new Date().getTime() / 1000.0;
+		let time = new Date().getTime() / 1000.0;
 		
 		// Simulate physics
 		physics.simulate();

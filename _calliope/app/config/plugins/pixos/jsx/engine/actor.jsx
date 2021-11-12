@@ -11,6 +11,15 @@
 ** ----------------------------------------------- **
 \*                                                 */
 
+import {
+  create,
+  rotate,
+  translate,
+  perspective,
+  isPowerOf2,
+  set,
+} from "./utils/matrix4";
+
 export default class Actor {
   constructor() {
     this.templateLoaded = false;
@@ -33,7 +42,7 @@ export default class Actor {
     if (this.loaded) return;
 
     if (!this.src || !this.sheetSize || !this.tileSize || !this.frames) {
-      debug.error("Invalid actor definition");
+      console.error("Invalid actor definition");
       return;
     }
 
@@ -56,15 +65,15 @@ export default class Actor {
   }
 
   onTilesetDefinitionLoaded() {
-    var s = this.zone.tileset.tileSize;
-    var ts = [this.tileSize[0] / s, this.tileSize[1] / s];
-    var v = [
+    let s = this.zone.tileset.tileSize;
+    let ts = [this.tileSize[0] / s, this.tileSize[1] / s];
+    let v = [
       [0, 0, 0],
       [ts[0], 0, 0],
       [ts[0], 0, ts[1]],
       [0, 0, ts[1]],
     ];
-    var poly = [
+    let poly = [
       [v[2], v[3], v[0]],
       [v[2], v[0], v[1]],
     ].flatten();
@@ -79,7 +88,7 @@ export default class Actor {
 
     this.init(); // Hook for actor implementations
     this.loaded = true;
-    debug.log(
+    console.log(
       "Initialized actor '" + this.id + "' in zone '" + this.zone.id + "'"
     );
 
@@ -87,35 +96,35 @@ export default class Actor {
   }
 
   getTexCoords(i) {
-    var t =
+    let t =
       this.frames[Direction.actorSequence(this.facing)][this.animFrame % 4];
-    var ss = this.sheetSize;
-    var ts = this.tileSize;
-    var bl = [(t[0] + ts[0]) / ss[0], t[1] / ss[1]];
-    var tr = [t[0] / ss[0], (t[1] + ts[1]) / ss[1]];
-    var v = [bl, [tr[0], bl[1]], tr, [bl[0], tr[1]]];
-    var poly = [
+    let ss = this.sheetSize;
+    let ts = this.tileSize;
+    let bl = [(t[0] + ts[0]) / ss[0], t[1] / ss[1]];
+    let tr = [t[0] / ss[0], (t[1] + ts[1]) / ss[1]];
+    let v = [bl, [tr[0], bl[1]], tr, [bl[0], tr[1]]];
+    let poly = [
       [v[0], v[1], v[2]],
       [v[0], v[2], v[3]],
     ];
     return poly.flatten();
   }
 
-  draw() {
+  draw(engine) {
     if (!this.loaded) return;
 
-    mvPushMatrix();
-    mat4.translate(mvMatrix, this.pos);
+    engine.mvPushMatrix();
+    translate(mvMatrix, this.pos);
 
     // Undo rotation so that character plane is normal to LOS
-    mat4.translate(mvMatrix, this.drawOffset);
-    mat4.rotate(mvMatrix, degToRad(renderer.cameraAngle), [1, 0, 0]);
-    renderer.bindBuffer(
+    translate(mvMatrix, this.drawOffset);
+    rotate(mvMatrix, engine.degToRad(renderer.cameraAngle), [1, 0, 0]);
+    engine.bindBuffer(
       this.vertexPosBuf,
       shaderProgram.vertexPositionAttribute
     );
-    renderer.bindBuffer(this.vertexTexBuf, shaderProgram.textureCoordAttribute);
-    renderer.bindTexture(this.texture);
+    engine.bindBuffer(this.vertexTexBuf, shaderProgram.textureCoordAttribute);
+    engine.bindTexture(this.texture);
     shaderProgram.setMatrixUniforms();
 
     // Actors always render on top of everything behind them
@@ -123,7 +132,7 @@ export default class Actor {
     gl.drawArrays(gl.TRIANGLES, 0, this.vertexPosBuf.numItems);
     gl.depthFunc(gl.LESS);
 
-    mvPopMatrix();
+    engine.mvPopMatrix();
   }
 
   setFrame(frame) {
@@ -153,12 +162,12 @@ export default class Actor {
 
     // Sort activities by increasing startTime, then by id
     this.activityList.sort(function (a, b) {
-      var dt = a.startTime - b.startTime;
+      let dt = a.startTime - b.startTime;
       if (!dt) return dt;
       return a.id > b.id ? 1 : -1;
     });
 
-    var toRemove = [];
+    let toRemove = [];
     this.activityList.each(function (a) {
       if (!a.loaded || a.startTime > time) return;
 
