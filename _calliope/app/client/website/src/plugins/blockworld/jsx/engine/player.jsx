@@ -11,7 +11,7 @@
 ** ----------------------------------------------- **
 \*                                                 */
 
-import { Vector, lineRectCollide, rectRectCollide } from "../utils/vector";
+import { Vector, lineRectCollide, rectRectCollide } from "./utils/vector";
 import BLOCK from "./blocks";
 import { MOUSE } from "./enums";
 

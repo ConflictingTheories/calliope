@@ -14,9 +14,9 @@
 import React, { Component } from "react";
 import { collect } from "react-recollect";
 // WebGL Component
-import WebGLView from "./WebGLView";
+import WebGLView from "./view";
 // Blockworld Scene Provider
-import SceneProvider from "./sceneProvider";
+import SceneProvider from "./scene";
 // Style Plugin
 import "../less/bitworld.less";
 
@@ -48,7 +48,7 @@ class BlockWorld extends Component {
     const { networkString, updated } = this.state;
     return (
       <>
-        <WebGLView class="bitworld" key={updated} width={720} height={480} SceneProvider={SceneProvider} networkString={networkString} />
+        <WebGLView class="bitworld" key={updated} width={720} height={480} SceneProvider={new SceneProvider()} networkString={networkString} />
       </>
     );
   }

@@ -133,7 +133,7 @@ module.exports = (async () => {
   // Write JSON Manifests
   fs.writeFileSync(
     path.join(__dirname, "/../client/website/build/content/posts.json"),
-    JSON.stringify(postJson)
+    JSON.stringify(postJson.reverse())
   );
   fs.writeFileSync(
     path.join(__dirname, "/../client/website/build/content/pages.json"),

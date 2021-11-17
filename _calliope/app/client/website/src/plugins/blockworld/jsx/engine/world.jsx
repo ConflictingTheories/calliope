@@ -11,7 +11,7 @@
 ** ----------------------------------------------- **
 \*                                                 */
 
-import { Vector } from "../utils/vector";
+import { Vector } from "./utils/vector";
 import BLOCK from "./blocks";
 
 export default class World {
