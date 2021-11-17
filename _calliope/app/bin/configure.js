@@ -91,7 +91,7 @@ module.exports = (() => {
       const formattedPosts = nonJSPosts
         .map((x) => {
           let link = x.split("/storage/posts/")[1];
-          return `<li><a target="main" href=/content/posts/${link}>${link}</a></li>`;
+          return `<li><a target="main" href=/content/${link}>${link}</a></li>`;
         })
         .join("");
 

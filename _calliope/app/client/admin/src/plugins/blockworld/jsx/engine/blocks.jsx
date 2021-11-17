@@ -11,7 +11,7 @@
 ** ----------------------------------------------- **
 \*                                                 */
 
-import { pushQuad } from "../utils/vector";
+import { pushQuad } from "./utils/vector";
 import { DIRECTION } from "./enums";
 
 // Block Object Model

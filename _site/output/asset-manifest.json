@@ -1,28 +1,28 @@
 {
   "files": {
-    "main.css": "/static/css/main.97b4d134.chunk.css",
-    "main.js": "/static/js/main.d80fb65f.chunk.js",
-    "main.js.map": "/static/js/main.d80fb65f.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.a4891f41.js",
-    "runtime-main.js.map": "/static/js/runtime-main.a4891f41.js.map",
-    "static/css/2.169cdb5c.chunk.css": "/static/css/2.169cdb5c.chunk.css",
-    "static/js/2.90efcbe2.chunk.js": "/static/js/2.90efcbe2.chunk.js",
-    "static/js/2.90efcbe2.chunk.js.map": "/static/js/2.90efcbe2.chunk.js.map",
+    "main.css": "/static/css/main.f6dfe876.chunk.css",
+    "main.js": "/static/js/main.d4a5c850.chunk.js",
+    "main.js.map": "/static/js/main.d4a5c850.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.428aefd5.js",
+    "runtime-main.js.map": "/static/js/runtime-main.428aefd5.js.map",
+    "static/css/2.6c196407.chunk.css": "/static/css/2.6c196407.chunk.css",
+    "static/js/2.cfa35f05.chunk.js": "/static/js/2.cfa35f05.chunk.js",
+    "static/js/2.cfa35f05.chunk.js.map": "/static/js/2.cfa35f05.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.ab49fd2e7a82ee25af3e3ab5daa67dd5.js": "/precache-manifest.ab49fd2e7a82ee25af3e3ab5daa67dd5.js",
+    "precache-manifest.b9e136133004718018d98c429187d138.js": "/precache-manifest.b9e136133004718018d98c429187d138.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/2.169cdb5c.chunk.css.map": "/static/css/2.169cdb5c.chunk.css.map",
-    "static/css/main.97b4d134.chunk.css.map": "/static/css/main.97b4d134.chunk.css.map",
-    "static/js/2.90efcbe2.chunk.js.LICENSE.txt": "/static/js/2.90efcbe2.chunk.js.LICENSE.txt",
+    "static/css/2.6c196407.chunk.css.map": "/static/css/2.6c196407.chunk.css.map",
+    "static/css/main.f6dfe876.chunk.css.map": "/static/css/main.f6dfe876.chunk.css.map",
     "static/media/katex.min.css": "/static/media/KaTeX_Typewriter-Regular.f43e8696.woff2",
     "static/media/blueprint-icons.css": "/static/media/icons-20.cef8cdbb.woff",
-    "static/media/logo.svg": "/static/media/logo.1b010ed1.svg"
+    "static/media/logo.svg": "/static/media/logo.1b010ed1.svg",
+    "static/media/pixos.less": "/static/media/minecraftia.9e87c05c.ttf"
   },
   "entrypoints": [
-    "static/js/runtime-main.a4891f41.js",
-    "static/css/2.169cdb5c.chunk.css",
-    "static/js/2.90efcbe2.chunk.js",
-    "static/css/main.97b4d134.chunk.css",
-    "static/js/main.d80fb65f.chunk.js"
+    "static/js/runtime-main.428aefd5.js",
+    "static/css/2.6c196407.chunk.css",
+    "static/js/2.cfa35f05.chunk.js",
+    "static/css/main.f6dfe876.chunk.css",
+    "static/js/main.d4a5c850.chunk.js"
   ]
 }

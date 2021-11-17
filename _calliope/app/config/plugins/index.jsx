@@ -15,6 +15,7 @@ import React from "react";
 import ipfsStream from "./ipfs-stream/jsx";
 import MermaidDiagram from "./mermaid/jsx";
 import BlockWorld from "./blockworld/jsx";
+import Pixos from "./pixos/jsx";
 
 // TODO - Add Theme Injection Somehow (Or Wrapper)
 
@@ -45,6 +46,9 @@ export default function plugins(props) {
       } else {
         return <></>;
       }
+    // Pixos
+    case "pixos":
+      return <Pixos />;
     default:
       return <>{JSON.stringify(props)}</>;
   }
