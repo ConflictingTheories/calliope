@@ -1,9 +1,17 @@
 
 # Release notes
 
+#### 2021 Novembet
+1. Added Plugin - Pixos
+2. Improved Plugin Loading
+3. Moved into separate repos
+4. NPM plugin support
+
+#### 2021 October
+1. Improved build scripts
+
 #### 2021 April
 1. Added Plugin - Blockworld
-
 
 #### 2021 January
 

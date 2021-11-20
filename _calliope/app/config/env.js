@@ -68,5 +68,5 @@ module.exports = {
   SITE_IP: process.env.SITE_IP,
   // CONTENT
   CONTENT_ROOT: path.join(__dirname, process.env.CONTENT_ROOT),
-  REVERSE_CONTENT: false
+  REVERSE_CONTENT: "0"
 };
