@@ -1,4 +1,3 @@
-
 .title {
   font-family: "Rock Salt", sans-serif;
   font-style: italic;
@@ -65,8 +64,6 @@
   top: 0;
 }
 
-// Special Effect Hooks specialEffect1-5
-
 .specialEffect1 {
   position: fixed;
   right: 0;
@@ -91,6 +88,30 @@
     transparent 1%
   );
   animation: fudge 7s ease-in-out alternate infinite;
+}
+
+@media only screen and (max-width: 767px) {
+  .specialEffect1 {
+    display: none;
+    /*CSS transitions*/
+    -o-transition-property: none !important;
+    -moz-transition-property: none !important;
+    -ms-transition-property: none !important;
+    -webkit-transition-property: none !important;
+    transition-property: none !important;
+    /*CSS transforms*/
+    -o-transform: none !important;
+    -moz-transform: none !important;
+    -ms-transform: none !important;
+    -webkit-transform: none !important;
+    transform: none !important;
+    /*CSS animations*/
+    -webkit-animation: none !important;
+    -moz-animation: none !important;
+    -o-animation: none !important;
+    -ms-animation: none !important;
+    animation: none !important;
+  }
 }
 
 // Animations

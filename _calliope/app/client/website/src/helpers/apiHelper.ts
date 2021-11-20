@@ -60,7 +60,7 @@ async function handleResponse(response:Response) {
                 await logout();
             }else{
                 await logout();
-                location && location.reload(true);
+                location && location.reload();
             }
         }else{
             const data = text && JSON.parse(text);

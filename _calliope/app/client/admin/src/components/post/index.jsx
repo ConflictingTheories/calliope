@@ -22,11 +22,13 @@ import math from "remark-math";
 import a11yEmoji from "@fec/remark-a11y-emoji";
 import html from "remark-html";
 import emoji from "remark-emoji";
+import headings from "remark-autolink-headings";
 import shortcodes from "remark-shortcodes";
 
 import { renderers } from "../../theme/jsx";
 import { Icon } from "@blueprintjs/core";
 import Swal from "sweetalert2";
+import "@sweetalert2/themes/dark/dark.css";
 
 const parseHtml = htmlParser({
   isValidNode: (node) => node.type !== "script",
@@ -115,6 +117,7 @@ class Post extends Component {
               emoji,
               a11yEmoji,
               math,
+              headings,
               html,
             ]}
             children={content || ""}

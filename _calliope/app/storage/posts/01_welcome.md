@@ -92,3 +92,8 @@ More Complex Features (Will come later)
 You can even add a simple block building plugin to your blog. (In Progress)
 
 [[ blockworld networkString="test" ]]
+
+# Feeling Retro? Try out Pixos (coming soon)
+You can even add a simple sprite scene building plugin to your blog. (In Progress)
+
+[[ pixos ]]

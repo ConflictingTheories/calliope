@@ -57,7 +57,7 @@ const App = () => {
   return (
     <React.Fragment>
       {/* background Canvas - For Special Animations - TODO - Issues with Sizing*/}
-      {/* <canvas class="specialEffect1" ref={ref} /> */}
+      {/* <canvas style={{ width: "100%", height: "100%" }} ref={ref} /> */}
       {/* Pre-Special Effects - TODO -- Issues w sizing*/}
       <div class="specialEffect1"></div>
       <div class="specialEffect2"></div>

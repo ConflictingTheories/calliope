@@ -12,7 +12,7 @@
 \*                                                 */
 
 const Env = require("../../config/env");
-// const S3Driver = require("./S3Driver");
+const S3Driver = require("./S3Driver");
 const FileDriver = require("./FileDriver");
 
 console.log(Env.STORAGE_TYPE, Env.STORAGE_ROOT);
