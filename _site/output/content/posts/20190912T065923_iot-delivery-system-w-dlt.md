@@ -1,0 +1,11 @@
+# IoT Delivery System w/ DLT
+~ 2019-09-12T06:59:23+00:00 ~
+  
+---
+I had an idea just now (of course right before I go to sleep) that what would be a great boon to the DLT ecosystem would be a distributed / semi-decentralized physical delivery system. The concept is simple – internet connected physical lockboxes (think small lockers) that can be reserved via a collateral obligation through a DLT network. A part of this would be a fungible token that provides the means of collateral and payment obligations alongside a cryto-backed identity management system with multi-signature capabilities.
+
+This would allow a delivery company (or contractor) to enter into an agreement with the receiving party to provide a secure means of delivering physical goods that can both handle the problem of the last mile transition as well as ensure that all parties are fairly treated and that payments are secured. This could even go so far as to include additional smart contracts for managing such aspects as insurance and conditional bonuses or penalties.
+
+Without going into any details (as I am exhausted – 1AM) it would allow the receiver to verify their pickup, the delivery company to verify their drop-off, and for both parties to ensure a timely and appropriate transaction. Both parties would put up a collateral payment in order to reserve the box and unlock the device, at the same time, the offending party would give up the collateral in the event of a breach of contract – whether by late delivery, missed delivery, and failed or late pickup. This would provide a royalty to the delivery box provider in exchange for providing the service, and would ensure that only the parties in question could access the box during their reserved timeslots.
+
+Obviously there are some more details to iron out, but I think this could provide a lucrative and useful means of solving the problems associated with final mile deliveries and the receivership of such goods whilst allowing individuals to provide distributed warehousing and storage solutions without needing to scale a workforce or expend undue capital.

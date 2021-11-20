@@ -68,6 +68,7 @@
     "remark-math": "3.0.0",
     "remark-parse": "3.0.0",
     "remark-shortcodes": "^0.3.1",
+    "remark-slug": "^7.0.0",
     "rsuite": "^4.8.2",
     "sequelize": "^6.3.5",
     "shelljs": "^0.8.4",
@@ -79,13 +80,13 @@
     "build-site": "cd client/website && craco build",
     "build-admin": "cd client/admin && craco build",
     "build": "yarn configure && concurrently \"yarn build-site\" \"yarn build-admin\"",
-    "configure": "yarn preload && node bin/configure",
-    "copy-content": "node ./bin/static",
-    "preload": "node ./bin/preload",
+    "configure": "yarn preload && node bin/build/configure",
+    "copy-content": "node ./bin/build/static",
+    "preload": "node ./bin/build/preload",
     "deploy": "yarn build && yarn export",
     "db-seed": "node config/db/seed.js",
     "db-migrate": "node config/db/migrate.js",
-    "export": "node bin/export.js && yarn copy-content",
+    "export": "node bin/build/export.js && yarn copy-content",
     "start-site": "yarn configure && node bin/app.js",
     "start-admin": "node bin/admin.js",
     "start": "concurrently \"yarn start-site\" \"yarn start-admin\"",
@@ -94,7 +95,7 @@
     "dist": "yarn build && PUBLIC_URL= && ELECTRON_START_URL= && yarn build && electron-builder",
     "dist-win": "yarn build && npx electron-packager . --arch=x64 --platform=win32 --overwrite && yarn env",
     "dist-mac": "yarn build && npx electron-packager . --arch=x64 --platform=darwin",
-    "env": "node bin/pack.js"
+    "env": "node bin/build/pack.js"
   },
   "eslintConfig": {
     "extends": "react-app"

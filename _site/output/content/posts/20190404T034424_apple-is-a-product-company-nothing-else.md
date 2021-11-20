@@ -1,0 +1,10 @@
+# Apple is a product company
+~ 2019-04-04T03:44:24+00:00 ~
+
+With the most latest announcement from Apple regarding their new product offering Apple Card – it may appear like Apple is innovating and finally getting out of its post-Jobs slump. But I have a different take – this is the same Apple strategy since they decided to start selling dongles and deciding to make Mac OS only available for their machines despite no longer be on a Sparc chipset and opting for the x86 route like its PC brethren.
+
+It’s purely to drive product purchasing. They have no interest in promoting anything else and they certainly do not want to open their offerings up into a real platform. Apple is not a platform focused on anything except getting their users to buy more and more products.
+
+Even their latest offering still requires an iPhone. The only $1000+ credit card on the market outside of a few elite offerings such as the Black Titanium cards. If you are like me, you get a little nervous thinking about this. Do I want to have to buy every new iPhone just keep my credit card? What if I lose my phone or suddenly decide I don’t want to play by Apple’s rules? Out of luck I guess – time to go back to my local bank branch and hope they have something for me.
+
+Essentially, by buying into Apple you are effectively signing up for the reverse pension they offer – they will own you and they will still charge you for your time and actions. Not to mention they are increasingly picky and they change their terms on a whim. What about another FaceTime bug? Will the next one result in my Apple Card being stolen and used? What if Apple doesn’t believe me or argues against me or closes my account and cuts me out? Am I just being paranoid? I’m not sure yet, but I do know that as is always the case, Apple sells products and lock-in and not services or a platform. That is all they can do. I don’t welcome it one bit.

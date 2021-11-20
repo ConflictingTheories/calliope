@@ -14,13 +14,13 @@ require("dotenv").config();
 
 module.exports = (() => {
   // THIRD-PARTY LIBRARIES
+  const path = require("path");
   const express = require("express");
-  const bodyparser = require("body-parser");
-  const cookieparser = require("cookie-parser");
+  const cors = require("cors");
   const session = require("express-session");
   const FileUpload = require("express-fileupload");
-  const path = require("path");
-  const cors = require("cors");
+  const cookieparser = require("cookie-parser");
+  const bodyparser = require("body-parser");
   const app = express();
   const server = require("http").Server(app);
 
@@ -33,7 +33,8 @@ module.exports = (() => {
   // INDEX MODULES
   const index = require("../routes/admin/index");
   const content = require("../routes/admin/content");
-  // SERVER
+  
+  //START ADMIN SERVER
   server.listen(Env.ADMIN_PORT, () => {
     console.log(
       `${Env.SHORT_NAME} :: Your New Website is Now Live @ http://localhost:${Env.ADMIN_PORT}`
@@ -80,7 +81,7 @@ module.exports = (() => {
     DB.sync();
   });
 
-  // ERROR
+  // ERROR HANDLER
   process.on("uncaughtException", function (e) {
     console.log("ERROR: " + e);
     if (e.errno === "EADDRINUSE") {
