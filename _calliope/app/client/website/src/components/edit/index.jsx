@@ -44,7 +44,7 @@ class EditMarkdown extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      content: props.content || "",
+      content: props.content || "please start your edits :)",
     };
     this.saveChanges = this.saveChanges.bind(this);
   }
@@ -87,7 +87,7 @@ class EditMarkdown extends Component {
                   height={"100%"}
                   preview={"edit"}
                   value={content}
-                  autoFocus={true}
+                  autoFocus={false}
                   visiableDragbar={false}
                   onChange={(value) => {
                     store.selectedContent = value;
@@ -124,7 +124,7 @@ class EditMarkdown extends Component {
                       html,
                     ],
                     renderers: renderers,
-                    allowDangerousHtml: true,
+                    // allowDangerousHtml: true,
                   }}
                 />
               </Container>

@@ -32,7 +32,7 @@
     "@fec/remark-a11y-emoji": "^2.0.0",
     "@nvd/use-webgl": "^0.1.0",
     "@sweetalert2/themes": "^4.0.2",
-    "@uiw/react-md-editor": "^2.0.3",
+    "@uiw/react-md-editor": "^3.7.0",
     "archiver": "^5.2.0",
     "aws-sdk": "^2.761.0",
     "babel-preset-react-app": "^10.0.0",
