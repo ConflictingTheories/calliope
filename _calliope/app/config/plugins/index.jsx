@@ -12,10 +12,10 @@
 \*                                                 */
 import React from "react";
 // Plugins
-import ipfsStream from "./ipfs-stream/jsx";
-import MermaidDiagram from "./mermaid/jsx";
-import BlockWorld from "./blockworld/jsx";
-import Pixos from "./pixos/jsx";
+import ipfsStream from "calliope-ipfs-stream";
+import MermaidDiagram from "calliope-mermaid";
+import BlockWorld from "calliope-blockworld";
+import Pixos from "calliope-pixos";
 
 // TODO - Add Theme Injection Somehow (Or Wrapper)
 
@@ -24,6 +24,7 @@ export default function plugins(props) {
   switch (props.identifier) {
     // IPFS Video Streams (HLS)
     case "ipfsStream":
+      console.log(ipfsStream);
       let { ipfsHash, audioOnly } = props.attributes;
       if (audioOnly) {
         return <ipfsStream.Audio ipfsHash={ipfsHash} />;
@@ -32,6 +33,7 @@ export default function plugins(props) {
       }
     // Mermaid Diagrams
     case "mermaid":
+      console.log(MermaidDiagram);
       let { diagram } = props.attributes;
       if (diagram) {
         return <MermaidDiagram diagram={diagram} />;
@@ -40,6 +42,7 @@ export default function plugins(props) {
       }
     // Blockworld Diagrams
     case "blockworld":
+      console.log(BlockWorld);
       let { networkString } = props.attributes;
       if (networkString) {
         return <BlockWorld networkString={networkString} />;
@@ -48,6 +51,7 @@ export default function plugins(props) {
       }
     // Pixos
     case "pixos":
+      console.log(Pixos);
       return <Pixos />;
     default:
       return <>{JSON.stringify(props)}</>;
