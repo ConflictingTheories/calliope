@@ -21,7 +21,7 @@ yarn export                 # Export
 mkdir -p $BUILD_PATH/output
 rm -rf $BUILD_PATH/output/*
 cd $BUILD_PATH/../_calliope
-cp -R app/output/site/* $BUILD_PATH/output
+cp -R output/site/* $BUILD_PATH/output
 cp $BUILD_PATH/favicon.ico $BUILD_PATH/output
 echo "/*    /index.html   200" > $BUILD_PATH/output/_redirects
 # Return to Start
