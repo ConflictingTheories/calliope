@@ -1,6 +1,5 @@
 export NODE_ENV="production"
 export REACT_APP_SITE_TITLE="Calliope Static Site Generator"
-export ELECTRON_START_URL="http://localhost:8888/"
 export SHORT_NAME="Calliope SSG"
 export CALLIOPE_THEME="default"
 export THEME_DARK="false"

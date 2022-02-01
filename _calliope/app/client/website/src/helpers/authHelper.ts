@@ -6,8 +6,6 @@
  * ---------------------------- *
  */
 
-// import { session } from "electron";
-
 // Auth Helper Class
 class Authenticator {
   // Return Auth Header with Token

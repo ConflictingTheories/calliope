@@ -1,7 +1,14 @@
 
 # Release notes
 
-#### 2021 Novembet
+#### 2022 January
+
+1. Stripped out electron
+2. Cleaned up packages
+3. Reduced size and tidied repo
+4. Misc cleanup
+
+#### 2021 November
 1. Added Plugin - Pixos
 2. Improved Plugin Loading
 3. Moved into separate repos
@@ -23,4 +30,6 @@
 6. Live Editting / Preview
 7. Better Navigation / Linking for Static and Live Hosting
 8. Save Reminders
+
+
 

@@ -14,13 +14,13 @@ require("dotenv").config();
 
 module.exports = (() => {
   // THIRD-PARTY LIBRARIES
+  const path = require("path");
   const express = require("express");
-  const bodyparser = require("body-parser");
-  const cookieparser = require("cookie-parser");
+  const cors = require("cors");
   const session = require("express-session");
   const FileUpload = require("express-fileupload");
-  const path = require("path");
-  const cors = require("cors");
+  const cookieparser = require("cookie-parser");
+  const bodyparser = require("body-parser");
   const app = express();
   const server = require("http").Server(app);
 
@@ -32,10 +32,10 @@ module.exports = (() => {
   const Dns = require("../lib/common/Dns");
 
   // INDEX MODULES
-  const index = require("../routes/public/index");
-  const content = require("../routes/public/content");
+  const index = require("../routes/client/index");
+  const content = require("../routes/client/content");
 
-  // SERVER
+  // START SERVER
   server.listen(Env.WEBSITE_PORT, () => {
     // Storage Driver Type
     console.log("Using Storage Driver :: ", Storage.version);
@@ -68,7 +68,7 @@ module.exports = (() => {
         let apiVer = req.params.ver;
         switch (apiVer) {
           case "v1":
-            apiRouter = require("../routes/public/" + apiVer + "/index.js");
+            apiRouter = require("../routes/client/" + apiVer + "/index.js");
             apiRouter(req, res);
             break;
           default:
@@ -90,7 +90,7 @@ module.exports = (() => {
     DB.sync();
   });
 
-  // ERROR
+  // HANDLE ERROR
   process.on("uncaughtException", function (e) {
     console.log("ERROR: " + e);
     if (e.errno === "EADDRINUSE") {
