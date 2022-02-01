@@ -1,6 +1,6 @@
 {
   "name": "calliope-ssg",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "Kyle Derby MacInnis",
     "url": "https://conflictingtheories.com"
@@ -126,9 +126,6 @@
     "@types/node": "^14.10.1",
     "concurrently": "^5.3.0",
     "craco-less": "1.20.0",
-    "electron": "^11.1.1",
-    "electron-builder": "^22.9.1",
-    "electron-package": "^0.1.0",
     "http-server": "^0.12.3",
     "typescript": "^4.0.2",
     "wait-on": "^5.2.1"

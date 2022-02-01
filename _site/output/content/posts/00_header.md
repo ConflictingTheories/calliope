@@ -30,7 +30,7 @@ New UPDATES! :muscle: Admin Panel Improvements
 - Live Previews & editting
 - Post and Page Creation
 - Reminders on Exit to Save Changes
-- Zip Export & Electron App Bundle
+- Zip Export & Electron App Bundle (now in separate repo [Electron support here](https://github.com/ConflictingTheories/calliope-electron) )
 - Better Routing
 
 ## 💪 Give it TRY! [Get Calliope Today](https://github.com/ConflictingTheories/calliope)
