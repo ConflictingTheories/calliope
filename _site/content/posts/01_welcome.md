@@ -1,5 +1,10 @@
 # Current features
 
+### Admin Panel / Live Editor & Preview
+Easily edit & preview your pages and posts. Add new ones, and quickly export to a static zip for deployment.
+
+![/content/media/admin.png](/content/media/admin.png)
+
 ### Embedded Media
 
 Media can be added through normal Markdown entry - and can reference local or remote files.
