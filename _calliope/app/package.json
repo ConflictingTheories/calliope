@@ -44,7 +44,7 @@
     "calliope-blockworld": "^0.1.7",
     "calliope-ipfs-stream": "^0.1.7",
     "calliope-mermaid": "^0.1.7",
-    "calliope-pixos": "^0.4.1",
+    "calliope-pixos": "^0.4.13",
     "config": "^3.3.2",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
