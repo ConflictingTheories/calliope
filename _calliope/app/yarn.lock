@@ -3998,15 +3998,14 @@ calliope-mermaid@^0.1.7:
   dependencies:
     react-mermaid2 "^0.1.4"
 
-calliope-pixos@^0.4.13:
-  version "0.4.23"
-  resolved "https://registry.yarnpkg.com/calliope-pixos/-/calliope-pixos-0.4.23.tgz#0269a5e665182c415fa04867c9afbea6db1b8974"
-  integrity sha512-s8eMTFG5CjCScHrliTB1b6uJHimp0PDOimasQcOwUDBs0fXd8NoMXiKTloLTW5Aa7xATJMK8Qoga106/qO1pfQ==
+calliope-pixos@0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/calliope-pixos/-/calliope-pixos-0.4.3.tgz#7c91c8af45c140704cdd2c812c594298c49332f4"
+  integrity sha512-5Sl1BlkVStDAvO4H5NItcPu/l8b7yjemoMpsTHFZsSvZ54Z/PWqmy8yUiLR/8rnnkH9uQmLT5fPpkbDgc8T7mQ==
   dependencies:
     babel-loader "^8.2.3"
-    css-loader "^6.7.1"
+    css-loader "^6.6.0"
     dexie "^3.2.0"
-    file-saver "^2.0.5"
     jszip "^3.7.1"
     prop-types "^15.7.2"
     style-loader "^3.3.1"
@@ -4980,7 +4979,7 @@ css-loader@^6.5.1:
     postcss-value-parser "^4.1.0"
     semver "^7.3.5"
 
-css-loader@^6.7.1:
+css-loader@^6.6.0:
   version "6.7.1"
   resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-6.7.1.tgz#e98106f154f6e1baf3fc3bc455cb9981c1d5fd2e"
   integrity sha512-yB5CNFa14MbPJcomwNh3wLThtkZgcNyI2bNMRt8iE5Z8Vwl7f8vQXFAzn2HDOJvtDq2NTZBUGMSUNNyrv3/+cw==

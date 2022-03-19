@@ -94,6 +94,6 @@ You can even add a simple block building plugin to your blog. (In Progress)
 [[ blockworld networkString="test" ]]
 
 # Feeling Retro? Try out Pixos (coming soon)
-You can even add a simple sprite scene building plugin to your blog. (In Progress)
+You can even add a simple sprite scene building plugin to your blog. (In Progress) (Also check out the [Peaceful Garden](https://peaceful.garden) for the most up-to-date example.
 
 [[ pixos ]]
