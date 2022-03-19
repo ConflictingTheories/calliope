@@ -51,8 +51,8 @@ export default function plugins(props) {
       }
     // Pixos
     case "pixos":
-      let PixosPlugin = Pixos['calliope-pixos'].default;
-      return <PixosPlugin />;
+      let PixosPlugin = Pixos["calliope-pixos"].default;
+      return <PixosPlugin style={{ height: "550px" }} />;
     default:
       return <>{JSON.stringify(props)}</>;
   }

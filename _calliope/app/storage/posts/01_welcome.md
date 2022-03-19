@@ -80,20 +80,16 @@ The following are the features I am working on getting ready:
 - ✔️ DNS Name Configuration via Namecheap
 
 More Complex Features (Will come later)
-- :construction: Blockworld 3D
+- :construction: Blockworld 3D (Pixos!)
 - :construction: Better Themes and More Robust Effects
 - :construction: Publish / Edit Buttons
 - :construction: Injectable Posts / Nested Content via Reference
 - :construction: Deployment to Git / S3 / Others
 - :construction: Permissions & Roles
 
-
-# Play with blocks in your Blog (Deprecated)
-You can even add a simple block building plugin to your blog. (In Progress)
-
-[[ blockworld networkString="test" ]]
-
-# Feeling Retro? Try out Pixos (New Updates!)
+# Feeling Retro? Try out Pixos (In Progress - New Updates!)
 You can even add a simple sprite scene building plugin to your blog. For more information you can follow the most up-to-date version of the demo game [Peaceful Garden](https://peaceful.garden) which is based on the Pixos framework.
 
 [[ pixos ]]
+
+Take a look and follow along for future updates!
