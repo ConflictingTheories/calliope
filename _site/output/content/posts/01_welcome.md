@@ -88,12 +88,12 @@ More Complex Features (Will come later)
 - :construction: Permissions & Roles
 
 
-# Play with blocks in your Blog
+# Play with blocks in your Blog (Deprecated)
 You can even add a simple block building plugin to your blog. (In Progress)
 
 [[ blockworld networkString="test" ]]
 
-# Feeling Retro? Try out Pixos (coming soon)
-You can even add a simple sprite scene building plugin to your blog. (In Progress)
+# Feeling Retro? Try out Pixos (New Updates!)
+You can even add a simple sprite scene building plugin to your blog. For more information you can follow the most up-to-date version of the demo game [Peaceful Garden](https://peaceful.garden) which is based on the Pixos framework.
 
 [[ pixos ]]
