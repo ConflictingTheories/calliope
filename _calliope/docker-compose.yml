@@ -37,6 +37,8 @@ services:
     container_name: "calliope-portal"
     image: calliope:latest
     restart: always
+    env_file:
+      - .env
     build:
       context: .
       dockerfile: ./scripts/docker/server/Dockerfile
