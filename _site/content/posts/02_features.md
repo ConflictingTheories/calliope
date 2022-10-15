@@ -1,6 +1,12 @@
 
 # Release notes
 
+
+#### 2022 March
+
+1. Updated Pixos
+2. Added Screenshots
+3. Adjusted Content
 #### 2022 January
 
 1. Stripped out electron
